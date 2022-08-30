@@ -1,0 +1,38 @@
+<h1>アカウントの登録</h1>
+
+<.form let={f} for={@changeset} action={Routes.account_registration_path(@conn, :create)}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, "ニックネーム" %>
+  <%= text_input f, :name, required: true%>
+  <%= error_tag f, :name%>
+
+  <%= label f, "メールアドレス" %>
+  <%= email_input f, :email, required: true %>
+  <%= error_tag f, :email %>
+
+  <%= label f, "パスワード" %>
+  <%= password_input f, :password, required: true %>
+  <%= error_tag f, :password %>
+
+  <%= label f, "年齢" %>
+  <%= date_select f, :age %>
+  <%= error_tag f, :age %>
+
+  <%= label f, "性別" %>
+  <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力" %>
+  <%= error_tag f, :gender %>
+
+  <div>
+    <%= submit "登録" %>
+  </div>
+</.form>
+
+<p>
+  <%= link "Log in", to: Routes.account_session_path(@conn, :new) %> |
+  <%= link "Forgot your password?", to: Routes.account_reset_password_path(@conn, :new) %>
+</p>
