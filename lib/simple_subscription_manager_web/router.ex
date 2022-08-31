@@ -89,4 +89,12 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     get "/accounts/confirm/:token", AccountConfirmationController, :edit
     post "/accounts/confirm/:token", AccountConfirmationController, :update
   end
+
+  # simple subscription manager routes
+
+  scope "/", SimpleSubscriptionManagerWeb do
+    pipe_through [:browser, :require_authenticated_account]
+
+    get "/manager", ManagerController, :home
+  end
 end
