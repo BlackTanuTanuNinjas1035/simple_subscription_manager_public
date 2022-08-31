@@ -1,10 +1,10 @@
 <ul>
 <%= if @current_account do %>
-  <li><%= @current_account.name %></li>
-  <li><%= link "アカウント設定", to: Routes.account_settings_path(@conn, :edit) %></li>
-  <li><%= link "ログアウト", to: Routes.account_session_path(@conn, :delete), method: :delete %></li>
+  いらっしゃい、<%= @current_account.name %> さん!
+  <li><%= link "アカウントの設定をする", to: Routes.account_settings_path(@conn, :edit) %></li>
+  <li><%= link "ログアウトする", to: Routes.account_session_path(@conn, :delete), method: :delete %></li>
 <% else %>
-  <li><%= link "登録", to: Routes.account_registration_path(@conn, :new) %></li>
-  <li><%= link "ログイン", to: Routes.account_session_path(@conn, :new) %></li>
+  <li><%= link "アカウントの登録をする", to: Routes.account_registration_path(@conn, :new) %></li>
+  <li><%= link "ログインする", to: Routes.account_session_path(@conn, :new) %></li>
 <% end %>
 </ul>
