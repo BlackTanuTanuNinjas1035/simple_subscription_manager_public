@@ -95,6 +95,6 @@ defmodule SimpleSubscriptionManagerWeb.Router do
   scope "/", SimpleSubscriptionManagerWeb do
     pipe_through [:browser, :require_authenticated_account]
 
-    get "/manager", ManagerController, :home
+    get "/manager", ManagerController, :index
   end
 end

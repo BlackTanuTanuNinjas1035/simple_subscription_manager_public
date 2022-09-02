@@ -1,1 +1,12 @@
-メイン画面
+<h2>登録しているサービス</h2>
+
+<ul>
+    <li>
+        <span>サービス名</span><span>ジャンル</span><span>月額料金</span>
+    </li>
+    <%= for subscribe <- @subscribes do %>
+        <li>
+            <span><%= subscribe.subscription_alias.name %></span><span><%= subscribe.subscription_alias.name %></span>
+        </li>
+    <% end %>
+</ul>
