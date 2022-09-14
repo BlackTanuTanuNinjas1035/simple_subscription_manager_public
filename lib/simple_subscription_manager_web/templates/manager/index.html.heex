@@ -1,7 +1,11 @@
+<div>あなたが登録サブスクリプションを追加する</div>
+<button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
+
 <h2>登録しているサービス</h2>
 
-<ul>
+<ol>
     <li>
+        <%# 各項目の名前欄はスペースを開けて整形すること %>
         <span>サービス名</span><span>ジャンル</span><span>月額料金</span>
     </li>
     <%= for subscribe <- @subscribes do %>
@@ -9,4 +13,4 @@
             <span><%= subscribe.subscription_alias.name %></span><span><%= subscribe.subscription_alias.name %></span>
         </li>
     <% end %>
-</ul>
+</ol>

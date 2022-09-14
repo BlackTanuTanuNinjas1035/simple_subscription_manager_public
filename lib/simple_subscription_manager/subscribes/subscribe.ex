@@ -13,7 +13,7 @@ defmodule SimpleSubscriptionManager.Subscribes.Subscribe do
   @doc false
   def changeset(subscribe, attrs) do
     subscribe
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:account_id, :subscription_id])
+    |> validate_required([:account_id, :subscription_id])
   end
 end

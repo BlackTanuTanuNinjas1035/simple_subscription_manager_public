@@ -10,6 +10,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     plug :put_root_layout, {SimpleSubscriptionManagerWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    # ここでassignsにカレントアカウントの情報を渡している
     plug :fetch_current_account
   end
 
@@ -35,15 +36,15 @@ defmodule SimpleSubscriptionManagerWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  # if Mix.env() in [:dev, :test] do
+  #   import Phoenix.LiveDashboard.Router
 
-    scope "/" do
-      pipe_through :browser
+  #   scope "/" do
+  #     pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: SimpleSubscriptionManagerWeb.Telemetry
-    end
-  end
+  #     live_dashboard "/dashboard", metrics: SimpleSubscriptionManagerWeb.Telemetry
+  #   end
+  # end
 
   # Enables the Swoosh mailbox preview in development.
   #
@@ -96,5 +97,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     pipe_through [:browser, :require_authenticated_account]
 
     get "/manager", ManagerController, :index
+    get "/manager/register", ManagerController, :new
+
   end
 end
