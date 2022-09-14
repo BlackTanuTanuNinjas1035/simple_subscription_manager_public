@@ -6,16 +6,16 @@
 }
 
 html {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(179, 28, 28, 0);
 }
 
 body{
     font-family: 'Exo', sans-serif;
 }
 
-.background{
+/* .background{
     position: absolute;
-}
+} */
 
 .maincon {
     position: relative;
@@ -62,9 +62,9 @@ body{
     list-style: none;
     width: 20px;
     height: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgb(73, 139, 14);
     animation: animate 25s linear infinite;
-    bottom: 50px;
+    bottom: -150px;
     
 }
 
