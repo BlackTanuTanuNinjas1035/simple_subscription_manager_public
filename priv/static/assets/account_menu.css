@@ -1,0 +1,28 @@
+header {
+    height: 100px;
+    width: 100%;
+    background-color: rgb(199, 199, 199);
+}
+.container.header{
+    display: flex;
+    justify-content: space-between;
+}
+/* .header-image {
+} */
+
+.nav-header {
+    flex-grow: 0.3;
+    display: flex;
+    /* justify-content: space-between;  */
+}
+.nav-header div {
+    flex-grow: 1;
+} 
+
+.header-ul {
+    list-style: none;
+}
+
+/* 
+.account-info {
+} */
