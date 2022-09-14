@@ -1,4 +1,6 @@
-<ul>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/account_menu.css")}/>
+
+<ul class="header-ul">
 <%= if @current_account do %>
   <li>いらっしゃい、<%= @current_account.name %> さん!</li>
   <li><%= link "アカウントの設定をする", to: Routes.account_settings_path(@conn, :edit) %></li>
