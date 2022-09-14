@@ -11,7 +11,7 @@ header {
 } */
 
 .nav-header {
-    flex-grow: 0.3;
+    flex-grow: 0.1;
     display: flex;
     /* justify-content: space-between;  */
 }
