@@ -10,6 +10,11 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   def index(conn, _params) do
     subscribes = Subscribes.list_subscribe()
     changeset = Subscribe.changeset(%Subscribe{}, %{})
+
+    # 現在のconnに入っているcurrent_account属性のidを取得する
+    current_id = conn.assigns[:current_account].id
+    IO.puts "現在のアカウントIDは、「#{current_id}」です"
+
     conn
     |> render("index.html", subscribes: subscribes, changeset: changeset)
   end
