@@ -8,10 +8,12 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {SimpleSubscriptionManagerWeb.LayoutView, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
     # ここでassignsにカレントアカウントの情報を渡している
     plug :fetch_current_account
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    # # ここでassignsにカレントアカウントの情報を渡している
+    # plug :fetch_current_account
   end
 
   pipeline :api do
@@ -94,7 +96,8 @@ defmodule SimpleSubscriptionManagerWeb.Router do
   # simple subscription manager routes
 
   scope "/", SimpleSubscriptionManagerWeb do
-    pipe_through [:browser, :require_authenticated_account]
+    # pipe_through [:browser, :require_authenticated_account]
+    # pipe_through [:browser]
 
     get "/manager", ManagerController, :index
     get "/manager/register", ManagerController, :new
