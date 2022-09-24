@@ -12,16 +12,15 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
     # 現在のconnに入っているcurrent_account属性のidを取得する
     current_id = conn.assigns[:current_account].id
-    IO.puts "現在のアカウントIDは、「#{current_id}」です"
+    # IO.puts "現在のアカウントIDは、「#{current_id}」です"
+    IO.inspect(conn.assigns.current_account)
 
     # 現在のアカウントが登録しているサブスクリプションのリストを取得する
-    subscribes = Subscribes.get_subscribes(current_id)
-    # total_price = subscribes
-    # |> Enum.at()
-    # |> Enum.sum()
+    subscribes_list = Subscribes.get_subscribes(current_id)
+    total_price = subscribes_list |> Enum.reduce(0, fn (x, acc) -> x.subscription_alias.price + acc end)
 
     conn
-    |> render("index.html", subscribes: subscribes, changeset: changeset)
+    |> render("index.html", subscribes_list: subscribes_list, changeset: changeset, total_price: total_price)
   end
 
   @doc """

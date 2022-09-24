@@ -133,7 +133,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountAuth do
       conn
     else
       conn
-      |> put_flash(:error, "You must log in to access this page.")
+      |> put_flash(:error, "ログインが必要です。リダイレクトしました。")
       |> maybe_store_return_to()
       |> redirect(to: Routes.account_session_path(conn, :new))
       |> halt()

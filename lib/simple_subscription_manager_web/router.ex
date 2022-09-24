@@ -96,8 +96,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
   # simple subscription manager routes
 
   scope "/", SimpleSubscriptionManagerWeb do
-    # pipe_through [:browser, :require_authenticated_account]
-    # pipe_through [:browser]
+    pipe_through [:browser, :require_authenticated_account]
 
     get "/manager", ManagerController, :index
     get "/manager/register", ManagerController, :new

@@ -34,16 +34,23 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
   def registration_changeset(account, attrs, opts \\ []) do
     account
     |> cast(attrs, [:name, :email, :password, :age, :gender])
-    |> validate_required([:name])
+    |> validate_name()
     |> validate_email()
     |> validate_password(opts)
+  end
+
+  # 入力されたアカウントの名前の有無、長さを検証する
+  defp validate_name(changeset) do
+    changeset
+    |> validate_required([:name])
+    |> validate_length(:name, min: 1, max: 60, message: "最大で60文字の名前(表示名)を設定してください")
   end
 
   defp validate_email(changeset) do
     changeset
     |> validate_required([:email])
-    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
-    |> validate_length(:email, max: 160)
+    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "「＠」がありません。もしくは、スペースが含まれています。")
+    |> validate_length(:email, max: 160, message: "160までの文字数で入力してください。")
     |> unsafe_validate_unique(:email, SimpleSubscriptionManager.Repo)
     |> unique_constraint(:email)
   end
@@ -51,7 +58,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
   defp validate_password(changeset, opts) do
     changeset
     |> validate_required([:password])
-    |> validate_length(:password, min: 12, max: 72)
+    |> validate_length(:password, min: 12, max: 72, message: "12文字から72文字までのパスワードを設定してください")
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")

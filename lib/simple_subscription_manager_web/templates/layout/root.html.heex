@@ -36,9 +36,10 @@
         <div class="maincon">
           <header>
             <section class="container header">
-              <a href="https://phoenixframework.org/" class="phx-logo">
-                <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Phoenix Framework Logo"/>
-              </a>
+              <%= link to: Routes.page_path(@conn, :index) do%>
+                <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
+              <% end %>
+
       
               <nav class="nav-header">
                 

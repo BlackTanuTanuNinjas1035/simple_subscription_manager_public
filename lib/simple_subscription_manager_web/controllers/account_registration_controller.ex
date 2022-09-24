@@ -20,7 +20,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationController do
           )
 
         conn
-        |> put_flash(:info, "Account created successfully.")
+        |> put_flash(:info, "アカウントの作成に成功しました。")
         |> AccountAuth.log_in_account(account)
 
       {:error, %Ecto.Changeset{} = changeset} ->

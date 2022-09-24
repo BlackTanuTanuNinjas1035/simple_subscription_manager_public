@@ -8,9 +8,14 @@
         <%# 各項目の名前欄はスペースを開けて整形すること %>
         <span>サービス名</span><span>ジャンル</span><span>月額料金</span>
     </li>
-    <%= for subscribe <- @subscribes do %>
+    <%= for subscribe <- @subscribes_list do %>
         <li>
             <span><%= subscribe.subscription_alias.name %></span><span><%= subscribe.subscription_alias.price %></span>
         </li>
     <% end %>
 </ol>
+<%= if @total_price == 0 do%>
+    <div>ご利用のサービスはございません</div>
+<% else %>
+    <div><%= @total_price %></div>
+<% end %>
