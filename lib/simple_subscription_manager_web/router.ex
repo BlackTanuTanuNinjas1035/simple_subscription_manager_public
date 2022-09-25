@@ -100,6 +100,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
 
     get "/manager", ManagerController, :index
     get "/manager/register", ManagerController, :new
+    post "/manager/register", ManagerController, :create
 
   end
 end

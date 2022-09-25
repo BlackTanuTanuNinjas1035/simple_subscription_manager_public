@@ -35,17 +35,6 @@ defmodule SimpleSubscriptionManager.Subscribes do
 
     IO.puts "Current Account: #{current_account_id}"
 
-    # # idがcurrent_account_idと一致するクエリを返却。SELECT * FROM Account AS a WHEHR a.id == ^current_account_id;
-    # preload_query = from(a in Account, where: a.id == ^current_account_id)
-
-    # IO.puts "preload_query:"
-    # IO.inspect Repo.all(preload_query)
-
-    # # ココらへんが問題
-
-    # # 上記preloa_queryを持つクエリを取得(つまりidがcurrent_account_idと一緒であるsubscribesテーブルのクエリの返却)
-    # query = from(s in Subscribe, preload: [account_alias: ^preload_query])
-
     query = Subscribe |> where(account_id: ^current_account_id)
 
     IO.puts "query:"

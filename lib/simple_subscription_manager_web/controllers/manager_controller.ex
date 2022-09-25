@@ -4,6 +4,9 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   alias SimpleSubscriptionManager.Subscribes
   alias SimpleSubscriptionManager.Subscribes.Subscribe
 
+  alias SimpleSubscriptionManager.Subscriptions
+
+
   @doc """
   Subscribeから全件取得->変更の追跡をするchagesetを取得->renderに渡してindex.htmlを表示
   """
@@ -31,26 +34,43 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
     current_id = conn.assigns[:current_account].id
     IO.puts "現在のアカウントIDは、「#{current_id}」です"
 
+    # セレクトボックスを表示するために、サブスクリプションの一覧を取得する
+    subscription_list = Subscriptions.list_subscriptions()
+
+    # IO.inspect subscription_list
+
+    # 検証を取得
     changeset = Subscribes.change_subscribe_registration(%Subscribe{}, %{})
-    render(conn, changeset: changeset)
+
+    # IO.inspect changeset
+
+    render(conn, changeset: changeset, subscription_list: subscription_list)
   end
 
   @doc """
-  subscribeの登録を行う->:ok or :error が帰ってくる -> index.htmlにリダイレクト
+  subscribeの登録を行う-> :ok or :error が帰ってくる -> index.htmlにリダイレクト
   """
   def create(conn, %{"subscribe" => subscribe_params}) do
 
+    IO.puts "before"
+    IO.inspect subscribe_params
+
+    # 受け取った属性(%{subscription_id}に、現在のカレントアカウントのid(account_id)を追加する
     current_id = conn.assigns[:current_account].id
-    IO.puts "現在のアカウントIDは、「#{current_id}」です"
+    IO.puts current_id
 
-      case Subscribes.register_subscribe(subscribe_params)do
-        {:ok, _} ->
-          conn
-          |> put_flash(:info, "サブスクリプションの追加に成功しました。")
-          |> redirect(to: Routes.manager_path(conn, :index))
+    # 属性のキーはアトムでなく、文字列であることに注意
+    subscribe_params = Map.put(subscribe_params, "account_id", current_id)
 
-        {:error, %Ecto.Changeset{} = changeset} ->
-          render(conn, "index.html", changeset: changeset)
-      end
+
+    case Subscribes.register_subscribe(subscribe_params)do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "サブスクリプションの追加に成功しました。")
+        |> redirect(to: Routes.manager_path(conn, :index))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "index.html", changeset: changeset)
+    end
   end
 end
