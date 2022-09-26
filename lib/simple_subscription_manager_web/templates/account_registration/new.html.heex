@@ -37,6 +37,14 @@
         <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力" %>
         <%= error_tag f, :gender %>
       </div>
+      
+      <div>入力していただいた情報(性別、年齢、登録したサービス)などを収集して、グラフすることで利用者全体のサービスの利用情報の表示を考えております
+      </div>
+      <div>
+        <%= label f, "ユーザ情報の利用について"%>
+        <%= checkbox f, :use_user_info %>
+      </div>
+
       <div>
         <%= submit "登録" %>
       </div>

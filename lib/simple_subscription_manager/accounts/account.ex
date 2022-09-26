@@ -9,6 +9,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
     field :hashed_password, :string, redact: true
     field :age, :date
     field :gender, :integer
+    field :use_user_info, :boolean
     field :confirmed_at, :naive_datetime
 
     timestamps()
@@ -33,10 +34,11 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
   """
   def registration_changeset(account, attrs, opts \\ []) do
     account
-    |> cast(attrs, [:name, :email, :password, :age, :gender])
+    |> cast(attrs, [:name, :email, :password, :age, :gender, :use_user_info])
     |> validate_name()
     |> validate_email()
     |> validate_password(opts)
+    |> validate_required([:use_user_info])
   end
 
   # 入力されたアカウントの名前の有無、長さを検証する
