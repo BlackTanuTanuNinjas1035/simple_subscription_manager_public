@@ -24,6 +24,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/help", PageController, :help
   end
 
   # Other scopes may use custom stacks.

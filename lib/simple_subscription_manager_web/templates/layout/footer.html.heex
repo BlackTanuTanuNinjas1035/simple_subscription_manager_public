@@ -2,9 +2,9 @@
 
 <table>
     <tr>
-        <th>私達について</th><th>個人向け</th><th>ビジネス向け</th>
+        <th>当サイトについて</th><th>個人向け</th><th>企業向け</th>
     </tr>
     <tr>
-        <td>自己紹介</td><td>マネージャを使用</td>
+        <td><%= link "使い方について", to: Routes.page_path(@conn, :help) %></td><td>マネージャを使用</td><td>利用サービスの統計</td>
     </tr>
 </table>

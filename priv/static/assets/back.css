@@ -19,9 +19,15 @@ body{
 } */
 
 .maincon {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     position: relative;
 }
 
+/* .maincon {
+    position: relative;
+} */
 
 
 
@@ -162,4 +168,8 @@ body{
         border-radius: 50%;
     }
 
+}
+
+footer {
+    margin-top: auto
 }
