@@ -3,9 +3,9 @@ defmodule SimpleSubscriptionManager.Repo.Migrations.CreateSubscriptions do
 
   def change do
     create table(:subscriptions) do
-      add :name, :string
-      add :genre, :string
-      add :price, :integer
+      add :name, :string, null: false
+      add :genre_id, references(:genres, on_delete: :delete_all), null: false
+      add :price, :integer, null: false
 
       timestamps()
     end

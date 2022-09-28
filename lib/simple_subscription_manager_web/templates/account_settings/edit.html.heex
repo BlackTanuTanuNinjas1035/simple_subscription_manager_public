@@ -51,3 +51,42 @@
     <%= submit "Change password" %>
   </div>
 </.form>
+
+<h3>公開される情報の更新</h3>
+
+<.form let={f} for={@public_info_changeset} action={Routes.account_settings_path(@conn, :update)} id="update_public_info">
+  <%= if @public_info_changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div>
+    <%= label f, "ニックネーム" %>
+    <%= text_input f, :name, required: true%>
+    <%= error_tag f, :name%>
+  </div>
+
+  <div>
+    <%= label f, "年齢" %>
+    <%= date_select f, :age %>
+    <%= error_tag f, :age %>
+  </div>
+  <div class="seibetu">
+    <%= label f, "性別" %>
+    <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力" %>
+    <%= error_tag f, :gender %>
+  </div>
+  
+  <div>入力していただいた情報(性別、年齢、登録したサービス)などを収集して、グラフすることで利用者全体のサービスの利用情報の表示を考えております
+  </div>
+  <div>
+    <%= label f, "ユーザ情報の利用を許可する"%>
+    <%= checkbox f, :use_user_info %>
+  </div>
+
+  <div>
+    <%= submit "Change public infomation" %>
+  </div>
+
+</.form>

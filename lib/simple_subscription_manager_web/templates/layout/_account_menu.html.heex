@@ -3,6 +3,7 @@
 <ul class="header-ul">
 <%= if @current_account do %>
   <li>いらっしゃい、<%= @current_account.name %> さん!</li>
+  <li>メアド: <%= @current_account.email %> さん!</li>
   <li><%= link "アカウントの設定をする", to: Routes.account_settings_path(@conn, :edit) %></li>
   <li><%= link "ログアウトする", to: Routes.account_session_path(@conn, :delete), method: :delete %></li>
 <% else %>

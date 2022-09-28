@@ -14,7 +14,7 @@ defmodule SimpleSubscriptionManager.Repo.Migrations.CreateAccountsAuthTables do
       # 追加。性別(必須ではない)
       add :gender, :integer
       # 追加。ユーザ情報の利用許可
-      add :use_user_info, :boolean
+      add :use_user_info, :boolean, null: false
       add :confirmed_at, :naive_datetime
       timestamps()
     end

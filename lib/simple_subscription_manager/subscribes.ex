@@ -1,6 +1,5 @@
 defmodule SimpleSubscriptionManager.Subscribes do
   alias SimpleSubscriptionManager.Subscribes.Subscribe
-  alias SimpleSubscriptionManager.Accounts.Account
   alias SimpleSubscriptionManager.Repo
   import Ecto.Query
 

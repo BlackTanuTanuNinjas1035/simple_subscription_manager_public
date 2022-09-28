@@ -350,4 +350,24 @@ defmodule SimpleSubscriptionManager.Accounts do
       {:error, :account, changeset, _} -> {:error, changeset}
     end
   end
+
+  def update_account_public_info(account, password, attrs) do
+    changeset =
+      account
+      |> Account.public_info_changeset(attrs)
+      |> Account.validate_current_password(password)
+
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(:account, changeset)
+    |> Ecto.Multi.delete_all(:tokens, AccountToken.account_and_contexts_query(account, :all))
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{account: account}} -> {:ok, account}
+      {:error, :account, changeset, _} -> {:error, changeset}
+    end
+  end
+
+  def change_account_public_info(account, attrs \\ %{}) do
+    Account.public_info_changeset(account, attrs)
+  end
 end

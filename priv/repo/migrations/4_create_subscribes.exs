@@ -9,5 +9,9 @@ defmodule SimpleSubscriptionManager.Repo.Migrations.CreateSubscribes do
 
       timestamps()
     end
+
+    # これらはユニーク制約となる
+    create unique_index(:subscribes, [:account_id, :subscription_id])
+
   end
 end

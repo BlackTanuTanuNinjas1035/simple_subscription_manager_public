@@ -150,4 +150,10 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
       add_error(changeset, :current_password, "is not valid")
     end
   end
+
+  def public_info_changeset(account, attrs) do
+    account
+    |> cast(attrs, [:name, :age, :gender])
+    |> validate_required([:name, :age, :gender])
+  end
 end

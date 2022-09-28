@@ -50,6 +50,23 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
     end
   end
 
+  # 追加
+  def update(conn, %{"action" => "update_public_info"} = params) do
+    %{"current_password" => password, "account" => account_params} = params
+    account = conn.assigns.current_account
+
+    case Accounts.update_account_public_info(account, password, account_params) do
+      {:ok, account} ->
+        conn
+        |> put_flash(:info, "Public information updated successfully.")
+        |> put_session(:account_return_to, Routes.account_settings_path(conn, :edit))
+        |> AccountAuth.log_in_account(account)
+
+      {:error, changeset} ->
+        render(conn, "edit.html", password_changeset: changeset)
+    end
+  end
+
   def confirm_email(conn, %{"token" => token}) do
     case Accounts.update_account_email(conn.assigns.current_account, token) do
       :ok ->
@@ -70,5 +87,6 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
     conn
     |> assign(:email_changeset, Accounts.change_account_email(account))
     |> assign(:password_changeset, Accounts.change_account_password(account))
+    |> assign(:public_info_changeset, Accounts.change_account_public_info(account))
   end
 end
