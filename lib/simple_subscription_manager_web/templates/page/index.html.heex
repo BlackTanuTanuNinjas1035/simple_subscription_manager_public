@@ -1,7 +1,20 @@
-<div class="contant">
-    <h2>
-        <span>あなたのための</span><span>超シンプルなサブスクリプション管理</span>
-    </h2>
-    <p class="anatani">サブスクリプションサービスを管理したい<strong><font color="#ff0000">あなた</font></strong>に</p>
-    <button><%= link "始める", to: Routes.manager_path(@conn, :index) %></button>
-</div>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/index_home.css")}/>
+
+<!--- <div class="content"> --->
+    <div class="caption">
+        <p class="youkoso">ようこそ</p>
+        <h1>
+            <span>あなたのための</span><span>超シンプルなサブスクリプション管理</span>
+        </h1>
+    </div>
+
+    <div class="p_div">
+        <p class="anatani">サブスクリプションサービスを管理したい<strong><font color="#ff0000">あなた</font></strong>に</p>
+    </div>
+
+    <div class="button_div">
+        <div class="button_div2">
+            <button class="start_button"><%= link "はじめてみる！", to: Routes.manager_path(@conn, :index) %></button>
+        </div>
+    </div>
+<!--- </div> --->
