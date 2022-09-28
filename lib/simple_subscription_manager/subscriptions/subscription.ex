@@ -3,9 +3,9 @@ defmodule SimpleSubscriptionManager.Subscriptions.Subscription do
   import Ecto.Changeset
 
   schema "subscriptions" do
-    field :genre, :string
     field :name, :string
     field :price, :integer
+    belongs_to :genre_alias, SimpleSubscriptionManager.Subscriptions.Genre, foreign_key: :genre_id, type: :integer
 
     timestamps()
   end

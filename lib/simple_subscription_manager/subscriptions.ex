@@ -4,5 +4,6 @@ defmodule SimpleSubscriptionManager.Subscriptions do
 
   def list_subscriptions() do
     Repo.all(Subscription)
+    |> Repo.preload([:genre_alias])
   end
 end
