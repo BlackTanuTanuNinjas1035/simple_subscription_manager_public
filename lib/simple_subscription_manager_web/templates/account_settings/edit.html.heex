@@ -1,6 +1,6 @@
 <h1>Settings</h1>
 
-<h3>Change email</h3>
+<h3>メールアドレスを変更する</h3>
 
 <.form let={f} for={@email_changeset} action={Routes.account_settings_path(@conn, :update)} id="update_email">
   <%= if @email_changeset.action do %>
@@ -11,20 +11,20 @@
 
   <%= hidden_input f, :action, name: "action", value: "update_email" %>
 
-  <%= label f, :email %>
+  <%= label f, :email, "新しいメールアドレス" %>
   <%= email_input f, :email, required: true %>
   <%= error_tag f, :email %>
 
-  <%= label f, :current_password, for: "current_password_for_email" %>
+  <%= label f, :current_password, "パスワード", for: "current_password_for_email" %>
   <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email" %>
   <%= error_tag f, :current_password %>
 
   <div>
-    <%= submit "Change email" %>
+    <%= submit "メールアドレスを変更" %>
   </div>
 </.form>
 
-<h3>Change password</h3>
+<h3>パスワードを変更する</h3>
 
 <.form let={f} for={@password_changeset} action={Routes.account_settings_path(@conn, :update)} id="update_password">
   <%= if @password_changeset.action do %>
@@ -35,20 +35,20 @@
 
   <%= hidden_input f, :action, name: "action", value: "update_password" %>
 
-  <%= label f, :password, "New password" %>
+  <%= label f, :password, "新しいパスワード" %>
   <%= password_input f, :password, required: true %>
   <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation, "Confirm new password" %>
+  <%= label f, :password_confirmation, "新しいパスワード(再入力)" %>
   <%= password_input f, :password_confirmation, required: true %>
   <%= error_tag f, :password_confirmation %>
 
-  <%= label f, :current_password, for: "current_password_for_password" %>
+  <%= label f, :current_password, "現在のパスワード", for: "current_password_for_password" %>
   <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password" %>
   <%= error_tag f, :current_password %>
 
   <div>
-    <%= submit "Change password" %>
+    <%= submit "パスワードを変更" %>
   </div>
 </.form>
 
@@ -86,7 +86,7 @@
   </div>
 
   <div>
-    <%= submit "Change public infomation" %>
+    <%= submit "ユーザー情報を変更" %>
   </div>
 
 </.form>
