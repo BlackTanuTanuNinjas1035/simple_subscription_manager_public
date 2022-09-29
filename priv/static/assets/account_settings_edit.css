@@ -1,0 +1,47 @@
+.main_contents > .container{
+    width: 100%;
+    height: 100%;
+    display :flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main_contents > .container > .content{
+    background: #ffffff;
+    width: 900px;
+    height: 700px;
+    margin: 8% auto 8%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* overflow: scroll; */
+
+}
+
+.content-a {
+    margin: auto 20% auto 20%;
+    text-align: left;
+}
+
+.h1_div{
+    text-align: center;
+}
+
+.one-block {
+    margin: 10px;
+}
+
+.h3_div {
+    margin-left: 10%;
+}
+
+.submit_button{
+    text-align: right;
+}
