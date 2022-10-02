@@ -351,23 +351,91 @@ defmodule SimpleSubscriptionManager.Accounts do
     end
   end
 
-  def update_account_public_info(account, password, attrs) do
+  # 名前の変更を検証
+  def change_account_name(account, attrs \\ %{}) do
+    Account.name_changeset(account, attrs)
+  end
+
+  # 入力したパスワードがあっていれば、名前を変更
+  def update_account_name(account, password, attrs) do
     changeset =
       account
-      |> Account.public_info_changeset(attrs)
+      |> Account.name_changeset(attrs)
       |> Account.validate_current_password(password)
 
-    Ecto.Multi.new()
-    |> Ecto.Multi.update(:account, changeset)
-    |> Ecto.Multi.delete_all(:tokens, AccountToken.account_and_contexts_query(account, :all))
-    |> Repo.transaction()
-    |> case do
-      {:ok, %{account: account}} -> {:ok, account}
-      {:error, :account, changeset, _} -> {:error, changeset}
+      Ecto.Multi.new()
+      |> Ecto.Multi.update(:account, changeset)
+      |> Ecto.Multi.delete_all(:tokens, AccountToken.account_and_contexts_query(account, :all))
+      |> Repo.transaction()
+      |> case do
+        {:ok, %{account: account}} -> {:ok, account}
+        {:error, :account, changeset, _} -> {:error, changeset}
     end
   end
 
-  def change_account_public_info(account, attrs \\ %{}) do
-    Account.public_info_changeset(account, attrs)
+  # 年齢の検証の結果を返す
+  def change_account_age(account, attrs \\ %{}) do
+    Account.age_changeset(account, attrs)
+  end
+
+  # 入力したパスワードがあっていれば、年齢を変更
+  def update_account_age(account, password, attrs) do
+    changeset =
+      account
+      |> Account.age_changeset(attrs)
+      |> Account.validate_current_password(password)
+
+      Ecto.Multi.new()
+      |> Ecto.Multi.update(:account, changeset)
+      |> Ecto.Multi.delete_all(:tokens, AccountToken.account_and_contexts_query(account, :all))
+      |> Repo.transaction()
+      |> case do
+        {:ok, %{account: account}} -> {:ok, account}
+        {:error, :account, changeset, _} -> {:error, changeset}
+    end
+  end
+
+  # 性別の検証の結果を返す
+  def change_account_gender(account, attrs \\ %{}) do
+    Account.gender_changeset(account, attrs)
+  end
+
+  # 入力したパスワードがあっていれば、性別を変更
+  def update_account_gender(account, password, attrs) do
+    changeset =
+      account
+      |> Account.gender_changeset(attrs)
+      |> Account.validate_current_password(password)
+
+      Ecto.Multi.new()
+      |> Ecto.Multi.update(:account, changeset)
+      |> Ecto.Multi.delete_all(:tokens, AccountToken.account_and_contexts_query(account, :all))
+      |> Repo.transaction()
+      |> case do
+        {:ok, %{account: account}} -> {:ok, account}
+        {:error, :account, changeset, _} -> {:error, changeset}
+    end
+  end
+
+  # ユーザ情報の利用の検証の結果を返す
+  def change_account_use_user_info(account, attrs \\ %{}) do
+    Account.use_user_info_changeset(account, attrs)
+  end
+
+  # 入力したパスワードがあっていれば、ユーザ情報の利用を変更
+  def update_account_use_user_info(account, password, attrs) do
+    changeset =
+      account
+      |> Account.use_user_info_changeset(attrs)
+      |> Account.validate_current_password(password)
+
+      Ecto.Multi.new()
+      |> Ecto.Multi.update(:account, changeset)
+      |> Ecto.Multi.delete_all(:tokens, AccountToken.account_and_contexts_query(account, :all))
+      |> Repo.transaction()
+      |> case do
+        {:ok, %{account: account}} -> {:ok, account}
+        {:error, :account, changeset, _} -> {:error, changeset}
+    end
   end
 end

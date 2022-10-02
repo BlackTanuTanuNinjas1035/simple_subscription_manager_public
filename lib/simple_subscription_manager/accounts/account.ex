@@ -151,9 +151,48 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
     end
   end
 
-  def public_info_changeset(account, attrs) do
+  # 名前の変更が正しいか検証
+  def name_changeset(account, attrs) do
     account
-    |> cast(attrs, [:name, :age, :gender])
-    |> validate_required([:name, :age, :gender])
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
+    |> case do
+      %{changes: %{name: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :name, "did not change")
+    end
   end
+
+  # 年齢の変更が正しいか検証
+  def age_changeset(account, attrs) do
+    account
+    |> cast(attrs, [:age])
+    |> validate_required([:age])
+    |> case do
+      %{changes: %{age: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :age, "did not change")
+    end
+  end
+
+  # 性別の変更が正しいか検証
+  def gender_changeset(account, attrs) do
+    account
+    |> cast(attrs, [:gender])
+    |> validate_required([:gender])
+    |> case do
+      %{changes: %{gender: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :gender, "did not change")
+    end
+  end
+
+  # ユーザ情報の利用の変更が正しいか検証
+  def use_user_info_changeset(account, attrs) do
+    account
+    |> cast(attrs, [:use_user_info])
+    |> validate_required([:use_user_info])
+    |> case do
+      %{changes: %{use_user_info: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :use_user_info, "did not change")
+    end
+  end
+
 end

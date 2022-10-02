@@ -5,6 +5,7 @@ defmodule SimpleSubscriptionManager.Subscriptions.Subscription do
   schema "subscriptions" do
     field :name, :string
     field :price, :integer
+    field :description, :string
     belongs_to :genre_alias, SimpleSubscriptionManager.Subscriptions.Genre, foreign_key: :genre_id, type: :integer
 
     timestamps()
