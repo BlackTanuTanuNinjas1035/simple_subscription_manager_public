@@ -6,18 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content={csrf_token_value()}>
     <%= live_title_tag assigns[:page_title] || "SimpleSubscriptionManager", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/base.css")}/>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/my-css.css")}/>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/back.css")}/>
+    
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
 
-  <body>
+  <body>  
+
     <div class="background">
-      <div class="context">
-        <h1>Pure Css Animated Background</h1>
-      </div>
-
-
       <div class="area" >
             <ul class="circles">
                     <li></li>
@@ -31,33 +29,35 @@
                     <li></li>
                     <li></li>
             </ul>
-      
-      
-        <div class="maincon">
-          <header>
-            <section class="container header">
-              <%= link to: Routes.page_path(@conn, :index) do%>
-                <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
-              <% end %>
-
-      
-              <nav class="nav-header">
-                
-                <div class="account-info">
-                  <%= render "_account_menu.html", assigns %>
-                </div>
-              </nav>
-              
-            </section>
-          </header>
-
-          <%= @inner_content %>
-
-          <footer style="position:absolute;bottom:0;">
-          <%=  render "footer.html", assigns %>
-          </footer>
-        </div>
       </div>
     </div>
+
+    <div class="front">
+      <header>
+        <section class="container header">
+          <%= link to: Routes.page_path(@conn, :index) do%>
+            <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
+          <% end %> 
+          
+          <nav class="nav-header">
+            
+            <div class="account-info">
+              <%= render "_account_menu.html", assigns %>
+            </div>
+          </nav>
+        </section>
+      </header>
+
+      <div class="main_contents">
+        <%= @inner_content %>
+      </div>
+
+      <footer>
+        <%=  render "footer.html", assigns %>
+      </footer>
+
+    </div>
+  
+    
   </body>
 </html>

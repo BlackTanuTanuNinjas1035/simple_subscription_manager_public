@@ -1,3 +1,4 @@
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
 <div>あなたが登録サブスクリプションを追加する</div>
 <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
 
@@ -19,3 +20,11 @@
 <% else %>
     <div><%= @total_price %></div>
 <% end %>
+
+<div class="test" id="testid">
+    <p class="ptest">はい</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_index.js")}></script>
+

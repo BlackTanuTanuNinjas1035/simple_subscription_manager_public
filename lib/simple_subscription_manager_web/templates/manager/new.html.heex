@@ -8,3 +8,8 @@
         <%= submit "登録" %>
     </div>
 </.form>
+
+<%= for subscription <- @subscription_list do %>
+    <h3 id="#text{subscription.id}"><%= subscription.name %></h3>
+    <p name="#{subscription.name}"><%= subscription.description %></p>
+<% end %>

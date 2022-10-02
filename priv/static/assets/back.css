@@ -1,46 +1,9 @@
 /* @import url('https://fonts.googleapis.com/css?family=Exo:400,700'); */
 
-*{
-    margin: 0px;
-    padding: 0px;
-}
-
-html {
-    background-color: rgba(179, 28, 28, 0);
-}
-
-body{
-    font-family: 'Exo', sans-serif;
-}
-
-/* .background{
+.background{
     position: absolute;
-} */
-
-.maincon {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    position: relative;
-}
-
-/* .maincon {
-    position: relative;
-} */
-
-
-
-.context {
     width: 100%;
-    position: absolute;
-    top:50vh;
-    
-}
-
-.context h1{
-    text-align: center;
-    color: rgba(255, 255, 255, 0);
-    font-size: 50px;
+    height: 100%;
 }
 
 
@@ -49,8 +12,6 @@ body{
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
     width: 100%;
     height:100vh;
-    
-   
 }
 
 .circles{
@@ -169,6 +130,3 @@ body{
 
 }
 
-footer {
-    margin-top: auto
-}
