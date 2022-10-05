@@ -6,8 +6,11 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationController do
   alias SimpleSubscriptionManagerWeb.AccountAuth
 
   def new(conn, _params) do
+
+    today = Date.utc_today()
+
     changeset = Accounts.change_account_registration(%Account{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, toyear: today.year)
   end
 
   def create(conn, %{"account" => account_params}) do

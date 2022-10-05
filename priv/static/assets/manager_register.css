@@ -1,0 +1,1 @@
+ul#subscription_list li:nth-of-type(n+2) { display: none; }

@@ -6,3 +6,9 @@
 .test.on {
     background-color: blue;
 }
+
+/* 合計金額は位置固定 */
+#total_price {
+    position: fixed;
+    bottom: 20%;
+}

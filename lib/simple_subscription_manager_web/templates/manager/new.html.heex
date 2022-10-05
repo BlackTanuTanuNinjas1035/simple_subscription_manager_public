@@ -1,15 +1,24 @@
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/manager_register.css")}/>
+<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_register.js")}></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
 <h1>サブスクリプション登録</h1>
 
 <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
-    <%= select f, :subscription_id, Enum.map(@subscription_list, fn(s) -> {s.name, s.id} end), selected: [1] %>
+    <%= select f, :subscription_id, Enum.map(@subscription_list, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription"%>
 
     <div>
         <%= submit "登録" %>
     </div>
 </.form>
 
+<ul id="subscription_list">
 <%= for subscription <- @subscription_list do %>
-    <h3 id="#text{subscription.id}"><%= subscription.name %></h3>
-    <p name="#{subscription.name}"><%= subscription.description %></p>
+    <li id={~w/#{subscription.id}/}>
+        <h3><%= subscription.name %></h3>
+        <p><%= subscription.description %></p>
+        <div>月額: <%= subscription.price %></div>
+    </li>
 <% end %>
+</ul>

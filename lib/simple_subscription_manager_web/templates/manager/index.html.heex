@@ -16,9 +16,9 @@
     <% end %>
 </ol>
 <%= if @total_price == 0 do%>
-    <div>ご利用のサービスはございません</div>
+    <div id="total_price">ご利用のサービスはございません</div>
 <% else %>
-    <div><%= @total_price %></div>
+    <div id="total_price"><%= @total_price %></div>
 <% end %>
 
 <div class="test" id="testid">

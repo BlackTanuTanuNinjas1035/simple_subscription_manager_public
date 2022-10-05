@@ -29,7 +29,7 @@
       </div>
       <div>
         <%= label f, "年齢" %>
-        <%= date_select f, :age %>
+        <%= date_select f, :age, year: [options: 1950..@toyear]  %>
         <%= error_tag f, :age %>
       </div>
       <div class="seibetu">
