@@ -5,7 +5,7 @@
         <th>当サイトについて</th><th>各画面へのリンク</th><th>企業向け</th>
     </tr>
     <tr>
-        <td><%= link "使い方について", to: Routes.page_path(@conn, :help) %></td><td><%= link "登録サービス一覧を表示", to: Routes.manager_path(@conn, :index) %></td><td>利用サービスの統計</td>
+        <td><%= link "使い方について", to: Routes.page_path(@conn, :help) %></td><td><%= link "登録サービス一覧を表示", to: Routes.manager_path(@conn, :index) %></td><td><%= link "利用サービスの統計", to: Routes.page_path(@conn, :stat) %></td>
     </tr>
     <tr>
         <td></td><td><%= link "サービスを登録する", to: Routes.manager_path(@conn, :new) %></td><td></td>

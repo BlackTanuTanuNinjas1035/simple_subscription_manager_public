@@ -1,5 +1,6 @@
 defmodule SimpleSubscriptionManager.Subscribes do
   alias SimpleSubscriptionManager.Subscribes.Subscribe
+  alias SimpleSubscriptionManager.Accounts.Account
   alias SimpleSubscriptionManager.Repo
   import Ecto.Query
 
@@ -44,4 +45,30 @@ defmodule SimpleSubscriptionManager.Subscribes do
     |> Repo.preload(:subscription_alias)
   end
 
+  @doc """
+  use_user_infoがtrueであるアカウントのサブスクライブ情報を取得
+  """
+  def get_subscribes_of_available_user() do
+
+    # use_user_infoがtrueであるクエリ
+    sub_query = from(a in Account, where: a.use_user_info == true)
+    # を含むクエリ(join)
+    query = from(s in Subscribe, preload: [account_alias: ^sub_query])
+    # subscriptionとjoin
+    full_query = Repo.all(query) |> Repo.preload(:subscription_alias)
+
+
+    # サービスごとの件数
+    subscription_counter = Enum.reduce(full_query, %{}, fn s, acc -> Map.update(acc, s.subscription_alias.name, 1, &(&1+1)) end)
+
+  end
+
+  @doc """
+  全体の何割から回答を得られたか(小数点第1で四捨五入)を返却
+  """
+  def anser_counter() do
+    all_user = Repo.one(from(a in Account, select: count(a)))
+    true_user = Repo.one(from(a in Account, where: a.use_user_info == true, select: count(a)))
+    Float.ceil(true_user / all_user, 1)
+  end
 end

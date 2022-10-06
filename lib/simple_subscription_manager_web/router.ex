@@ -25,6 +25,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
 
     get "/", PageController, :index
     get "/help", PageController, :help
+    get "/stat", PageController, :stat
   end
 
   # Other scopes may use custom stacks.
