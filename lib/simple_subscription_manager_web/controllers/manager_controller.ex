@@ -70,7 +70,10 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         |> redirect(to: Routes.manager_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "index.html", changeset: changeset)
+        subscription_list = Subscriptions.list_subscriptions()
+        conn
+        |> put_flash(:info, "サブスクリプションの登録に失敗しました。サービスの重複を確認してください。")
+        |> render("new.html", changeset: changeset, subscription_list: subscription_list)
     end
   end
 end

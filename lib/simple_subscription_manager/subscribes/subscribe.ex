@@ -15,5 +15,7 @@ defmodule SimpleSubscriptionManager.Subscribes.Subscribe do
     subscribe
     |> cast(attrs, [:account_id, :subscription_id])
     |> validate_required([:account_id, :subscription_id])
+    |> unsafe_validate_unique([:account_id, :subscription_id], SimpleSubscriptionManager.Repo)
+    |> unique_constraint([:account_id, :subscription_id])
   end
 end

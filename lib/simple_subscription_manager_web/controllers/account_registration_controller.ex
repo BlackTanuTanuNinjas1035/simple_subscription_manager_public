@@ -7,6 +7,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationController do
 
   def new(conn, _params) do
 
+    # 今日の日付から西暦を取得したい
     today = Date.utc_today()
 
     changeset = Accounts.change_account_registration(%Account{})
@@ -27,7 +28,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationController do
         |> AccountAuth.log_in_account(account)
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        today = Date.utc_today()
+        render(conn, "new.html", changeset: changeset, toyear: today.year)
     end
   end
 end
