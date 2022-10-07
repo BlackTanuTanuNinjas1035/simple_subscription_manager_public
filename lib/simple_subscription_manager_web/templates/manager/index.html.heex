@@ -1,24 +1,27 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
-<div>あなたが登録サブスクリプションを追加する</div>
+<div>あなたの利用しているサブスクリプションを登録しましょう!</div>
 <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
 
 <h2>登録しているサービス</h2>
 
-<ol>
-    <li>
+<table>
+    <tr>
         <%# 各項目の名前欄はスペースを開けて整形すること %>
-        <span>サービス名</span><span>ジャンル</span><span>月額料金</span>
-    </li>
+        <th>サービス名</th><th>ジャンル</th><th>月額料金</th>
+    </tr>
     <%= for subscribe <- @subscribes_list do %>
-        <li>
-            <span><%= subscribe.subscription_alias.name %></span><span><%= subscribe.subscription_alias.price %></span>
-        </li>
+        <tr>
+            <td><%= subscribe.subscription_alias.name %></td>
+            <td><%= subscribe.subscription_alias.genre_alias.name %></td>
+            <td><%= subscribe.subscription_alias.price %></td>
+        </tr>
     <% end %>
-</ol>
+</table>
+
 <%= if @total_price == 0 do%>
     <div id="total_price">ご利用のサービスはございません</div>
 <% else %>
-    <div id="total_price"><%= @total_price %></div>
+    <div id="total_price">合計金額: <%= @total_price %> 円</div>
 <% end %>
 
 <div class="test" id="testid">

@@ -1,1 +1,15 @@
-<h3>利用者から<%= @number_of_ans %>%の回答を得られました</h3>
+<h1>サブスクリプションサービスの統計</h1>
+    <p>こちらから人気のサブスクリプションサービスを見ることができます</p>
+
+<div>ご利用者から<%= @number_of_ans * 100 %>%の回答を得られました</div>
+
+<h3>人気のサービスランキング</h3>
+<ol>
+<%= for subscription_count <- @subscription_counter do %>
+    <li>
+    <span><%= elem subscription_count, 0 %></span><span><%= elem subscription_count, 1 %></span>
+    </li>
+<% end %>
+</ol>
+
+

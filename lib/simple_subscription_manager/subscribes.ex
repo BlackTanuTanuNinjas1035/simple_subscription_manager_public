@@ -42,7 +42,7 @@ defmodule SimpleSubscriptionManager.Subscribes do
 
     # subscriptionsテーブルと関連付け(join)してから返却
     Repo.all(query, preload: [:subscription_alias])
-    |> Repo.preload(:subscription_alias)
+    |> Repo.preload([:subscription_alias, subscription_alias: [:genre_alias]])
   end
 
   @doc """
@@ -55,12 +55,14 @@ defmodule SimpleSubscriptionManager.Subscribes do
     # を含むクエリ(join)
     query = from(s in Subscribe, preload: [account_alias: ^sub_query])
     # subscriptionとjoin
-    full_query = Repo.all(query) |> Repo.preload(:subscription_alias)
+    full_query = Repo.all(query) |> Repo.preload([:subscription_alias, subscription_alias: [:genre_alias]])
 
 
     # サービスごとの件数
     subscription_counter = Enum.reduce(full_query, %{}, fn s, acc -> Map.update(acc, s.subscription_alias.name, 1, &(&1+1)) end)
 
+    # "AbemaTV プレミア" => 2 から {"AbemaTV プレミア", 2} に変換
+    Map.to_list subscription_counter
   end
 
   @doc """
