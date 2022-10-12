@@ -1,5 +1,6 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/footer.css")}/>
 
+<!---
 <table>
     <tr>
         <th>当サイトについて</th><th>各画面へのリンク</th><th>企業向け</th>
@@ -14,3 +15,22 @@
         <td></td><td><%= link "アカウント情報を変更する", to: Routes. account_settings_path(@conn, :edit) %></td>
     </tr>
 </table>
+--->
+
+<ul class="footer_ul">
+    <li class="footer_li li1">
+        <p>当サイトについて</p>
+        <div><%= link "使い方について", to: Routes.page_path(@conn, :help) %></div>
+    </li>
+    <li class="footer_li li2">
+        <p>各画面へのリンク</p>
+        <div><%= link "登録サービス一覧を表示", to: Routes.manager_path(@conn, :index) %></div>
+        <div><%= link "サービスを登録する", to: Routes.manager_path(@conn, :new) %></div>
+        <div class="li2_div3"><%= link "アカウント情報を変更する", to: Routes. account_settings_path(@conn, :edit) %></div>
+    </li>
+    <li class="footer_li li3">
+        <p>企業向け</p>
+        <div><%= link "利用サービスの統計", to: Routes.page_path(@conn, :stat) %></div>
+    </li>
+    
+</ul>

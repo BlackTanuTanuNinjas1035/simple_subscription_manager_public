@@ -1,33 +1,48 @@
-<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
-<div>あなたの利用しているサブスクリプションを登録しましょう!</div>
-<button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
+<div class="big_content">
+    <div class="content">
+        <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
+        <div>あなたの利用しているサブスクリプションを登録しましょう!</div>
+        <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
 
-<h2>登録しているサービス</h2>
+        <h2>登録しているサービス</h2>
 
-<table>
-    <tr>
-        <%# 各項目の名前欄はスペースを開けて整形すること %>
-        <th>サービス名</th><th>ジャンル</th><th>月額料金</th>
-    </tr>
-    <%= for subscribe <- @subscribes_list do %>
-        <tr>
-            <td><%= subscribe.subscription_alias.name %></td>
-            <td><%= subscribe.subscription_alias.genre_alias.name %></td>
-            <td><%= subscribe.subscription_alias.price %></td>
-        </tr>
-    <% end %>
-</table>
+        <table>
+            <tr>
+                <%# 各項目の名前欄はスペースを開けて整形すること %>
+                <th>サービス名</th><th>ジャンル</th><th>月額料金</th>
+            </tr>
+            <%= for subscribe <- @subscribes_list do %>
+                <tr>
+                    <td><%= subscribe.subscription_alias.name %></td>
+                    <td><%= subscribe.subscription_alias.genre_alias.name %></td>
+                    <td><%= subscribe.subscription_alias.price %></td>
+                </tr>
+            <% end %>
+        </table>
 
-<%= if @total_price == 0 do%>
-    <div id="total_price">ご利用のサービスはございません</div>
-<% else %>
-    <div id="total_price">合計金額: <%= @total_price %> 円</div>
-<% end %>
+        <%= if @total_price == 0 do%>
+            <div id="total_price">ご利用のサービスはございません</div>
+        <% else %>
+            <div id="total_price">合計金額: <%= @total_price %> 円</div>
+        <% end %>
+    </div>
 
-<div class="test" id="testid">
-    <p class="ptest">はい</p>
+    <div class="content2">
+
+        <article class="contents-b">
+            <div class="chart-back">
+            <canvas id="chart01" class="chart001"></canvas>
+            </div>
+        </article>
+
+    </div>
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.1.js"integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script> --->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_graph.js")}></script>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_index.js")}></script>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.1.js"integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_index.js")}></script>
 

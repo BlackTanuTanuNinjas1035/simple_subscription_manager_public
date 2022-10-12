@@ -1,14 +1,56 @@
-.test{
-    width:100px;
-    height: 100px;
-    background-color: red;
-}
-.test.on {
-    background-color: blue;
+.main_contents > .container{
+    width: 100%;
+    height: 100%;
+    display :flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* 合計金額は位置固定 */
-#total_price {
-    position: fixed;
-    bottom: 20%;
+.container > .big_content {
+    display :flex;
+    justify-content: center;
+}
+
+.main_contents > .container > .big_content > .content{
+    background: #ffffff;
+    width: 500px;
+    height: 700px;
+    margin: 1% 1% 1% 1%;
+    /* padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 50px; */
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+
+    overflow: scroll;
+
+}
+
+.container > .big_content > .content2{
+    width: 900px;
+    height: 700px;
+    margin: 1% 1% 1% 1%;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+}
+
+.contents-b {
+    width: 90%;
+    height: 90%;
+}
+
+.chart-back {
+    width: 100%;
+    height: 100%;
+}
+
+.chart001 {
+    width: 100%;
+    height: 100%;
 }
