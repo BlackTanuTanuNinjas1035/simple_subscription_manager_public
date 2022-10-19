@@ -1,3 +1,4 @@
+
 //値をグラフに表示させる
 Chart.plugins.register({
     afterDatasetsDraw: function (chart, easing) {
@@ -34,16 +35,22 @@ Chart.plugins.register({
 //=========== 円グラフ ============//
 $('#chart01').on('inview', function(event, isInView) {//画面上に入ったらグラフを描画
 if (isInView) {
-  
 var ctx=document.getElementById("chart01");//グラフを描画したい場所のid
+var tmp = getSubsc();
+var ls_name = tmp[0];
+var ls_price = tmp[1];
+console.log(ls_name);
+
 var chart=new Chart(ctx,{
 type:'pie',//グラフのタイプ
 data:{//グラフのデータ
-  labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
+  // labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
+  labels:ls_name,
   datasets:[{
       label:"職種別比率",//グラフのタイトル
       backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
-      data:["960", "1000"]//データ
+      // data:["960", "1000"]//データ
+      data:ls_price
     }]
 },
 
