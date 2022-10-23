@@ -20,5 +20,5 @@ body{
 .main_contents{
     width: 100%;
     /*高さ↓　ヘッダーのpxとフッターのpxを引いてる */
-    height: calc(100% - 180px);
+    height: calc(100% - 100px);
 }

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content={csrf_token_value()}>
     <%= live_title_tag assigns[:page_title] || "SimpleSubscriptionManager", suffix: " · Phoenix Framework" %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/base.css")}/>
-    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/my-css.css")}/>
+    <!-- <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/my-css.css")}/> 　現在は使ってないはず　不具合なければ消したい--->
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/back.css")}/>
     
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
@@ -32,8 +32,10 @@
       </div>
     </div>
 
-    <div class="front">
+    <div class="front" id="front">
+
       <header>
+        <!--　10月23日に_account_menu.html.heexに移動させた　不具合がなかったら消したい
         <section class="container header">
           <%= link to: Routes.page_path(@conn, :index) do%>
             <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
@@ -41,8 +43,9 @@
           
           <nav class="nav-header">
             
-            <div class="account-info">
+            <div class="account-info"> --->
               <%= render "_account_menu.html", assigns %>
+            <!--
             </div>
 
             <div class="hamburger_div">
@@ -79,16 +82,18 @@
           </nav>
         </section>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
-        <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/header.js")}></script>
+        <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/header.js")}></script> --->
       </header>
 
       <div class="main_contents">
         <%= @inner_content %>
       </div>
 
+      
       <footer>
         <%=  render "footer.html", assigns %>
       </footer>
+
 
     </div>
   
