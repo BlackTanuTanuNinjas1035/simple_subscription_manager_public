@@ -1,3 +1,5 @@
+/*ヘッダーのcssだよ*/
+
 header {
     height: 100px;
     width: 100%;
@@ -13,12 +15,9 @@ header {
 } */
 
 .nav-header {
-    flex-grow: 0.1;
     display: flex;
-    /* justify-content: space-between;  */
 }
 .nav-header div {
-    flex-grow: 1;
 } 
 
 .header-ul {
@@ -28,3 +27,51 @@ header {
 /* 
 .account-info {
 } */
+
+
+/* ハンバーガーメニューcss */
+
+
+header a {
+    text-decoration: none;
+}
+
+header ul,
+header li {
+    list-style: none;
+}
+
+.hamburger_div {
+    margin: 0 20px;
+    display: flex;
+}
+.hamburger_div2{
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+.hamburger_button {
+    position: relative;
+    margin: auto 0;
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+}
+
+.hamburger_nav {
+    width: 300px;
+    background-color: white;
+    position: absolute;
+    top: 51px;
+    right: 0;
+    padding: 30px;
+    visibility: hidden;
+}
+.hamburger_nav.active{
+    visibility: visible;
+}
+
+.hbg_nav_p{
+    font-size: 20px;
+}
+
