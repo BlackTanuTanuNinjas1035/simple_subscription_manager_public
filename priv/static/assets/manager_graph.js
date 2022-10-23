@@ -43,6 +43,7 @@ console.log(ls_name);
 
 var chart=new Chart(ctx,{
 type:'pie',//グラフのタイプ
+//type:'doughnut',
 data:{//グラフのデータ
   // labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
   labels:ls_name,

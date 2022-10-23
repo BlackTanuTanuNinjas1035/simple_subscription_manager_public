@@ -44,8 +44,42 @@
             <div class="account-info">
               <%= render "_account_menu.html", assigns %>
             </div>
+
+            <div class="hamburger_div">
+              <div class="hamburger_div2">
+                <div class="hamburger_button" id="hamburger_button">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+
+                  <nav class="hamburger_nav" id="hamburger_nav">
+                    <ul class="nav__items nav-items">
+                      <li class="hbg_nav_li">
+                        <p class="hbg_nav_p">当サイトについて</p>
+                        <div class="hbg_nav_link"><%= link "使い方について", to: Routes.page_path(@conn, :help) %></div>
+                      </li>
+                      <li class="hbg_nav_li">
+                        <p class="hbg_nav_p">各画面へのリンク</p>
+                        <div class="hbg_nav_link"><%= link "登録サービス一覧を表示", to: Routes.manager_path(@conn, :index) %></div>
+                        <div class="hbg_nav_link"><%= link "サービスを登録する", to: Routes.manager_path(@conn, :new) %></div>
+                        <div class="hbg_nav_link"><%= link "アカウント情報を変更する", to: Routes. account_settings_path(@conn, :edit) %></div>
+                      </li>
+                      <li class="hbg_nab_li">
+                        <p class="hbg_nav_p">企業向け</p>
+                        <div class="hbg_nav_link"><%= link "利用サービスの統計", to: Routes.page_path(@conn, :stat) %></div>
+                      </li>
+                    </ul>
+                  </nav>
+
+                </div>
+              </div>
+            </div>
+
+
           </nav>
         </section>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
+        <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/header.js")}></script>
       </header>
 
       <div class="main_contents">
