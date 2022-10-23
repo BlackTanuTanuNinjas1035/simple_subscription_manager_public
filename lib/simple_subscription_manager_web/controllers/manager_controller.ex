@@ -44,7 +44,10 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
     # IO.inspect changeset
 
-    render(conn, changeset: changeset, subscription_list: subscription_list)
+    # 三年後までの支払日を登録できる
+    to_year = Date.utc_today().year
+
+    render(conn, changeset: changeset, subscription_list: subscription_list, to_year: to_year)
   end
 
   @doc """
@@ -56,6 +59,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
     IO.inspect subscribe_params
 
     # 受け取った属性(%{subscription_id}に、現在のカレントアカウントのid(account_id)を追加する
+    # subscribe_paramsにacccount_idフィールドに対応する現在のアカウントのidを挿入することで、subscribesテーブルに追加するための検証をクリアさせる
     current_id = conn.assigns[:current_account].id
     IO.puts current_id
 
@@ -75,5 +79,29 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         |> put_flash(:info, "サブスクリプションの登録に失敗しました。サービスの重複を確認してください。")
         |> render("new.html", changeset: changeset, subscription_list: subscription_list)
     end
+  end
+
+  # 登録したサービスを削除する
+  def delete(conn, %{"subscribe_id" => subscribe_id}) do
+
+    IO.puts"subscribe_id"
+    IO.inspect subscribe_id
+
+    case Subscribes.delete_subscribe(subscribe_id) do
+      {:ok, msg} ->
+        conn
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.manager_path(conn, :index))
+      {:error, msg} ->
+        conn
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.manager_path(conn, :index))
+    end
+
+  end
+
+  # 登録したサービスの支払日を更新する
+  def update do
+
   end
 end

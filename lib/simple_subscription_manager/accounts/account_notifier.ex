@@ -3,12 +3,12 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
 
   alias SimpleSubscriptionManager.Mailer
 
-  # Delivers the email using the application mailer.
+  # メール送信機能
   defp deliver(recipient, subject, body) do
     email =
       new()
       |> to(recipient)
-      |> from({"SimpleSubscriptionManager", "contact@example.com"})
+      |> from({"サブスクーラー システム Mail", "subscler.tanutanu893@gmail.com"})
       |> subject(subject)
       |> text_body(body)
 
@@ -39,6 +39,7 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
 
   @doc """
   Deliver instructions to reset a account password.
+  パスワードをリセットする際に送信されるメール。
   """
   def deliver_reset_password_instructions(account, url) do
     deliver(account.email, "Reset password instructions", """
@@ -59,6 +60,7 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
 
   @doc """
   Deliver instructions to update a account email.
+  アカウントのEメールを変更する際に送信されるメール。
   """
   def deliver_update_email_instructions(account, url) do
     deliver(account.email, "Update email instructions", """

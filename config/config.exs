@@ -26,6 +26,11 @@ config :simple_subscription_manager, SimpleSubscriptionManagerWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :simple_subscription_manager, SimpleSubscriptionManager.Mailer, adapter: Swoosh.Adapters.Local
 
+# 本番環境用
+# config :simple_subscription_manager, SimpleSubscriptionManager.Mailer,
+# adapter: Swoosh.Adapters.Sendgrid,
+# api_key: "<ここにSendgridのAPIキーを書く>"
+
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 

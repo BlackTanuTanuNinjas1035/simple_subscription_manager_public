@@ -101,6 +101,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     pipe_through [:browser, :require_authenticated_account]
 
     get "/manager", ManagerController, :index
+    get "/manager/delete/:subscribe_id", ManagerController, :delete
     get "/manager/register", ManagerController, :new
     post "/manager/register", ManagerController, :create
 

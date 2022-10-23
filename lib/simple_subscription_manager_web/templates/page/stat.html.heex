@@ -7,9 +7,29 @@
 <ol>
 <%= for subscription_count <- @subscription_counter do %>
     <li>
-    <span><%= elem subscription_count, 0 %></span><span><%= elem subscription_count, 1 %></span>
+        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
     </li>
 <% end %>
 </ol>
+
+<h3>男性に人気のサービスランキング</h3>
+<ol>
+<%= for subscription_count <- @subscription_counter_in_male do %>
+    <li>
+        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+    </li>
+<% end %>
+</ol>
+
+
+<h3>女性に人気のサービスランキング</h3>
+<ol>
+<%= for subscription_count <- @subscription_counter_in_female do %>
+    <li>
+        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+    </li>
+<% end %>
+</ol>
+
 
 
