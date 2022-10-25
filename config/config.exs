@@ -24,12 +24,12 @@ config :simple_subscription_manager, SimpleSubscriptionManagerWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :simple_subscription_manager, SimpleSubscriptionManager.Mailer, adapter: Swoosh.Adapters.Local
+# config :simple_subscription_manager, SimpleSubscriptionManager.Mailer, adapter: Swoosh.Adapters.Local
 
 # 本番環境用
-# config :simple_subscription_manager, SimpleSubscriptionManager.Mailer,
-# adapter: Swoosh.Adapters.Sendgrid,
-# api_key: "<ここにSendgridのAPIキーを書く>"
+config :simple_subscription_manager, SimpleSubscriptionManager.Mailer,
+  adapter: Swoosh.Adapters.Sendgrid,
+  api_key: "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"
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false

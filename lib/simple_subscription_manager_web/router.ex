@@ -28,10 +28,11 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     get "/stat", PageController, :stat
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", SimpleSubscriptionManagerWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", SimpleSubscriptionManagerWeb do
+    pipe_through :api
+
+    get "/usable", ApiController, :index
+  end
 
   # Enables LiveDashboard only for development
   #
