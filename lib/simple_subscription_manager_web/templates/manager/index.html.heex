@@ -13,9 +13,9 @@
             </tr>
             <%= for subscribe <- @subscribes_list do %>
                 <tr>
-                    <td><%= subscribe.subscription_alias.name %></td>
-                    <td><%= subscribe.subscription_alias.genre_alias.name %></td>
-                    <td><%= subscribe.subscription_alias.price %></td>
+                    <td class="subsc_name"><%= subscribe.subscription_alias.name %></td>
+                    <td class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></td>
+                    <td class="subsc_price"><%= subscribe.subscription_alias.price %></td>
                     <td><%= subscribe.date_of_payment %></td>
                     <td><div><a href={~w"/manager/delete/#{subscribe.id}"}>削除</a></div></td>
                     <td><div><a href={~w"/manager/update/#{subscribe.id}"}>更新</a></div></td>
@@ -45,7 +45,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
-    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_graph.js")}></script>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_index.js")}></script>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_graph.js")}></script>
+    
 </div>
 
