@@ -1,10 +1,11 @@
 defmodule SimpleSubscriptionManagerWeb.ApiController do
   use SimpleSubscriptionManagerWeb, :controller
-  alias SimpleSubscriptionManagerWeb.Subscribes
+  alias SimpleSubscriptionManager.Subscribes
+
+  # action_fallback SimpleSubscriptionManagerWeb.FallbackController
 
   def index(conn, _params) do
-    answer_counter = Subscribes.answer_counter()
-    ratio = Subscribes.anser_counter()
-    render(conn, "index.json", point: answer_counter, ratio: ratio)
+    available_user = %{point: Subscribes.answer_counter(), ratio: Subscribes.answer_counter()}
+    render(conn, "index.json", available_user: available_user)
   end
 end

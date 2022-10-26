@@ -1,5 +1,6 @@
 defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
   import Swoosh.Email
+  use Swoosh.Mailer, otp_app: :simple_subscription_manager
 
   alias SimpleSubscriptionManager.Mailer
 
@@ -8,7 +9,8 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"サブスクーラー システム Mail", "subscler.tanutanu893@gmail.com"})
+      |> from({"サブスクーラー システム Mail", "subscler14106@gmail.com"})
+      # |> from({"サブスクーラー システム Mail", "subscler@gmail.com"})
       |> subject(subject)
       |> text_body(body)
 

@@ -31,7 +31,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
   scope "/api", SimpleSubscriptionManagerWeb do
     pipe_through :api
 
-    get "/usable", ApiController, :index
+    get "/available-user", ApiController, :index
   end
 
   # Enables LiveDashboard only for development

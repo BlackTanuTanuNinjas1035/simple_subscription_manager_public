@@ -32,7 +32,7 @@ config :simple_subscription_manager, SimpleSubscriptionManager.Mailer,
   api_key: "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"
 
 # Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
+config :swoosh, :api_client, Swoosh.ApiClient.Hackney
 
 # Configure esbuild (the version is required)
 config :esbuild,
