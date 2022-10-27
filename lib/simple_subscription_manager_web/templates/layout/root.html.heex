@@ -44,7 +44,7 @@
           <nav class="nav-header">
             
             <div class="account-info"> --->
-              <%= render "_account_menu.html", assigns %>
+              <%= render "header.html", assigns %>
             <!--
             </div>
 
@@ -97,6 +97,6 @@
 
     </div>
   
-    
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/js/jquery-3.4.1.min.js")}></script>
   </body>
 </html>

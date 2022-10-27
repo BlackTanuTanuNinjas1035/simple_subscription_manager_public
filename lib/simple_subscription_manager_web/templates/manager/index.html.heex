@@ -1,18 +1,22 @@
 <div class="big_content">
     <div class="content">
-        <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
-        <div>あなたの利用しているサブスクリプションを登録しましょう!</div>
-        <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
+        <link phx-track-static rel="stylesheet" media="screen and (min-width:768px)" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
+        <link phx-track-static rel="stylesheet" media="screen and (max-width:769px)" href={Routes.static_path(@conn, "/assets/manager_index_sumaho.css")}/>
+        <div class="top_content">
+            <div>あなたの利用しているサブスクリプションを登録しましょう!</div>
+            <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
 
-        <h2>登録しているサービス</h2>
+            <h2>登録しているサービス</h2>
+        </div>
 
+        <!-- tableはcss適用しづらい
         <table>
             <tr>
                 <%# 各項目の名前欄はスペースを開けて整形すること %>
                 <th>サービス名</th><th>ジャンル</th><th>月額料金</th><th>支払日</th>
             </tr>
             <%= for subscribe <- @subscribes_list do %>
-                <tr>
+                <tr class="subsc_card">
                     <td class="subsc_name"><%= subscribe.subscription_alias.name %></td>
                     <td class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></td>
                     <td class="subsc_price"><%= subscribe.subscription_alias.price %></td>
@@ -22,12 +26,32 @@
                 </tr>
             <% end %>
         </table>
+        --->
 
-        <%= if @total_price == 0 do%>
-            <div id="total_price">ご利用のサービスはございません</div>
-        <% else %>
-            <div id="total_price">合計金額: <%= @total_price %> 円</div>
-        <% end %>
+        <div class="middle_content">
+            <%= for subscribe <- @subscribes_list do %>
+                <dl class="subsc_card">
+                    <dd class="subsc_name"><%= subscribe.subscription_alias.name %></dd>
+                    <dd class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></dd>
+                    <dd class="subsc_price"><%= subscribe.subscription_alias.price %></dd>
+                    <dd><%= subscribe.date_of_payment %></dd>
+                    <dd><div><a href={~w"/manager/delete/#{subscribe.id}"}>削除</a></div></dd>
+                    <dd><div><a href={~w"/manager/update/#{subscribe.id}"}>更新</a></div></dd>
+                </dl>
+            <% end %>
+        </div>
+
+        <div class="bottom_content">
+            <%= if @total_price == 0 do%>
+                <div id="total_price">ご利用のサービスはございません</div>
+            <% else %>
+                <div id="total_price">合計金額: <%= @total_price %> 円</div>
+            <% end %>
+        </div>
+        <div class="right">
+            <!--css grid用--->
+        </div>
+        <div class="left"></div>
     </div>
 
     <div class="content2">
@@ -42,9 +66,9 @@
 
 
     <!-- <script src="https://code.jquery.com/jquery-3.6.1.js"integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script> --->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+    <!-- ck-static type="text/javascript" src={Routes.static_path(@conn, "/assets/js/Chart.min.js")}></script> --->
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/js/jquery.inview.min.js")}></script>
+
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_index.js")}></script>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_graph.js")}></script>
     
