@@ -82,16 +82,16 @@ defmodule SimpleSubscriptionManager.Subscribes do
   @doc """
   登録情報の利用許可をしているアカウント数を取得
   """
-  def answer_counter() do
+  def available_counter() do
     Repo.one(from(a in Account, where: a.use_user_info == true, select: count(a)))
   end
 
   @doc """
   利用許可されたユーザが、全体の何割か(小数点第1で四捨五入)を返却
   """
-  def answer_ratio() do
+  def available_percent() do
     all_user = Repo.one(from(a in Account, select: count(a)))
-    true_user = answer_counter()
+    true_user = available_counter()
     Float.ceil(true_user / all_user, 1)
   end
 

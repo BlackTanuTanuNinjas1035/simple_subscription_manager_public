@@ -8,8 +8,8 @@ defmodule SimpleSubscriptionManagerWeb.ApiView do
 
   def render("available_user.json", %{api: available_user}) do
     %{
-      point: available_user.point,
-      raito: available_user.ratio
+      num_of_user: available_user.num_of_user,
+      percent: available_user.percent
     }
   end
 end
