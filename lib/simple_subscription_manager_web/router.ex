@@ -8,12 +8,9 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {SimpleSubscriptionManagerWeb.LayoutView, :root}
-    # ここでassignsにカレントアカウントの情報を渡している
     plug :fetch_current_account
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    # # ここでassignsにカレントアカウントの情報を渡している
-    # plug :fetch_current_account
   end
 
   pipeline :api do
@@ -32,6 +29,11 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     pipe_through :api
 
     get "/available-user", ApiController, :index
+    get "/service-list", ApiController, :index_service
+    get "/genre-list", ApiController, :index_genre
+    get "/service-ranking", ApiController, :index_service_ranking
+    get "/service-ranking/:gender", ApiController, :index_service_ranking_by_gender
+
   end
 
   # Enables LiveDashboard only for development

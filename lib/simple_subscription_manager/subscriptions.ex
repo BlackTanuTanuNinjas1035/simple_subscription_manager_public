@@ -1,5 +1,6 @@
 defmodule SimpleSubscriptionManager.Subscriptions do
   alias SimpleSubscriptionManager.Subscriptions.Subscription
+  alias SimpleSubscriptionManager.Subscriptions.Genre
   alias SimpleSubscriptionManager.Repo
   import Ecto.Query
 
@@ -9,6 +10,13 @@ defmodule SimpleSubscriptionManager.Subscriptions do
   def list_subscriptions() do
     Repo.all(Subscription)
     |> Repo.preload([:genre_alias])
+  end
+
+  @doc """
+  ジャンルのリストを返す
+  """
+  def list_genres() do
+    Repo.all(Genre)
   end
 
   @doc """

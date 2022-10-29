@@ -17,22 +17,18 @@ config :simple_subscription_manager, SimpleSubscriptionManagerWeb.Endpoint,
   pubsub_server: SimpleSubscriptionManager.PubSub,
   live_view: [signing_salt: "C6OXGaWM"]
 
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-# config :simple_subscription_manager, SimpleSubscriptionManager.Mailer, adapter: Swoosh.Adapters.Local
+# ローカル環境用
+config :simple_subscription_manager, SimpleSubscriptionManager.Mailer, adapter: Swoosh.Adapters.Local
+# 本番環境用
+config :swoosh, :api_client, Swoosh.ApiClient.Local
 
 # 本番環境用
-config :simple_subscription_manager, SimpleSubscriptionManager.Mailer,
-  adapter: Swoosh.Adapters.Sendgrid,
-  api_key: "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"
+# config :simple_subscription_manager, SimpleSubscriptionManager.Mailer,
+#   adapter: Swoosh.Adapters.Sendgrid,
+#   api_key: "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"
 
-# Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, Swoosh.ApiClient.Hackney
+# 本番環境用
+# config :swoosh, :api_client, Swoosh.ApiClient.Hackney
 
 # Configure esbuild (the version is required)
 config :esbuild,

@@ -198,13 +198,13 @@
       <%= hidden_input f, :action, name: "action", value: "update_use_user_info" %>
 
       <div class="one-element">
-      <%= label f, "ユーザ情報の利用を許可する"%>
+      <%= label f, :use_user_info, "ユーザ情報の利用を許可する"%>
       <%= checkbox f, :use_user_info %>
       <%= error_tag f, :use_user_info %>
       </div>
 
       <div class="one-element">
-      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_use_user_ino" %>
+      <%= label f, :current_password, "パスワード", for: "current_password_for_use_user_info" %>
       <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_use_user_info" %>
       <%= error_tag f, :current_password %>
       </div>

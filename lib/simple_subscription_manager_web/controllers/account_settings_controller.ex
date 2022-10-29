@@ -43,7 +43,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
   # パスワードの変更
   def update(conn, %{"action" => "update_password"} = params) do
     %{"current_password" => password, "account" => account_params} = params
-    IO.puts "受け取ったパスワード: #{password}, 受け取ったアカウント情報\n#{account_params}"
+    # IO.puts "受け取ったパスワード: #{password}, 受け取ったアカウント情報\n#{account_params}"
 
     account = conn.assigns.current_account
 

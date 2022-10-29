@@ -47,9 +47,14 @@ defmodule SimpleSubscriptionManager.Subscribes do
   end
 
   @doc """
-  use_user_infoがtrueであるアカウントのサブスクライブ情報を取得。性別を数字で指定。(男性: 1, 女性: 2, 性別を指定しない場合(デフォルト): 0)
+  登録情報を利用可能にしているアカウントが、登録しているサブスクライブ情報を取得。
+  入力: 性別を数字で指定。(男性: 1, 女性: 2, 性別を指定しない場合(デフォルト): 0)
+  出力: [[サービス名, ジャンル名, 登録件数, 全体の割合], ...]
   """
   def get_subscribes_of_available_user(gender \\ 0) do
+
+    #
+    subscribe_count = Subscribe |> select([s], count(s.id)) |> Repo.one
 
     # 性別指定なし or 性別指定ありでユーザ情報が利用可能なユーザの登録したサービスを取得
     query = if gender == 0 do
@@ -73,9 +78,11 @@ defmodule SimpleSubscriptionManager.Subscribes do
     Enum.map(fn g ->
       point = Map.get(subscription_counter, elem(g, 0))
       if point != nil do
-        name_point_genre = name_point_genre ++ [elem(g, 0), elem(g, 1), point]
+        name_point_genre = name_point_genre ++ [elem(g, 0), elem(g, 1), point, Float.ceil(point/subscribe_count, 3)]
       end
     end)
+    |> Enum.reject(&is_nil/1)
+    |> Enum.sort_by(fn x -> Enum.at(x, 2) end, :desc)
 
   end
 
@@ -92,7 +99,7 @@ defmodule SimpleSubscriptionManager.Subscribes do
   def available_percent() do
     all_user = Repo.one(from(a in Account, select: count(a)))
     true_user = available_counter()
-    Float.ceil(true_user / all_user, 1)
+    Float.ceil(true_user / all_user, 3)
   end
 
   @doc """
