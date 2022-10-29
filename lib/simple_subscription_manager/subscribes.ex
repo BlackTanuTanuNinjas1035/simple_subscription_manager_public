@@ -48,19 +48,17 @@ defmodule SimpleSubscriptionManager.Subscribes do
 
   @doc """
   登録情報を利用可能にしているアカウントが、登録しているサブスクライブ情報を取得。
-  入力: 性別を数字で指定。(男性: 1, 女性: 2, 性別を指定しない場合(デフォルト): 0)
+  入力: 性別を数字で指定。(男性: 1, 女性: 2, 性別を指定しない場合(デフォルト): 0)。ユーザの年代を指定(例: 10)。nilで指定しない。
   出力: [[サービス名, ジャンル名, 登録件数, 全体の割合], ...]
   """
-  def get_subscribes_of_available_user(gender \\ 0) do
+  def get_subscribes_ranking(gender \\ 0, age \\ nil) do
 
-    #
     subscribe_count = Subscribe |> select([s], count(s.id)) |> Repo.one
 
-    # 性別指定なし or 性別指定ありでユーザ情報が利用可能なユーザの登録したサービスを取得
-    query = if gender == 0 do
-      Subscribe |> join(:inner, [sb], a in Account, on: sb.account_id == a.id) |> preload([:account_alias, :subscription_alias, subscription_alias: :genre_alias]) |> Repo.all
+    query = if age == nil do
+      get_subscribes_by_available_user(gender)
     else
-      Subscribe |> join(:inner, [sb], a in Account, on: sb.account_id == a.id and a.gender == ^gender) |> preload([:account_alias, :subscription_alias, subscription_alias: :genre_alias]) |> Repo.all
+      divide_by_age_group(get_subscribes_by_available_user(gender), age)
     end
 
     # サービスごとの件数をカウントする
@@ -84,6 +82,26 @@ defmodule SimpleSubscriptionManager.Subscribes do
     |> Enum.reject(&is_nil/1)
     |> Enum.sort_by(fn x -> Enum.at(x, 2) end, :desc)
 
+  end
+  # 性別指定なし or 性別指定ありでユーザ情報が利用可能なユーザの登録したサービスを取得
+  defp get_subscribes_by_available_user(gender \\ 0) do
+    if gender == 0 do
+      Subscribe |> join(:inner, [sb], a in Account, on: sb.account_id == a.id) |> preload([:account_alias, :subscription_alias, subscription_alias: :genre_alias]) |> Repo.all
+    else
+      Subscribe |> join(:inner, [sb], a in Account, on: sb.account_id == a.id and a.gender == ^gender) |> preload([:account_alias, :subscription_alias, subscription_alias: :genre_alias]) |> Repo.all
+    end
+  end
+  # 登録サービス情報からageで指定した年代のものを取得。
+  defp divide_by_age_group(subscribes, age) do
+    today = Date.utc_today()
+    age_group = []
+    for s <- subscribes do
+      if today.year - s.account_alias.age.year >= age and today.year - s.account_alias.age.year < age+10 do
+        age_group = age_group ++ s
+      end
+    end
+    # 年代のものを取得できない場合([nil, ...])、空リストに変換する
+    age_group |> Enum.reject(&is_nil/1)
   end
 
   @doc """
@@ -124,3 +142,10 @@ defmodule SimpleSubscriptionManager.Subscribes do
     end
   end
 end
+
+
+# iex(72)> for a <- all do
+#   ...(72)> if today.year - a.age.year >= 10 and today.year - a.age.year < 20 do
+#   ...(72)> list = list ++ [a]
+#   ...(72)> end
+#   ...(72)> end
