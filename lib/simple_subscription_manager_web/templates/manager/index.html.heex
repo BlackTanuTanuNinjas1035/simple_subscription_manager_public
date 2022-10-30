@@ -30,14 +30,32 @@
 
         <div class="middle_content">
             <%= for subscribe <- @subscribes_list do %>
+                <!--
                 <dl class="subsc_card">
                     <dd class="subsc_name"><%= subscribe.subscription_alias.name %></dd>
                     <dd class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></dd>
                     <dd class="subsc_price"><%= subscribe.subscription_alias.price %></dd>
-                    <dd><%= subscribe.date_of_payment %></dd>
+                    <dd class="payment"><%= subscribe.date_of_payment %></dd>
                     <dd><div><a href={~w"/manager/delete/#{subscribe.id}"}>削除</a></div></dd>
                     <dd><div><a href={~w"/manager/update/#{subscribe.id}"}>更新</a></div></dd>
                 </dl>
+                --->
+                <div class="subsc_card">
+                    <div class="subsc_name"><%= subscribe.subscription_alias.name %></div>
+                    <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
+                    <!-- subsc_price　はcssの::afterで円を挿入 --->
+                    <div class="subsc_price"><%= subscribe.subscription_alias.price %></div>
+                    <div class="subsc_payment"><%= subscribe.date_of_payment %></div>
+                    <div class="subsc_option">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <div class="subsc_option_menu">
+                            <div><a href={~w"/manager/delete/#{subscribe.id}"}>削除</a></div>
+                            <div><a href={~w"/manager/update/#{subscribe.id}"}>更新</a></div>
+                        </div>
+                    </div>
+                </div>
             <% end %>
         </div>
 
@@ -48,10 +66,8 @@
                 <div id="total_price">合計金額: <%= @total_price %> 円</div>
             <% end %>
         </div>
-        <div class="right">
-            <!--css grid用--->
-        </div>
-        <div class="left"></div>
+        <div class="right"><!--css grid用---></div>
+        <div class="left"><!--css grid用---></div>
     </div>
 
     <div class="content2">
