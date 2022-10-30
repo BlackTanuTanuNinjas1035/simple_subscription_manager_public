@@ -1,5 +1,4 @@
-<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/account_menu.css")}/>
-
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/header.css")}/>
 <section class="container header">
     <%= link to: Routes.page_path(@conn, :index) do%>
         <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
@@ -47,5 +46,8 @@
     
     </nav>
 </section>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
+<!--
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script> --->
+<!-- <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/jquery-3.6.1.min.js")}></script> --->
+<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/jquery-3.6.1.min.js")}></script>
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/header.js")}></script>

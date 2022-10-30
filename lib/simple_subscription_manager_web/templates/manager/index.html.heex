@@ -82,8 +82,10 @@
 
 
     <!-- <script src="https://code.jquery.com/jquery-3.6.1.js"integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script> --->
-    <script defer phx-track-ck-static type="text/javascript" src={Routes.static_path(@conn, "/assets/js/Chart.min.js")}></script> 
-    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/js/jquery.inview.min.js")}></script>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/jquery-3.6.1.min.js")}></script>
+    
+    <script defer phx-track-ck-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/Chart.min.js")}></script> 
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/jquery.inview.min.js")}></script>
 
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_index.js")}></script>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_graph.js")}></script>
