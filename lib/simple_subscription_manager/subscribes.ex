@@ -30,7 +30,7 @@ defmodule SimpleSubscriptionManager.Subscribes do
   end
 
   @doc """
-  与えられたcurrent_account_idと一致しているSubscribeのクエリを返却する
+  与えられたidと一致しているユーザの登録したサービスを返却する
   """
   def get_subscribes(current_account_id) do
 
@@ -48,11 +48,22 @@ defmodule SimpleSubscriptionManager.Subscribes do
 
   @doc """
   登録情報を利用可能にしているアカウントが、登録しているサブスクライブ情報を取得。
-  入力: 性別を数字で指定。(男性: 1, 女性: 2, 性別を指定しない場合(デフォルト): 0)。ユーザの年代を指定(例: 10)。nilで指定しない。
-  出力: [[サービス名, ジャンル名, 登録件数, 全体の割合], ...]
+  性別を数字で指定。(男性: 1, 女性: 2, 性別を指定しない場合(デフォルト): 0)。
+  ユーザの年代を指定(例: 10)。nilで指定しない。
+
+  ## Examples
+      iex> Subscribes.get_subscribes_ranking 1
+      [
+        ["Netflix(ベーシック)", "動画配信サービス", 2, 0.334],
+        ["U-NEXT", "動画配信サービス", 1, 0.167],
+        ["Hulu", "動画配信サービス", 1, 0.167],
+        ["Amazon Prime Video", "動画配信サービス", 1, 0.167],
+        ["Youtubeプレミア", "動画配信サービス", 1, 0.167]
+      ]
   """
   def get_subscribes_ranking(gender \\ 0, age \\ nil) do
 
+    # サービス登録件数
     subscribe_count = Subscribe |> select([s], count(s.id)) |> Repo.one
 
     query = if age == nil do
@@ -61,7 +72,7 @@ defmodule SimpleSubscriptionManager.Subscribes do
       divide_by_age_group(get_subscribes_by_available_user(gender), age)
     end
 
-    # サービスごとの件数をカウントする
+    # サービス種類ごとの登録件数
     subscription_counter = Enum.reduce(query, %{}, fn s, acc -> Map.update(acc, s.subscription_alias.name, 1, &(&1+1)) end)
 
     # DBに登録しているサービスの名前とジャンルの名前の組み合わせを取得する
@@ -105,6 +116,27 @@ defmodule SimpleSubscriptionManager.Subscribes do
   end
 
   @doc """
+  登録されたサービスの種類のランキングを出力
+
+    ## Examles
+      iex> Subscribes.get_genres_ranking
+      [{"動画配信サービス", 2, 0.5},{"漫画・小説配信サービス", 2, 0.5}]
+  """
+  def get_genres_ranking(gender \\ 0, age \\ nil) do
+    service_ranking = get_subscribes_ranking(gender, age)
+
+    # %{"動画配信サービス" => 5, ...}
+    genre_ranking = Enum.reduce(service_ranking, %{}, fn s, acc -> Map.update(acc, Enum.at(s, 1), 1, &(&1+1)) end)
+    IO.inspect genre_ranking
+
+    genre_count = Enum.reduce(Map.to_list(genre_ranking), 0, fn genre, acc -> elem(genre, 1) + acc end)
+
+    Map.to_list(genre_ranking) |>
+    Enum.map(fn genre -> {elem(genre,0), elem(genre, 1), Float.ceil(elem(genre, 1)/genre_count, 3)} end)
+  end
+
+
+  @doc """
   登録情報の利用許可をしているアカウント数を取得
   """
   def available_counter() do
@@ -142,10 +174,3 @@ defmodule SimpleSubscriptionManager.Subscribes do
     end
   end
 end
-
-
-# iex(72)> for a <- all do
-#   ...(72)> if today.year - a.age.year >= 10 and today.year - a.age.year < 20 do
-#   ...(72)> list = list ++ [a]
-#   ...(72)> end
-#   ...(72)> end
