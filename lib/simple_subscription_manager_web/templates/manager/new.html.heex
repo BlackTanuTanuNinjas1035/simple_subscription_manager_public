@@ -10,6 +10,7 @@
         <h1>サブスクリプション登録</h1>
     </div>
 
+    <%# all %>
     <div class="form_div">
         <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
@@ -40,6 +41,263 @@
         <% end %>
         </ul>
     </div>
+
+    <%# 動画 %>
+    <div class="form_div">
+        <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
+
+            <div class="select_box">
+                <%= select f, :subscription_id, Enum.map(@subscription_list_by_video, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_video"%>
+            </div>
+
+            <div>
+                <%= label f, "支払日" %>
+                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3]  %>
+                <%= error_tag f, :date_of_payment %>
+            </div>
+
+            <div class="select_submit">
+                <%= submit "登録" %>
+            </div>
+        </.form>
+    </div>
+
+    <div class="subsc_info">
+        <ul id="subscription_list">
+        <%= for subscription <- @subscription_list_by_video do %>
+            <li id={~w/#{subscription.id}/}>
+                <h3><%= subscription.name %></h3>
+                <p><%= subscription.description %></p>
+                <div>月額: <%= subscription.price %></div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+
+    <%# 音楽 %>
+    <div class="form_div">
+        <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
+
+            <div class="select_box">
+                <%= select f, :subscription_id, Enum.map(@subscription_list_by_music, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_music"%>
+            </div>
+
+            <div>
+                <%= label f, "支払日" %>
+                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3]  %>
+                <%= error_tag f, :date_of_payment %>
+            </div>
+
+            <div class="select_submit">
+                <%= submit "登録" %>
+            </div>
+        </.form>
+    </div>
+
+    <div class="subsc_info">
+        <ul id="subscription_list">
+        <%= for subscription <- @subscription_list_by_music do %>
+            <li id={~w/#{subscription.id}/}>
+                <h3><%= subscription.name %></h3>
+                <p><%= subscription.description %></p>
+                <div>月額: <%= subscription.price %></div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+
+    <%# カーレンタル %>
+    <div class="form_div">
+        <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
+
+            <div class="select_box">
+                <%= select f, :subscription_id, Enum.map(@subscription_list_by_car, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_car"%>
+            </div>
+
+            <div>
+                <%= label f, "支払日" %>
+                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3]  %>
+                <%= error_tag f, :date_of_payment %>
+            </div>
+
+            <div class="select_submit">
+                <%= submit "登録" %>
+            </div>
+        </.form>
+    </div>
+
+    <div class="subsc_info">
+        <ul id="subscription_list">
+        <%= for subscription <- @subscription_list_by_car do %>
+            <li id={~w/#{subscription.id}/}>
+                <h3><%= subscription.name %></h3>
+                <p><%= subscription.description %></p>
+                <div>月額: <%= subscription.price %></div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+
+    <%# 食品 %>
+    <div class="form_div">
+        <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
+
+            <div class="select_box">
+                <%= select f, :subscription_id, Enum.map(@subscription_list_by_food, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_food"%>
+            </div>
+
+            <div>
+                <%= label f, "支払日" %>
+                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3]  %>
+                <%= error_tag f, :date_of_payment %>
+            </div>
+
+            <div class="select_submit">
+                <%= submit "登録" %>
+            </div>
+        </.form>
+    </div>
+
+    <div class="subsc_info">
+        <ul id="subscription_list">
+        <%= for subscription <- @subscription_list_by_food do %>
+            <li id={~w/#{subscription.id}/}>
+                <h3><%= subscription.name %></h3>
+                <p><%= subscription.description %></p>
+                <div>月額: <%= subscription.price %></div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+
+    <%# ソフトウェア %>
+    <div class="form_div">
+        <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
+
+            <div class="select_box">
+                <%= select f, :subscription_id, Enum.map(@subscription_list_by_software, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_software"%>
+            </div>
+
+            <div>
+                <%= label f, "支払日" %>
+                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3]  %>
+                <%= error_tag f, :date_of_payment %>
+            </div>
+
+            <div class="select_submit">
+                <%= submit "登録" %>
+            </div>
+        </.form>
+    </div>
+
+    <div class="subsc_info">
+        <ul id="subscription_list">
+        <%= for subscription <- @subscription_list_by_software do %>
+            <li id={~w/#{subscription.id}/}>
+                <h3><%= subscription.name %></h3>
+                <p><%= subscription.description %></p>
+                <div>月額: <%= subscription.price %></div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+
+    <%# 家具 %>
+    <div class="form_div">
+        <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
+
+            <div class="select_box">
+                <%= select f, :subscription_id, Enum.map(@subscription_list_by_furniture, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_furniture"%>
+            </div>
+
+            <div>
+                <%= label f, "支払日" %>
+                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3]  %>
+                <%= error_tag f, :date_of_payment %>
+            </div>
+
+            <div class="select_submit">
+                <%= submit "登録" %>
+            </div>
+        </.form>
+    </div>
+
+    <div class="subsc_info">
+        <ul id="subscription_list">
+        <%= for subscription <- @subscription_list_by_furniture do %>
+            <li id={~w/#{subscription.id}/}>
+                <h3><%= subscription.name %></h3>
+                <p><%= subscription.description %></p>
+                <div>月額: <%= subscription.price %></div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+
+    <%# 習い事 %>
+    <div class="form_div">
+        <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
+
+            <div class="select_box">
+                <%= select f, :subscription_id_by_lesson, Enum.map(@subscription_list_by_lesson, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_lesson"%>
+            </div>
+
+            <div>
+                <%= label f, "支払日" %>
+                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3]  %>
+                <%= error_tag f, :date_of_payment %>
+            </div>
+
+            <div class="select_submit">
+                <%= submit "登録" %>
+            </div>
+        </.form>
+    </div>
+
+    <div class="subsc_info">
+        <ul id="subscription_list">
+        <%= for subscription <- @subscription_list_by_lesson do %>
+            <li id={~w/#{subscription.id}/}>
+                <h3><%= subscription.name %></h3>
+                <p><%= subscription.description %></p>
+                <div>月額: <%= subscription.price %></div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+
+    <%# 本 %>
+    <div class="form_div">
+        <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
+
+            <div class="select_box">
+                <%= select f, :subscription_id_by_book, Enum.map(@subscription_list_by_book, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_book"%>
+            </div>
+
+            <div>
+                <%= label f, "支払日" %>
+                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3]  %>
+                <%= error_tag f, :date_of_payment %>
+            </div>
+
+            <div class="select_submit">
+                <%= submit "登録" %>
+            </div>
+        </.form>
+    </div>
+
+    <div class="subsc_info">
+        <ul id="subscription_list">
+        <%= for subscription <- @subscription_list_by_book do %>
+            <li id={~w/#{subscription.id}/}>
+                <h3><%= subscription.name %></h3>
+                <p><%= subscription.description %></p>
+                <div>月額: <%= subscription.price %></div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+    
 </div>
 
 

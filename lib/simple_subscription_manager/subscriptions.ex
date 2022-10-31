@@ -22,7 +22,7 @@ defmodule SimpleSubscriptionManager.Subscriptions do
   @doc """
   引数genre_idで指定したジャンルのサブスクリプションのリストを返す
   """
-  def list_subscriptions_by_id(genre_id) do
+  def list_subscriptions_by_genre(genre_id) do
 
     query = from(s in Subscription, where: s.genre_id == ^genre_id)
 

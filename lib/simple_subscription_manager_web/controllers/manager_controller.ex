@@ -34,8 +34,17 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
     current_id = conn.assigns[:current_account].id
     IO.puts "現在のアカウントIDは、「#{current_id}」です"
 
-    # セレクトボックスを表示するために、サブスクリプションの一覧を取得する
+    # 各ジャンルのサービスのクエリのリストを受け取る
     subscription_list = Subscriptions.list_subscriptions()
+    subscription_list_by_video = Subscriptions.list_subscriptions_by_genre 1
+    subscription_list_by_music = Subscriptions.list_subscriptions_by_genre 2
+    subscription_list_by_car = Subscriptions.list_subscriptions_by_genre 3
+    subscription_list_by_food = Subscriptions.list_subscriptions_by_genre 4
+    subscription_list_by_software = Subscriptions.list_subscriptions_by_genre 5
+    subscription_list_by_furniture = Subscriptions.list_subscriptions_by_genre 6
+    subscription_list_by_lesson = Subscriptions.list_subscriptions_by_genre 7
+    subscription_list_by_book = Subscriptions.list_subscriptions_by_genre 8
+
 
     # IO.inspect subscription_list
 
@@ -47,7 +56,17 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
     # 三年後までの支払日を登録できる
     to_year = Date.utc_today().year
 
-    render(conn, changeset: changeset, subscription_list: subscription_list, to_year: to_year)
+    render(conn, changeset: changeset, to_year: to_year,
+      subscription_list: subscription_list,
+      subscription_list_by_video: subscription_list_by_video,
+      subscription_list_by_music: subscription_list_by_music,
+      subscription_list_by_car: subscription_list_by_car,
+      subscription_list_by_food: subscription_list_by_food,
+      subscription_list_by_software: subscription_list_by_software,
+      subscription_list_by_furniture: subscription_list_by_furniture,
+      subscription_list_by_lesson: subscription_list_by_lesson,
+      subscription_list_by_book: subscription_list_by_book
+    )
   end
 
   @doc """

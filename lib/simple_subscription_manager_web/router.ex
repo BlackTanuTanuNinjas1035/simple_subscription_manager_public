@@ -17,14 +17,6 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", SimpleSubscriptionManagerWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
-    get "/help", PageController, :help
-    get "/stat", PageController, :stat
-  end
-
   scope "/api", SimpleSubscriptionManagerWeb do
     pipe_through :api
 
@@ -101,6 +93,14 @@ defmodule SimpleSubscriptionManagerWeb.Router do
   # simple subscription manager routes
 
   scope "/", SimpleSubscriptionManagerWeb do
+    pipe_through :browser
+
+    get "/", PageController, :index
+    get "/help", PageController, :help
+    get "/stat", PageController, :stat
+  end
+
+  scope "/", SimpleSubscriptionManagerWeb do
     pipe_through [:browser, :require_authenticated_account]
 
     get "/manager", ManagerController, :index
@@ -108,5 +108,12 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     get "/manager/register", ManagerController, :new
     post "/manager/register", ManagerController, :create
 
+  end
+
+  scope "/doc", SimpleSubscriptionManagerWeb do
+    pipe_through :browser
+
+    get "/", DocumentController, :index
+    get "/:document_id", DocumentController, :show
   end
 end
