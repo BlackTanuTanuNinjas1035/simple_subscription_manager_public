@@ -35,6 +35,9 @@
                             <li class="hbg_nab_li">
                                 <p class="hbg_nav_p">企業向け</p>
                                 <div class="hbg_nav_link"><%= link "利用サービスの統計", to: Routes.page_path(@conn, :stat) %></div>
+                                <!--- 下のやつがAPIのリンク　パスは通ってない --->
+                                <div class="hbg_nav_link"><%= link "APIの利用", to: Routes.page_path(@conn, :stat) %></div>
+                                
                             </li>
                         </ul>
                     </nav>
@@ -46,8 +49,5 @@
     
     </nav>
 </section>
-<!--
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script> --->
-<!-- <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/jquery-3.6.1.min.js")}></script> --->
-<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/jquery-3.6.1.min.js")}></script>
+
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/header.js")}></script>
