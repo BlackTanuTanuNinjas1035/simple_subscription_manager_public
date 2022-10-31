@@ -35,3 +35,9 @@ function getSubsc() {
     let return_array = [ls_name, ls_price];
     return return_array
 }
+
+$(function(){
+    $(".subsc_option").on("click", function(){
+        $(this).find(".subsc_option_menu").toggleClass("active");
+    });
+})
