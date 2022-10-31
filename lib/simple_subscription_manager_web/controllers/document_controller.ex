@@ -8,6 +8,6 @@ defmodule SimpleSubscriptionManagerWeb.DocumentController do
   end
 
   def show(conn, %{"document_id" => document_id}) do
-    render(conn, "show.html", document: Documents.get_document(document_id))
+    render(conn, "show.html", document: Documents.get_document!(document_id))
   end
 end
