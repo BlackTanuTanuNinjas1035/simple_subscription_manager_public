@@ -2,6 +2,7 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
   use SimpleSubscriptionManagerWeb, :controller
 
 
+
   def index(conn, _params) do
     IO.inspect(conn.assigns.current_account)
     render(conn, "index.html")
@@ -16,15 +17,88 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
     number_of_ans = SimpleSubscriptionManager.Subscribes.available_percent()
     # 各サブスクリプションの登録数を表示
     subscription_counter = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking()
+    genre_counter = SimpleSubscriptionManager.Subscribes.get_genres_ranking()
+
     subscription_counter_in_male = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1)
+    subscription_counter_in_male_by_age_0 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 0)
+    subscription_counter_in_male_by_age_10 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 10)
+    subscription_counter_in_male_by_age_20 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 20)
+    subscription_counter_in_male_by_age_30 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 30)
+    subscription_counter_in_male_by_age_40 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 40)
+    subscription_counter_in_male_by_age_50 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 50)
+    subscription_counter_in_male_by_age_60 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 60)
+    subscription_counter_in_male_by_age_70 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 70)
+
+    genre_counter_in_male = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1)
+    genre_counter_in_male_by_age_0 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1, 0)
+    genre_counter_in_male_by_age_10 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1, 10)
+    genre_counter_in_male_by_age_20 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1, 20)
+    genre_counter_in_male_by_age_30 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1, 30)
+    genre_counter_in_male_by_age_40 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1, 40)
+    genre_counter_in_male_by_age_50 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1, 50)
+    genre_counter_in_male_by_age_60 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1, 60)
+    genre_counter_in_male_by_age_70 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(1, 70)
+
     subscription_counter_in_female = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2)
+    subscription_counter_in_female_by_age_0 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2, 0)
+    subscription_counter_in_female_by_age_10 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2, 10)
+    subscription_counter_in_female_by_age_20 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2, 20)
+    subscription_counter_in_female_by_age_30 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2, 30)
+    subscription_counter_in_female_by_age_40 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2, 40)
+    subscription_counter_in_female_by_age_50 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2, 50)
+    subscription_counter_in_female_by_age_60 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2, 60)
+    subscription_counter_in_female_by_age_70 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(2, 70)
 
-    # # リストの中身がタプルになっているので、リストに変更
-    # subscription_counter = Enum.map subscription_counter_tuple, &Tuple.to_list/1
-    # そして登録数の降順にソート
-    # subscription_counter_sorted =  subscription_counter |> Enum.sort_by fn x -> elem x, 1 end , :desc
+    genre_counter_in_female = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2)
+    genre_counter_in_female_by_age_0 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2, 0)
+    genre_counter_in_female_by_age_10 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2, 10)
+    genre_counter_in_female_by_age_20 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2, 20)
+    genre_counter_in_female_by_age_30 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2, 30)
+    genre_counter_in_female_by_age_40 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2, 40)
+    genre_counter_in_female_by_age_50 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2, 50)
+    genre_counter_in_female_by_age_60 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2, 60)
+    genre_counter_in_female_by_age_70 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(2, 70)
 
-    # Subscription |> where name: "AbemaTV プレミア"
-    render(conn, "stat.html", number_of_ans: number_of_ans, subscription_counter: subscription_counter, subscription_counter_in_male: subscription_counter_in_male, subscription_counter_in_female: subscription_counter_in_female)
+    render(conn, "stat.html",
+      number_of_ans: number_of_ans,
+      subscription_counter: subscription_counter,
+      subscription_counter_in_male: subscription_counter_in_male,
+      subscription_counter_in_male_by_age_0: subscription_counter_in_male_by_age_0,
+      subscription_counter_in_male_by_age_10: subscription_counter_in_male_by_age_10,
+      subscription_counter_in_male_by_age_20: subscription_counter_in_male_by_age_20,
+      subscription_counter_in_male_by_age_30: subscription_counter_in_male_by_age_30,
+      subscription_counter_in_male_by_age_40: subscription_counter_in_male_by_age_40,
+      subscription_counter_in_male_by_age_50: subscription_counter_in_male_by_age_50,
+      subscription_counter_in_male_by_age_60: subscription_counter_in_male_by_age_60,
+      subscription_counter_in_male_by_age_70: subscription_counter_in_male_by_age_70,
+      subscription_counter_in_female: subscription_counter_in_female,
+      subscription_counter_in_female_by_age_0: subscription_counter_in_female_by_age_0,
+      subscription_counter_in_female_by_age_10: subscription_counter_in_female_by_age_10,
+      subscription_counter_in_female_by_age_20: subscription_counter_in_female_by_age_20,
+      subscription_counter_in_female_by_age_30: subscription_counter_in_female_by_age_30,
+      subscription_counter_in_female_by_age_40: subscription_counter_in_female_by_age_40,
+      subscription_counter_in_female_by_age_50: subscription_counter_in_female_by_age_50,
+      subscription_counter_in_female_by_age_60: subscription_counter_in_female_by_age_60,
+      subscription_counter_in_female_by_age_70: subscription_counter_in_female_by_age_70,
+      genre_counter: genre_counter,
+      genre_counter_in_male: genre_counter_in_male,
+      genre_counter_in_male_by_age_0: genre_counter_in_male_by_age_0,
+      genre_counter_in_male_by_age_10: genre_counter_in_male_by_age_10,
+      genre_counter_in_male_by_age_20: genre_counter_in_male_by_age_20,
+      genre_counter_in_male_by_age_30: genre_counter_in_male_by_age_30,
+      genre_counter_in_male_by_age_40: genre_counter_in_male_by_age_40,
+      genre_counter_in_male_by_age_50: genre_counter_in_male_by_age_50,
+      genre_counter_in_male_by_age_60: genre_counter_in_male_by_age_60,
+      genre_counter_in_male_by_age_70: genre_counter_in_male_by_age_70,
+      genre_counter_in_female: genre_counter_in_female,
+      genre_counter_in_female_by_age_0: genre_counter_in_female_by_age_0,
+      genre_counter_in_female_by_age_10: genre_counter_in_female_by_age_10,
+      genre_counter_in_female_by_age_20: genre_counter_in_female_by_age_20,
+      genre_counter_in_female_by_age_30: genre_counter_in_female_by_age_30,
+      genre_counter_in_female_by_age_40: genre_counter_in_female_by_age_40,
+      genre_counter_in_female_by_age_50: genre_counter_in_female_by_age_50,
+      genre_counter_in_female_by_age_60: genre_counter_in_female_by_age_60,
+      genre_counter_in_female_by_age_70: genre_counter_in_female_by_age_70
+    )
   end
 end

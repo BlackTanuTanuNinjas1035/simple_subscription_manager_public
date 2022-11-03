@@ -15,9 +15,12 @@ defmodule SimpleSubscriptionManager.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: SimpleSubscriptionManager.PubSub},
       # Start the Endpoint (http/https)
-      SimpleSubscriptionManagerWeb.Endpoint
+      SimpleSubscriptionManagerWeb.Endpoint,
       # Start a worker by calling: SimpleSubscriptionManager.Worker.start_link(arg)
       # {SimpleSubscriptionManager.Worker, arg}
+
+      # Quantumタスクスケジューラを開始
+      SimpleSubscriptionManager.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

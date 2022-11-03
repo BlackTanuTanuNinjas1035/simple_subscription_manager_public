@@ -31,7 +31,7 @@ defmodule SimpleSubscriptionManager.AccountsTest do
       %{id: id} = account = account_fixture()
 
       assert %Account{id: ^id} =
-               Accounts.get_account_by_email_and_password(account.email, valid_account_password())
+              Accounts.get_account_by_email_and_password(account.email, valid_account_password())
     end
   end
 

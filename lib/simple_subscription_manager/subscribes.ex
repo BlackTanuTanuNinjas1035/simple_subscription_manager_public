@@ -10,7 +10,7 @@ defmodule SimpleSubscriptionManager.Subscribes do
   """
   def list_subscribe() do
     Repo.all(Subscribe)
-    |> Repo.preload([:account_alias, :subscription_alias])
+    |> Repo.preload([:account_alias, :subscription_alias, subscription_alias: [:genre_alias]])
   end
 
   @doc """
@@ -69,8 +69,10 @@ defmodule SimpleSubscriptionManager.Subscribes do
     query = if age == nil do
       get_subscribes_by_available_user(gender)
     else
-      divide_by_age_group(get_subscribes_by_available_user(gender), age)
+      divide_by_age_group(get_subscribes_by_available_user(gender), age) |> Enum.reject(&is_nil/1)
     end
+
+    IO.inspect query
 
     # サービス種類ごとの登録件数
     subscription_counter = Enum.reduce(query, %{}, fn s, acc -> Map.update(acc, s.subscription_alias.name, 1, &(&1+1)) end)
@@ -111,8 +113,6 @@ defmodule SimpleSubscriptionManager.Subscribes do
         age_group = age_group ++ s
       end
     end
-    # 年代のものを取得できない場合([nil, ...])、空リストに変換する
-    age_group |> Enum.reject(&is_nil/1)
   end
 
   @doc """

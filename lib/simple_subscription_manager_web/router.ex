@@ -25,6 +25,12 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     get "/genre-list", ApiController, :index_genre
     get "/service-ranking", ApiController, :index_service_ranking
     get "/service-ranking/:gender", ApiController, :index_service_ranking_by_gender
+    get "/service-ranking/age/:age", ApiController, :index_service_ranking_by_age
+    get "/service-ranking/:gender/:age", ApiController, :index_service_ranking_by_gender_and_age
+    get "/genre-ranking", ApiController, :index_genre_ranking
+    get "/genre-ranking/:gender", ApiController, :index_genre_ranking_by_gender
+    get "/genre-ranking/age/:age", ApiController, :index_genre_ranking_by_age
+    get "/genre-ranking/:gender/:age", ApiController, :index_genre_ranking_by_gender_and_age
 
   end
 
