@@ -39,6 +39,28 @@
     margin: 20px 0 20px 0;
 }
 
+.genre_select_area {
+    display: flex;
+    margin-bottom: 10px;
+}
+.genre_text_div {
+    margin: 0 7%;
+}
+.genre_select_div {
+    width: 150px;
+}
+.genre_select {
+    width: 100%;
+}
+/*セレクトボックスのそれぞれの表示非表示とか*/
+.select_content {
+    display: none;
+}
+.select_content.active {
+    display: block;
+}
+
+
 .form_div > form{
     display: flex;
     justify-content: center;
@@ -48,6 +70,7 @@
     margin-right: 100px;
 }
 
+
 .select_submit > button {
     width: 100px;
     height: 30px;
@@ -56,11 +79,20 @@
 ul {
     list-style-type: none;
 }
+.subsc_info li {
+    display: none;
+}
+.subsc_info li.active {
+    display: inline-block;
+}
 
 .subsc_info {
     background-color: rgb(233, 255, 172);
     margin: 50px 20px 10px 20px;
-
     border-radius: 10px;
-
 }
+
+
+/* .hidden {
+    display: none;
+} */

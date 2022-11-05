@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content={csrf_token_value()}>
     <%= live_title_tag assigns[:page_title] || "SimpleSubscriptionManager", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/sanitize.css")}/>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/base.css")}/>
     <!-- <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/my-css.css")}/> 　現在は使ってないはず　不具合なければ消したい--->
 
