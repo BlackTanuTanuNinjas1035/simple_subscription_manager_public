@@ -12,6 +12,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   """
   def index(conn, _params) do
     changeset = Subscribe.changeset(%Subscribe{}, %{})
+    date_of_payment_changeset = Subscribe.changeset(%Subscribe{}, %{})
 
     # 現在のconnに入っているcurrent_account属性のidを取得する
     current_id = conn.assigns[:current_account].id
@@ -22,8 +23,17 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
     subscribes_list = Subscribes.get_subscribes(current_id)
     total_price = subscribes_list |> Enum.reduce(0, fn (x, acc) -> x.subscription_alias.price + acc end)
 
+    to_year = Date.utc_today().year
+
     conn
-    |> render("index.html", subscribes_list: subscribes_list, changeset: changeset, total_price: total_price)
+    |> render(
+        "index.html",
+        subscribes_list: subscribes_list,
+        changeset: changeset,
+        total_price: total_price,
+        date_of_payment_changeset: date_of_payment_changeset,
+        to_year: to_year
+      )
   end
 
   @doc """
@@ -120,7 +130,19 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   end
 
   # 登録したサービスの支払日を更新する
-  def update do
+  def update(conn, %{"subscribe_id" => subscribe_id, "subscribe" => subscribe_params}) do
 
+    IO.inspect(conn)
+    IO.inspect "subscrbe_params: #{inspect subscribe_params["date_of_payment"]}"
+    case Subscribes.update_date_of_payment(subscribe_id, subscribe_params["date_of_payment"]) do
+      {:ok, msg} ->
+        conn
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.manager_path(conn, :index))
+      {:error, msg} ->
+        conn
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.manager_path(conn, :index))
+    end
   end
 end

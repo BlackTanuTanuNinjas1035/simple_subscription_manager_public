@@ -164,13 +164,26 @@ defmodule SimpleSubscriptionManager.Subscribes do
     end
   end
 
-  def update_day_of_payment(id, date_of_payment) do
+  @doc """
+  登録したサービスの支払日を更新する
+  """
+  def update_date_of_payment(id, date_of_payment) do
     subscribe = Repo.get Subscribe, id
-    Ecto.Changeset.change(subscribe, date_of_payment: date_of_payment)
-    |> Repo.update
-    |> case do
-      {:ok, _} -> IO.puts "サブスクライブの更新に成功しました"
-      {:error, _} -> IO.puts "サブスクライブの更新に失敗しました"
+    case map_to_date(date_of_payment) do
+      {:ok, date_of_payment} ->
+        subscribe = Ecto.Changeset.change(subscribe, date_of_payment: date_of_payment)
+        Repo.update(subscribe)
+        |> case do
+          {:ok, _} -> {:ok, "支払日の更新に成功しました"}
+          {:error, _} -> {:error, "支払日の更新に失敗しました"}
+        end
+      {:error, :invalid_date} -> {:error, "支払日の更新に失敗しました"}
+
     end
+
+  end
+  # {"day" => , "month" => , "year" =>}から~D[]に変換した結果を返す
+  defp map_to_date(%{"day" => day, "month" => month, "year" => year}) do
+    Date.from_erl({String.to_integer(year), String.to_integer(month), (String.to_integer day)})
   end
 end

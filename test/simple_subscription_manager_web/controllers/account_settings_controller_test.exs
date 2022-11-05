@@ -10,7 +10,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsControllerTest do
     test "renders settings page", %{conn: conn} do
       conn = get(conn, Routes.account_settings_path(conn, :edit))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Settings</h1>"
+      assert response =~ "<h1>アカウントの設定</h1>"
     end
 
     test "redirects if account is not logged in" do

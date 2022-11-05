@@ -7,9 +7,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationControllerTest do
     test "renders registration page", %{conn: conn} do
       conn = get(conn, Routes.account_registration_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Register</h1>"
-      assert response =~ "Log in</a>"
-      assert response =~ "Register</a>"
+      assert response =~ "<h1>アカウントの登録</h1>"
+
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -31,18 +30,18 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationControllerTest do
       assert get_session(conn, :account_token)
       assert redirected_to(conn) == "/"
 
-      # Now do a logged in request and assert on the menu
+      # ログイン後に画面上部が切り替わっていることを確認
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ email
-      assert response =~ "Settings</a>"
-      assert response =~ "Log out</a>"
+      assert response =~ "アカウントの設定をする</a>"
+      assert response =~ "ログアウトする</a>"
     end
 
     test "render errors for invalid data", %{conn: conn} do
       conn =
         post(conn, Routes.account_registration_path(conn, :create), %{
-          "account" => %{"email" => "with spaces", "password" => "too short"}
+          "account" => %{"email" => "with spaces", "password" => "too short", }
         })
 
       response = html_response(conn, 200)
