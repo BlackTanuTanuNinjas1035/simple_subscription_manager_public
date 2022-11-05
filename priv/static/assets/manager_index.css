@@ -56,17 +56,10 @@
     background-color: rgb(191, 255, 108);
     /* height: 80px; */
     margin: 10px;
+    padding: 5px;
     border-radius: 10px;
     box-shadow: 5px 5px 5px 0 rgb(0, 0, 0, .5);
     border: none;
-    transition: all .3s;
-    /* display: grid;
-    grid-template:
-        "name       .       option" 1fr
-        "genre      price   price"  1fr
-        "payment    price   price"  1fr
-        "cgpay      cgpay   cgpay"  0fr
-        / 5fr       1fr     1fr ; */
 }
 .card_flex {
     display: flex;
@@ -74,7 +67,6 @@
 }
 
 .subsc_name {
-    grid-area: name;
     text-align: left;
     margin-left: 5%;
     font-size: 20px;
@@ -100,12 +92,10 @@
     box-shadow:0 0 0 1px rgba(255, 255, 255, .3);
 }
 .subsc_genre {
-    grid-area: genre;
     text-align: left;
     margin-left: 5%;
 }
 .subsc_price {
-    grid-area: price;
     font-size: 20px;
     align-self: end;
 }
@@ -113,18 +103,15 @@
     content: "円";
 }
 .subsc_payment {
-    grid-area: payment;
     text-align: left;
     margin-left: 5%;
 }
 .subsc_change_payment {
-    grid-area: cgpay;
     text-align: left;
     margin-left: 5%;
     display: none;
 }
 .subsc_option {
-    grid-area: option;
     width: 30px;
     height: 30px;
     position:relative;

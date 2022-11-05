@@ -24,7 +24,11 @@ body{
     /*高さ↓　ヘッダーのpxとフッターのpxを引いてる */
     height: calc(100% - 100px);
 }
-/* 
-::-webkit-scrollbar {
-    width: 10px;
-} */
+
+/* alert-infoをabsolute */
+.container {
+    position: relative;
+}
+.alert-info {
+    position: absolute;
+}
