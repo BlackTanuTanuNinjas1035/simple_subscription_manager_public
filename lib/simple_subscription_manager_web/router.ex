@@ -25,6 +25,12 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     get "/genre-list", ApiController, :index_genre
     get "/service-ranking", ApiController, :index_service_ranking
     get "/service-ranking/:gender", ApiController, :index_service_ranking_by_gender
+    get "/service-ranking/age/:age", ApiController, :index_service_ranking_by_age
+    get "/service-ranking/:gender/:age", ApiController, :index_service_ranking_by_gender_and_age
+    get "/genre-ranking", ApiController, :index_genre_ranking
+    get "/genre-ranking/:gender", ApiController, :index_genre_ranking_by_gender
+    get "/genre-ranking/age/:age", ApiController, :index_genre_ranking_by_age
+    get "/genre-ranking/:gender/:age", ApiController, :index_genre_ranking_by_gender_and_age
 
   end
 
@@ -57,7 +63,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     end
   end
 
-  ## Authentication routes
+  ## 認証(Authen)ルート
 
   scope "/", SimpleSubscriptionManagerWeb do
     pipe_through [:browser, :redirect_if_account_is_authenticated]
@@ -90,7 +96,13 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     post "/accounts/confirm/:token", AccountConfirmationController, :update
   end
 
-  # simple subscription manager routes
+  scope "/", SimpleSubscriptionManagerWeb do
+    pipe_through [:browser]
+
+    get "/accounts/delete", AccountQuitController, :index
+  end
+
+  ## サブスクーラー機能ルート
 
   scope "/", SimpleSubscriptionManagerWeb do
     pipe_through :browser
@@ -104,6 +116,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     pipe_through [:browser, :require_authenticated_account]
 
     get "/manager", ManagerController, :index
+    post "/manager", ManagerController, :update
     get "/manager/delete/:subscribe_id", ManagerController, :delete
     get "/manager/register", ManagerController, :new
     post "/manager/register", ManagerController, :create

@@ -10,7 +10,7 @@ defmodule SimpleSubscriptionManager.Subscribes do
   """
   def list_subscribe() do
     Repo.all(Subscribe)
-    |> Repo.preload([:account_alias, :subscription_alias])
+    |> Repo.preload([:account_alias, :subscription_alias, subscription_alias: [:genre_alias]])
   end
 
   @doc """
@@ -69,8 +69,10 @@ defmodule SimpleSubscriptionManager.Subscribes do
     query = if age == nil do
       get_subscribes_by_available_user(gender)
     else
-      divide_by_age_group(get_subscribes_by_available_user(gender), age)
+      divide_by_age_group(get_subscribes_by_available_user(gender), age) |> Enum.reject(&is_nil/1)
     end
+
+    IO.inspect query
 
     # サービス種類ごとの登録件数
     subscription_counter = Enum.reduce(query, %{}, fn s, acc -> Map.update(acc, s.subscription_alias.name, 1, &(&1+1)) end)
@@ -111,8 +113,6 @@ defmodule SimpleSubscriptionManager.Subscribes do
         age_group = age_group ++ s
       end
     end
-    # 年代のものを取得できない場合([nil, ...])、空リストに変換する
-    age_group |> Enum.reject(&is_nil/1)
   end
 
   @doc """
@@ -164,13 +164,26 @@ defmodule SimpleSubscriptionManager.Subscribes do
     end
   end
 
-  def update_day_of_payment(id, date_of_payment) do
+  @doc """
+  登録したサービスの支払日を更新する
+  """
+  def update_date_of_payment(id, date_of_payment) do
     subscribe = Repo.get Subscribe, id
-    Ecto.Changeset.change(subscribe, date_of_payment: date_of_payment)
-    |> Repo.update
-    |> case do
-      {:ok, _} -> IO.puts "サブスクライブの更新に成功しました"
-      {:error, _} -> IO.puts "サブスクライブの更新に失敗しました"
+    case map_to_date(date_of_payment) do
+      {:ok, date_of_payment} ->
+        subscribe = Ecto.Changeset.change(subscribe, date_of_payment: date_of_payment)
+        Repo.update(subscribe)
+        |> case do
+          {:ok, _} -> {:ok, "支払日の更新に成功しました"}
+          {:error, _} -> {:error, "支払日の更新に失敗しました"}
+        end
+      {:error, :invalid_date} -> {:error, "支払日の更新に失敗しました"}
+
     end
+
+  end
+  # {"day" => , "month" => , "year" =>}から~D[]に変換した結果を返す
+  defp map_to_date(%{"day" => day, "month" => month, "year" => year}) do
+    Date.from_erl({String.to_integer(year), String.to_integer(month), (String.to_integer day)})
   end
 end

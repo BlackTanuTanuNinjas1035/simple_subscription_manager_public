@@ -275,8 +275,8 @@ defmodule SimpleSubscriptionManager.Accounts do
   """
   def confirm_account(token) do
     with {:ok, query} <- AccountToken.verify_email_token_query(token, "confirm"),
-         %Account{} = account <- Repo.one(query),
-         {:ok, %{account: account}} <- Repo.transaction(confirm_account_multi(account)) do
+        %Account{} = account <- Repo.one(query),
+        {:ok, %{account: account}} <- Repo.transaction(confirm_account_multi(account)) do
       {:ok, account}
     else
       _ -> :error
@@ -321,7 +321,7 @@ defmodule SimpleSubscriptionManager.Accounts do
   """
   def get_account_by_reset_password_token(token) do
     with {:ok, query} <- AccountToken.verify_email_token_query(token, "reset_password"),
-         %Account{} = account <- Repo.one(query) do
+        %Account{} = account <- Repo.one(query) do
       account
     else
       _ -> nil
@@ -436,6 +436,14 @@ defmodule SimpleSubscriptionManager.Accounts do
       |> case do
         {:ok, %{account: account}} -> {:ok, account}
         {:error, :account, changeset, _} -> {:error, changeset}
+    end
+  end
+
+  def delete_account(id) do
+    account = Repo.get Account, id
+    case Repo.delete account do
+      {:ok, struct}       -> {:ok, "アカウントの削除に成功しました"}
+      {:error, changeset} -> {:ok, "アカウントの削除に失敗しました"}
     end
   end
 end

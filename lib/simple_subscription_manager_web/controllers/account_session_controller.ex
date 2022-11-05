@@ -23,5 +23,15 @@ defmodule SimpleSubscriptionManagerWeb.AccountSessionController do
     conn
     |> put_flash(:info, "ログアウトしました。")
     |> AccountAuth.log_out_account()
+    |> case do
+      {:ok, msg} ->
+        conn
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.page_path(conn, :index))
+      {:error, msg} ->
+          conn
+          |> put_flash(:info, msg)
+          |> redirect(to: Routes.manager_path(conn, :index))
+    end
   end
 end
