@@ -22,14 +22,14 @@
                             <span></span>
                             <div class="subsc_option_menu">
                                 <div><a href={~w"/manager/delete/#{subscribe.id}"}>削除</a></div>
-                                <button class="change">更新</button>
+                                <button class="change_button">更新</button>
                             </div>
                         </div>
                     </div>
                     <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
                     <div class="card_flex">
                         <div class="subsc_payment"><%= subscribe.date_of_payment %></div>
-                        <!-- subsc_price　はcssの疑似要素::afterで円を挿入 --->
+                        <!-- subsc_price　はcssの疑似要素::afterで円を挿入するとクロームで文字化けしたので直接いれたいけどべつの問題が --->
                         <div class="subsc_price"><%= subscribe.subscription_alias.price %></div>
                     </div>
                     <div class="subsc_change_payment">

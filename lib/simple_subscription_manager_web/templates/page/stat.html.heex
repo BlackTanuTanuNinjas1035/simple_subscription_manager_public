@@ -1,500 +1,590 @@
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/page_stat.css")}/>
+
 <div class="content">
-<h1>サブスクリプションサービスの統計</h1>
-    <p>こちらから人気のサブスクリプションサービスを見ることができます</p>
+    <div class="content_top">
+        <h1>サブスクリプションサービスの統計</h1>
+            <p>こちらから人気のサブスクリプションサービスを見ることができます</p>
 
-<div>ご利用者から<%= @number_of_ans * 100 %>%の回答を得られました</div>
+        <div>ご利用者から<%= @number_of_ans * 100 %>%の回答を得られました</div>
+    </div>
 
-<h3>人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter) == 0 do %>
-        <%= for subscription_count <- @subscription_counter do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+    <div class="content_bottom">
+        <div class="tab_select">
+            <div class="service_button tab_button active" data-tab="service"><p>サービス</p></div>
+            <div class="genre_button tab_button" data-tab="genre"><p>ジャンル</p></div>
+        </div>
+        <div class="ranking ranking_service active">
+            <div class="overall_service">
+                <h3>人気のサービスランキング</h3>
+                <ol>
+                    <%= unless Enum.count(@subscription_counter) == 0 do %>
+                        <%= for subscription_count <- @subscription_counter do %>
+                            <li>
+                                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                            </li>
+                        <% end %>
+                    <% else %>
+                        <div>データを取得できませんでした</div>
+                    <% end %>
+                </ol>
+            </div>
 
-<h3>男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_male do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+            <div class="male_service">
+                <div class="ranking_and_graph">
+                    <div class="rag_ranking"><!--classのragはranking_and_graph--->
+                        <h3>男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_male do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="rag_graph">
+                        <article class="contents-b">
+                            <div class="chart-back">
+                                <canvas id="chart01" class="chart001"></canvas>
+                            </div>
+                        </article>
+                    </div>
+                </div>
 
-<h3>10代未満の男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male_by_age_0) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_male_by_age_0 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+                <div class="male_age_service">
+                    <div class="mini_ranking">
+                        <h3>10代未満の男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male_by_age_0) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_male_by_age_0 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>10代の男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male_by_age_10) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_male_by_age_10 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>20代の男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male_by_age_20) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_male_by_age_20 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>30代の男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male_by_age_30) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_male_by_age_30 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>40代の男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male_by_age_40) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_male_by_age_40 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>50代の男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male_by_age_50) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_mal_by_age_50 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>60代の男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male_by_age_60) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_male_by_age_60 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>70代の男性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_male_by_age_70) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_male_by_age_70 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                </div>
+            </div>
 
-<h3>10代の男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male_by_age_10) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_male_by_age_10 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+            <div class="female_service">
+                <h3>女性に人気のサービスランキング</h3>
+                <ol>
+                    <%= unless Enum.count(@subscription_counter_in_female) == 0 do %>
+                        <%= for subscription_count <- @subscription_counter_in_female do %>
+                            <li>
+                                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                            </li>
+                        <% end %>
+                    <% else %>
+                        <div>データを取得できませんでした</div>
+                    <% end %>
+                </ol>
 
-<h3>20代の男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male_by_age_20) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_male_by_age_20 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+                <div class="female_age_service">
+                    <div class="mini_ranking">
+                        <h3>10代未満の女性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_female_by_age_0 )== 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_female_by_age_0 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>10代の女性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_female_by_age_10) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_female_by_age_10 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>20代の女性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_female_by_age_20) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_female_by_age_20 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>30代の女性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_female_by_age_30) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_female_by_age_30 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>40代の女性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_female_by_age_40) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_female_by_age_40 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>50代の女性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_female_by_age_50) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_female_by_age_60 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>60代の女性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_female_by_age_60) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_female_by_age_60 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>70代の女性に人気のサービスランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@subscription_counter_in_female_by_age_70) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_in_female_by_age_70 do %>
+                                    <li>
+                                        <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<h3>30代の男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male_by_age_30) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_male_by_age_30 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+        <div class="ranking ranking_genre">
+            <div class="overall_genre">
+                <h3>人気のジャンルのランキング</h3>
+                <ol>
+                    <%= unless Enum.count(@genre_counter) == 0 do %>
+                        <%= for genre_count <- @genre_counter do %>
+                            <li>
+                                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                            </li>
+                        <% end %>
+                    <% else %>
+                        <div>データを取得できませんでした</div>
+                    <% end %>
+                </ol>
+            </div>
 
-<h3>40代の男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male_by_age_40) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_male_by_age_40 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+            <div class="male_genre">
+                <h3>男性に人気のジャンルのランキング</h3>
+                <ol>
+                    <%= unless Enum.count(@genre_counter_in_male) == 0 do %>
+                        <%= for genre_count <- @genre_counter_in_male do %>
+                            <li>
+                                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                            </li>
+                        <% end %>
+                    <% else %>
+                        <div>データを取得できませんでした</div>
+                    <% end %>
+                </ol>
 
-<h3>50代の男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male_by_age_50) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_mal_by_age_50 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+                <div class="male_age_genre">
+                    <div class="mini_ranking">
+                        <h3>10代未満の男性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_male_by_age_0) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_male_by_age_0 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>10代の男性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_male_by_age_10) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_male_by_age_10 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>20代の男性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_male_by_age_20) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_male_by_age_20 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>30代の男性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_male_by_age_30) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_male_by_age_30 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>40代の男性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_male_by_age_40) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_male_by_age_40 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>50代の男性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_male_by_age_50) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_male_by_age_50 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>60代の男性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_male_by_age_60) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_male_by_age_60 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>70代の男性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_male_by_age_70) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_male_by_age_70 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                </div>
+            </div>
 
-<h3>60代の男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male_by_age_60) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_male_by_age_60 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+            <div class="female_genre">
+                <h3>女性に人気のジャンルのランキング</h3>
+                <ol>
+                    <%= unless Enum.count(@genre_counter_in_female) == 0 do %>
+                        <%= for genre_count <- @genre_counter_in_female do %>
+                            <li>
+                                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                            </li>
+                        <% end %>
+                    <% else %>
+                        <div>データを取得できませんでした</div>
+                    <% end %>
+                </ol>
 
-<h3>70代の男性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_male_by_age_70) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_male_by_age_70 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+                <div class="female_age_genre">
+                    <div class="mini_ranking">
+                        <h3>10代未満の女性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_female_by_age_0) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_female_by_age_0 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>10代の女性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_female_by_age_10) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_female_by_age_10 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>20代の女性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_female_by_age_20) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_female_by_age_20 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>30代の女性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_female_by_age_30) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_female_by_age_30 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>40代の女性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_female_by_age_40) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_female_by_age_40 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>50代の女性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_female_by_age_50) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_female_by_age_50 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>60代の女性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_female_by_age_60) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_female_by_age_60 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking">
+                        <h3>70代の女性に人気のジャンルのランキング</h3>
+                        <ol>
+                            <%= unless Enum.count(@genre_counter_in_female_by_age_70) == 0 do %>
+                                <%= for genre_count <- @genre_counter_in_female_by_age_70 do %>
+                                    <li>
+                                        <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                </div>
+            </div>
 
-<h3>女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
+        </div>
+    </div>
 
-<h3>10代未満の女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female_by_age_0 )== 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female_by_age_0 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>10代の女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female_by_age_10) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female_by_age_10 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>20代の女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female_by_age_20) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female_by_age_20 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>30代の女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female_by_age_30) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female_by_age_30 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>40代の女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female_by_age_40) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female_by_age_40 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>50代の女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female_by_age_50) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female_by_age_60 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>60代の女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female_by_age_60) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female_by_age_60 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>70代の女性に人気のサービスランキング</h3>
-<ol>
-    <%= unless Enum.count(@subscription_counter_in_female_by_age_70) == 0 do %>
-        <%= for subscription_count <- @subscription_counter_in_female_by_age_70 do %>
-            <li>
-                <span><%= Enum.at subscription_count, 0 %></span><span><%= Enum.at subscription_count, 1 %></span><span><%= Enum.at subscription_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter) == 0 do %>
-        <%= for genre_count <- @genre_counter do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>10代未満の男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male_by_age_0) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male_by_age_0 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>10代の男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male_by_age_10) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male_by_age_10 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>20代の男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male_by_age_20) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male_by_age_20 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>30代の男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male_by_age_30) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male_by_age_30 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>40代の男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male_by_age_40) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male_by_age_40 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>50代の男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male_by_age_50) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male_by_age_50 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>60代の男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male_by_age_60) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male_by_age_60 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>70代の男性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_male_by_age_70) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_male_by_age_70 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>10代未満の女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female_by_age_0) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female_by_age_0 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>10代の女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female_by_age_10) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female_by_age_10 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>20代の女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female_by_age_20) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female_by_age_20 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>30代の女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female_by_age_30) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female_by_age_30 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>40代の女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female_by_age_40) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female_by_age_40 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>50代の女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female_by_age_50) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female_by_age_50 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>60代の女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female_by_age_60) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female_by_age_60 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
-
-<h3>70代の女性に人気のジャンルのランキング</h3>
-<ol>
-    <%= unless Enum.count(@genre_counter_in_female_by_age_70) == 0 do %>
-        <%= for genre_count <- @genre_counter_in_female_by_age_70 do %>
-            <li>
-                <span><%= elem genre_count, 0 %></span><span><%= elem genre_count, 1 %></span><span><%= elem genre_count, 2 %></span>
-            </li>
-        <% end %>
-    <% else %>
-        <div>データを取得できませんでした</div>
-    <% end %>
-</ol>
 </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+
+<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/page_stat.js")}></script>
+<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/page_stat_graph.js")}></script>

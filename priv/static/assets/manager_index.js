@@ -1,4 +1,5 @@
 
+//たぶん登録されてるサブスクをhtmlのなかから取得してリストにして返す関数
 function getSubsc() {
     let ls_n = document.getElementsByClassName("subsc_name");
     let ls_p = document.getElementsByClassName("subsc_price");
@@ -23,7 +24,7 @@ $(function(){
     $(".subsc_option").on("click", function(){
         $(this).find(".subsc_option_menu").toggleClass("active");
     });
-    $(".change").on("click", function(){
+    $(".change_button").on("click", function(){
         $(this).parents(".subsc_card").children(".subsc_change_payment").slideToggle(300);
         // $(this).parents(".subsc_card").children(".subsc_change_payment").toggleClass("active");
     })

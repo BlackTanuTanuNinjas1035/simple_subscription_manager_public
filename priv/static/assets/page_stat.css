@@ -1,0 +1,116 @@
+.main_contents > .container{
+    width: 100%;
+    height: 100%;
+    /* display :flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+.main_contents > .container > .content{
+    background: #ffffff;
+    width: 75%;
+    /* height: 90%; */
+    margin: 8% auto 8%;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+
+    /* display: grid;
+    grid-template: 
+        "top    " 1fr
+        "bottom " 5fr
+        / 1fr; */
+    display: flex;
+    flex-direction: column;
+}
+.content_top {
+    /* grid-area: top; */
+}
+.content_bottom{
+    /* grid-area: bottom; */
+    margin: 10px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 10px;
+    overflow-y: scroll;
+    display:flex;
+    flex-direction: column;
+}
+.active {
+    background-color: rgb(162, 210, 194);
+}
+
+.tab_select {
+    display: flex;
+}
+.service_button {
+
+}
+.genre_button {
+
+}
+
+.ranking_service {
+    display: none;
+    background-color: rgb(162, 210, 194);
+}
+.ranking_service.active {
+    display: block;
+}
+.ranking_genre {
+    display: none;
+    background-color: rgb(162, 210, 194);
+}
+.ranking_genre.active {
+    display: block;
+}
+
+.ranking_and_graph {
+    display: flex;
+}
+.rag_ranking {
+
+}
+.rag_graph {
+
+}
+
+.overall_service {
+}
+.gender_service {
+    
+}
+.male_service {
+}
+.male_age_service {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.female_service {
+}
+.female_age_service {
+    display: flex;
+    flex-wrap: wrap;
+}
+.overall_genre {
+}
+.gender_genre {
+    
+}
+.male_genre {
+}
+.female_genre {
+}
+.male_age_genre {
+    display: flex;
+    flex-wrap: wrap;
+}
+.female_age_genre {
+    display: flex;
+    flex-wrap: wrap;
+}
+.mini_ranking {
+    width: 25%;
+}
+.active {
+    display: block;
+}

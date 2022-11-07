@@ -1,6 +1,10 @@
-<h1>APIドキュメント一覧</h1>
-<ul>
-    <%= for document <- @document_list do %>
-        <li><a href={"/doc/#{document.id}"}><%= document.name %></a><div><%= document.text %></div></li>
-    <% end %>
-</ul>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/tmp_content.css")}/>
+
+<div class="content">
+    <h1>APIドキュメント一覧</h1>
+    <ul>
+        <%= for document <- @document_list do %>
+            <li><a href={"/doc/#{document.id}"}><%= document.name %></a><div><%= document.text %></div></li>
+        <% end %>
+    </ul>
+</div>

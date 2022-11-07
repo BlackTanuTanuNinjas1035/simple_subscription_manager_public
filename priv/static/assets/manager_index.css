@@ -99,6 +99,7 @@
     font-size: 20px;
     align-self: end;
 }
+/*なんかクロームだけで文字化けしたから直接書くことにした いけど別の問題が */
 .subsc_price::after {
     content: "円";
 }
@@ -114,6 +115,7 @@
 .subsc_option {
     width: 30px;
     height: 30px;
+    margin-left: 60px;
     position:relative;
     justify-self: end;
 }
