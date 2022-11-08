@@ -4,13 +4,14 @@ defmodule SimpleSubscriptionManager.Subscribes.SubscribeNotifier do
 
   alias SimpleSubscriptionManager.Mailer
 
+  @subscler_email "subscler14106@gmail.com"
+
   # メール送信機能
   defp deliver(recipient, subject, body) do
     email =
       new()
       |> to(recipient)
-      |> from({"サブスクーラー システム Mail", "subscler14106@gmail.com"})
-      # |> from({"サブスクーラー システム Mail", "subscler@gmail.com"})
+      |> from({"サブスクーラー システム Mail", @subscler_email})
       |> subject(subject)
       |> text_body(body)
 

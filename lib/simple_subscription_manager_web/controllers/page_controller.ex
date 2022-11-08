@@ -4,7 +4,7 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
 
 
   def index(conn, _params) do
-    IO.inspect(conn.assigns.current_account)
+    IO.inspect(conn)
     render(conn, "index.html")
   end
 
@@ -17,7 +17,23 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
     number_of_ans = SimpleSubscriptionManager.Subscribes.available_percent()
     # 各サブスクリプションの登録数を表示
     subscription_counter = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking()
+    subscription_counter_by_age_0 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(0, 0)
+    subscription_counter_by_age_10 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(0, 10)
+    subscription_counter_by_age_20 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(0, 20)
+    subscription_counter_by_age_30 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(0, 30)
+    subscription_counter_by_age_40 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(0, 40)
+    subscription_counter_by_age_50 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(0, 50)
+    subscription_counter_by_age_60 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(0, 60)
+    subscription_counter_by_age_70 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(0, 70)
     genre_counter = SimpleSubscriptionManager.Subscribes.get_genres_ranking()
+    genre_counter_by_age_0 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(0, 0)
+    genre_counter_by_age_10 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(0, 10)
+    genre_counter_by_age_20 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(0, 20)
+    genre_counter_by_age_30 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(0, 30)
+    genre_counter_by_age_40 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(0, 40)
+    genre_counter_by_age_50 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(0, 50)
+    genre_counter_by_age_60 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(0, 60)
+    genre_counter_by_age_70 = SimpleSubscriptionManager.Subscribes.get_genres_ranking(0, 70)
 
     subscription_counter_in_male = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1)
     subscription_counter_in_male_by_age_0 = SimpleSubscriptionManager.Subscribes.get_subscribes_ranking(1, 0)
@@ -62,6 +78,14 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
     render(conn, "stat.html",
       number_of_ans: number_of_ans,
       subscription_counter: subscription_counter,
+      subscription_counter_by_age_0: subscription_counter_by_age_0,
+      subscription_counter_by_age_10: subscription_counter_by_age_10,
+      subscription_counter_by_age_20: subscription_counter_by_age_20,
+      subscription_counter_by_age_30: subscription_counter_by_age_30,
+      subscription_counter_by_age_40: subscription_counter_by_age_40,
+      subscription_counter_by_age_50: subscription_counter_by_age_50,
+      subscription_counter_by_age_60: subscription_counter_by_age_60,
+      subscription_counter_by_age_70: subscription_counter_by_age_70,
       subscription_counter_in_male: subscription_counter_in_male,
       subscription_counter_in_male_by_age_0: subscription_counter_in_male_by_age_0,
       subscription_counter_in_male_by_age_10: subscription_counter_in_male_by_age_10,
@@ -81,6 +105,14 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
       subscription_counter_in_female_by_age_60: subscription_counter_in_female_by_age_60,
       subscription_counter_in_female_by_age_70: subscription_counter_in_female_by_age_70,
       genre_counter: genre_counter,
+      genre_counter_by_age_0: genre_counter_by_age_0,
+      genre_counter_by_age_10: genre_counter_by_age_10,
+      genre_counter_by_age_20: genre_counter_by_age_20,
+      genre_counter_by_age_30: genre_counter_by_age_30,
+      genre_counter_by_age_40: genre_counter_by_age_40,
+      genre_counter_by_age_50: genre_counter_by_age_50,
+      genre_counter_by_age_60: genre_counter_by_age_60,
+      genre_counter_by_age_70: genre_counter_by_age_70,
       genre_counter_in_male: genre_counter_in_male,
       genre_counter_in_male_by_age_0: genre_counter_in_male_by_age_0,
       genre_counter_in_male_by_age_10: genre_counter_in_male_by_age_10,
