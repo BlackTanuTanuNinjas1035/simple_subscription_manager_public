@@ -5,6 +5,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   alias SimpleSubscriptionManager.Subscribes.Subscribe
 
   alias SimpleSubscriptionManager.Subscriptions
+  alias SimpleSubscriptionManager.Subscriptions.SubscriptionNotifier
 
 
   @doc """
@@ -144,5 +145,20 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         |> put_flash(:info, msg)
         |> redirect(to: Routes.manager_path(conn, :index))
     end
+  end
+
+  def form(conn, _params) do
+    render(conn, "form.html")
+  end
+
+  def send(conn, params) do
+    IO.puts "conn"
+    IO.inspect conn
+    IO.puts "params"
+    IO.inspect params
+    current_account = conn.assigns.current_account
+    SubscriptionNotifier.deliver_additional_service(current_account.name, current_account.email,  Access.get(params, "service"),  Access.get(params, "plan"))
+    conn
+    |> redirect(to: Routes.manager_path(conn, :index))
   end
 end

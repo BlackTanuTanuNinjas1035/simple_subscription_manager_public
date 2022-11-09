@@ -1,0 +1,6 @@
+<%= form_for @conn, Routes.manager_path(@conn, :send), fn f -> %>
+    
+    登録したいサービス: <%= text_input f, :service %>
+    登録したいプラン  : <%= text_input f, :plan %>
+    <%= submit "送信" %>
+<% end %>
