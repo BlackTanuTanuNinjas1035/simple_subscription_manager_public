@@ -113,7 +113,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         end
 
       {:error, %Ecto.Changeset{} = changeset} ->
-            # 各ジャンルのサービスのクエリのリストを受け取る
+        # 各ジャンルのサービスのクエリのリストを受け取る
         subscription_list = Subscriptions.list_subscriptions()
         subscription_list_by_video = Subscriptions.list_subscriptions_by_genre 1
         subscription_list_by_music = Subscriptions.list_subscriptions_by_genre 2
@@ -124,10 +124,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         subscription_list_by_lesson = Subscriptions.list_subscriptions_by_genre 7
         subscription_list_by_book = Subscriptions.list_subscriptions_by_genre 8
 
-
         to_year = Date.utc_today().year
-
-
 
         conn
         |> put_flash(:info, "サブスクリプションの登録に失敗しました。サービスの重複を確認してください。")
