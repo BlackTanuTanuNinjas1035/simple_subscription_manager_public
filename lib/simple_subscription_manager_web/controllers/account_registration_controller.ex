@@ -29,7 +29,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         today = Date.utc_today()
-        render(conn, "new.html", changeset: changeset, toyear: today.year)
+        render(conn, "new.html", changeset: changeset, today: today)
     end
   end
 end

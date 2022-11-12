@@ -37,7 +37,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
         |> redirect(to: Routes.account_settings_path(conn, :edit))
 
       {:error, changeset} ->
-        render(conn, "edit.html", email_changeset: changeset)
+        today = Date.utc_today()
+        render(conn, "edit.html", email_changeset: changeset, today: today)
     end
   end
 
@@ -56,7 +57,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
         |> AccountAuth.log_in_account(account)
 
       {:error, changeset} ->
-        render(conn, "edit.html", password_changeset: changeset)
+        today = Date.utc_today()
+        render(conn, "edit.html", password_changeset: changeset, today: today)
     end
   end
 
@@ -89,7 +91,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
         |> AccountAuth.log_in_account(account)
 
       {:error, changeset} ->
-        render(conn, "edit.html", password_changeset: changeset)
+        today = Date.utc_today()
+        render(conn, "edit.html", password_changeset: changeset, today: today)
     end
   end
 
@@ -106,7 +109,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
         |> AccountAuth.log_in_account(account)
 
       {:error, changeset} ->
-        render(conn, "edit.html", password_changeset: changeset)
+        today = Date.utc_today()
+        render(conn, "edit.html", password_changeset: changeset, today: today)
     end
   end
 
@@ -123,7 +127,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
         |> AccountAuth.log_in_account(account)
 
       {:error, changeset} ->
-        render(conn, "edit.html", password_changeset: changeset)
+        today = Date.utc_today()
+        render(conn, "edit.html", password_changeset: changeset, today: today)
     end
   end
 
@@ -142,7 +147,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
         |> AccountAuth.log_in_account(account)
 
       {:error, changeset} ->
-        render(conn, "edit.html", password_changeset: changeset)
+        today = Date.utc_today()
+        render(conn, "edit.html", password_changeset: changeset, today: today)
     end
   end
 

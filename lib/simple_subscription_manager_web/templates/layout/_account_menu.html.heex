@@ -5,7 +5,7 @@
   <li>メアド: <%= @current_account.email %> さん!</li>
   <li><%= link "アカウントの設定をする", to: Routes.account_settings_path(@conn, :edit) %></li>
   <li><%= link "ログアウトする", to: Routes.account_session_path(@conn, :delete), method: :delete %></li>
-  <li><%= link "退会する", to: Routes.account_quit_path(@conn, :index) %></li>
+  <!-- <li><%= link "退会する", to: Routes.account_quit_path(@conn, :index) %></li> -->
 <% else %>
   <li><%= link "アカウントの登録をする", to: Routes.account_registration_path(@conn, :new) %></li>
   <li><%= link "ログインする", to: Routes.account_session_path(@conn, :new) %></li>

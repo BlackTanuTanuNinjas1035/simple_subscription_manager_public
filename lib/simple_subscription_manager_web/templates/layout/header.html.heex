@@ -25,6 +25,9 @@
                             <li class="hbg_nav_li">
                                 <p class="hbg_nav_p">当サイトについて</p>
                                 <div class="hbg_nav_link"><%= link "使い方について", to: Routes.page_path(@conn, :help) %></div>
+                                <%= if @current_account do %>
+                                    <%= link "退会する", to: Routes.account_quit_path(@conn, :index) %>
+                                <% end %>
                             </li>
                             <li class="hbg_nav_li">
                                 <p class="hbg_nav_p">各画面へのリンク</p>

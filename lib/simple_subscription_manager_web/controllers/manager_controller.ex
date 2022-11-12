@@ -113,10 +113,35 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         end
 
       {:error, %Ecto.Changeset{} = changeset} ->
+            # 各ジャンルのサービスのクエリのリストを受け取る
         subscription_list = Subscriptions.list_subscriptions()
+        subscription_list_by_video = Subscriptions.list_subscriptions_by_genre 1
+        subscription_list_by_music = Subscriptions.list_subscriptions_by_genre 2
+        subscription_list_by_car = Subscriptions.list_subscriptions_by_genre 3
+        subscription_list_by_food = Subscriptions.list_subscriptions_by_genre 4
+        subscription_list_by_software = Subscriptions.list_subscriptions_by_genre 5
+        subscription_list_by_furniture = Subscriptions.list_subscriptions_by_genre 6
+        subscription_list_by_lesson = Subscriptions.list_subscriptions_by_genre 7
+        subscription_list_by_book = Subscriptions.list_subscriptions_by_genre 8
+
+
+        to_year = Date.utc_today().year
+
+
+
         conn
         |> put_flash(:info, "サブスクリプションの登録に失敗しました。サービスの重複を確認してください。")
-        |> render("new.html", changeset: changeset, subscription_list: subscription_list)
+        |> render("new.html", changeset: changeset, to_year: to_year,
+          subscription_list: subscription_list,
+          subscription_list_by_video: subscription_list_by_video,
+          subscription_list_by_music: subscription_list_by_music,
+          subscription_list_by_car: subscription_list_by_car,
+          subscription_list_by_food: subscription_list_by_food,
+          subscription_list_by_software: subscription_list_by_software,
+          subscription_list_by_furniture: subscription_list_by_furniture,
+          subscription_list_by_lesson: subscription_list_by_lesson,
+          subscription_list_by_book: subscription_list_by_book
+        )
     end
   end
 
