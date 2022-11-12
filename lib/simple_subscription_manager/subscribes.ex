@@ -3,6 +3,7 @@ defmodule SimpleSubscriptionManager.Subscribes do
   alias SimpleSubscriptionManager.Subscriptions
   alias SimpleSubscriptionManager.Accounts.Account
   alias SimpleSubscriptionManager.Repo
+  alias SimpleSubscriptionManager.Subscribes.History
   import Ecto.Query
 
   @doc """
@@ -14,14 +15,14 @@ defmodule SimpleSubscriptionManager.Subscribes do
   end
 
   @doc """
-  subscriptionの変更を追跡するchangesetを返す
+  入力された属性が正しいか検証するためのchangesetを返す
   """
   def change_subscribe_registration(%Subscribe{} = subscribe, attrs \\ %{}) do
     Subscribe.changeset(subscribe, attrs)
   end
 
   @doc """
-  subscribeを追跡&検査->登録する
+  入力された属性が正しいかsubscribe検証して登録する
   """
   def register_subscribe(attrs) do
     %Subscribe{}
@@ -165,19 +166,19 @@ defmodule SimpleSubscriptionManager.Subscribes do
   end
 
   @doc """
-  登録したサービスの支払日を更新する
+  登録したサービスの契約日を更新する
   """
-  def update_date_of_payment(id, date_of_payment) do
+  def update_date_of_contract(id, date_of_contract) do
     subscribe = Repo.get Subscribe, id
-    case map_to_date(date_of_payment) do
-      {:ok, date_of_payment} ->
-        subscribe = Ecto.Changeset.change(subscribe, date_of_payment: date_of_payment)
+    case map_to_date(date_of_contract) do
+      {:ok, date_of_contract} ->
+        subscribe = Ecto.Changeset.change(subscribe, date_of_contract: date_of_contract)
         Repo.update(subscribe)
         |> case do
-          {:ok, _} -> {:ok, "支払日の更新に成功しました"}
-          {:error, _} -> {:error, "支払日の更新に失敗しました"}
+          {:ok, _} -> {:ok, "契約日の更新に成功しました"}
+          {:error, _} -> {:error, "契約日の更新に失敗しました"}
         end
-      {:error, :invalid_date} -> {:error, "支払日の更新に失敗しました"}
+      {:error, :invalid_date} -> {:error, "契約日の更新に失敗しました"}
 
     end
 
@@ -185,5 +186,36 @@ defmodule SimpleSubscriptionManager.Subscribes do
   # {"day" => , "month" => , "year" =>}から~D[]に変換した結果を返す
   defp map_to_date(%{"day" => day, "month" => month, "year" => year}) do
     Date.from_erl({String.to_integer(year), String.to_integer(month), (String.to_integer day)})
+  end
+
+  ## History: 登録したサービスの履歴
+
+  @doc """
+  属性の入力が正しいかsubscribe検査->登録する
+  """
+  def register_history(attrs) do
+    %History{}
+    |> Subscribe.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  履歴の一覧を表示する
+  """
+  def list_history() do
+    Repo.all(History)
+    |> Repo.preload([:account_alias, :subscription_alias, subscription_alias: [:genre_alias]])
+  end
+
+  @doc """
+  履歴の契約日と支払日を更新する
+  """
+  def update_history(account_id, subscription_id, date_of_contract, date_of_payment) do
+    record = History |> where( account_id: 1, subscription_id: 1) |> Repo.one
+    record = Ecto.Changeset.change(record, date_of_contract: date_of_contract, date_of_payment: date_of_payment)
+    case Repo.update record do
+      {:ok, _struct}       -> {:ok, "履歴の契約日と支払日の更新に成功しました"}
+      {:error, _changeset} -> {:error, "履歴の契約日と支払日の更新に失敗しました"}
+    end
   end
 end

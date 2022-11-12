@@ -29,7 +29,7 @@
       </div>
       <div>
         <%= label f, "年齢" %>
-        <%= date_select f, :age, year: [options: 1950..@toyear]  %>
+        <%= date_select f, :age, year: [options: 1950..@today.year], default: @today %>
         <%= error_tag f, :age %>
       </div>
       <div class="seibetu">
@@ -37,7 +37,7 @@
         <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力" %>
         <%= error_tag f, :gender %>
       </div>
-      
+
       <div>入力していただいた情報(性別、年齢、登録したサービス)などを収集して、グラフすることで利用者全体のサービスの利用情報の表示を考えております
       </div>
       <div>

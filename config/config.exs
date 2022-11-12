@@ -54,5 +54,6 @@ import_config "#{config_env()}.exs"
 
 config :simple_subscription_manager, SimpleSubscriptionManager.Scheduler,
   jobs: [
-    {"0 0 * * *", {SimpleSubscriptionManager.Scheduler, :check_date_of_payment, []}}
+    {"0 0 * * *", {SimpleSubscriptionManager.Scheduler, :check_date_of_payment, []}},
+    # {"0 0 * * *", {SimpleSubscriptionManager.Scheduler, 支払日になったら支払日を翌月に設定して継続するか、subscribesから削除する}}
   ]

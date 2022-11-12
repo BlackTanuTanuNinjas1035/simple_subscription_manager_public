@@ -6,7 +6,7 @@
       <h1>アカウントの設定</h1>
       <div>現在の名前: <%= @current_account.name %></div>
         <div>現在のメールアドレス: <%= @current_account.email %></div>
-        <div>現在の年齢: <%= @current_account.age %></div>
+        <div>現在の生年月日: <%= @current_account.age %></div>
         <div>現在の性別: <%= @current_account.gender %></div>
         <div>現在のユーザ情報の利用可否:
           <%= if @current_account.use_user_info do %>
@@ -22,7 +22,7 @@
     <div class="h3_div">
       <h3>メールアドレスを変更する</h3>
     </div>
-  
+
     <.form let={f} for={@email_changeset} action={Routes.account_settings_path(@conn, :update)} id="update_email">
       <%= if @email_changeset.action do %>
         <div class="alert alert-danger">
@@ -97,7 +97,7 @@
 
       <div class="one-element">
       <%= label f, :age, "新しい年齢" %>
-      <%= date_select f, :age %>
+      <%= date_select f, :age, year: [options: 1950..@today.year]%>
       <%= error_tag f, :age %>
       </div>
 
@@ -216,4 +216,3 @@
   </div>
 
 </div>
-
