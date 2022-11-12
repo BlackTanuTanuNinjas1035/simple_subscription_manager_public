@@ -2,7 +2,7 @@
     <div class="content">
         <link phx-track-static rel="stylesheet" media="screen and (min-width:768px)" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
         <link phx-track-static rel="stylesheet" media="screen and (max-width:769px)" href={Routes.static_path(@conn, "/assets/manager_index_sumaho.css")}/>
-        
+
         <div class="top_content">
             <div>あなたの利用しているサブスクリプションを登録しましょう!</div>
             <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
@@ -28,27 +28,34 @@
                     </div>
                     <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
                     <div class="card_flex">
-                        <div class="subsc_payment"><%= subscribe.date_of_payment %></div>
-                        <!-- subsc_price　はcssの疑似要素::afterで円を挿入するとクロームで文字化けしたので直接いれたいけどべつの問題が --->
+                        <div class="subsc_payment"><%= subscribe.date_of_contract %></div>
+                        <!-- subsc_price　はcssの疑似要素::afterで円を挿入 --->
                         <div class="subsc_price"><%= subscribe.subscription_alias.price %></div>
                     </div>
                     <div class="subsc_change_payment">
-                        <%= form_for @date_of_payment_changeset, Routes.manager_path(@conn, :update), fn f -> %>
-                            <%= if @date_of_payment_changeset.action do %>
+                    <%# 登録内容の更新 %>
+                        <%= form_for @changeset, Routes.manager_path(@conn, :update), fn f -> %>
+                            <%= if @changeset.action do %>
                                 <div class="alert alert-danger">
-                                    <p>年齢の変更に失敗しました。入力内容を確認してください。</p>
+                                    <p>登録内容の変更に失敗しました。入力内容を確認してください。</p>
                                 </div>
                             <% end %>
 
                             <%= hidden_input f, :action, name: "subscribe_id", value: subscribe.id %>
+
                             <label>
-                                <%= date_select f, :date_of_payment, year: [options: @to_year..@to_year+3], default: subscribe.date_of_payment %>
+                                <%= date_select f, :date_of_contract, year: [options: @to_year..@to_year+3], default: subscribe.date_of_contract %>
                             </label>
 
-                            <%= submit "支払日の更新" %>
+                            <div>
+                                <%= label f, "継続"%>
+                                <%= checkbox f, :contine %>
+                            </div>
+
+                            <%= submit "登録内容の更新" %>
                         <% end %>
                     </div>
-                    
+
                 </div>
             <% end %>
         </div>
@@ -60,7 +67,7 @@
                 <div id="total_price">合計金額: <%= @total_price %> 円</div>
             <% end %>
         </div>
-        
+
         <div class="right"><!--css grid用---></div>
         <div class="left"><!--css grid用---></div>
     </div>
@@ -84,6 +91,5 @@
 
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_index.js")}></script>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_graph.js")}></script>
-    
-</div>
 
+</div>

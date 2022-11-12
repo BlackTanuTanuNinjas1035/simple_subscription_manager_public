@@ -5,6 +5,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   alias SimpleSubscriptionManager.Subscribes.Subscribe
 
   alias SimpleSubscriptionManager.Subscriptions
+  alias SimpleSubscriptionManager.Subscriptions.SubscriptionNotifier
 
 
   @doc """
@@ -12,12 +13,10 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   """
   def index(conn, _params) do
     changeset = Subscribe.changeset(%Subscribe{}, %{})
-    date_of_payment_changeset = Subscribe.changeset(%Subscribe{}, %{})
+    date_of_contract_changeset = Subscribe.changeset(%Subscribe{}, %{})
 
     # 現在のconnに入っているcurrent_account属性のidを取得する
     current_id = conn.assigns[:current_account].id
-    # IO.puts "現在のアカウントIDは、「#{current_id}」です"
-    IO.inspect(conn.assigns.current_account)
 
     # 現在のアカウントが登録しているサブスクリプションのリストを取得する
     subscribes_list = Subscribes.get_subscribes(current_id)
@@ -31,7 +30,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         subscribes_list: subscribes_list,
         changeset: changeset,
         total_price: total_price,
-        date_of_payment_changeset: date_of_payment_changeset,
+        date_of_contract_changeset: date_of_contract_changeset,
         to_year: to_year
       )
   end
@@ -55,15 +54,9 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
     subscription_list_by_lesson = Subscriptions.list_subscriptions_by_genre 7
     subscription_list_by_book = Subscriptions.list_subscriptions_by_genre 8
 
-
-    # IO.inspect subscription_list
-
     # 検証を取得
     changeset = Subscribes.change_subscribe_registration(%Subscribe{}, %{})
 
-    # IO.inspect changeset
-
-    # 三年後までの支払日を登録できる
     to_year = Date.utc_today().year
 
     render(conn, changeset: changeset, to_year: to_year,
@@ -84,23 +77,40 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   """
   def create(conn, %{"subscribe" => subscribe_params}) do
 
-    IO.puts "before"
-    IO.inspect subscribe_params
-
-    # 受け取った属性(%{subscription_id}に、現在のカレントアカウントのid(account_id)を追加する
-    # subscribe_paramsにacccount_idフィールドに対応する現在のアカウントのidを挿入することで、subscribesテーブルに追加するための検証をクリアさせる
+    # account_idを追加
     current_id = conn.assigns[:current_account].id
-    IO.puts current_id
-
-    # 属性のキーはアトムでなく、文字列であることに注意
     subscribe_params = Map.put(subscribe_params, "account_id", current_id)
 
+    # date_of_paymentをdate_of_contractの今月に置き換える(3ヶ月前に契約してしたサービスを登録したい場合、翌月に支払いが表示できるようにしたいため)
+    next_mounth = Date.utc_today().month
+    if subscribe_params["continue"] == true do
+      Map.put(subscribe_params, "date_of_payment",  Date.new!(subscribe_params.date_of_contract.year, next_mounth, subscribe_params.date_of_contract.day))
+    end
 
+    # サービスを登録する
     case Subscribes.register_subscribe(subscribe_params)do
       {:ok, _} ->
-        conn
-        |> put_flash(:info, "サブスクリプションの追加に成功しました。")
-        |> redirect(to: Routes.manager_path(conn, :index))
+
+        # 履歴に登録する
+        case Subscribes.register_history(subscribe_params) do
+          {:ok, _msg} ->
+            conn
+            |> put_flash(:info, "サブスクリプションの追加に成功しました。")
+            |> redirect(to: Routes.manager_path(conn, :index))
+
+          # すでに登録履歴がある場合は、履歴の日付の更新をする
+          {:error, _changeset} ->
+            case Subscribes.update_history(subscribe_params.account_id, subscribe_params.subscription_id, subscribe_params.date_of_contract, subscribe_params.date_of_payment) do
+              {:ok, msg} ->
+                conn
+                |> put_flash(:info, msg)
+                |> redirect(to: Routes.manager_path(conn, :index))
+              {:error, msg} ->
+                conn
+                |> put_flash(:info, msg)
+                |> redirect(to: Routes.manager_path(conn, :index))
+            end
+        end
 
       {:error, %Ecto.Changeset{} = changeset} ->
         subscription_list = Subscriptions.list_subscriptions()
@@ -129,12 +139,11 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
   end
 
-  # 登録したサービスの支払日を更新する
+  # フォームから更新日と継続の入力を受取り、登録したサービスの支払日と契約の継続を更新する
   def update(conn, %{"subscribe_id" => subscribe_id, "subscribe" => subscribe_params}) do
 
-    IO.inspect(conn)
-    IO.inspect "subscrbe_params: #{inspect subscribe_params["date_of_payment"]}"
-    case Subscribes.update_date_of_payment(subscribe_id, subscribe_params["date_of_payment"]) do
+    # 契約日の更新
+    case Subscribes.update_date_of_contract(subscribe_id, subscribe_params["date_of_contract"]) do
       {:ok, msg} ->
         conn
         |> put_flash(:info, msg)
@@ -144,5 +153,20 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         |> put_flash(:info, msg)
         |> redirect(to: Routes.manager_path(conn, :index))
     end
+  end
+
+  def form(conn, _params) do
+    render(conn, "form.html")
+  end
+
+  def send(conn, params) do
+    IO.puts "conn"
+    IO.inspect conn
+    IO.puts "params"
+    IO.inspect params
+    current_account = conn.assigns.current_account
+    SubscriptionNotifier.deliver_additional_service(current_account.name, current_account.email,  Access.get(params, "service"),  Access.get(params, "plan"))
+    conn
+    |> redirect(to: Routes.manager_path(conn, :index))
   end
 end

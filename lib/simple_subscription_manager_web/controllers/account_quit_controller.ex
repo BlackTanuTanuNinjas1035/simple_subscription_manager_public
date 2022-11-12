@@ -1,8 +1,8 @@
 defmodule SimpleSubscriptionManagerWeb.AccountQuitController do
   use SimpleSubscriptionManagerWeb, :controller
 
-  alias SimpleSubscriptionManager.Accounts
-  alias SimpleSubscriptionManagerWeb.AccountAuth
+  # alias SimpleSubscriptionManager.Accounts
+  # alias SimpleSubscriptionManagerWeb.AccountAuth
 
   def index(conn, _params) do
     render(conn, "index.html")

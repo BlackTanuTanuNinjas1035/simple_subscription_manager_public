@@ -8,10 +8,11 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
 
   def edit(conn, _params) do
 
+    today = Date.utc_today()
     IO.puts "現在のconn.assigns"
     IO.inspect(conn.assigns)
 
-    render(conn, "edit.html")
+    render(conn, "edit.html", today: today)
   end
 
   # メールアドレスの変更

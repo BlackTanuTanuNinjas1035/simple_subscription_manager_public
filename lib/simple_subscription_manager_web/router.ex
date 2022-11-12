@@ -120,7 +120,8 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     get "/manager/delete/:subscribe_id", ManagerController, :delete
     get "/manager/register", ManagerController, :new
     post "/manager/register", ManagerController, :create
-
+    get "/manager/form", ManagerController, :form
+    post "/manager/form", ManagerController, :request_email
   end
 
   scope "/doc", SimpleSubscriptionManagerWeb do
