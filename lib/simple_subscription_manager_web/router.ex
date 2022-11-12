@@ -100,6 +100,7 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     pipe_through [:browser]
 
     get "/accounts/delete", AccountQuitController, :index
+    get "/accounts/delete/yes", AccountQuitController, :quit
   end
 
   ## サブスクーラー機能ルート

@@ -28,7 +28,13 @@
                     </div>
                     <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
                     <div class="card_flex">
-                        <div class="subsc_payment"><%= subscribe.date_of_contract %></div>
+                        <div class="subsc_payment">契約日: <%= subscribe.date_of_contract %></div>
+                        <div class="subsc_payment">次回支払日: <%= subscribe.date_of_payment %></div>
+                        <%= if subscribe.countine == true do %>
+                            <div>継続する</div>
+                        <% else %>
+                            <div>継続しない</div>
+                        <% end %>
                         <!-- subsc_price　はcssの疑似要素::afterで円を挿入 --->
                         <div class="subsc_price"><%= subscribe.subscription_alias.price %></div>
                     </div>

@@ -442,8 +442,8 @@ defmodule SimpleSubscriptionManager.Accounts do
   def delete_account(id) do
     account = Repo.get Account, id
     case Repo.delete account do
-      {:ok, struct}       -> {:ok, "アカウントの削除に成功しました"}
-      {:error, changeset} -> {:ok, "アカウントの削除に失敗しました"}
+      {:ok, _struct}       -> {:ok, "アカウントの削除に成功しました"}
+      {:error, _changeset} -> {:ok, "アカウントの削除に失敗しました"}
     end
   end
 end
