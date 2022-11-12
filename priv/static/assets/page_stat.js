@@ -12,6 +12,9 @@ $(function(){
         console.log(selected_tab);
         $(".ranking").removeClass("active");
         $(selected_tab).addClass("active");
-        
     })
+
+    //olから値取る
+    let ol_class = $("#unko li:nth-child(1)").child(".subsc_reginum");
+    console.log(ol_class);
 })

@@ -1,3 +1,7 @@
+/* bace.cssの値を修正 */
+
+
+
 .main_contents > .container{
     width: 100%;
     height: 100%;
@@ -65,12 +69,23 @@
 
 .ranking_and_graph {
     display: flex;
+    min-height: 300px;
+}
+.div_rag_ranking {
+    display: flex;
+    justify-content: center;
 }
 .rag_ranking {
-
+    width: 50%;
+    text-align: left;
 }
-.rag_graph {
+li:nth-child(n + 11) {
+    display: none;
+}
 
+
+.rag_graph {
+    width: 50%;
 }
 
 .overall_service {
@@ -108,8 +123,18 @@
     display: flex;
     flex-wrap: wrap;
 }
-.mini_ranking {
+.mini_ranking_and_graph {
     width: 25%;
+}
+.mini_ranking {
+
+}
+.mini_graph {
+
+}
+.graph {
+    width: 100%;
+    height: 100%;
 }
 .active {
     display: block;
