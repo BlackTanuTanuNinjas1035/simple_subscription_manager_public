@@ -9,19 +9,12 @@ defmodule SimpleSubscriptionManagerWeb.AccountQuitController do
   def quit(conn, _params) do
     conn
     |> put_flash(:info, "ログアウトしました。")
-    |> AccountAuth.log_out_account()
+    |> AccountAuth.delete_account()
     |> case do
-      {:ok, _msg} ->
-        case Acccounts.delete_account(conn.assigns[:current_account].id) do
-          {:ok, msg} ->
-            conn
-            |> put_flash(:info, msg)
-            |> redirect(to: Routes.page_path(conn, :index))
-          {:error, msg} ->
-            conn
-            |> put_flash(:info, msg)
-            |> redirect(to: Routes.manager_path(conn, :index))
-        end
+      {:ok, msg} ->
+        conn
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.page_path(conn, :index))
       {:error, msg} ->
           conn
           |> put_flash(:info, msg)

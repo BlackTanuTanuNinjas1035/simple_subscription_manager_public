@@ -443,7 +443,7 @@ defmodule SimpleSubscriptionManager.Accounts do
     account = Repo.get Account, id
     case Repo.delete account do
       {:ok, _struct}       -> {:ok, "アカウントの削除に成功しました"}
-      {:error, _changeset} -> {:ok, "アカウントの削除に失敗しました"}
+      {:error, _changeset} -> {:error, "アカウントの削除に失敗しました"}
     end
   end
 end

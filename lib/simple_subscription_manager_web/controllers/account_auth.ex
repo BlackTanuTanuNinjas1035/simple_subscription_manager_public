@@ -147,4 +147,29 @@ defmodule SimpleSubscriptionManagerWeb.AccountAuth do
   defp maybe_store_return_to(conn), do: conn
 
   defp signed_in_path(_conn), do: "/"
+
+  def delete_account(conn) do
+    account_token = get_session(conn, :account_token)
+    account_token && Accounts.delete_session_token(account_token)
+
+    if live_socket_id = get_session(conn, :live_socket_id) do
+      SimpleSubscriptionManagerWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
+    end
+
+    case Accounts.delete_account(conn.assigns[:current_account].id) do
+      {:ok, msg} ->
+        conn
+        |> renew_session()
+        |> delete_resp_cookie(@remember_me_cookie)
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.page_path(conn, :index))
+      {:error, msg} ->
+        conn
+        |> renew_session()
+        |> delete_resp_cookie(@remember_me_cookie)
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.page_path(conn, :index))
+      end
+
+  end
 end
