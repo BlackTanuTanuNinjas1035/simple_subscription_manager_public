@@ -3,7 +3,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
   alias SimpleSubscriptionManager.Subscribes
   alias SimpleSubscriptionManager.Subscribes.Subscribe
-
+  alias SimpleSubscriptionManager.Converter
   alias SimpleSubscriptionManager.Subscriptions
   alias SimpleSubscriptionManager.Subscriptions.SubscriptionNotifier
 
@@ -39,9 +39,6 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   変更の追跡を追跡するchangesetを取得して
   """
   def new(conn,_pramas) do
-
-    current_id = conn.assigns[:current_account].id
-    IO.puts "現在のアカウントIDは、「#{current_id}」です"
 
     # 各ジャンルのサービスのクエリのリストを受け取る
     subscription_list = Subscriptions.list_subscriptions()
@@ -80,12 +77,26 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
     # account_idを追加
     current_id = conn.assigns[:current_account].id
     subscribe_params = Map.put(subscribe_params, "account_id", current_id)
+    subscribe_params = Map.update(subscribe_params, "date_of_contract", subscribe_params["date_of_contract"], fn date -> Converter.convert!(date) end)
+    subscribe_params = Map.update(subscribe_params, "date_of_payment", subscribe_params["date_of_payment"], fn date -> Converter.convert!(date) end)
+    IO.puts "to_mounth: #{Date.utc_today().month}"
 
-    # date_of_paymentをdate_of_contractの今月に置き換える(3ヶ月前に契約してしたサービスを登録したい場合、翌月に支払いが表示できるようにしたいため)
-    next_mounth = Date.utc_today().month
-    if subscribe_params["continue"] == true do
-      Map.put(subscribe_params, "date_of_payment",  Date.new!(subscribe_params.date_of_contract.year, next_mounth, subscribe_params.date_of_contract.day))
+    # date_of_paymentをdate_of_contractの今月に置き換える(3ヶ月前に契約してしたサービスを登録した場合、今月翌月に支払いが表示できるようにしたいため)
+    subscribe_params = if subscribe_params["continue"] == "true" do
+      IO.puts "continue is true"
+
+      # 例: 今日=11/17 契約日=2/1 継続登録時 11/1になる 支払日を過ぎているので翌々月(12/1)で登録
+      IO.puts "#{subscribe_params["date_of_contract"].day} > #{Date.utc_today().day} == #{subscribe_params["date_of_contract"].day > Date.utc_today().day}"
+
+      date_of_payment_value = Subscribes.caluclate_date_of_payment(subscribe_params)
+      IO.puts"date_of_payment_value: #{inspect date_of_payment_value}"
+      Map.put(subscribe_params, "date_of_payment", date_of_payment_value)
+    else
+      IO.puts "continue is false"
+      Map.put(subscribe_params, "date_of_payment", nil)
     end
+
+    IO.inspect(subscribe_params)
 
     # サービスを登録する
     case Subscribes.register_subscribe(subscribe_params)do
@@ -100,7 +111,16 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
           # すでに登録履歴がある場合は、履歴の日付の更新をする
           {:error, _changeset} ->
-            case Subscribes.update_history(subscribe_params.account_id, subscribe_params.subscription_id, subscribe_params.date_of_contract, subscribe_params.date_of_payment) do
+            case Subscribes.update_history(
+              current_id,
+              subscribe_params
+            ) do
+            # case Subscribes.update_history(
+            #   current_id,
+            #   subscribe_params["subscription_id"],
+            #   Date.new!(String.to_integer(subscribe_params["date_of_contract"]["year"]), String.to_integer(subscribe_params["date_of_contract"]["month"]), String.to_integer(subscribe_params["date_of_contract"]["day"])),
+            #   Date.new!(String.to_integer(subscribe_params["date_of_payment"]["year"]), String.to_integer(subscribe_params["date_of_payment"]["month"]), String.to_integer(subscribe_params["date_of_payment"]["day"]))
+            # ) do
               {:ok, msg} ->
                 conn
                 |> put_flash(:info, msg)
@@ -161,12 +181,21 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
   end
 
-  # フォームから更新日と継続の入力を受取り、登録したサービスの支払日と契約の継続を更新する
+  # フォームから契約日と継続の変更を受取り、登録したサービスの支払日と契約の継続を更新する
   def update(conn, %{"subscribe_id" => subscribe_id, "subscribe" => subscribe_params}) do
 
+    IO.puts "conn"
+    IO.inspect conn
+
+    subscribe_params = Map.update(subscribe_params, "continue", false, fn value -> Converter.convert!(value) end)
+
+    IO.puts "subscribe_params"
+    IO.inspect subscribe_params
+
     # 契約日の更新
-    case Subscribes.update_date_of_contract(subscribe_id, subscribe_params["date_of_contract"]) do
+    case Subscribes.update_subsribe(subscribe_id, subscribe_params) do
       {:ok, msg} ->
+        # case
         conn
         |> put_flash(:info, msg)
         |> redirect(to: Routes.manager_path(conn, :index))
