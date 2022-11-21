@@ -50,12 +50,26 @@
                             <%= hidden_input f, :action, name: "subscribe_id", value: subscribe.id %>
 
                             <label>
-                                <%= date_select f, :date_of_contract, year: [options: @to_year..@to_year+3], default: subscribe.date_of_contract %>
+                                <%= date_select f, :date_of_contract, year: [options: @to_year..@to_year+3], default: subscribe.date_of_contract, month: [options: [
+                                        {gettext("1"), "1"},
+                                        {gettext("2"), "2"},
+                                        {gettext("3"), "3"},
+                                        {gettext("4"), "4"},
+                                        {gettext("5"), "5"},
+                                        {gettext("6"), "6"},
+                                        {gettext("7"), "7"},
+                                        {gettext("8"), "8"},
+                                        {gettext("9"), "9"},
+                                        {gettext("10"), "10"},
+                                        {gettext("11"), "11"},
+                                        {gettext("12"), "12"},
+                                    ]
+                                ] %>
                             </label>
 
                             <div>
                                 <%= label f, "継続"%>
-                                <%= checkbox f, :contine %>
+                                <%= checkbox f, :continue %>
                             </div>
 
                             <%= submit "登録内容の更新" %>
