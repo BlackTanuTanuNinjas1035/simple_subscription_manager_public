@@ -1,4 +1,7 @@
 /* bace.cssの値を修正 */
+#front {
+    height: auto;
+}
 
 
 
@@ -74,9 +77,10 @@
 .div_rag_ranking {
     display: flex;
     justify-content: center;
+    width: 50%;
 }
 .rag_ranking {
-    width: 50%;
+    width: auto;
     text-align: left;
 }
 li:nth-child(n + 11) {
@@ -116,12 +120,20 @@ li:nth-child(n + 11) {
 .female_genre {
 }
 .male_age_genre {
+    text-align: center;
+}
+.div_male_age_genre {
     display: flex;
     flex-wrap: wrap;
+    display: none;
 }
 .female_age_genre {
+    text-align: center;
+}
+.div_female_age_genre {
     display: flex;
     flex-wrap: wrap;
+    display: none;
 }
 .mini_ranking_and_graph {
     width: 25%;
@@ -129,8 +141,15 @@ li:nth-child(n + 11) {
 .mini_ranking {
 
 }
+.mini_ranking .ol_ranking {
+    display: none;
+}
 .mini_graph {
 
+}
+.rag_bar_graph {
+    width: 100%;
+    height: 500px;
 }
 .graph {
     width: 100%;
@@ -138,4 +157,7 @@ li:nth-child(n + 11) {
 }
 .active {
     display: block;
+}
+.subsc_ratio {
+    display: none;
 }
