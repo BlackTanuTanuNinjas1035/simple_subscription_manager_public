@@ -65,17 +65,17 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
   アカウントのEメールを変更する際に送信されるメール。
   """
   def deliver_update_email_instructions(account, url) do
-    deliver(account.email, "Update email instructions", """
+    deliver(account.email, "メールアドレスの変更", """
 
     ==============================
 
-    Hi #{account.email},
+    お世話になっております #{account.email}さま
 
-    You can change your email by visiting the URL below:
+    メールアドレスの変更を確定するため以下のリンクに行ってください:
 
     #{url}
 
-    If you didn't request this change, please ignore this.
+    もしこのメールに見覚えがない場合は無視してください。
 
     ==============================
     """)

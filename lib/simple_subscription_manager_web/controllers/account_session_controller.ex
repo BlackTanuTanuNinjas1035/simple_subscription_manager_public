@@ -15,7 +15,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountSessionController do
       AccountAuth.log_in_account(conn, account, account_params)
     else
       # In order to prevent user enumeration attacks, don't disclose whether the email is registered.
-      render(conn, "new.html", error_message: "Invalid email or password")
+      render(conn, "new.html", error_message: "メールアドレスかパスワードの検証に失敗しました")
     end
   end
 

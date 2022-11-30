@@ -1,0 +1,8 @@
+
+<%= form_for @conn, Routes.form_path(@conn, :inquiry_form), fn f -> %>
+
+    <div><%= select f, :genre, ["サービスの追加": "add_service", "機能の追加": "extend_function"]%></div>
+    <%= textarea f, :text %>
+    <%= submit "送信" %>
+
+<% end %>

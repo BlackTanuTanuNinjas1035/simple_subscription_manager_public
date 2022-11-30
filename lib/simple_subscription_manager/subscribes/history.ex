@@ -17,6 +17,5 @@ defmodule SimpleSubscriptionManager.Subscribes.History do
     |> cast(attrs, [:account_id, :subscription_id, :date_of_contract, :continue, :date_of_payment])
     |> validate_required([:account_id, :subscription_id, :date_of_contract, :continue])
     |> unsafe_validate_unique([:account_id, :subscription_id], SimpleSubscriptionManager.Repo)
-    |> unique_constraint([:account_id, :subscription_id])
   end
 end

@@ -6,7 +6,7 @@
         <div class="top_content">
             <div>あなたの利用しているサブスクリプションを登録しましょう!</div>
             <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
-
+            <%= link "履歴", to: Routes.history_path(@conn, :index) %>
             <h2>登録しているサービス</h2>
         </div>
 

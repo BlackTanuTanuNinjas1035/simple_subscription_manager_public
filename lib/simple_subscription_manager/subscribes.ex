@@ -193,15 +193,28 @@ defmodule SimpleSubscriptionManager.Subscribes do
   end
 
   @doc """
-  履歴の一覧を表示する
+  指定したユーザの履歴を表示する
   """
-  def list_history() do
-    Repo.all(History)
+  def get_history(account_id) do
+    History
+    |> where(account_id: ^account_id)
+    |> Repo.all
     |> Repo.preload([:account_alias, :subscription_alias, subscription_alias: [:genre_alias]])
   end
 
   @doc """
-  履歴の契約日と支払日を更新する
+  指定した履歴を削除する
+  """
+  def delete_history(history_id) do
+    record = Repo.get!(History, history_id)
+    case Repo.delete(record) do
+      {:ok, _struct} -> {:ok, "履歴の削除に成功しました"}
+      {:error, _changeset} -> {:ok, "履歴の削除に失敗しました"}
+    end
+  end
+
+  @doc """
+  ひと月に重複した履歴の登録がある場合の履歴の契約日と支払日を更新する
   """
   def update_history(account_id, subscribe_params) do
     record = Repo.get_by(History, account_id: account_id, subscription_id: subscribe_params["subscription_id"])
@@ -211,14 +224,6 @@ defmodule SimpleSubscriptionManager.Subscribes do
       {:error, _changeset} -> {:error, "履歴の契約日と支払日の更新に失敗しました"}
     end
   end
-  # def update_history(account_id, subscription_id, date_of_contract, date_of_payment) do
-  #   record = Repo.get_by(History, account_id: account_id, subscription_id: subscription_id)
-  #   record = Ecto.Changeset.change(record, date_of_contract: date_of_contract, date_of_payment: date_of_payment)
-  #   case Repo.update record do
-  #     {:ok, _struct}       -> {:ok, "履歴の契約日と支払日の更新に成功しました"}
-  #     {:error, _changeset} -> {:error, "履歴の契約日と支払日の更新に失敗しました"}
-  #   end
-  # end
 
   @doc """
   スケジューラ用。

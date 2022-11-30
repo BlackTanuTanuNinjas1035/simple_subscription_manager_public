@@ -1,0 +1,7 @@
+<%= if @service_topic_list do%>
+    <ul>
+        <%= for service_topic <- @service_topic_list do %>
+            <li><%= Date.to_iso8601(service_topic.inserted_at) %><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></li>
+        <% end %>
+    </ul>
+<% end %>

@@ -113,16 +113,36 @@ defmodule SimpleSubscriptionManagerWeb.Router do
     get "/stat", PageController, :stat
   end
 
-  scope "/", SimpleSubscriptionManagerWeb do
+  scope "/manager", SimpleSubscriptionManagerWeb do
     pipe_through [:browser, :require_authenticated_account]
 
-    get "/manager", ManagerController, :index
-    post "/manager", ManagerController, :update
-    get "/manager/delete/:subscribe_id", ManagerController, :delete
-    get "/manager/register", ManagerController, :new
-    post "/manager/register", ManagerController, :create
-    get "/manager/form", ManagerController, :form
-    post "/manager/form", ManagerController, :request_email
+    get "/", ManagerController, :index
+    post "/", ManagerController, :update
+    get "/delete/:subscribe_id", ManagerController, :delete
+    get "/register", ManagerController, :new
+    post "/register", ManagerController, :create
+  end
+
+  scope "/manager", SimpleSubscriptionManagerWeb do
+    pipe_through [:browser, :require_authenticated_account]
+
+    get "/form", FormController, :form
+    # post "/form", FormController, :request_email
+    post "/form", FormController, :inquiry_form
+  end
+
+  scope "/manager", SimpleSubscriptionManagerWeb do
+    pipe_through [:browser, :require_authenticated_account]
+
+    get "/history", HistoryController, :index
+    post "/delete", HistoryController, :delete
+  end
+
+  scope "/topic", SimpleSubscriptionManagerWeb do
+    pipe_through [:browser]
+
+    get "/", TopicController, :index
+    get "/:id", TopicController, :show
   end
 
   scope "/doc", SimpleSubscriptionManagerWeb do

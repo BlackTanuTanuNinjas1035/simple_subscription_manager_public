@@ -1,0 +1,18 @@
+<ul>
+<%= for history <- @history_list do %>
+    <li>
+    <%= history.subscription_alias.name %>
+    <%= history.subscription_alias.genre_alias.name %>
+    <%= history.subscription_alias.price %>
+    <%= history.continue %>
+    <%= history.date_of_contract %>
+    <%= history.date_of_payment %>
+    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+        <%= submit("削除") %>
+    <% end %>
+    </li>
+<% end %>
+</ul>
+
+<%= link "戻る", to: Routes.manager_path(@conn, :index) %>
