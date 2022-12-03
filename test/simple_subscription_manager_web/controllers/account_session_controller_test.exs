@@ -12,8 +12,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountSessionControllerTest do
       conn = get(conn, Routes.account_session_path(conn, :new))
       response = html_response(conn, 200)
       assert response =~ "<h1>Log in</h1>"
-      assert response =~ "Register</a>"
-      assert response =~ "Forgot your password?</a>"
+      assert response =~ "アカウントの登録</a>"
+      assert response =~ "パスワードを忘れたら？</a>"
     end
 
     test "redirects if already logged in", %{conn: conn, account: account} do
@@ -36,8 +36,8 @@ defmodule SimpleSubscriptionManagerWeb.AccountSessionControllerTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ account.email
-      assert response =~ "Settings</a>"
-      assert response =~ "Log out</a>"
+      assert response =~ "アカウントの登録をする</a>"
+      assert response =~ "ログインする</a>"
     end
 
     test "logs the account in with remember me", %{conn: conn, account: account} do
@@ -76,7 +76,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountSessionControllerTest do
 
       response = html_response(conn, 200)
       assert response =~ "<h1>Log in</h1>"
-      assert response =~ "Invalid email or password"
+      assert response =~ "メールアドレスかパスワードの検証に失敗しました"
     end
   end
 
@@ -85,14 +85,14 @@ defmodule SimpleSubscriptionManagerWeb.AccountSessionControllerTest do
       conn = conn |> log_in_account(account) |> delete(Routes.account_session_path(conn, :delete))
       assert redirected_to(conn) == "/"
       refute get_session(conn, :account_token)
-      assert get_flash(conn, :info) =~ "Logged out successfully"
+      assert get_flash(conn, :info) =~ "ログアウトしました。"
     end
 
     test "succeeds even if the account is not logged in", %{conn: conn} do
       conn = delete(conn, Routes.account_session_path(conn, :delete))
       assert redirected_to(conn) == "/"
       refute get_session(conn, :account_token)
-      assert get_flash(conn, :info) =~ "Logged out successfully"
+      assert get_flash(conn, :info) =~ "ログアウトしました。"
     end
   end
 end

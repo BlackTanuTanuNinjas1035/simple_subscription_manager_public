@@ -1,8 +1,15 @@
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/tmp_content.css")}/>
 
-<%= form_for @conn, Routes.form_path(@conn, :inquiry_form), fn f -> %>
+<div class="content">
 
-    <div><%= select f, :genre, ["サービスの追加": "add_service", "機能の追加": "extend_function"]%></div>
-    <%= textarea f, :text %>
-    <%= submit "送信" %>
+    <h1>お問い合わせページ</h1>
 
-<% end %>
+    <p>当ページはサブスクーラーに追加してほしいサービスや、機能などの要望を管理者に伝えるページになっております。</p>
+
+    <%= form_for @conn, Routes.form_path(@conn, :inquiry_form), fn f -> %>
+
+        <div><%= label f, "送信の種類" %><%= select f, :genre, ["サービスの追加": "add_service", "機能の追加": "extend_function"]%></div>
+        <%= textarea f, :text %>
+        <%= submit "送信" %>
+    <% end %>
+</div>

@@ -6,6 +6,7 @@ defmodule SimpleSubscriptionManager.Converter do
 
   def convert!("true"), do: true
   def convert!("false"), do: false
+  def convert!(%{"day" => day, "month" => month, "year" => year}) when is_integer(day), do: Date.new!(year, month, day)
   def convert!(%{"day" => day, "month" => month, "year" => year}), do: Date.new!(String.to_integer(year), String.to_integer(month), String.to_integer(day))
 
 end

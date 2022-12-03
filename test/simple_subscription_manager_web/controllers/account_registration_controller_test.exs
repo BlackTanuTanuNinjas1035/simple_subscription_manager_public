@@ -45,9 +45,9 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Register</h1>"
-      assert response =~ "must have the @ sign and no spaces"
-      assert response =~ "should be at least 12 character"
+      assert response =~ "<h1>アカウントの登録r</h1>"
+      # assert response =~ "must have the @ sign and no spaces"
+      assert response =~ "12文字から72文字までのパスワードを設定してください"
     end
   end
 end
