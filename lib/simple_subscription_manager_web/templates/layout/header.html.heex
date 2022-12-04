@@ -1,28 +1,21 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/header.css")}/>
 <section class="container header">
-<<<<<<< HEAD
     
     <div class="header_left">
-        <%= link to: Routes.page_path(@conn, :index) do%>
-            <div class="sumaho_rogo"></div>
-            <div class="pc_rogo">
-                <img src={Routes.static_path(@conn, "/images/mozi1.png")} class="header_logo" alt="Simple Subscription Manager Logo"/>    
-            </div>
-        <% end %> 
+        <%= unless @current_account do %>
+            <%= link to: Routes.page_path(@conn, :index) do%>
+                <div class="sumaho_rogo"></div>
+                <div class="pc_rogo">
+                    <img src={Routes.static_path(@conn, "/images/mozi1.png")} class="header_logo" alt="Simple Subscription Manager Logo"/>    
+                </div>
+            <% end %> 
+        <% else %>
+            <%= link to: Routes.manager_path(@conn, :index) do%>
+                <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
+            <% end %>
+        <% end %>
     </div>
     
-=======
-
-    <%= unless @current_account do %>
-        <%= link to: Routes.page_path(@conn, :index) do%>
-            <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
-        <% end %>
-    <% else %>
-        <%= link to: Routes.manager_path(@conn, :index) do%>
-            <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
-        <% end %>
-    <% end %>
->>>>>>> origin/manager_dev
 
     <nav class="nav-header">
 
