@@ -23,9 +23,10 @@ function getSubsc() {
 $(function(){
     $(".subsc_option").on("click", function(){
         $(this).find(".subsc_option_menu").toggleClass("active");
-    });
-    $(".change_button").on("click", function(){
         $(this).parents(".subsc_card").children(".subsc_change_payment").slideToggle(300);
-        // $(this).parents(".subsc_card").children(".subsc_change_payment").toggleClass("active");
-    })
+    });
+    // $(".change_button").on("click", function(){
+    //     $(this).parents(".subsc_card").children(".subsc_change_payment").slideToggle(300);
+    //     // $(this).parents(".subsc_card").children(".subsc_change_payment").toggleClass("active");
+    // })
 })

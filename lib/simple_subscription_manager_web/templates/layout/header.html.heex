@@ -1,8 +1,15 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/header.css")}/>
 <section class="container header">
-    <%= link to: Routes.page_path(@conn, :index) do%>
-        <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
-    <% end %> 
+    
+    <div class="header_left">
+        <%= link to: Routes.page_path(@conn, :index) do%>
+            <div class="sumaho_rogo"></div>
+            <div class="pc_rogo">
+                <img src={Routes.static_path(@conn, "/images/mozi1.png")} class="header_logo" alt="Simple Subscription Manager Logo"/>    
+            </div>
+        <% end %> 
+    </div>
+    
 
     <nav class="nav-header">
     

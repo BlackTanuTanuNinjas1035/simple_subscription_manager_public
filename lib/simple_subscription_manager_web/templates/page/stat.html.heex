@@ -8,15 +8,15 @@
         <div>ご利用者から<%= @number_of_ans * 100 %>%の回答を得られました</div>
     </div>
 
-    <div class="content_bottom">
+    <div class="content_buttom">
         <div class="tab_select">
             <div class="service_button tab_button active" data-tab="service"><p>サービス</p></div>
             <div class="genre_button tab_button" data-tab="genre"><p>ジャンル</p></div>
         </div>
         <div class="ranking ranking_service active">
-            <h3>人気のサービスランキング</h3>
+            <h2>人気のサービスランキング</h2>
             <div class="ranking_and_graph" id="overall_service">
-                    <div class="div_rag_ranking">
+                    <div class="div_rag_ranking hello">
                         <div class="rag_ranking">
                         
                         <ol class="ol_ranking">
@@ -32,13 +32,175 @@
                         </ol>
                         </div>
                     </div>
-                    <div class="rag_graph">
+                    <div class="rag_graph hello">
                         <canvas id="graph_overall_service" class="graph"></canvas>
                     </div>
             </div>
 
+
+            <!-- サービスの年齢別のランキング --->
+            <h2>年代別のサービスランキング</h2>
+            <div class="overall_age_service age_circle_graph">
+                <div class="mini_ranking_and_graph" id="overall_age_00_service">
+                    <div class="mini_ranking">
+                        <h3>10代未満</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@subscription_counter_by_age_0) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_by_age_0 do %>
+                                    <li>
+                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_graph">
+                        <canvas id="graph_overall_age_00_service" class="graph"></canvas>
+                    </div>
+                </div>
+
+                <div class="mini_ranking_and_graph" id="overall_age_10_service">
+                    <div class="mini_ranking">
+                        <h3>10代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@subscription_counter_by_age_10) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_by_age_10 do %>
+                                    <li>
+                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_graph">
+                        <canvas id="graph_overall_age_20_service" class="graph"></canvas>
+                    </div>
+                </div>
+                <div class="mini_ranking_and_graph" id="overall_age_20_service">
+                    <div class="mini_ranking">
+                        <h3>20代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@subscription_counter_by_age_20) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_by_age_20 do %>
+                                    <li>
+                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_graph">
+                        <canvas id="graph_overall_age_20_service" class="graph"></canvas>
+                    </div>
+                </div>
+                <div class="mini_ranking_and_graph" id="overall_age_30_service">
+                    <div class="mini_ranking">
+                        <h3>30代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@subscription_counter_by_age_30) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_by_age_30 do %>
+                                    <li>
+                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_graph">
+                        <canvas id="graph_overall_age_30_service" class="graph"></canvas>
+                    </div>
+                </div>
+                <div class="mini_ranking_and_graph" id="overall_age_40_service">
+                    <div class="mini_ranking">
+                        <h3>40代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@subscription_counter_by_age_40) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_by_age_40 do %>
+                                    <li>
+                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_graph">
+                        <canvas id="graph_overall_age_40_service" class="graph"></canvas>
+                    </div>
+                </div>
+                <div class="mini_ranking_and_graph" id="overall_age_50_service">
+                    <div class="mini_ranking">
+                        <h3>50代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@subscription_counter_by_age_50) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_by_age_50 do %>
+                                    <li>
+                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_graph">
+                        <canvas id="graph_overall_age_50_service" class="graph"></canvas>
+                    </div>
+                </div>
+                <div class="mini_ranking_and_graph" id="overall_age_60_service">
+                    <div class="mini_ranking">
+                        <h3>60代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@subscription_counter_by_age_60) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_by_age_60 do %>
+                                    <li>
+                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_graph">
+                        <canvas id="graph_overall_age_60_service" class="graph"></canvas>
+                    </div>
+                </div>
+                <div class="mini_ranking_and_graph" id="overall_age_70_service">
+                    <div class="mini_ranking">
+                        <h3>70代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@subscription_counter_by_age_70) == 0 do %>
+                                <%= for subscription_count <- @subscription_counter_by_age_70 do %>
+                                    <li>
+                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_graph">
+                        <canvas id="graph_overall_age_70_service" class="graph"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+
+
             <div class="male_service">
-                <h3>男性に人気のサービスランキング</h3>
+                <h2>男性に人気のサービスランキング</h2>
                 <div class="ranking_and_graph" id="male_overall_service">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking"><!--classのragはranking_and_graph--->
@@ -61,11 +223,12 @@
                         </div>
                 </div>
 
-                <div class="male_age_service">
+                <h2>年代別　男性に人気のサービスランキング</h2>
+                <div class="male_age_service age_circle_graph">
                     <div class="mini_ranking_and_graph" id="male_age_00_service">
                         
                         <div class="mini_ranking">
-                            <h3>10代未満の男性に人気のサービスランキング</h3>
+                            <h3>10代未満</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_0) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male_by_age_0 do %>
@@ -84,7 +247,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="male_age_10_service">
                         <div class="mini_ranking">
-                            <h3>10代の男性に人気のサービスランキング</h3>
+                            <h3>10代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_10) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male_by_age_10 do %>
@@ -103,7 +266,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="male_age_20_service">
                         <div class="mini_ranking">
-                            <h3>20代の男性に人気のサービスランキング</h3>
+                            <h3>20代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_20) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male_by_age_20 do %>
@@ -122,7 +285,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="male_age_30_service">
                         <div class="mini_ranking">
-                            <h3>30代の男性に人気のサービスランキング</h3>
+                            <h3>30代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_30) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male_by_age_30 do %>
@@ -141,7 +304,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="male_age_40_service">
                         <div class="mini_ranking">
-                            <h3>40代の男性に人気のサービスランキング</h3>
+                            <h3>40代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_40) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male_by_age_40 do %>
@@ -160,7 +323,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="male_age_50_service">
                         <div class="mini_ranking">
-                            <h3>50代の男性に人気のサービスランキング</h3>
+                            <h3>50代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_50) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_mal_by_age_50 do %>
@@ -179,7 +342,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="male_age_60_service">
                         <div class="mini_ranking">
-                            <h3>60代の男性に人気のサービスランキング</h3>
+                            <h3>60代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_60) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male_by_age_60 do %>
@@ -198,7 +361,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="male_age_70_service">
                         <div class="mini_ranking">
-                            <h3>70代の男性に人気のサービスランキング</h3>
+                            <h3>70代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_70) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male_by_age_70 do %>
@@ -219,10 +382,10 @@
             </div>
 
             <div class="female_service">
+                <h2>女性に人気のサービスランキング</h2>
                 <div class="ranking_and_graph" id="female_overall_service">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking">
-                            <h3>女性に人気のサービスランキング</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female do %>
@@ -241,10 +404,11 @@
                     </div>
                 </div>
 
-                <div class="female_age_service">
+                <h2>年代別　女性に人気のサービスランキング</h2>
+                <div class="female_age_service age_circle_graph">
                     <div class="mini_ranking_and_graph" id="female_age_00_service">
                         <div class="mini_ranking">
-                            <h3>10代未満の女性に人気のサービスランキング</h3>
+                            <h3>10代未満</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female_by_age_0 )== 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female_by_age_0 do %>
@@ -263,7 +427,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="female_age_10_service">
                         <div class="mini_ranking">
-                            <h3>10代の女性に人気のサービスランキング</h3>
+                            <h3>10代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female_by_age_10) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female_by_age_10 do %>
@@ -282,7 +446,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="female_age_20_service">
                         <div class="mini_ranking">
-                            <h3>20代の女性に人気のサービスランキング</h3>
+                            <h3>20代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female_by_age_20) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female_by_age_20 do %>
@@ -301,7 +465,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="female_age_30_service">
                         <div class="mini_ranking">
-                            <h3>30代の女性に人気のサービスランキング</h3>
+                            <h3>30代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female_by_age_30) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female_by_age_30 do %>
@@ -320,7 +484,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="female_age_40_service">
                         <div class="mini_ranking">
-                            <h3>40代の女性に人気のサービスランキング</h3>
+                            <h3>40代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female_by_age_40) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female_by_age_40 do %>
@@ -339,7 +503,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="female_age_50_service">
                         <div class="mini_ranking">
-                            <h3>50代の女性に人気のサービスランキング</h3>
+                            <h3>50代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female_by_age_50) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female_by_age_60 do %>
@@ -358,7 +522,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="female_age_60_service">
                         <div class="mini_ranking">
-                            <h3>60代の女性に人気のサービスランキング</h3>
+                            <h3>60代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female_by_age_60) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female_by_age_60 do %>
@@ -377,7 +541,7 @@
                     </div>
                     <div class="mini_ranking_and_graph" id="female_age_70_service">
                         <div class="mini_ranking">
-                        <h3>70代の女性に人気のサービスランキング</h3>
+                        <h3>70代</h3>
                         <ol class="ol_ranking">
                             <%= unless Enum.count(@subscription_counter_in_female_by_age_70) == 0 do %>
                                 <%= for subscription_count <- @subscription_counter_in_female_by_age_70 do %>
@@ -399,10 +563,11 @@
         </div>
 
         <div class="ranking ranking_genre">
+
+            <div class="ranking_title"><h2>人気のジャンルのランキング</h2></div>
             <div class="ranking_and_graph" id="overall_genre">
                 <div class="div_rag_ranking">
                     <div class="rag_ranking">
-                        <h3>人気のジャンルのランキング</h3>
                         <ol class="ol_ranking">
                             <%= unless Enum.count(@genre_counter) == 0 do %>
                                 <%= for genre_count <- @genre_counter do %>
@@ -421,11 +586,141 @@
                 </div>
             </div>
 
+            <div class="overall_age_genre" id="overall_age_genre">
+                <div class="ranking_title"><h2>年代別　人気のジャンルランキング</h2></div>
+                <div class="div_overall_age_genre">
+                    <div class="mini_ranking_and_graph" id="overall_age_00_genre">
+                        <h3>10代未満</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@genre_counter_by_age_0) == 0 do %>
+                                <%= for genre_count <- @genre_counter_by_age_0 do %>
+                                    <li>
+                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    
+                    <div class="mini_ranking_and_graph" id="overall_age_10_genre">
+                        <h3>10代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@genre_counter_by_age_10) == 0 do %>
+                                <%= for genre_count <- @genre_counter_by_age_10 do %>
+                                    <li>
+                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking_and_graph" id="overall_age_20_genre">
+                        <h3>20代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@genre_counter_by_age_20) == 0 do %>
+                                <%= for genre_count <- @genre_counter_by_age_20 do %>
+                                    <li>
+                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking_and_graph" id="overall_age_30_genre">
+                        <h3>30代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@genre_counter_by_age_30) == 0 do %>
+                                <%= for genre_count <- @genre_counter_by_age_30 do %>
+                                    <li>
+                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking_and_graph" id="overall_age_40_genre">
+                        <h3>40代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@genre_counter_by_age_40) == 0 do %>
+                                <%= for genre_count <- @genre_counter_by_age_40 do %>
+                                    <li>
+                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking_and_graph" id="overall_age_50_genre">
+                        <h3>50代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@genre_counter_by_age_50) == 0 do %>
+                                <%= for genre_count <- @genre_counter_by_age_50 do %>
+                                    <li>
+                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking_and_graph" id="overall_age_60_genre">
+                        <h3>60代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@genre_counter_by_age_60) == 0 do %>
+                                <%= for genre_count <- @genre_counter_by_age_60 do %>
+                                    <li>
+                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+                    <div class="mini_ranking_and_graph" id="overall_age_70_genre">
+                        <h3>70代</h3>
+                        <ol class="ol_ranking">
+                            <%= unless Enum.count(@genre_counter_by_age_70) == 0 do %>
+                                <%= for genre_count <- @genre_counter_by_age_70 do %>
+                                    <li>
+                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                    </li>
+                                <% end %>
+                            <% else %>
+                                <div>データを取得できませんでした</div>
+                            <% end %>
+                        </ol>
+                    </div>
+
+                </div>
+                <!--棒グラフ --->
+                <div class="div_rag_bar_graph">
+                    <div class="rag_bar_graph">
+                        <canvas id="bar_graph_overall_genre" class="bar_graph"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+
             <div class="male_genre">
+                <div class="ranking_title"><h3>男性に人気のジャンルのランキング</h3></div>
                 <div class="ranking_and_graph" id="male_overall_genre">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking">
-                            <h3>男性に人気のジャンルのランキング</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male do %>
@@ -445,10 +740,10 @@
                 </div>
 
                 <div class="male_age_genre" id="male_age_genre">
-                    <h2>年代別の男性に人気のジャンルランキング</h2>
+                    <div class="ranking_title"><h2>年代別の男性に人気のジャンルランキング</h2></div>
                     <div class="div_male_age_genre">
                         <div class="mini_ranking_and_graph" id="male_age_00_genre">
-                            <h3>10代未満の男性に人気のジャンルのランキング</h3>
+                            <h3>10代未満</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male_by_age_0) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male_by_age_0 do %>
@@ -462,7 +757,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="male_age_10_genre">
-                            <h3>10代の男性に人気のジャンルのランキング</h3>
+                            <h3>10代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male_by_age_10) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male_by_age_10 do %>
@@ -476,7 +771,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="male_age_20_genre">
-                            <h3>20代の男性に人気のジャンルのランキング</h3>
+                            <h3>20代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male_by_age_20) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male_by_age_20 do %>
@@ -490,7 +785,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="male_age_30_genre">
-                            <h3>30代の男性に人気のジャンルのランキング</h3>
+                            <h3>30代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male_by_age_30) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male_by_age_30 do %>
@@ -504,7 +799,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="male_age_40_genre">
-                            <h3>40代の男性に人気のジャンルのランキング</h3>
+                            <h3>40代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male_by_age_40) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male_by_age_40 do %>
@@ -518,7 +813,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="male_age_50_genre">
-                            <h3>50代の男性に人気のジャンルのランキング</h3>
+                            <h3>50代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male_by_age_50) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male_by_age_50 do %>
@@ -532,7 +827,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="male_age_60_genre">
-                            <h3>60代の男性に人気のジャンルのランキング</h3>
+                            <h3>60代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male_by_age_60) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male_by_age_60 do %>
@@ -546,7 +841,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="male_age_70_genre">
-                            <h3>70代の男性に人気のジャンルのランキング</h3>
+                            <h3>70代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male_by_age_70) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male_by_age_70 do %>
@@ -562,17 +857,19 @@
                     </div>
                 
                     <!-- 棒グラフ -->
-                    <div class="rag_bar_graph">
-                        <canvas id="bar_graph_male_genre" class="bar_graph"></canvas>
+                    <div class="div_rag_bar_graph">
+                        <div class="rag_bar_graph">
+                            <canvas id="bar_graph_male_genre" class="bar_graph"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="female_genre">
+                <div class="ranking_title"><h3>女性に人気のジャンルのランキング</h3></div>
                 <div class="ranking_and_graph" id="female_overall_genre">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking">
-                            <h3>女性に人気のジャンルのランキング</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female do %>
@@ -592,10 +889,10 @@
                 </div>
 
                 <div class="female_age_genre" id="female_age_genre">
-                    <h2>年代別の女性に人気のジャンルランキング</h2>
+                    <div class="ranking_title"><h2>年代別の女性に人気のジャンルランキング</h2></div>
                     <div class="div_female_age_genre">
                         <div class="mini_ranking_and_graph" id="female_age_00_genre">
-                            <h3>10代未満の女性に人気のジャンルのランキング</h3>
+                            <h3>10代未満</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female_by_age_0) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female_by_age_0 do %>
@@ -609,7 +906,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="female_age_10_genre">
-                            <h3>10代の女性に人気のジャンルのランキング</h3>
+                            <h3>10代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female_by_age_10) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female_by_age_10 do %>
@@ -623,7 +920,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="female_age_20_genre">
-                            <h3>20代の女性に人気のジャンルのランキング</h3>
+                            <h3>20代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female_by_age_20) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female_by_age_20 do %>
@@ -637,7 +934,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="female_age_30_genre">
-                            <h3>30代の女性に人気のジャンルのランキング</h3>
+                            <h3>30代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female_by_age_30) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female_by_age_30 do %>
@@ -651,7 +948,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="female_age_40_genre">
-                            <h3>40代の女性に人気のジャンルのランキング</h3>
+                            <h3>40代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female_by_age_40) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female_by_age_40 do %>
@@ -665,7 +962,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="female_age_50_genre">
-                            <h3>50代の女性に人気のジャンルのランキング</h3>
+                            <h3>50代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female_by_age_50) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female_by_age_50 do %>
@@ -679,7 +976,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="female_age_60_genre">
-                            <h3>60代の女性に人気のジャンルのランキング</h3>
+                            <h3>60代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female_by_age_60) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female_by_age_60 do %>
@@ -693,7 +990,7 @@
                             </ol>
                         </div>
                         <div class="mini_ranking_and_graph" id="female_age_70_genre">
-                            <h3>70代の女性に人気のジャンルのランキング</h3>
+                            <h3>70代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female_by_age_70) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female_by_age_70 do %>
@@ -707,8 +1004,11 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="rag_bar_graph">
-                        <canvas id="bar_graph_female_genre" class="bar_graph"></canvas>
+
+                    <div class="div_rag_bar_graph">
+                        <div class="rag_bar_graph">
+                            <canvas id="bar_graph_female_genre" class="bar_graph"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>

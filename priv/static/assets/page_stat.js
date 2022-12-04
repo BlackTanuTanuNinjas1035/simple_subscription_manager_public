@@ -13,44 +13,22 @@ $(function(){
         $(".ranking").removeClass("active");
         $(selected_tab).addClass("active");
     })
-
-    //olから値取る
-    // let subsc_name_list = [];
-    // let subsc_reginum_list = [];
-    // let sum = 0;  //すべての合計件数
-    // let sum_less_than = 0; //11以下の合計件数
-    // let ol_selected = document.querySelector("#aaa");
-    // console.log(ol_selected);
-    // let li_list = ol_selected.querySelectorAll("li");
-
-    // for(let i = 0; i < li_list.length; i++) {
-    //     let tmp_name = li_list[i].querySelector(".subsc_name").textContent;
-    //     let tmp_reginum = parseFloat(li_list[i].querySelector(".subsc_reginum").textContent);
-
-    //     if (i < 10) {
-    //         //10未満の処理
-    //         subsc_name_list[i] = tmp_name;
-    //         subsc_reginum_list[i] = tmp_reginum;
-    //         sum += tmp_reginum;
-    //     } else if (i == 10) {
-    //         //10のときの処理
-    //         subsc_name_list[10] = "その他";
-    //         sum += tmp_reginum;
-    //         sum_less_than += tmp_reginum;
-    //     } else {
-    //         sum += tmp_reginum;
-    //         sum_less_than += tmp_reginum;
-    //     }
-    // }
-    // subsc_reginum_list.push(sum)
-    // console.log(subsc_name_list);
-    // console.log(subsc_reginum_list);
-    // console.log(sum);
-    // console.log(sum_less_than);
-
-    //get_ranking("#aaa")
-
 })
+
+$(window).on('load resize', function(){
+    var winW = $(window).width();
+    var devW = 767;
+    if (winW <= devW) {
+    //767px以下の時の処理
+        console.log("はろー")
+        
+
+
+    } else {
+    //768pxより大きい時の処理
+        console.log("せいろー")
+    }
+});
 
 //ol_rankingのtagdataを受け取るとspanの要素を取得し、リストにして返す
 function get_ranking(ranking_and_graph_id) {

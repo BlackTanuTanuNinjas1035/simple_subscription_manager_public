@@ -10,12 +10,22 @@ header {
     display: flex;
     justify-content: space-between;
 }
+.header > a {
+    margin-left: max(20px, 3%);
+}
+/* ヘッダーのロゴの画像サイズをトリミングしてる　あとで画像自体をトリミングしたい */
+.header_logo {
+    width: 420px;
+    height: 100px;
+    object-fit: cover;
+}
 
 /* .header-image {
 } */
 
 .nav-header {
     display: flex;
+    height: 100px;
 }
 .nav-header div {
 } 
@@ -26,6 +36,12 @@ header {
 
 header a {
     text-decoration: none;
+}
+
+.header-ul{
+}
+.header-ul .mail_address {
+    display: none;
 }
 
 header ul,
@@ -149,4 +165,31 @@ header li {
     left: 18px;
     transform: translateY(-6px) rotate(45deg);
     width: 30%;
+}
+.header_left {
+    margin-left: 5%;
+}
+.header_left > a {
+    display: flex;
+}
+
+.sumaho_rogo {
+    content: "";
+    background-image: url(../images/rogotanu_touka.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100px;
+    width: 100px;
+}
+
+@media screen and (max-width: 767px){
+    .header > a {
+        display: none;
+    }
+    .sumaho_rogo {        
+    }
+    .pc_rogo {
+        display: none;
+    }
 }

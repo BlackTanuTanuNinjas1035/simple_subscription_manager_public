@@ -31,10 +31,11 @@ body{
 }
 .container > .alert-info {
     position: absolute;
+    top: 0;
 }
 .container > .alert-danger {
     position: absolute;
-    top: 1em;
+    top: 0;
 }
 
 /* スクロールバーの太さなど*/

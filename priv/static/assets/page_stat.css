@@ -14,9 +14,10 @@
 }
 .main_contents > .container > .content{
     background: #ffffff;
-    width: 75%;
+    max-width: 1500px;
+    width: 95%;
     /* height: 90%; */
-    margin: 8% auto 8%;
+    margin: 2% auto;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
@@ -32,10 +33,10 @@
 .content_top {
     /* grid-area: top; */
 }
-.content_bottom{
+.content_buttom{
     /* grid-area: bottom; */
     margin: 10px;
-    background-color: rgb(235, 235, 235);
+    /*background-color: rgb(235, 235, 235); */
     border-radius: 10px;
     overflow-y: scroll;
     display:flex;
@@ -47,12 +48,21 @@
 
 .tab_select {
     display: flex;
+    font-size: 25px;
+}
+.tab_button {
+    border-radius: 5px 5px 0 0;
+    padding: 0 10px;
 }
 .service_button {
-
+    margin-left: 20px;
+    
 }
 .genre_button {
 
+}
+.ranking {
+    border-radius: 10px 10px 0 0;
 }
 
 .ranking_service {
@@ -82,10 +92,78 @@
 .rag_ranking {
     width: auto;
     text-align: left;
+    max-width: 70%;
+    margin-left: 10%;
 }
-li:nth-child(n + 11) {
+
+/* ランキングのliの処理 */
+/* olリストの数字の位置を内側　タイトルと同じにする */
+.content li {
+    /* list-style-position: inside; */
+}
+/* 3位以内のolの数字を消す */
+.content li:nth-child(-n + 3) {
+    position: relative;
+    list-style: none;
+}
+/* ランキング全体のsubsc_name設定*/
+.content li .subsc_name {
+    font-size: clamp(30px, 2.5vw, 40px);
+    white-space: nowrap;
+    width: 100%;
+    overflow-x: scroll;
+    display: inline-block;
+}
+/* ランキング4位以下のsubsc_nameの設定 */
+.content li:nth-child(n + 4) .subsc_name {
+    font-size: clamp(20px, 2vw, 25px);
+}
+/* ランキング全体のsubsc_genre設定*/
+.content li .subsc_genre {
+    font-size: clamp(10px, 2vw, 20px);
+    display: inline-block;
+}
+/* ランキング4位以下のsubsc_genreの設定 */
+.content li:nth-child(n + 4) .subsc_genre {
+    font-size: clamp(15px, 1vw, 20px);
+}
+/* ランキングの11以下を非表示 */
+.content li:nth-child(n + 11) {
     display: none;
 }
+.content li:nth-child(1) .subsc_name{
+}
+.content li:nth-child(-n + 3) {
+}
+/* 三位以内に表示するメダルの設定 */
+.content li:nth-child(-n + 3)::before {
+    position: absolute;
+    top: 1.2vw;
+    left: -3vw;
+
+    width: 2.5vw;
+    min-width: 30px;
+    max-width: 40px;
+    height: 2.5vw;
+    min-height: 30px;
+    max-height: 40px;
+    content: "";
+    /* background-image: url(../images/medal_no1.png); */
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.content li:nth-child(1)::before {
+    background-image: url(../images/medal_no1.png);
+}
+.content li:nth-child(2)::before {
+    background-image: url(../images/medal_no2.png);
+}
+.content li:nth-child(3)::before {
+    background-image: url(../images/medal_no3.png);
+}
+
 
 
 .rag_graph {
@@ -97,22 +175,34 @@ li:nth-child(n + 11) {
 .gender_service {
     
 }
+.age_circle_graph {
+    display: flex;
+    flex-wrap: wrap;
+}
+.overall_age_service {
+
+}
 .male_service {
 }
 .male_age_service {
-    display: flex;
-    flex-wrap: wrap;
 
 }
 .female_service {
 }
 .female_age_service {
-    display: flex;
-    flex-wrap: wrap;
+
 }
 .overall_genre {
 }
 .gender_genre {
+    
+}
+.overall_age_genre {
+}
+.div_overall_age_genre {
+    display: flex;
+    flex-wrap: wrap;
+    display: none;
     
 }
 .male_genre {
@@ -158,6 +248,61 @@ li:nth-child(n + 11) {
 .active {
     display: block;
 }
+/* .ranking_service .subsc_name {
+    font-size: 20px;
+}
+.ranking_service .subsc_genre {
+    font-size: 10px;
+} */
+.ranking_service .subsc_reginum {
+    display: none;
+}
+
+.ranking_genre .subsc_genre {
+    font-size: 20px;
+}
+
 .subsc_ratio {
     display: none;
+}
+
+@media screen and (max-width: 767px){
+    .ranking_and_graph {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: unset;
+        width: 100%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+    .div_rag_ranking {
+        min-width: 100%;
+        scroll-snap-align: start;
+    } 
+    .rag_graph {
+        min-width: 100%;
+        scroll-snap-align: start;
+    }
+    .age_circle_graph {
+        flex-wrap: nowrap;
+        justify-content: unset;
+        width: 100%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+    .div_female_age_genre {
+        
+    }
+    .mini_ranking_and_graph {
+        min-width: 50%;
+        scroll-snap-align: start;
+    }
+    .div_rag_bar_graph {
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .rag_bar_graph {
+        min-width: 180%;
+    }
+
 }

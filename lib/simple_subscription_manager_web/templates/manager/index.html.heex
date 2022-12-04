@@ -1,11 +1,17 @@
 <div class="big_content">
+    <div class="scroll_snap_margin"></div><!-- スクロールスナップ用のdiv --->
     <div class="content">
-        <link phx-track-static rel="stylesheet" media="screen and (min-width:768px)" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
-        <link phx-track-static rel="stylesheet" media="screen and (max-width:769px)" href={Routes.static_path(@conn, "/assets/manager_index_sumaho.css")}/>
+        <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
+        <!-- <link phx-track-static rel="stylesheet" media="screen and (max-width:768px)" href={Routes.static_path(@conn, "/assets/manager_index_sumaho.css")}/> --->
 
         <div class="top_content">
             <div>あなたの利用しているサブスクリプションを登録しましょう!</div>
+            <!--
             <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
+            --->
+            <%= link to: Routes.manager_path(@conn, :new) do%>
+                登録
+            <% end %> 
 
             <h2>登録しているサービス</h2>
         </div>
@@ -21,14 +27,14 @@
                             <span></span>
                             <span></span>
                             <div class="subsc_option_menu">
-                                <div><a href={~w"/manager/delete/#{subscribe.id}"}>削除</a></div>
-                                <button class="change_button">更新</button>
+                                <div><a href={~w"/manager/delete/#{subscribe.id}"}><div class="trash"></div></a></div>
+                                <!-- <button class="change_button">更新</button> --->
                             </div>
                         </div>
                     </div>
                     <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
                     <div class="card_flex">
-                        <div class="subsc_payment">契約日: <%= subscribe.date_of_contract %></div>
+                        <!-- <div class="subsc_payment">契約日: <%= subscribe.date_of_contract %></div> --->
                         <div class="subsc_payment">次回支払日: <%= subscribe.date_of_payment %></div>
                         <%= if subscribe.continue == true do %>
                             <div>継続する</div>

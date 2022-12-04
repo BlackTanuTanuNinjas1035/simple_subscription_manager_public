@@ -274,11 +274,16 @@ $(function() {
     //ageだけlistとforを使って記述したい
     //すべてのサービスランキングフラグ↓
     let flag_graph_overall_service = true;
+    //年代別　人気サービスランキングフラグ
+    let flaglist_graph_overall_age_service = []; //listの添字と年代が対応している
+    let age_number = 8 //年齢別の区分の数　forで使う
+    for (let i = 0; i < age_number; i++) {
+        flaglist_graph_overall_age_service[i] = true;
+    }
     //男性のサービスランキングフラグ
     let flag_graph_male_service = true;
     //男性の年齢別サービスランキングフラグ
     let flaglist_graph_male_age_service = []; //listの添字と年代が対応している
-    let age_number = 8 //年齢別の区分の数　forで使う
     for (let i = 0; i < age_number; i++) {
         flaglist_graph_male_age_service[i] = true;
     }
@@ -299,6 +304,26 @@ $(function() {
             let chart_graph_overall_service = graphView(tmp); //オブジェクトが返ってくる　個別にoptionなど変更したいとき
         };
     });
+
+    //年代別　人気のサービスランキング
+    let chartlist_graph_overall_age_service = [];
+    let chart_id;
+    let chart_id_sub; //#つけたchart_id
+    for(let i = 0; i < age_number; i++) {
+        chart_id = "overall_age_" + i + "0_service";
+        chart_id_sub = "#" + chart_id;
+        //即時関数　(function(渡す変数)){}(受け取る変数名)
+        (function(i, chart_id, chart_id_sub, flaglist_graph_overall_age_service, chartlist_graph_overall_age_service){
+            $(chart_id_sub).on("inview", function() {
+                if(flaglist_graph_overall_age_service[i]) {
+                    flaglist_graph_overall_age_service[i] = false;
+                    chartlist_graph_overall_age_service[i] = graphView(chart_id);
+                }
+            })
+        })(i, chart_id, chart_id_sub, flaglist_graph_overall_age_service, chartlist_graph_overall_age_service);
+    }
+
+
     //すべての男性のサービスグラフランキングの描画処理
     $("#graph_male_overall_service").on("inview", function() {
         if (flag_graph_male_service) {
@@ -309,8 +334,6 @@ $(function() {
     });
     //男性年齢別サービスのグラフのインスタンスを格納するリスト
     let chartlist_graph_male_age_service = [];
-    let chart_id;
-    let chart_id_sub; //#つけたchart_id
     for(let i = 0; i < age_number; i++) {
         chart_id = "male_age_" + i + "0_service";
         chart_id_sub = "#" + chart_id;
@@ -353,13 +376,9 @@ $(function() {
     let flag_graph_overall_genre = true;
     //男性のジャンルランキングフラグ
     let flag_graph_male_genre = true;
-    //男性の年齢別のジャンルランキングフラグ
-    let flag_graph_male_age_genre = true;
 
     //女性のジャンルランキングフラグ
     let flag_graph_female_genre = true;
-    //女性の年齢別のジャンルランキングフラグ
-    let flag_graph_female_age_genre = true;
 
     $("#graph_overall_genre").on("inview", function() {
         if (flag_graph_overall_genre) {
@@ -368,6 +387,9 @@ $(function() {
             let  chart_graph_male_genre = graphView_genre(tmp); //オブジェクトが返ってくる　個別にoptionなど変更したいとき
         };
     });
+
+    //年代別　人気ジャンルランキング
+
     $("#graph_male_overall_genre").on("inview", function() {
         if (flag_graph_male_genre) {
             flag_graph_male_genre = false;
@@ -386,11 +408,18 @@ $(function() {
     });
 
     //棒グラフ
+    let flag_bar_graph_overall_genre = true;
     let flag_bar_graph_age_male_genre = true;
     let flag_bar_graph_age_female_genre = true;
 
-
-
+    $("#bar_graph_overall_genre").on("inview", function() {
+        if(flag_bar_graph_overall_genre) {
+            flag_bar_graph_overall_genre = false;
+            let tmp = "overall_age_genre";
+            let chart_bar_graph_overall_genre = graphView_age_genre(tmp);
+        }
+        
+    });
 
     $("#bar_graph_male_genre").on("inview", function() {
         if(flag_bar_graph_age_male_genre) {
@@ -408,5 +437,6 @@ $(function() {
         }
         
     });
+
 
 });
