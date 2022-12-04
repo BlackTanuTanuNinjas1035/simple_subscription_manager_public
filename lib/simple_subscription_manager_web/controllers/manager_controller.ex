@@ -4,14 +4,19 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   alias SimpleSubscriptionManager.Subscribes
   alias SimpleSubscriptionManager.Subscribes.Subscribe
   alias SimpleSubscriptionManager.Converter
+  alias SimpleSubscriptionManager.History
   alias SimpleSubscriptionManager.Subscriptions
-  alias SimpleSubscriptionManager.Subscriptions.SubscriptionNotifier
+  # alias SimpleSubscriptionManager.Subscriptions.SubscriptionNotifier
 
 
   @doc """
   Subscribeから全件取得->変更の追跡をするchagesetを取得->renderに渡してindex.htmlを表示
   """
   def index(conn, _params) do
+
+    IO.puts "AAA"
+    IO.inspect conn.assigns
+
     changeset = Subscribe.changeset(%Subscribe{}, %{})
     date_of_contract_changeset = Subscribe.changeset(%Subscribe{}, %{})
 
@@ -88,7 +93,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
       # 例: 今日=11/17 契約日=2/1 継続登録時 11/1になる 支払日を過ぎているので翌々月(12/1)で登録
       IO.puts "#{subscribe_params["date_of_contract"].day} > #{Date.utc_today().day} == #{subscribe_params["date_of_contract"].day > Date.utc_today().day}"
 
-      date_of_payment_value = Subscribes.caluclate_date_of_payment(subscribe_params)
+      date_of_payment_value = History.caluclate_date_of_payment(subscribe_params)
       IO.puts"date_of_payment_value: #{inspect date_of_payment_value}"
       Map.put(subscribe_params, "date_of_payment", date_of_payment_value)
     else
@@ -102,35 +107,36 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
     case Subscribes.register_subscribe(subscribe_params)do
       {:ok, _} ->
 
-        # 履歴に登録する
-        case Subscribes.register_history(subscribe_params) do
-          {:ok, _msg} ->
-            conn
-            |> put_flash(:info, "サブスクリプションの追加に成功しました。")
-            |> redirect(to: Routes.manager_path(conn, :index))
+        if Date.diff(subscribe_params["date_of_contract"], Date.utc_today) <= 0 do
+          # 履歴に登録する
+          case History.register_history(subscribe_params) do
+            {:ok, _msg} ->
+              conn
+              |> put_flash(:info, "サブスクリプションの追加に成功しました。")
+              |> redirect(to: Routes.manager_path(conn, :index))
 
-          # すでに登録履歴がある場合は、履歴の日付の更新をする
-          {:error, _changeset} ->
-            case Subscribes.update_history(
-              current_id,
-              subscribe_params
-            ) do
-            # case Subscribes.update_history(
-            #   current_id,
-            #   subscribe_params["subscription_id"],
-            #   Date.new!(String.to_integer(subscribe_params["date_of_contract"]["year"]), String.to_integer(subscribe_params["date_of_contract"]["month"]), String.to_integer(subscribe_params["date_of_contract"]["day"])),
-            #   Date.new!(String.to_integer(subscribe_params["date_of_payment"]["year"]), String.to_integer(subscribe_params["date_of_payment"]["month"]), String.to_integer(subscribe_params["date_of_payment"]["day"]))
-            # ) do
-              {:ok, msg} ->
-                conn
-                |> put_flash(:info, msg)
-                |> redirect(to: Routes.manager_path(conn, :index))
-              {:error, msg} ->
-                conn
-                |> put_flash(:info, msg)
-                |> redirect(to: Routes.manager_path(conn, :index))
-            end
+            # すでに登録履歴がある場合は、履歴の日付の更新をする
+            {:error, _changeset} ->
+              case History.update_history(
+                current_id,
+                subscribe_params
+              ) do
+                {:ok, msg} ->
+                  conn
+                  |> put_flash(:info, msg)
+                  |> redirect(to: Routes.manager_path(conn, :index))
+                {:error, msg} ->
+                  conn
+                  |> put_flash(:error, msg)
+                  |> redirect(to: Routes.manager_path(conn, :index))
+              end
+          end
+        else
+          conn
+          |> put_flash(:info, "サブスクリプションの追加に成功しました。")
+          |> redirect(to: Routes.manager_path(conn, :index))
         end
+
 
       {:error, %Ecto.Changeset{} = changeset} ->
         # 各ジャンルのサービスのクエリのリストを受け取る
@@ -175,7 +181,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         |> redirect(to: Routes.manager_path(conn, :index))
       {:error, msg} ->
         conn
-        |> put_flash(:info, msg)
+        |> put_flash(:error, msg)
         |> redirect(to: Routes.manager_path(conn, :index))
     end
 
@@ -201,23 +207,9 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
         |> redirect(to: Routes.manager_path(conn, :index))
       {:error, msg} ->
         conn
-        |> put_flash(:info, msg)
+        |> put_flash(:error, msg)
         |> redirect(to: Routes.manager_path(conn, :index))
     end
   end
 
-  def form(conn, _params) do
-    render(conn, "form.html")
-  end
-
-  def send(conn, params) do
-    IO.puts "conn"
-    IO.inspect conn
-    IO.puts "params"
-    IO.inspect params
-    current_account = conn.assigns.current_account
-    SubscriptionNotifier.deliver_additional_service(current_account.name, current_account.email,  Access.get(params, "service"),  Access.get(params, "plan"))
-    conn
-    |> redirect(to: Routes.manager_path(conn, :index))
-  end
 end

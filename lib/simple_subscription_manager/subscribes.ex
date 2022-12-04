@@ -181,45 +181,6 @@ defmodule SimpleSubscriptionManager.Subscribes do
 
   end
 
-  ## History: 登録したサービスの履歴
-
-  @doc """
-  属性の入力が正しいかsubscribe検査->登録する
-  """
-  def register_history(attrs) do
-    %History{}
-    |> History.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  履歴の一覧を表示する
-  """
-  def list_history() do
-    Repo.all(History)
-    |> Repo.preload([:account_alias, :subscription_alias, subscription_alias: [:genre_alias]])
-  end
-
-  @doc """
-  履歴の契約日と支払日を更新する
-  """
-  def update_history(account_id, subscribe_params) do
-    record = Repo.get_by(History, account_id: account_id, subscription_id: subscribe_params["subscription_id"])
-    record = Ecto.Changeset.change(record, date_of_contract: subscribe_params["date_of_contract"], date_of_payment: subscribe_params["date_of_payment"])
-    case Repo.update record do
-      {:ok, _struct}       -> {:ok, "履歴の契約日と支払日の更新に成功しました"}
-      {:error, _changeset} -> {:error, "履歴の契約日と支払日の更新に失敗しました"}
-    end
-  end
-  # def update_history(account_id, subscription_id, date_of_contract, date_of_payment) do
-  #   record = Repo.get_by(History, account_id: account_id, subscription_id: subscription_id)
-  #   record = Ecto.Changeset.change(record, date_of_contract: date_of_contract, date_of_payment: date_of_payment)
-  #   case Repo.update record do
-  #     {:ok, _struct}       -> {:ok, "履歴の契約日と支払日の更新に成功しました"}
-  #     {:error, _changeset} -> {:error, "履歴の契約日と支払日の更新に失敗しました"}
-  #   end
-  # end
-
   @doc """
   スケジューラ用。
   """
@@ -231,20 +192,4 @@ defmodule SimpleSubscriptionManager.Subscribes do
     end
   end
 
-  @doc """
-  支払日を計算する
-  """
-  def caluclate_date_of_payment(subscribe_params) do
-    if subscribe_params["date_of_contract"].day > Date.utc_today().day do
-      %{"year" => subscribe_params["date_of_contract"].year, "month" => Date.utc_today().month, "day" => subscribe_params["date_of_contract"].day}
-    else
-      # if Integer.to_string(Date.utc_today().month + 1) != 13 do
-      if Date.utc_today().month + 1 != 13 do
-        %{"year" => subscribe_params["date_of_contract"].year, "month" => Date.utc_today().month + 1, "day" => subscribe_params["date_of_contract"].day}
-      else
-        %{"year" => subscribe_params["date_of_contract"].year + 1, "month" => 1, "day" => subscribe_params["date_of_contract"]["day"]}
-      end
-    end
-
-  end
 end

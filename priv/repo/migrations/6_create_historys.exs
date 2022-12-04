@@ -15,7 +15,7 @@ defmodule SimpleSubscriptionManager.Repo.Migrations.CreateHistorys do
       timestamps()
     end
 
-    # これらはユニーク制約となる
-    create unique_index(:historys, [:account_id, :subscription_id])
+    # 3ヶ月までの履歴を取るので、ユニーク制約とはならない
+    # create unique_index(:historys, [:account_id, :subscription_id])
   end
 end

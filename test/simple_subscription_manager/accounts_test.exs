@@ -53,18 +53,18 @@ defmodule SimpleSubscriptionManager.AccountsTest do
       {:error, changeset} = Accounts.register_account(%{})
 
       assert %{
-               password: ["can't be blank"],
-               email: ["can't be blank"]
-             } = errors_on(changeset)
+                password: ["can't be blank"],
+                email: ["can't be blank"]
+              } = errors_on(changeset)
     end
 
     test "validates email and password when given" do
       {:error, changeset} = Accounts.register_account(%{email: "not valid", password: "not valid"})
 
       assert %{
-               email: ["must have the @ sign and no spaces"],
-               password: ["should be at least 12 character(s)"]
-             } = errors_on(changeset)
+                email: ["must have the @ sign and no spaces"],
+                password: ["should be at least 12 character(s)"]
+              } = errors_on(changeset)
     end
 
     test "validates maximum values for email and password for security" do
@@ -267,9 +267,9 @@ defmodule SimpleSubscriptionManager.AccountsTest do
         })
 
       assert %{
-               password: ["should be at least 12 character(s)"],
-               password_confirmation: ["does not match password"]
-             } = errors_on(changeset)
+                password: ["should be at least 12 character(s)"],
+                password_confirmation: ["does not match password"]
+              } = errors_on(changeset)
     end
 
     test "validates maximum values for password for security", %{account: account} do
@@ -476,9 +476,9 @@ defmodule SimpleSubscriptionManager.AccountsTest do
         })
 
       assert %{
-               password: ["should be at least 12 character(s)"],
-               password_confirmation: ["does not match password"]
-             } = errors_on(changeset)
+                password: ["should be at least 12 character(s)"],
+                password_confirmation: ["does not match password"]
+              } = errors_on(changeset)
     end
 
     test "validates maximum values for password for security", %{account: account} do

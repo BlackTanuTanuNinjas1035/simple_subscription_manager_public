@@ -112,7 +112,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
   def password_changeset(account, attrs, opts \\ []) do
     account
     |> cast(attrs, [:password])
-    |> validate_confirmation(:password, message: "does not match password")
+    |> validate_confirmation(:password, message: "パスワードがマッチしませんでした")
     |> validate_password(opts)
   end
 
