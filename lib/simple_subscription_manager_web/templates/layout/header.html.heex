@@ -11,7 +11,10 @@
             <% end %> 
         <% else %>
             <%= link to: Routes.manager_path(@conn, :index) do%>
-                <img src={Routes.static_path(@conn, "/images/mozi1.png")} alt="Simple Subscription Manager Logo"/>
+            <div class="sumaho_rogo"></div>
+                <div class="pc_rogo">
+                    <img src={Routes.static_path(@conn, "/images/mozi1.png")} class="header_logo" alt="Simple Subscription Manager Logo"/>
+                </div>
             <% end %>
         <% end %>
     </div>
