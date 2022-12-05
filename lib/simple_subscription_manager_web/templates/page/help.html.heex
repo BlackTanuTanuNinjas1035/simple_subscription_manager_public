@@ -7,7 +7,38 @@
 5.登録しましたら先程の画面にご利用のサービスの一覧と月にかかるサブスクリプションサービスの合計金額が表示されます
 6.気軽にご利用ください
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/tmp_content.css")}/>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/help.css")}/>
 
 <div class="content">
+    <div>
+
+            <!-- inde_list =  [{"はじまり", talk_list}, ...] -->
+            <%= for index <- @index_list do %>
+                <!-- はじめにとか -->
+                <h3><%= elem index, 0 %></h3>
+
+                    <!-- 本文 -->
+                    <%= for talk <- elem index, 1 do %>
+                        <div class="flex">
+                            <%= if talk.is_left do%>
+                                <div class="left">
+                                    <figure class="image"><img src={"/assets/images/#{talk.image}.png"} alt=""></figure>
+                                </div>
+                                <div class="right">
+                                    <p class="text"><%= talk.text %></p>
+                                </div>
+                            <% else %>
+                                <div class="left">
+                                    <p class="text"><%= talk.text %></p>
+                                </div>
+                                <div class="right">
+                                    <figure class="image"><img src={"/assets/images/#{talk.image}.png"} alt=""></figure>
+                                </div>
+                            <% end%>
+                        </div>
+                    <% end %>
+
+            <% end %>
+        </div>
 
 </div>

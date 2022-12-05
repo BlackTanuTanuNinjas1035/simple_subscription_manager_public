@@ -1,7 +1,7 @@
 defmodule SimpleSubscriptionManagerWeb.PageController do
   use SimpleSubscriptionManagerWeb, :controller
 
-
+  alias SimpleSubscriptionManager.Talks
 
   def index(conn, _params) do
     IO.inspect(conn)
@@ -9,7 +9,8 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
   end
 
   def help(conn, _params) do
-    render(conn, "help.html")
+    index_1 = {"はじめに", Talks.get_talk_list(0)}
+    render(conn, "help.html", index_list: [index_1])
   end
 
   def stat(conn, _params) do

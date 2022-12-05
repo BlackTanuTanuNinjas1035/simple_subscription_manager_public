@@ -1,5 +1,5 @@
-defmodule SimpleSubscriptionManager.History do
-  alias SimpleSubscriptionManager.Subscribes.History
+defmodule SimpleSubscriptionManager.Historys do
+  alias SimpleSubscriptionManager.Historys.History
   alias SimpleSubscriptionManager.Repo
   alias SimpleSubscriptionManager.Converter
 
@@ -24,7 +24,7 @@ defmodule SimpleSubscriptionManager.History do
     |> where(account_id: ^account_id)
     |> Repo.all
     |> Repo.preload([:account_alias, :subscription_alias, subscription_alias: [:genre_alias]])
-    |> Enum.filter(fn record -> today_month - record.date_of_payment.month == month end)
+    |> Enum.filter(fn record -> today_month - record.inserted_at.month == month end)
   end
 
   # %{ "1" => [%History{}, ...] }
