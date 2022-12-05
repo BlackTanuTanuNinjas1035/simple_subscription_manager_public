@@ -1,0 +1,32 @@
+.main_contents > .container{
+    width: 100%;
+    height: 100%;
+    /*display :flex; */
+    flex-direction: column;
+    justify-content: center;
+}
+.container > .big_content {
+    height: 100%;
+    /* display :flex; */
+    flex-direction: column;
+    justify-content: center;
+}
+.middle_content {
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width:fit-content;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+.graph_content {
+    width: 1000px;
+    height: 300px;
+}
+.history_content {
+    width: 1000px;
+}
+.div_line_graph {
+    width: 100%;
+    height: 100%;
+}
