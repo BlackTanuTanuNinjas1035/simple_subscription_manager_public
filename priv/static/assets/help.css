@@ -1,0 +1,15 @@
+.flex {
+    /* 横並び */
+    display: flex;
+}
+
+.flex .image {
+    /* サイズを指定 */
+    width: 100px;
+    height: 100px;
+    /* position: absolute; */
+}
+
+.text {
+    width: 100px;
+}

@@ -1,4 +1,4 @@
-defmodule SimpleSubscriptionManager.Subscribes.History do
+defmodule SimpleSubscriptionManager.Historys.History do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -16,6 +16,5 @@ defmodule SimpleSubscriptionManager.Subscribes.History do
     history
     |> cast(attrs, [:account_id, :subscription_id, :date_of_contract, :continue, :date_of_payment])
     |> validate_required([:account_id, :subscription_id, :date_of_contract, :continue])
-    |> unsafe_validate_unique([:account_id, :subscription_id], SimpleSubscriptionManager.Repo)
   end
 end
