@@ -4,7 +4,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   alias SimpleSubscriptionManager.Subscribes
   alias SimpleSubscriptionManager.Subscribes.Subscribe
   alias SimpleSubscriptionManager.Converter
-  alias SimpleSubscriptionManager.History
+  alias SimpleSubscriptionManager.Historys
   alias SimpleSubscriptionManager.Subscriptions
   # alias SimpleSubscriptionManager.Subscriptions.SubscriptionNotifier
 
@@ -93,7 +93,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
       # 例: 今日=11/17 契約日=2/1 継続登録時 11/1になる 支払日を過ぎているので翌々月(12/1)で登録
       IO.puts "#{subscribe_params["date_of_contract"].day} > #{Date.utc_today().day} == #{subscribe_params["date_of_contract"].day > Date.utc_today().day}"
 
-      date_of_payment_value = History.caluclate_date_of_payment(subscribe_params)
+      date_of_payment_value = Historys.caluclate_date_of_payment(subscribe_params)
       IO.puts"date_of_payment_value: #{inspect date_of_payment_value}"
       Map.put(subscribe_params, "date_of_payment", date_of_payment_value)
     else
@@ -109,7 +109,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
         if Date.diff(subscribe_params["date_of_contract"], Date.utc_today) <= 0 do
           # 履歴に登録する
-          case History.register_history(subscribe_params) do
+          case Historys.register_history(subscribe_params) do
             {:ok, _msg} ->
               conn
               |> put_flash(:info, "サブスクリプションの追加に成功しました。")
@@ -117,7 +117,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
             # すでに登録履歴がある場合は、履歴の日付の更新をする
             {:error, _changeset} ->
-              case History.update_history(
+              case Historys.update_history(
                 current_id,
                 subscribe_params
               ) do
