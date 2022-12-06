@@ -2,7 +2,10 @@
 <div class="big_content">
 
     <div class="middle_content">
-        <h1>履歴</h1>
+        <div class="top_content">
+            <div class="title">履歴</div>
+            <%= link "戻る", to: Routes.manager_path(@conn, :index) %>
+        </div>
         <div class="graph_content">
             <div class="div_line_graph">
                 <canvas id="line_graph" class="graph"></canvas>
@@ -10,297 +13,298 @@
         </div>
 
         <div class="history_content">
-            <div>
-                <div>1ヶ月前: つまり<%= 1 |> previous_month()  %></div>
-                <%= unless Enum.count(@history_month_1) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_1 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+            <div class="history_flame">
+                    <div class="data" id="before_1">
+                        <div>1ヶ月前: つまり<%= 1 |> previous_month()  %></div>
+                        <%= unless Enum.count(@history_month_1) == 0 do %>
+                            <ul>
+                            <%= for history <- @history_month_1 do %>
+                                <li>
+                                <%= history.subscription_alias.name %>
+                                <%= history.subscription_alias.genre_alias.name %>
+                                <%= history.subscription_alias.price %>
+                                <%= history.continue %>
+                                <%= history.date_of_contract %>
+                                <%= history.date_of_payment %>
+                                <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                    <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                    <%= submit("削除") %>
+                                <% end %>
+                                </li>
+                            <% end %>
+                            </ul>
+                        <% else %>
+                            <div>データがありません</div>
                         <% end %>
-                        </li>
-                    <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                    </div>
 
-            <div>
-                <div>2ヶ月前: つまり<%= previous_month(2)  %></div>
-                <%= unless Enum.count(@history_month_2) == 0  do%>
-                    <ul>
-                    <%= for history <- @history_month_2 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_2">
+                    <div>2ヶ月前: つまり<%= previous_month(2)  %></div>
+                    <%= unless Enum.count(@history_month_2) == 0  do%>
+                        <ul>
+                        <%= for history <- @history_month_2 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>3ヶ月前: つまり<%= previous_month(3)  %></div>
-                <%= unless Enum.count(@history_month_3) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_3 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_3">
+                    <div>3ヶ月前: つまり<%= previous_month(3)  %></div>
+                    <%= unless Enum.count(@history_month_3) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_3 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>4ヶ月前: つまり<%= previous_month(4)  %></div>
-                <%= unless Enum.count(@history_month_4) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_4 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_4">
+                    <div>4ヶ月前: つまり<%= previous_month(4)  %></div>
+                    <%= unless Enum.count(@history_month_4) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_4 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>5ヶ月前: つまり<%= previous_month(5)  %></div>
-                <%= unless Enum.count(@history_month_5) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_5 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_5">
+                    <div>5ヶ月前: つまり<%= previous_month(5)  %></div>
+                    <%= unless Enum.count(@history_month_5) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_5 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>6ヶ月前: つまり<%= previous_month(6)  %></div>
-                <%= unless Enum.count(@history_month_6) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_6 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_6">
+                    <div>6ヶ月前: つまり<%= previous_month(6)  %></div>
+                    <%= unless Enum.count(@history_month_6) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_6 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>7ヶ月前: つまり<%= previous_month(7)  %></div>
-                <%= unless Enum.count(@history_month_7) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_7 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_7">
+                    <div>7ヶ月前: つまり<%= previous_month(7)  %></div>
+                    <%= unless Enum.count(@history_month_7) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_7 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>8ヶ月前: つまり<%= previous_month(8)  %></div>
-                <%= unless Enum.count(@history_month_8) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_8 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_8">
+                    <div>8ヶ月前: つまり<%= previous_month(8)  %></div>
+                    <%= unless Enum.count(@history_month_8) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_8 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>9ヶ月前: つまり<%= previous_month(9)  %></div>
-                <%= unless Enum.count(@history_month_9) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_9 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_9">
+                    <div>9ヶ月前: つまり<%= previous_month(9)  %></div>
+                    <%= unless Enum.count(@history_month_9) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_9 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>10ヶ月前: つまり<%= previous_month(10)  %></div>
-                <%= unless Enum.count(@history_month_10) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_10 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_10">
+                    <div>10ヶ月前: つまり<%= previous_month(10)  %></div>
+                    <%= unless Enum.count(@history_month_10) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_10 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>11ヶ月前: つまり<%= previous_month(11)  %></div>
-                <%= unless Enum.count(@history_month_11) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_11 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_11">
+                    <div>11ヶ月前: つまり<%= previous_month(11)  %></div>
+                    <%= unless Enum.count(@history_month_11) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_11 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
-            </div>
+                </div>
 
-            <div>
-                <div>12ヶ月前: つまり<%= previous_month(12)  %></div>
-                <%= unless Enum.count(@history_month_12) == 0 do %>
-                    <ul>
-                    <%= for history <- @history_month_12 do %>
-                        <li>
-                        <%= history.subscription_alias.name %>
-                        <%= history.subscription_alias.genre_alias.name %>
-                        <%= history.subscription_alias.price %>
-                        <%= history.continue %>
-                        <%= history.date_of_contract %>
-                        <%= history.date_of_payment %>
-                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                            <%= submit("削除") %>
+                <div class="data" id="before_12">
+                    <div>12ヶ月前: つまり<%= previous_month(12)  %></div>
+                    <%= unless Enum.count(@history_month_12) == 0 do %>
+                        <ul>
+                        <%= for history <- @history_month_12 do %>
+                            <li>
+                            <%= history.subscription_alias.name %>
+                            <%= history.subscription_alias.genre_alias.name %>
+                            <%= history.subscription_alias.price %>
+                            <%= history.continue %>
+                            <%= history.date_of_contract %>
+                            <%= history.date_of_payment %>
+                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                <%= submit("削除") %>
+                            <% end %>
+                            </li>
                         <% end %>
-                        </li>
+                        </ul>
+                    <% else %>
+                        <div>データがありません</div>
                     <% end %>
-                    </ul>
-                <% else %>
-                    <div>データがありません</div>
-                <% end %>
+                </div>
+
             </div>
-
-            <%= link "戻る", to: Routes.manager_path(@conn, :index) %>
-
         </div>
+
     </div>
 </div>
 
