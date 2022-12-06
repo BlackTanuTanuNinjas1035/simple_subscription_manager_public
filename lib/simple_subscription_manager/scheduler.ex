@@ -1,7 +1,7 @@
 defmodule SimpleSubscriptionManager.Scheduler do
   use Quantum, otp_app: :simple_subscription_manager
 
-  alias SimpleSubscriptionManager.History
+  alias SimpleSubscriptionManager.Historys
   alias SimpleSubscriptionManager.Historys.History
   alias SimpleSubscriptionManager.Subscribes
   alias SimpleSubscriptionManager.Subscribes.SubscribeNotifier
