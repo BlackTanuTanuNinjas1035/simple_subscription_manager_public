@@ -23,10 +23,29 @@
 }
 .top_content {
     display: flex;
+    justify-content: space-between;
     height: 5%;
+    padding: 3px;
+}
+.title_left {
+    height: 100%;
+    width: 30px;
+    margin-left: 2%;
+    background-image: url(../images/return.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.title_left a {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 .title {
-    font-size: large;
+    font-size: clamp(23px, 2vw, 25px);
+}
+.title_right {
+    margin-right: 2%;
 }
 .graph_content {
     width: 100%;
@@ -48,14 +67,157 @@
     height: 95%;
     display: flex;
     flex-wrap: nowrap;
-    overflow: scroll;
-    flex-direction:row-reverse
-}
-.data_flame {
-    overflow: scroll;
+    overflow-x: scroll;
+    flex-direction:row-reverse;
+    scroll-snap-type: x mandatory;
 }
 .data {
+    scroll-snap-align: start;
     min-width: 100%;
+    height: 99%;
+    display: flex;
+    flex-direction: column;
 }
-#before_1 {
+.data_month {
+    text-align: center;
+    height: 10%;
+    font-size: 20px;
+    vertical-align:auto;
+    display: flex;
+    justify-content: space-between;
+}
+.data_month span {
+    width: 20%;
+    display: inline-block;
+    padding: 5px;
+}
+.left_data_month {
+    white-space: nowrap;
+}
+.right_data_month {
+
+}
+.span_month {
+    width: auto;
+    white-space: nowrap;
+}
+.span_month::after {
+    content: "月";
+}
+.card_flame {
+    height: 90%;
+}
+.ul_card {
+    list-style: none;
+    height: 100%;
+    overflow: scroll;
+    /* display: flex;
+    flex-direction: column;
+    flex-grow: 1; */
+}
+.data_card {
+    margin: 5px;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 10px;
+    height: max(15%, 30px);
+    max-height: 50px;
+    background-color: rgb(191, 255, 108);
+    display: flex;
+    justify-content: space-between;
+}
+.card_left {
+    width: 80%;
+    height: 90%;
+    margin-left: 20px;
+    display: flex;
+    margin: auto;
+}
+.card_genre {
+    margin-right: 2%;
+}
+.icon {
+    width: 30px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.icon_video {
+    background-image: url(../images/icon_video.png);
+}
+.icon_music {
+    background-image: url(../images/icon_music.png);
+}
+.icon_car {
+    background-image: url(../images/icon_car.png);
+}
+.icon_food {
+    background-image: url(../images/icon_food.png);
+}
+.icon_software {
+    background-image: url(../images/icon_software.png);
+}
+.icon_furniture {
+    background-image: url(../images/icon_furniture.png);
+}
+.icon_lesson {
+    background-image: url(../images/icon_lesson.png);
+}
+.icon_book {
+    background-image: url(../images/icon_book.png);
+}
+.icon_other {
+    background-image: url(../images/icon_other.png);
+}
+.card_name {
+    flex-grow: 1;
+    margin:auto;
+    overflow: scroll;
+    white-space: nowrap;
+    font-size: clamp(18px, 3vw, 28px);
+}
+.card_right {
+    width: 20%;
+    height: 90%;
+    display: flex;
+    justify-content: right;
+    margin:auto;
+}
+.card_price {
+    font-size: clamp(20px, 3vw, 28px);
+    flex-grow: 1;
+    white-space: nowrap;
+    margin:auto;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    width: 25px;
+    height: 100%;
+    background-image: url(../images/delete.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align : top;
+}
+/* button img {
+    display: block;
+    background-image: url(../images/delete.png);
+    background-size: contain;
+} */
+
+@media screen and (max-width: 767px){
+    .card_left {
+        width: 68%;
+    }
+    .card_right {
+        margin-left: 1%;
+        width: 32%;
+    }
 }

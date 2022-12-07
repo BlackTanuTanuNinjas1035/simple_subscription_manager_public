@@ -3,8 +3,9 @@
 
     <div class="middle_content">
         <div class="top_content">
+            <div class="title_left"><%= link "", to: Routes.manager_path(@conn, :index) %></div>
             <div class="title">履歴</div>
-            <%= link "戻る", to: Routes.manager_path(@conn, :index) %>
+            <div class="title_right"></div>
         </div>
         <div class="graph_content">
             <div class="div_line_graph">
@@ -14,22 +15,54 @@
 
         <div class="history_content">
             <div class="history_flame">
-                    <div class="data" id="before_1">
-                        <div>1ヶ月前: つまり<%= 1 |> previous_month()  %></div>
+                <div class="data" id="before_1">
+                    <div class="data_month"><span class="left_data_month">1ヶ月前</span><span class="right_data_month"><span class="span_month"><%= 1 |> previous_month()  %></span></span><span></span></div>
+                    <div class="card_flame">
                         <%= unless Enum.count(@history_month_1) == 0 do %>
-                            <ul>
+                            <ul class="ul_card">
                             <%= for history <- @history_month_1 do %>
-                                <li>
-                                <%= history.subscription_alias.name %>
-                                <%= history.subscription_alias.genre_alias.name %>
-                                <%= history.subscription_alias.price %>
-                                <%= history.continue %>
-                                <%= history.date_of_contract %>
-                                <%= history.date_of_payment %>
-                                <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                    <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                    <%= submit("削除") %>
-                                <% end %>
+                                <li class="data_card">
+                                    <div class="card_left">
+                                        <div class="card_genre">
+                                            <%= case history.subscription_alias.genre_alias.name do %>
+                                                <%= "動画配信のサービス" -> %>
+                                                    <div class="icon icon_video"></div>
+                                                <%= "音楽配信のサービス" -> %>
+                                                    <div class="icon icon_music"></div>
+                                                <%= "カーレンタルのサービス" -> %>
+                                                    <div class="icon icon_car"></div>
+                                                <%= "食品のサービス" -> %>
+                                                    <div class="icon icon_food"></div>
+                                                <%= "ソフトウェア提供のサービス" -> %>
+                                                    <div class="icon icon_software"></div>
+                                                <%= "家具・家電のサービス" -> %>
+                                                    <div class="icon icon_furniture"></div>
+                                                <%= "習い事や趣味のサービス" -> %>
+                                                    <div class="icon icon_lesson"></div>
+                                                <%= "本のサービス" -> %>
+                                                    <div class="icon icon_book"></div>
+                                                <%= _ -> %>
+                                                    <div class="icon icon_other"></div>
+                                            <% end %>
+                                        </div>
+                                        <div class="card_name">
+                                            <%= history.subscription_alias.name %>
+                                        </div>
+                                    </div>
+                                    <div class="card_right">
+                                        <div class="card_price">
+                                            ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                        </div>
+                                        <!--
+                                        <%= history.continue %>
+                                        <%= history.date_of_contract %>
+                                        <%= history.date_of_payment %>
+                                        --->
+                                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                            <%= submit("") %>
+                                        <% end %>
+                                    </div>
                                 </li>
                             <% end %>
                             </ul>
@@ -37,23 +70,53 @@
                             <div>データがありません</div>
                         <% end %>
                     </div>
+                </div>
 
                 <div class="data" id="before_2">
-                    <div>2ヶ月前: つまり<%= previous_month(2)  %></div>
+                    <div class="data_month"><span class="left_data_month">2ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(2)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_2) == 0  do%>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_2 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
-                            <% end %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                                        <%= case history.subscription_alias.genre_alias.name do %>
+                                            <%= "動画配信のサービス" -> %>
+                                                <div class="icon icon_video"></div>
+                                            <%= "音楽配信のサービス" -> %>
+                                                <div class="icon icon_music"></div>
+                                            <%= "カーレンタルのサービス" -> %>
+                                                <div class="icon icon_car"></div>
+                                            <%= "食品のサービス" -> %>
+                                                <div class="icon icon_food"></div>
+                                            <%= "ソフトウェア提供のサービス" -> %>
+                                                <div class="icon icon_software"></div>
+                                            <%= "家具・家電のサービス" -> %>
+                                                <div class="icon icon_furniture"></div>
+                                            <%= "習い事や趣味のサービス" -> %>
+                                                <div class="icon icon_lesson"></div>
+                                            <%= "本のサービス" -> %>
+                                                <div class="icon icon_book"></div>
+                                            <%= _ -> %>
+                                                <div class="icon icon_other"></div>
+                                        <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="card_price">
+                                        ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                    </div>
+                                    <!-- <%= history.continue %>
+                                    <%= history.date_of_contract %>
+                                    <%= history.date_of_payment %> -->
+                                    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                        <%= submit("") %>
+                                    <% end %>
+                                </div>
                             </li>
                         <% end %>
                         </ul>
@@ -63,21 +126,52 @@
                 </div>
 
                 <div class="data" id="before_3">
-                    <div>3ヶ月前: つまり<%= previous_month(3)  %></div>
+                    <div class="data_month"><span class="left_data_month">3ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(3)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_3) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_3 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                            <%= case history.subscription_alias.genre_alias.name do %>
+                                <%= "動画配信のサービス" -> %>
+                                    <div class="icon icon_video"></div>
+                                <%= "音楽配信のサービス" -> %>
+                                    <div class="icon icon_music"></div>
+                                <%= "カーレンタルのサービス" -> %>
+                                    <div class="icon icon_car"></div>
+                                <%= "食品のサービス" -> %>
+                                    <div class="icon icon_food"></div>
+                                <%= "ソフトウェア提供のサービス" -> %>
+                                    <div class="icon icon_software"></div>
+                                <%= "家具・家電のサービス" -> %>
+                                    <div class="icon icon_furniture"></div>
+                                <%= "習い事や趣味のサービス" -> %>
+                                    <div class="icon icon_lesson"></div>
+                                <%= "本のサービス" -> %>
+                                    <div class="icon icon_book"></div>
+                                <%= _ -> %>
+                                    <div class="icon icon_other"></div>
+                            <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                    </div>
+                                    <div class="card_right">
+                                        <div class="card_price">
+                            ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                        </div>
+                                        <!--
                             <%= history.continue %>
                             <%= history.date_of_contract %>
                             <%= history.date_of_payment %>
+                            --->
                             <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
                                 <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
+                                <%= submit("") %>
                             <% end %>
+                                        </div>
                             </li>
                         <% end %>
                         </ul>
@@ -87,21 +181,52 @@
                 </div>
 
                 <div class="data" id="before_4">
-                    <div>4ヶ月前: つまり<%= previous_month(4)  %></div>
+                    <div class="data_month"><span class="left_data_month">4ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(4)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_4) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_4 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                            <%= case history.subscription_alias.genre_alias.name do %>
+                                <%= "動画配信のサービス" -> %>
+                                    <div class="icon icon_video"></div>
+                                <%= "音楽配信のサービス" -> %>
+                                    <div class="icon icon_music"></div>
+                                <%= "カーレンタルのサービス" -> %>
+                                    <div class="icon icon_car"></div>
+                                <%= "食品のサービス" -> %>
+                                    <div class="icon icon_food"></div>
+                                <%= "ソフトウェア提供のサービス" -> %>
+                                    <div class="icon icon_software"></div>
+                                <%= "家具・家電のサービス" -> %>
+                                    <div class="icon icon_furniture"></div>
+                                <%= "習い事や趣味のサービス" -> %>
+                                    <div class="icon icon_lesson"></div>
+                                <%= "本のサービス" -> %>
+                                    <div class="icon icon_book"></div>
+                                <%= _ -> %>
+                                    <div class="icon icon_other"></div>
+                            <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                    </div>
+                                    <div class="card_right">
+                                        <div class="card_price">
+                            ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                        </div>
+                                        <!--
                             <%= history.continue %>
                             <%= history.date_of_contract %>
                             <%= history.date_of_payment %>
+                            --->
                             <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
                                 <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
+                                <%= submit("") %>
                             <% end %>
+                                        </div>
                             </li>
                         <% end %>
                         </ul>
@@ -111,21 +236,52 @@
                 </div>
 
                 <div class="data" id="before_5">
-                    <div>5ヶ月前: つまり<%= previous_month(5)  %></div>
+                    <div class="data_month"><span class="left_data_month">5ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(5)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_5) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_5 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                            <%= case history.subscription_alias.genre_alias.name do %>
+                                <%= "動画配信のサービス" -> %>
+                                    <div class="icon icon_video"></div>
+                                <%= "音楽配信のサービス" -> %>
+                                    <div class="icon icon_music"></div>
+                                <%= "カーレンタルのサービス" -> %>
+                                    <div class="icon icon_car"></div>
+                                <%= "食品のサービス" -> %>
+                                    <div class="icon icon_food"></div>
+                                <%= "ソフトウェア提供のサービス" -> %>
+                                    <div class="icon icon_software"></div>
+                                <%= "家具・家電のサービス" -> %>
+                                    <div class="icon icon_furniture"></div>
+                                <%= "習い事や趣味のサービス" -> %>
+                                    <div class="icon icon_lesson"></div>
+                                <%= "本のサービス" -> %>
+                                    <div class="icon icon_book"></div>
+                                <%= _ -> %>
+                                    <div class="icon icon_other"></div>
+                                <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                    </div>
+                                    <div class="card_right">
+                                        <div class="card_price">
+                            ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                        </div>
+                                        <!--
                             <%= history.continue %>
                             <%= history.date_of_contract %>
                             <%= history.date_of_payment %>
+                            --->
                             <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
                                 <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
+                                <%= submit("") %>
                             <% end %>
+                                        </div>
                             </li>
                         <% end %>
                         </ul>
@@ -135,21 +291,52 @@
                 </div>
 
                 <div class="data" id="before_6">
-                    <div>6ヶ月前: つまり<%= previous_month(6)  %></div>
+                    <div class="data_month"><span class="left_data_month">6ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(6)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_6) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_6 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
-                            <% end %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                                        <%= case history.subscription_alias.genre_alias.name do %>
+                                            <%= "動画配信のサービス" -> %>
+                                                <div class="icon icon_video"></div>
+                                            <%= "音楽配信のサービス" -> %>
+                                                <div class="icon icon_music"></div>
+                                            <%= "カーレンタルのサービス" -> %>
+                                                <div class="icon icon_car"></div>
+                                            <%= "食品のサービス" -> %>
+                                                <div class="icon icon_food"></div>
+                                            <%= "ソフトウェア提供のサービス" -> %>
+                                                <div class="icon icon_software"></div>
+                                            <%= "家具・家電のサービス" -> %>
+                                                <div class="icon icon_furniture"></div>
+                                            <%= "習い事や趣味のサービス" -> %>
+                                                <div class="icon icon_lesson"></div>
+                                            <%= "本のサービス" -> %>
+                                                <div class="icon icon_book"></div>
+                                            <%= _ -> %>
+                                                <div class="icon icon_other"></div>
+                                        <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="card_price">
+                                        ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                    </div>
+                                    <!--
+                                    <%= history.continue %>
+                                    <%= history.date_of_contract %>
+                                    <%= history.date_of_payment %>
+                                    --->
+                                    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                        <%= submit("") %>
+                                    <% end %>
+                                </div>
                             </li>
                         <% end %>
                         </ul>
@@ -159,21 +346,52 @@
                 </div>
 
                 <div class="data" id="before_7">
-                    <div>7ヶ月前: つまり<%= previous_month(7)  %></div>
+                    <div class="data_month"><span class="left_data_month">7ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(7)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_7) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_7 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
-                            <% end %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                                        <%= case history.subscription_alias.genre_alias.name do %>
+                                            <%= "動画配信のサービス" -> %>
+                                                <div class="icon icon_video"></div>
+                                            <%= "音楽配信のサービス" -> %>
+                                                <div class="icon icon_music"></div>
+                                            <%= "カーレンタルのサービス" -> %>
+                                                <div class="icon icon_car"></div>
+                                            <%= "食品のサービス" -> %>
+                                                <div class="icon icon_food"></div>
+                                            <%= "ソフトウェア提供のサービス" -> %>
+                                                <div class="icon icon_software"></div>
+                                            <%= "家具・家電のサービス" -> %>
+                                                <div class="icon icon_furniture"></div>
+                                            <%= "習い事や趣味のサービス" -> %>
+                                                <div class="icon icon_lesson"></div>
+                                            <%= "本のサービス" -> %>
+                                                <div class="icon icon_book"></div>
+                                            <%= _ -> %>
+                                                <div class="icon icon_other"></div>
+                                        <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="card_price">
+                                        ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                    </div>
+                                    <!--
+                                    <%= history.continue %>
+                                    <%= history.date_of_contract %>
+                                    <%= history.date_of_payment %>
+                                    --->
+                                    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                        <%= submit("") %>
+                                    <% end %>
+                                </div>
                             </li>
                         <% end %>
                         </ul>
@@ -183,21 +401,52 @@
                 </div>
 
                 <div class="data" id="before_8">
-                    <div>8ヶ月前: つまり<%= previous_month(8)  %></div>
+                    <div class="data_month"><span class="left_data_month">8ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(8)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_8) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_8 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
-                            <% end %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                                        <%= case history.subscription_alias.genre_alias.name do %>
+                                            <%= "動画配信のサービス" -> %>
+                                                <div class="icon icon_video"></div>
+                                            <%= "音楽配信のサービス" -> %>
+                                                <div class="icon icon_music"></div>
+                                            <%= "カーレンタルのサービス" -> %>
+                                                <div class="icon icon_car"></div>
+                                            <%= "食品のサービス" -> %>
+                                                <div class="icon icon_food"></div>
+                                            <%= "ソフトウェア提供のサービス" -> %>
+                                                <div class="icon icon_software"></div>
+                                            <%= "家具・家電のサービス" -> %>
+                                                <div class="icon icon_furniture"></div>
+                                            <%= "習い事や趣味のサービス" -> %>
+                                                <div class="icon icon_lesson"></div>
+                                            <%= "本のサービス" -> %>
+                                                <div class="icon icon_book"></div>
+                                            <%= _ -> %>
+                                                <div class="icon icon_other"></div>
+                                        <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="card_price">
+                                        ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                    </div>
+                                    <!--
+                                    <%= history.continue %>
+                                    <%= history.date_of_contract %>
+                                    <%= history.date_of_payment %>
+                                    --->
+                                    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                        <%= submit("") %>
+                                    <% end %>
+                                </div>
                             </li>
                         <% end %>
                         </ul>
@@ -207,21 +456,52 @@
                 </div>
 
                 <div class="data" id="before_9">
-                    <div>9ヶ月前: つまり<%= previous_month(9)  %></div>
+                    <div class="data_month"><span class="left_data_month">9ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(9)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_9) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_9 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
-                            <% end %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                                        <%= case history.subscription_alias.genre_alias.name do %>
+                                            <%= "動画配信のサービス" -> %>
+                                                <div class="icon icon_video"></div>
+                                            <%= "音楽配信のサービス" -> %>
+                                                <div class="icon icon_music"></div>
+                                            <%= "カーレンタルのサービス" -> %>
+                                                <div class="icon icon_car"></div>
+                                            <%= "食品のサービス" -> %>
+                                                <div class="icon icon_food"></div>
+                                            <%= "ソフトウェア提供のサービス" -> %>
+                                                <div class="icon icon_software"></div>
+                                            <%= "家具・家電のサービス" -> %>
+                                                <div class="icon icon_furniture"></div>
+                                            <%= "習い事や趣味のサービス" -> %>
+                                                <div class="icon icon_lesson"></div>
+                                            <%= "本のサービス" -> %>
+                                                <div class="icon icon_book"></div>
+                                            <%= _ -> %>
+                                                <div class="icon icon_other"></div>
+                                        <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="card_price">
+                                        ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                    </div>
+                                    <!--
+                                    <%= history.continue %>
+                                    <%= history.date_of_contract %>
+                                    <%= history.date_of_payment %>
+                                    --->
+                                    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                        <%= submit("") %>
+                                    <% end %>
+                                </div>
                             </li>
                         <% end %>
                         </ul>
@@ -231,21 +511,52 @@
                 </div>
 
                 <div class="data" id="before_10">
-                    <div>10ヶ月前: つまり<%= previous_month(10)  %></div>
+                    <div class="data_month"><span class="left_data_month">10ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(10)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_10) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_10 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
-                            <% end %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                                        <%= case history.subscription_alias.genre_alias.name do %>
+                                            <%= "動画配信のサービス" -> %>
+                                                <div class="icon icon_video"></div>
+                                            <%= "音楽配信のサービス" -> %>
+                                                <div class="icon icon_music"></div>
+                                            <%= "カーレンタルのサービス" -> %>
+                                                <div class="icon icon_car"></div>
+                                            <%= "食品のサービス" -> %>
+                                                <div class="icon icon_food"></div>
+                                            <%= "ソフトウェア提供のサービス" -> %>
+                                                <div class="icon icon_software"></div>
+                                            <%= "家具・家電のサービス" -> %>
+                                                <div class="icon icon_furniture"></div>
+                                            <%= "習い事や趣味のサービス" -> %>
+                                                <div class="icon icon_lesson"></div>
+                                            <%= "本のサービス" -> %>
+                                                <div class="icon icon_book"></div>
+                                            <%= _ -> %>
+                                                <div class="icon icon_other"></div>
+                                        <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="card_price">
+                                        ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                    </div>
+                                    <!--
+                                    <%= history.continue %>
+                                    <%= history.date_of_contract %>
+                                    <%= history.date_of_payment %>
+                                    --->
+                                    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                        <%= submit("") %>
+                                    <% end %>
+                                </div>
                             </li>
                         <% end %>
                         </ul>
@@ -255,21 +566,52 @@
                 </div>
 
                 <div class="data" id="before_11">
-                    <div>11ヶ月前: つまり<%= previous_month(11)  %></div>
+                    <div class="data_month"><span class="left_data_month">11ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(11)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_11) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_11 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
-                            <% end %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                                        <%= case history.subscription_alias.genre_alias.name do %>
+                                            <%= "動画配信のサービス" -> %>
+                                                <div class="icon icon_video"></div>
+                                            <%= "音楽配信のサービス" -> %>
+                                                <div class="icon icon_music"></div>
+                                            <%= "カーレンタルのサービス" -> %>
+                                                <div class="icon icon_car"></div>
+                                            <%= "食品のサービス" -> %>
+                                                <div class="icon icon_food"></div>
+                                            <%= "ソフトウェア提供のサービス" -> %>
+                                                <div class="icon icon_software"></div>
+                                            <%= "家具・家電のサービス" -> %>
+                                                <div class="icon icon_furniture"></div>
+                                            <%= "習い事や趣味のサービス" -> %>
+                                                <div class="icon icon_lesson"></div>
+                                            <%= "本のサービス" -> %>
+                                                <div class="icon icon_book"></div>
+                                            <%= _ -> %>
+                                                <div class="icon icon_other"></div>
+                                        <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="card_price">
+                                        ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                    </div>
+                                    <!--
+                                    <%= history.continue %>
+                                    <%= history.date_of_contract %>
+                                    <%= history.date_of_payment %>
+                                    --->
+                                    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                        <%= submit("") %>
+                                    <% end %>
+                                </div>
                             </li>
                         <% end %>
                         </ul>
@@ -279,21 +621,52 @@
                 </div>
 
                 <div class="data" id="before_12">
-                    <div>12ヶ月前: つまり<%= previous_month(12)  %></div>
+                    <div class="data_month"><span class="left_data_month">12ヶ月前</span><span class="right_data_month"><span class="span_month"><%= previous_month(12)  %></span></span><span></span></div>
                     <%= unless Enum.count(@history_month_12) == 0 do %>
-                        <ul>
+                        <ul class="ul_card">
                         <%= for history <- @history_month_12 do %>
-                            <li>
-                            <%= history.subscription_alias.name %>
-                            <%= history.subscription_alias.genre_alias.name %>
-                            <%= history.subscription_alias.price %>
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("削除") %>
-                            <% end %>
+                            <li class="data_card">
+                                <div class="card_left">
+                                    <div class="card_genre">
+                                        <%= case history.subscription_alias.genre_alias.name do %>
+                                            <%= "動画配信のサービス" -> %>
+                                                <div class="icon icon_video"></div>
+                                            <%= "音楽配信のサービス" -> %>
+                                                <div class="icon icon_music"></div>
+                                            <%= "カーレンタルのサービス" -> %>
+                                                <div class="icon icon_car"></div>
+                                            <%= "食品のサービス" -> %>
+                                                <div class="icon icon_food"></div>
+                                            <%= "ソフトウェア提供のサービス" -> %>
+                                                <div class="icon icon_software"></div>
+                                            <%= "家具・家電のサービス" -> %>
+                                                <div class="icon icon_furniture"></div>
+                                            <%= "習い事や趣味のサービス" -> %>
+                                                <div class="icon icon_lesson"></div>
+                                            <%= "本のサービス" -> %>
+                                                <div class="icon icon_book"></div>
+                                            <%= _ -> %>
+                                                <div class="icon icon_other"></div>
+                                        <% end %>
+                                    </div>
+                                    <div class="card_name">
+                                        <%= history.subscription_alias.name %>
+                                    </div>
+                                </div>
+                                <div class="card_right">
+                                    <div class="card_price">
+                                        ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                    </div>
+                                    <!--
+                                    <%= history.continue %>
+                                    <%= history.date_of_contract %>
+                                    <%= history.date_of_payment %>
+                                    --->
+                                    <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                        <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                        <%= submit("") %>
+                                    <% end %>
+                                </div>
                             </li>
                         <% end %>
                         </ul>
@@ -311,5 +684,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
 
+<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/history.js")}></script>
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/history_graph.js")}></script>
 

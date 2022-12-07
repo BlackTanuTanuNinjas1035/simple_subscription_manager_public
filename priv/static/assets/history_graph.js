@@ -29,7 +29,7 @@ Chart.plugins.register({
         });
     }
 });
-console.log("tima");
+
 let flag_chart01 = true;
 //=========== 円グラフ ============//
 $('#line_graph').on('inview', function(event, isInView) {//画面上に入ったらグラフを描画
@@ -41,13 +41,14 @@ if( flag_chart01 ) {
     // var ls_name = tmp[0];
     // var ls_price = tmp[1];
     // console.log(ls_name);
+    let history_data = get_history_data();
     var ctx=document.getElementById("line_graph");
     var chart=new Chart(ctx,{
     type:'line',//グラフのタイプ
     //type:'doughnut',
     data:{//グラフのデータ
-        labels:[1,2,3,4,5,6,7,8,9,10,11,12],//データの名前
-        // labels:ls_name,
+        //labels:[1,2,3,4,5,6,7,8,9,10,11,12],//データの名前
+        labels: history_data[0],
         datasets:[{
             // label:"職種別比率",//グラフのタイトル
             // backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
@@ -60,14 +61,15 @@ if( flag_chart01 ) {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29 , 20, 10]
+                //data: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29 , 20, 10]
+                data: history_data[1]
         }]
     },
     
     options:{//グラフのオプション
         maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
         legend:{
-        display:true//グラフの説明を表示
+        display:false//グラフの説明を表示
         },
         tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
         callbacks:{
