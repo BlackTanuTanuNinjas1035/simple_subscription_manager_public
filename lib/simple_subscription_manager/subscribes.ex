@@ -86,7 +86,7 @@ defmodule SimpleSubscriptionManager.Subscribes do
 
     name_point_genre = []
 
-    # サービスの名前とポイントと、ジャンルの名前を合体させる
+    # サービスの名前とポイントと、ジャンルの名前を合体させる->件数でソート
     genre_name_list |>
     Enum.map(fn g ->
       point = Map.get(subscription_counter, elem(g, 0))

@@ -78,6 +78,7 @@
                                 <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
                                 <%= submit("削除") %>
                             <% end %>
+                            <%# <a href={~w"/manager/history/#{history.id}"}>削除</a> %>
                             </li>
                         <% end %>
                         </ul>
@@ -312,4 +313,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
 
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/history_graph.js")}></script>
-
