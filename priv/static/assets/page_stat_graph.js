@@ -191,7 +191,7 @@ function graphView_genre(ranking_and_graph_id) {
 function graphView_age_genre(age_genre_id) {
     let a = document.querySelector("#" + age_genre_id);
     let datasets_data = get_age_ranking_genre("#" + age_genre_id);
-    console.log(datasets_data);
+    //console.log(datasets_data);
     var ctx = a.querySelector(".bar_graph"); //グラフを描画したい場所のid
 
     var chart=new Chart(ctx,{
@@ -270,6 +270,7 @@ function hello(){
     console.log("hello");
 }
 
+
 $(function() {
     //ageだけlistとforを使って記述したい
     //すべてのサービスランキングフラグ↓
@@ -296,14 +297,20 @@ $(function() {
         flaglist_graph_female_age_service[i] = true;
     }
 
+    let chart_graph_overall_service;
+    console.log("document 1");
     //すべてのサービスランキングのグラフ描画処理
     $("#graph_overall_service").on("inview", function() {
         if (flag_graph_overall_service) {
             flag_graph_overall_service = false;
             let tmp = "overall_service";
-            let chart_graph_overall_service = graphView(tmp); //オブジェクトが返ってくる　個別にoptionなど変更したいとき
+            chart_graph_overall_service = graphView(tmp); //オブジェクトが返ってくる　個別にoptionなど変更したいとき
+            //console.log(chart_graph_overall_service);
+            console.log("document 2");
         };
     });
+    console.log("document 3")
+    
 
     //年代別　人気のサービスランキング
     let chartlist_graph_overall_age_service = [];
@@ -439,4 +446,70 @@ $(function() {
     });
 
 
+    //ランキングにメダルをつける作業
+    let juni_id = ["#overall_service", "#male_overall_service", "#female_overall_service", "#overall_genre", "#male_overall_genre", "#female_overall_genre"]
+    for(let i = 0; i < juni_id.length; i++) {
+        let juni_list = get_ranking_number(juni_id[i]);
+    add_ranking_number(juni_id[i], juni_list);
+    }
+    
+
+});
+
+function get_ranking_number(ranking_id) {
+    let document_rank = document.querySelector(ranking_id);
+    let ol_rank = document_rank.querySelector(".ol_ranking");
+    let rank_li_list = ol_rank.querySelectorAll("li");
+    //juni_numは件数
+    let juni_num = [];
+    //juni_noはランキング　順位タイあり
+    let juni_no = [];
+
+    //ランキングの要素が10以下の場合はループする回数を要素数にする
+    let for_num = 10;
+    if(rank_li_list.length < for_num) {
+        for_num = rank_li_list.length;
+    }
+    //juni_numに件数を入れる
+    for(let i = 0; i < for_num; i++) {
+        juni_num.push(parseInt(rank_li_list[i].querySelector(".subsc_reginum").textContent));
+    }
+    //juni_noをfor_numの分初期化する　iの初期値は1　例：[1,2,3,4,5,6,7,8]
+    for(let i = 1; i < for_num + 1; i++) {
+        juni_no.push(i);
+    }
+    // console.log(juni_num);
+    // console.log(juni_no);
+
+    for(let i = 1; i < for_num; i++) {
+        if(juni_num[i] == juni_num[i-1]) {
+            juni_no[i] = juni_no[i-1];
+        }
+    }
+    
+    return juni_no
+}
+
+function add_ranking_number(ranking_id, juni_list) {
+    let document_rank = document.querySelector(ranking_id);
+    let ol_rank = document_rank.querySelector(".ol_ranking");
+    let rank_li_list = ol_rank.querySelectorAll("li");
+
+    loop_num  = 10;
+    if(loop_num > rank_li_list.length) {
+        loop_num = rank_li_list.length;
+    }
+    
+    if(loop_num > 0) {
+        for (let i = 0; i < loop_num; i ++) {
+            let medal_class = ranking_id + " .ol_ranking li:nth-child(" + (i + 1) + ") .medal";
+            let add_class_no = "no" + String(juni_list[i]);
+            $(medal_class).addClass(add_class_no);
+        }
+    }
+}
+
+$(window).on('load', function(){
+	//console.log(chart_graph_overall_service);
+    console.log("window");
 });

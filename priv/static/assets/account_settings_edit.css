@@ -1,3 +1,7 @@
+#front {
+    height: auto;
+}
+
 .main_contents > .container{
     width: 100%;
     height: 100%;
@@ -8,10 +12,10 @@
 
 .main_contents > .container > .content{
     background: #ffffff;
-    width: 900px;
-    height: 700px;
+    width: 90%;
+    max-width: 1000px;
     margin: 1% auto 1%;
-    padding-top: 50px;
+    padding-top: 2%;
     padding-bottom: 50px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -21,17 +25,20 @@
     flex-direction: column;
     justify-content: center; */
 
-    overflow: scroll;
-
+    /* スクロールありにする */
+    /* height: 700px;
+    overflow: scroll; */
 }
 
-.content-a {
-    margin: auto 20% auto 20%;
+.user_data {
+    width: 90%;
+    margin: auto;
     text-align: left;
-}
-
-.h1_div{
     text-align: center;
+    background-color: rgb(212, 212, 212);
+}
+.page_title {
+    font-size: 30px;
 }
 
 .one-block {

@@ -2,10 +2,10 @@
 
 <div class="content">
     <div class="content_top">
-        <h1>サブスクリプションサービスの統計</h1>
+        <div class="page_title">サブスクリプションサービスの統計</div>
             <p>こちらから人気のサブスクリプションサービスを見ることができます</p>
 
-        <div>ご利用者から<%= @number_of_ans * 100 %>%の回答を得られました</div>
+        <div>ご利用者から<span class="anser_ratio"><%= @number_of_ans * 100 %>%</span>の回答を得られました</div>
     </div>
 
     <div class="content_buttom">
@@ -14,7 +14,7 @@
             <div class="genre_button tab_button" data-tab="genre"><p>ジャンル</p></div>
         </div>
         <div class="ranking ranking_service active">
-            <h2>人気のサービスランキング</h2>
+            <div class="ranking_title">人気のサービスランキング</div>
             <div class="ranking_and_graph" id="overall_service">
                     <div class="div_rag_ranking hello">
                         <div class="rag_ranking">
@@ -23,7 +23,7 @@
                             <%= unless Enum.count(@subscription_counter) == 0 do %>
                                 <%= for subscription_count <- @subscription_counter do %>
                                     <li>
-                                        <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                        <span class="medal"></span><span class="li_right"><span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span></span>
                                     </li>
                                 <% end %>
                             <% else %>
@@ -39,7 +39,7 @@
 
 
             <!-- サービスの年齢別のランキング --->
-            <h2>年代別のサービスランキング</h2>
+            <div class="ranking_title">年代別のサービスランキング</div>
             <div class="overall_age_service age_circle_graph">
                 <div class="mini_ranking_and_graph" id="overall_age_00_service">
                     <div class="mini_ranking">
@@ -200,7 +200,7 @@
 
 
             <div class="male_service">
-                <h2>男性に人気のサービスランキング</h2>
+                <div class="ranking_title">男性に人気のサービスランキング</div>
                 <div class="ranking_and_graph" id="male_overall_service">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking"><!--classのragはranking_and_graph--->
@@ -209,7 +209,7 @@
                                 <%= unless Enum.count(@subscription_counter_in_male) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male do %>
                                         <li>
-                                            <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                            <span class="medal"></span><span class="li_right"><span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span></span>
                                         </li>
                                     <% end %>
                                 <% else %>
@@ -223,7 +223,7 @@
                         </div>
                 </div>
 
-                <h2>年代別　男性に人気のサービスランキング</h2>
+                <div class="ranking_title">年代別　男性に人気のサービスランキング</div>
                 <div class="male_age_service age_circle_graph">
                     <div class="mini_ranking_and_graph" id="male_age_00_service">
                         
@@ -382,7 +382,7 @@
             </div>
 
             <div class="female_service">
-                <h2>女性に人気のサービスランキング</h2>
+                <div class="ranking_title">女性に人気のサービスランキング</div>
                 <div class="ranking_and_graph" id="female_overall_service">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking">
@@ -390,7 +390,7 @@
                                 <%= unless Enum.count(@subscription_counter_in_female) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_female do %>
                                         <li>
-                                            <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
+                                            <span class="medal"></span><span class="li_right"><span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span></span>
                                         </li>
                                     <% end %>
                                 <% else %>
@@ -404,7 +404,7 @@
                     </div>
                 </div>
 
-                <h2>年代別　女性に人気のサービスランキング</h2>
+                <div class="ranking_title">年代別　女性に人気のサービスランキング</div>
                 <div class="female_age_service age_circle_graph">
                     <div class="mini_ranking_and_graph" id="female_age_00_service">
                         <div class="mini_ranking">
@@ -564,7 +564,7 @@
 
         <div class="ranking ranking_genre">
 
-            <div class="ranking_title"><h2>人気のジャンルのランキング</h2></div>
+            <div class="ranking_title">人気のジャンルのランキング</div>
             <div class="ranking_and_graph" id="overall_genre">
                 <div class="div_rag_ranking">
                     <div class="rag_ranking">
@@ -572,7 +572,7 @@
                             <%= unless Enum.count(@genre_counter) == 0 do %>
                                 <%= for genre_count <- @genre_counter do %>
                                     <li>
-                                        <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                        <span class="medal"></span><span class="li_right"><span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span></span>
                                     </li>
                                 <% end %>
                             <% else %>
@@ -587,7 +587,7 @@
             </div>
 
             <div class="overall_age_genre" id="overall_age_genre">
-                <div class="ranking_title"><h2>年代別　人気のジャンルランキング</h2></div>
+                <div class="ranking_title">年代別　人気のジャンルランキング</div>
                 <div class="div_overall_age_genre">
                     <div class="mini_ranking_and_graph" id="overall_age_00_genre">
                         <h3>10代未満</h3>
@@ -717,7 +717,7 @@
 
 
             <div class="male_genre">
-                <div class="ranking_title"><h3>男性に人気のジャンルのランキング</h3></div>
+                <div class="ranking_title">男性に人気のジャンルのランキング</div>
                 <div class="ranking_and_graph" id="male_overall_genre">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking">
@@ -725,7 +725,7 @@
                                 <%= unless Enum.count(@genre_counter_in_male) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_male do %>
                                         <li>
-                                            <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                            <span class="medal"></span><span class="li_right"><span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span></span>
                                         </li>
                                     <% end %>
                                 <% else %>
@@ -740,7 +740,7 @@
                 </div>
 
                 <div class="male_age_genre" id="male_age_genre">
-                    <div class="ranking_title"><h2>年代別の男性に人気のジャンルランキング</h2></div>
+                    <div class="ranking_title">年代別の男性に人気のジャンルランキング</div>
                     <div class="div_male_age_genre">
                         <div class="mini_ranking_and_graph" id="male_age_00_genre">
                             <h3>10代未満</h3>
@@ -866,7 +866,7 @@
             </div>
 
             <div class="female_genre">
-                <div class="ranking_title"><h3>女性に人気のジャンルのランキング</h3></div>
+                <div class="ranking_title">女性に人気のジャンルのランキング</div>
                 <div class="ranking_and_graph" id="female_overall_genre">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking">
@@ -874,7 +874,7 @@
                                 <%= unless Enum.count(@genre_counter_in_female) == 0 do %>
                                     <%= for genre_count <- @genre_counter_in_female do %>
                                         <li>
-                                            <span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span>
+                                            <span class="medal"></span><span class="li_right"><span class="subsc_genre"><%= elem genre_count, 0 %></span><span class="subsc_reginum"><%= elem genre_count, 1 %></span><span class="subsc_ratio"><%= elem genre_count, 2 %></span></span>
                                         </li>
                                     <% end %>
                                 <% else %>
@@ -889,7 +889,7 @@
                 </div>
 
                 <div class="female_age_genre" id="female_age_genre">
-                    <div class="ranking_title"><h2>年代別の女性に人気のジャンルランキング</h2></div>
+                    <div class="ranking_title">年代別の女性に人気のジャンルランキング</div>
                     <div class="div_female_age_genre">
                         <div class="mini_ranking_and_graph" id="female_age_00_genre">
                             <h3>10代未満</h3>

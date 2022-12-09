@@ -91,7 +91,7 @@
             <%= if @total_price == 0 do%>
                 <div id="total_price">ご利用のサービスはございません</div>
             <% else %>
-                <div id="total_price">合計金額: <%= @total_price %> 円</div>
+                <div id="total_price" class="total_price"><div class="total_price_left">合計金額: </div><div class="total_price_right"><%= @total_price %> 円</div></div>
             <% end %>
         </div>
 

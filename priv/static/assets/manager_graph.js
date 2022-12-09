@@ -50,7 +50,7 @@ $('#chart01').on('inview', function(event, isInView) {//画面上に入ったら
         // labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
         labels:ls_name,
         datasets:[{
-            label:"職種別比率",//グラフのタイトル
+            label:"サブスクの割合",//グラフのタイトル
             backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
             // data:["960", "1000"]//データ
             data:ls_price

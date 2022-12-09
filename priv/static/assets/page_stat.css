@@ -3,8 +3,6 @@
     height: auto;
 }
 
-
-
 .main_contents > .container{
     width: 100%;
     height: 100%;
@@ -22,19 +20,21 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
 
-    /* display: grid;
-    grid-template: 
-        "top    " 1fr
-        "bottom " 5fr
-        / 1fr; */
     display: flex;
     flex-direction: column;
 }
 .content_top {
-    /* grid-area: top; */
+}
+.page_title {
+    font-size: clamp(20px, 3vw, 30px);
+    margin-bottom: min(2%, 15px);
+    font-weight: bold;
+}
+.anser_ratio {
+    font-size: large;
+    background-color: #ebffb5;
 }
 .content_buttom{
-    /* grid-area: bottom; */
     margin: 10px;
     /*background-color: rgb(235, 235, 235); */
     border-radius: 10px;
@@ -42,39 +42,47 @@
     display:flex;
     flex-direction: column;
 }
-.active {
-    background-color: rgb(162, 210, 194);
-}
+
 
 .tab_select {
     display: flex;
     font-size: 25px;
 }
 .tab_button {
+    font-weight: bold;
     border-radius: 5px 5px 0 0;
     padding: 0 10px;
+    background-color: rgb(211, 211, 211);
 }
 .service_button {
     margin-left: 20px;
-    
 }
 .genre_button {
-
+    margin-left: 10px;
+}
+.active {
+    background-color: #a7e8ba;
 }
 .ranking {
     border-radius: 10px 10px 0 0;
 }
 
+.ranking_title {
+    height: 30px;
+    font-weight: bold;
+    font-size: clamp(20px, 3vw, 25px);
+}
+
 .ranking_service {
     display: none;
-    background-color: rgb(162, 210, 194);
+    background-color: #a7e8ba;
 }
 .ranking_service.active {
     display: block;
 }
 .ranking_genre {
     display: none;
-    background-color: rgb(162, 210, 194);
+    background-color: #a7e8ba;
 }
 .ranking_genre.active {
     display: block;
@@ -92,78 +100,110 @@
 .rag_ranking {
     width: auto;
     text-align: left;
-    max-width: 70%;
-    margin-left: 10%;
+    /* max-width: 70%;
+    margin-left: 10%; */
+    max-width: 85%;
 }
 
 /* ランキングのliの処理 */
 /* olリストの数字の位置を内側　タイトルと同じにする */
 .content li {
     /* list-style-position: inside; */
-}
-/* 3位以内のolの数字を消す */
-.content li:nth-child(-n + 3) {
-    position: relative;
+    display: flex;
     list-style: none;
 }
-/* ランキング全体のsubsc_name設定*/
-.content li .subsc_name {
-    font-size: clamp(30px, 2.5vw, 40px);
+.content li .li_right {
+    overflow-x: scroll;
+}
+
+.content li:nth-child(-n + 3) {
+}
+/* ランキングサービス全体のsubsc_name設定*/
+.ranking_service li .subsc_name,
+.ranking_genre li .subsc_genre {
+    font-size: clamp(20px, 2vw, 25px);
     white-space: nowrap;
     width: 100%;
     overflow-x: scroll;
-    display: inline-block;
+    display: block;
 }
-/* ランキング4位以下のsubsc_nameの設定 */
-.content li:nth-child(n + 4) .subsc_name {
-    font-size: clamp(20px, 2vw, 25px);
+.ranking_service .medal.no1 + .li_right .subsc_name,
+.ranking_service .medal.no2 + .li_right .subsc_name,
+.ranking_service .medal.no3 + .li_right .subsc_name {
+    font-size: clamp(30px, 2.5vw, 40px);
+}
+.ranking_genre .medal.no1 + .li_right .subsc_genre,
+.ranking_genre .medal.no2 + .li_right .subsc_genre,
+.ranking_genre .medal.no3 + .li_right .subsc_genre {
+    font-size: clamp(25px, 2.5vw, 40px);
 }
 /* ランキング全体のsubsc_genre設定*/
-.content li .subsc_genre {
-    font-size: clamp(10px, 2vw, 20px);
-    display: inline-block;
-}
-/* ランキング4位以下のsubsc_genreの設定 */
-.content li:nth-child(n + 4) .subsc_genre {
+.ranking_service li .subsc_genre {
     font-size: clamp(15px, 1vw, 20px);
+    display: block;
+}
+/* １〜３位のsubsc_genreの設定 */
+.ranking_service li:nth-child(1) .subsc_genre {
+    font-size: clamp(15px, 2vw, 20px);
+}
+.ranking_service li:nth-child(2) .subsc_genre {
+    font-size: clamp(15px, 2vw, 20px);
+}
+.ranking_service li:nth-child(3) .subsc_genre {
+    font-size: clamp(15px, 2vw, 20px);
 }
 /* ランキングの11以下を非表示 */
-.content li:nth-child(n + 11) {
+.ranking_service li:nth-child(n + 11) {
     display: none;
 }
-.content li:nth-child(1) .subsc_name{
+.ranking_service li:nth-child(1) .subsc_name{
 }
-.content li:nth-child(-n + 3) {
+.ranking_service li:nth-child(-n + 3) {
 }
 /* 三位以内に表示するメダルの設定 */
-.content li:nth-child(-n + 3)::before {
-    position: absolute;
-    top: 1.2vw;
-    left: -3vw;
-
-    width: 2.5vw;
-    min-width: 30px;
-    max-width: 40px;
-    height: 2.5vw;
-    min-height: 30px;
-    max-height: 40px;
-    content: "";
-    /* background-image: url(../images/medal_no1.png); */
-    display: inline-block;
+.medal {
+    margin-top: 2.5%;
+    display: block;
+    width: 3vw;
+    max-width: 50px;
+    min-width: 40px;
+    height: 3vw;
+    min-height: 40px;
+    max-height: 50px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
-.content li:nth-child(1)::before {
+.medal.no1 {
     background-image: url(../images/medal_no1.png);
 }
-.content li:nth-child(2)::before {
+.medal.no2 {
     background-image: url(../images/medal_no2.png);
 }
-.content li:nth-child(3)::before {
+.medal.no3 {
     background-image: url(../images/medal_no3.png);
 }
-
+.medal.no4 {
+    background-image: url(../images/number_4.png);
+}
+.medal.no5 {
+    background-image: url(../images/number_5.png);
+}
+.medal.no6 {
+    background-image: url(../images/number_6.png);
+}
+.medal.no7 {
+    background-image: url(../images/number_7.png);
+}
+.medal.no8 {
+    background-image: url(../images/number_8.png);
+}
+.medal.no9 {
+    background-image: url(../images/number_9.png);
+}
+.medal.no10 {
+    background-image: url(../images/number_10.png);
+}
 
 
 .rag_graph {
@@ -260,6 +300,9 @@
 
 .ranking_genre .subsc_genre {
     font-size: 20px;
+}
+.ranking_genre .subsc_reginum {
+    display: none;
 }
 
 .subsc_ratio {

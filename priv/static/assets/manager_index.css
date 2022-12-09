@@ -154,6 +154,18 @@
 .subsc_option span:nth-of-type(3) {
     top: 19px;
 }
+.total_price {
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    font-size: clamp(20px, 3vh, 25px);
+}
+.total_price_left {
+    margin: auto;
+}
+.total_price_right {
+    margin: auto;
+}
 
 
 .big_content > .content2{

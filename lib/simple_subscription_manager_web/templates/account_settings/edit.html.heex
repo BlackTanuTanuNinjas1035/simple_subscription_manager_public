@@ -1,9 +1,8 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/account_settings_edit.css")}/>
 
 <div class="content">
-  <div class="content-a">
-    <div class="h1_div">
-      <h1>アカウントの設定</h1>
+  <div class="user_data">
+      <div class="page_title">アカウントの設定</div>
       <div>現在の名前: <%= @current_account.name %></div>
         <div>現在のメールアドレス: <%= @current_account.email %></div>
         <div>現在の生年月日: <%= @current_account.age %></div>
@@ -15,7 +14,6 @@
             ユーザ情報の利用を許可しない
           <% end %>
         </div>
-    </div>
   </div>
 
   <div class="one-block">
