@@ -24,7 +24,17 @@ defmodule SimpleSubscriptionManagerWeb.HistoryController do
       )
   end
 
-  def delete(conn, _params) do
+  def delete(conn, %{"history_id" => history_id}) do
     IO.inspect conn
+    case Historys.delete_history(history_id) do
+      {:ok, msg} ->
+        conn
+        |> put_flash(:info, msg)
+        |> redirect(to: Routes.history_path(conn, :index))
+      {:error, msg} ->
+        conn
+        |> put_flash(:error, msg)
+        |> redirect(to: Routes.history_path(conn, :index))
+    end
   end
 end
