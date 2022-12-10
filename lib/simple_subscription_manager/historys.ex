@@ -38,6 +38,30 @@ defmodule SimpleSubscriptionManager.Historys do
     end
   end
 
+  # def insert_history(history_id) do
+  #   record = %History{
+  #     account_id: subscribe.account_id,
+  #     subscription_id: subscribe.subscription_id,
+  #     date_of_contract: subscribe.date_of_contract,
+  #     continue: subscribe.continue,
+  #     date_of_payment: subscribe.date_of_payment,
+  #   }
+  #   case Repo.insert record do
+  #     {:ok, _struct} -> IO.puts "履歴の追加に成功しました"
+  #     {:error, _changeset} -> IO.puts "履歴の追加に失敗しました"
+  #   end
+  # end
+
+  def insert_history(attr) do
+    %History{}
+    |> History.changeset(attr)
+    |> Repo.insert()
+    |> case do
+      {:ok, _struct} -> {:ok, "履歴の追加に成功しました"}
+      {:error, _changeset} -> {:error, "履歴の追加に失敗しました"}
+    end
+  end
+
   @doc """
   ひと月に重複した履歴の登録がある場合の履歴の契約日と支払日を更新する
   """

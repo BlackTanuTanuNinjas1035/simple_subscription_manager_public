@@ -2,10 +2,8 @@ defmodule SimpleSubscriptionManager.Scheduler do
   use Quantum, otp_app: :simple_subscription_manager
 
   alias SimpleSubscriptionManager.Historys
-  alias SimpleSubscriptionManager.Historys.History
   alias SimpleSubscriptionManager.Subscribes
   alias SimpleSubscriptionManager.Subscribes.SubscribeNotifier
-  alias SimpleSubscriptionManager.Mailer
   alias SimpleSubscriptionManager.Repo
 
 
@@ -15,7 +13,7 @@ defmodule SimpleSubscriptionManager.Scheduler do
     subscribes_list = Subscribes.list_subscribe()
 
     for subscribe <- subscribes_list do
-      if Date.diff(subscribe.date_of_payment, Date.utc_today) == 10 do
+      if Date.diff(Date.utc_today, subscribe.date_of_payment) == 10 do
 
         SubscribeNotifier.deliver_date_of_payment(
           subscribe.account_alias.email,
@@ -52,16 +50,29 @@ defmodule SimpleSubscriptionManager.Scheduler do
           case Repo.update subscribe do
             {:ok, _struct} ->
 
-              record = %History{
-                account_id: subscribe.account_id,
-                subscription_id: subscribe.subscription_id,
-                date_of_contract: subscribe.date_of_contract,
-                continue: subscribe.continue,
-                date_of_payment: subscribe.date_of_payment,
-              }
-              case Repo.insert record do
-                {:ok, _struct} -> IO.puts "履歴の追加に成功しました"
-                {:error, _changeset} -> IO.puts "履歴の追加に失敗しました"
+              # record = %History{
+              #   account_id: subscribe.account_id,
+              #   subscription_id: subscribe.subscription_id,
+              #   date_of_contract: subscribe.date_of_contract,
+              #   continue: subscribe.continue,
+              #   date_of_payment: subscribe.date_of_payment,
+              # }
+              # case Repo.insert record do
+              #   {:ok, _struct} -> IO.puts "履歴の追加に成功しました"
+              #   {:error, _changeset} -> IO.puts "履歴の追加に失敗しました"
+              # end
+
+              case Historys.insert_history(
+                %{
+                  account_id: subscribe.account_id,
+                  subscription_id: subscribe.subscription_id,
+                  date_of_contract: subscribe.date_of_contract,
+                  continue: subscribe.continue,
+                  date_of_payment: subscribe.date_of_payment,
+                }
+              ) do
+                {:ok, msg} -> IO.puts msg
+                {:error, msg} -> IO.puts msg
               end
 
             {:error, _changeset} ->

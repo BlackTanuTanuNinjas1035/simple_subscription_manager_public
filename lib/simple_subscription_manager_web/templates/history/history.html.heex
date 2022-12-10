@@ -160,18 +160,18 @@
                                     </div>
                                     <div class="card_right">
                                         <div class="card_price">
-                            ￥<span class="price"><%= history.subscription_alias.price %></span>
+                                            ￥<span class="price"><%= history.subscription_alias.price %></span>
                                         </div>
                                         <!--
-                            <%= history.continue %>
-                            <%= history.date_of_contract %>
-                            <%= history.date_of_payment %>
-                            --->
-                            <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
-                                <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
-                                <%= submit("") %>
-                            <% end %>
-                                        </div>
+                                        <%= history.continue %>
+                                        <%= history.date_of_contract %>
+                                        <%= history.date_of_payment %>
+                                        --->
+                                        <%= form_for @conn, Routes.history_path(@conn, :delete), fn f -> %>
+                                            <%= hidden_input f, :delete_history, name: "history_id", value: history.id %>
+                                            <%= submit("") %>
+                                        <% end %>
+                                    </div>
                             </li>
                         <% end %>
                         </ul>
@@ -686,4 +686,3 @@
 
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/history.js")}></script>
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/history_graph.js")}></script>
-
