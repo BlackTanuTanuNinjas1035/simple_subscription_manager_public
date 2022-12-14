@@ -18,7 +18,7 @@
             <div class="ranking_and_graph" id="overall_service">
                     <div class="div_rag_ranking hello">
                         <div class="rag_ranking">
-                        
+
                         <ol class="ol_ranking">
                             <%= unless Enum.count(@subscription_counter) == 0 do %>
                                 <%= for subscription_count <- @subscription_counter do %>
@@ -204,7 +204,7 @@
                 <div class="ranking_and_graph" id="male_overall_service">
                     <div class="div_rag_ranking">
                         <div class="rag_ranking"><!--classのragはranking_and_graph--->
-                            
+
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male) == 0 do %>
                                     <%= for subscription_count <- @subscription_counter_in_male do %>
@@ -226,7 +226,7 @@
                 <div class="ranking_title">年代別　男性に人気のサービスランキング</div>
                 <div class="male_age_service age_circle_graph">
                     <div class="mini_ranking_and_graph" id="male_age_00_service">
-                        
+
                         <div class="mini_ranking">
                             <h3>10代未満</h3>
                             <ol class="ol_ranking">
@@ -326,7 +326,7 @@
                             <h3>50代</h3>
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_male_by_age_50) == 0 do %>
-                                    <%= for subscription_count <- @subscription_counter_in_mal_by_age_50 do %>
+                                    <%= for subscription_count <- @subscription_counter_in_male_by_age_50 do %>
                                         <li>
                                             <span class="subsc_name"><%= Enum.at subscription_count, 0 %></span><span class="subsc_genre"><%= Enum.at subscription_count, 1 %></span><span class="subsc_reginum"><%= Enum.at subscription_count, 2 %></span>
                                         </li>
@@ -603,7 +603,7 @@
                             <% end %>
                         </ol>
                     </div>
-                    
+
                     <div class="mini_ranking_and_graph" id="overall_age_10_genre">
                         <h3>10代</h3>
                         <ol class="ol_ranking">
@@ -712,7 +712,7 @@
                 </div>
             </div>
 
-            
+
 
 
 
@@ -855,7 +855,7 @@
                             </ol>
                         </div>
                     </div>
-                
+
                     <!-- 棒グラフ -->
                     <div class="div_rag_bar_graph">
                         <div class="rag_bar_graph">
