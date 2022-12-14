@@ -17,22 +17,38 @@
 }
 
 .main_contents > .container > .content{
+    display: flex;
+    flex-direction: column;
     background: #ffffff;
-    width: 900px;
-    height: 500px;
-    margin: 8% auto 8%;
+    max-width: 900px;
+    height: 95vh;
+    max-height: 500px;
+    margin: auto;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
+    font-size: 20px;
 }
 
-.h1_div{
-    margin: 20px 0 20px 0;
+.page_title{
+    display: flex;
+    margin: auto;
+    font-weight: bold;
+    font-size: 30px;
+    height: 15%;
+}
+.page_title_content {
+    margin: auto;
 }
 
 .genre_select_area {
     display: flex;
-    margin-bottom: 10px;
+    height: 10%;
+}
+.genre_select_area_content {
+    width: 100%;
+    margin: auto;
+    display: flex;
 }
 .genre_text_div {
     margin: 0 7%;
@@ -42,23 +58,42 @@
 }
 .genre_select {
     width: 100%;
+    height: 30px;
 }
 /*セレクトボックスのそれぞれの表示非表示とか*/
 .select_content {
+    height: 75%;
     display: none;
 }
 .select_content.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
-
-
+.form_div {
+    height: 10%;
+}
 .form_div > form{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .select_box{
-    margin-right: 100px;
+}
+#subscribe_date_of_contract_year,
+#subscribe_date_of_contract_month,
+#subscribe_date_of_contract_day {
+    height: 30px;
+}
+#subscribe_continue {
+    scale: 1.5;
+}
+.select_day {
+}
+.select_day_box {
+    display: inline-block;
+}
+.check_box {
+    display: inline-block;
 }
 
 
@@ -79,11 +114,85 @@ ul {
 
 .subsc_info {
     background-color: rgb(233, 255, 172);
-    margin: 50px 20px 10px 20px;
+    /* margin: 50px 20px 10px 20px; */
+    margin: 3% 2% 2% 2%;
     border-radius: 10px;
+    height: 85%;
+    box-sizing: border-box;
+}
+.subsc_info_title {
+    font-weight: bold;
+    font-size: 30px;
+}
+.subsc_info_price {
+    text-align: right;
+    margin-right: 5%;
+    font-weight: bold;
+    font-size: 25px;
+}
+#subscription_list,
+#subscription_list li {   
+    height: 100%;
+}
+#subscription_list li.active {
+    display: flex;
+    flex-direction: column;
+}
+.subsc_info_bottom {
+    flex-grow: 1;
+}
+.subsc_info_bottom p {
+    margin-top: 3%;
 }
 
 
-/* .hidden {
-    display: none;
-} */
+
+
+@media screen and (max-width: 767px){
+    .main_contents > .container > .content {
+        height: 80vh;
+        max-height: 1000px;
+        margin: 0 5px 0 5px;
+    }
+    .select2.select2-container.select2-container--default{
+        width: 100%;
+        max-width: 300px;
+    }
+    .page_title{
+        height: 8%;
+    }
+    .genre_select_area {
+        height: 7%;
+    }
+    .select_content {
+        height: 85%;
+    }
+    
+    .form_div > form{
+        flex-direction: column;
+        text-align: left;
+        height: 100%;
+    }
+    .select_box,
+    .select_day,
+    .select_submit {
+        margin: 5px;
+    }
+    .select_day {
+        text-align: right;
+        margin-right: 3%;
+    }
+    .select_submit {
+        text-align: center;
+        margin: auto;
+    }
+    
+    .form_div {
+        height: 30%;
+    }
+    .subsc_info {
+        height: 70%;
+    }
+}
+
+

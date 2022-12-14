@@ -309,6 +309,10 @@
     display: none;
 }
 
+.graph_label {
+    
+}
+
 @media screen and (max-width: 767px){
     .ranking_and_graph {
         display: flex;

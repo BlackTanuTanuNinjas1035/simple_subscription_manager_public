@@ -13,20 +13,23 @@ $(function(){
         $(".ranking").removeClass("active");
         $(selected_tab).addClass("active");
     })
-})
+});
+
+// $(window).on('load', function(){
+// 	//console.log(chart_graph_overall_service);
+//     console.log("window");
+// });
 
 $(window).on('load resize', function(){
     var winW = $(window).width();
     var devW = 767;
     if (winW <= devW) {
     //767px以下の時の処理
-        console.log("はろー")
-        
-
+        console.log("767以下だよー");
 
     } else {
     //768pxより大きい時の処理
-        console.log("せいろー")
+        console.log("768以上だよー");
     }
 });
 
@@ -206,5 +209,59 @@ function get_age_ranking_genre(age_genre_id){
         //console.log(re[i]);
     }
     return re
-
 }
+
+//順位をリストにして返す　10以内　順位タイ有り
+function get_ranking_number(ranking_id) {
+    let document_rank = document.querySelector(ranking_id);
+    let ol_rank = document_rank.querySelector(".ol_ranking");
+    let rank_li_list = ol_rank.querySelectorAll("li");
+    //juni_numは件数
+    let juni_num = [];
+    //juni_noはランキング　順位タイあり
+    let juni_no = [];
+
+    //ランキングの要素が10以下の場合はループする回数を要素数にする
+    let for_num = 10;
+    if(rank_li_list.length < for_num) {
+        for_num = rank_li_list.length;
+    }
+    //juni_numに件数を入れる
+    for(let i = 0; i < for_num; i++) {
+        juni_num.push(parseInt(rank_li_list[i].querySelector(".subsc_reginum").textContent));
+    }
+    //juni_noをfor_numの分初期化する　iの初期値は1　例：[1,2,3,4,5,6,7,8]
+    for(let i = 1; i < for_num + 1; i++) {
+        juni_no.push(i);
+    }
+    // console.log(juni_num);
+    // console.log(juni_no);
+
+    for(let i = 1; i < for_num; i++) {
+        if(juni_num[i] == juni_num[i-1]) {
+            juni_no[i] = juni_no[i-1];
+        }
+    }
+    
+    return juni_no
+}
+
+//idと順位リストを受け取り順位にあったメモリを表示する
+function add_ranking_number(ranking_id, juni_list) {
+    let document_rank = document.querySelector(ranking_id);
+    let ol_rank = document_rank.querySelector(".ol_ranking");
+    let rank_li_list = ol_rank.querySelectorAll("li");
+
+    loop_num  = 10;
+    if(loop_num > rank_li_list.length) {
+        loop_num = rank_li_list.length;
+    }
+    
+    if(loop_num > 0) {
+        for (let i = 0; i < loop_num; i ++) {
+            let medal_class = ranking_id + " .ol_ranking li:nth-child(" + (i + 1) + ") .medal";
+            let add_class_no = "no" + String(juni_list[i]);
+            $(medal_class).addClass(add_class_no);
+        }
+    }
+};
