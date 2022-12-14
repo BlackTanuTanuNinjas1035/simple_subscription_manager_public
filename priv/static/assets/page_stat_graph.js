@@ -1,3 +1,87 @@
+var global_value = 0;
+
+var chartJsPluginCenterLabel = {
+    afterDatasetsDraw: function (chart) {
+    console.log("プラグイン");
+
+    // // ラベルの X 座標と Y 座標
+    var canvas = chart.ctx.canvas;
+    var labelX = canvas.clientWidth / 2;
+    var labelY = Math.round((canvas.clientHeight + chart.chartArea.top) / 2);
+    // // ラベルの値　つかえなかった
+    var value = chart.data.datasets[0].data[0] + '%';
+    // ラベル描画
+    var ctx = this.setTextStyle(chart.ctx);
+    ctx.fillText(global_value, labelX, labelY);
+    },
+
+    /**
+     * 書式設定
+     */
+    setTextStyle: function (ctx) {
+    var fontSize = 40;
+    var fontStyle = 'normal';
+    var fontFamily = '"Helvetica Neue", Helvetica, Arial, sans-serif';
+    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+    ctx.fillStyle = '#636363';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    return ctx;
+    }
+};
+var options = {//グラフのオプション
+    maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
+    legend:{
+        display:false//グラフの説明を表示
+    },
+    tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
+        callbacks:{
+            label: function (tooltipItem, data) {
+            //return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
+            return data.labels[tooltipItem.index]
+            }
+        },    
+    },
+    title:{//上部タイトル表示の設定
+        display: false,
+        fontSize:10,
+        text: '単位：%'
+    },
+
+     //このpluginsはパーセンテージ表示の外部のやつ
+    plugins: {
+        labels: {
+        render: 'percentage',
+        fontColor: 'black',
+        fontSize: 20
+        }
+    }
+};
+var prevHoveredIndexes = [];
+options.events = ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove', 'hover'];
+options.onHover = (event, hoveredItems) => {
+    //データの操作場所とか
+    //console.log(data.datasets[0].data[14]);
+    //console.log(hoveredItems);
+
+    var graph_index = hoveredItems.map(x => x._index);
+    var hoge = hoveredItems.map(x => x._datasetIndex);
+    try {
+        global_value = hoveredItems[0]._chart.config.data.labels[graph_index];
+        console.log(global_value);
+
+    } catch (error) {
+        console.log("えらった")
+    }
+    
+    // if(data.labels[piyo[0]] == null) {
+    //     console.log("powo");
+    // } else {
+    //     global_value = data.labels[piyo[0]];
+    // }
+}
+
 //値をグラフに表示させる
 // Chart.plugins.register({
 //     afterDatasetsDraw: function (chart, easing) {
@@ -100,34 +184,33 @@ function graphView(ranking_and_graph_id) {
             }]
         },
 
-        options:{//グラフのオプション
-            maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
-            legend:{
-                display:false//グラフの説明を表示
-            },
-            tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
-                callbacks:{
-                    label: function (tooltipItem, data) {
-                    //return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
-                    return data.labels[tooltipItem.index]
-                    }
-                },    
-            },
-            title:{//上部タイトル表示の設定
-                display: false,
-                fontSize:10,
-                text: '単位：%'
-            },
+        options: options//グラフのオプション
+            // maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
+            // legend:{
+            //     display:false//グラフの説明を表示
+            // },
+            // tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
+            //     callbacks:{
+            //         label: function (tooltipItem, data) {
+            //         //return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
+            //         return data.labels[tooltipItem.index]
+            //         }
+            //     },    
+            // },
+            // title:{//上部タイトル表示の設定
+            //     display: false,
+            //     fontSize:10,
+            //     text: '単位：%'
+            // },
 
-             //このpluginsはパーセンテージ表示の外部のやつ
-            plugins: {
-                labels: {
-                render: 'percentage',
-                fontColor: 'black',
-                fontSize: 20
-                }
-            }
-        }
+            //  //このpluginsはパーセンテージ表示の外部のやつ
+            // plugins: {
+            //     labels: {
+            //     render: 'percentage',
+            //     fontColor: 'black',
+            //     fontSize: 20
+            //     }
+            // }
         
     });
     return chart
@@ -144,8 +227,8 @@ function graphView_genre(ranking_and_graph_id) {
     var chart=new Chart(ctx,{
         type:'doughnut',//グラフのタイプ
         //type:'doughnut',
-        data:{//グラフのデータ
-            //labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
+        data:{
+            //グラフのデータ
             labels:ranking_data[0],
             datasets:[{
                 label:"職種別比率",//グラフのタイトル
@@ -155,39 +238,13 @@ function graphView_genre(ranking_and_graph_id) {
             }]
         },
 
-        options:{//グラフのオプション
-            maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
-            legend:{
-                display:false//グラフの説明を表示
-            },
-            tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
-                callbacks:{
-                    label: function (tooltipItem, data) {
-                    //return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
-                    return data.labels[tooltipItem.index]
-                    }
-                },    
-            },
-            title:{//上部タイトル表示の設定
-                display: false,
-                fontSize:10,
-                text: '単位：%'
-            },
-
-             //このpluginsはパーセンテージ表示の外部のやつ
-            plugins: {
-                labels: {
-                render: 'percentage',
-                fontColor: 'black',
-                fontSize: 20
-                }
-            }
-        }
+        options: options
         
     });
     return chart
 }
 
+//ジャンルの棒グラフ
 function graphView_age_genre(age_genre_id) {
     let a = document.querySelector("#" + age_genre_id);
     let datasets_data = get_age_ranking_genre("#" + age_genre_id);
@@ -200,21 +257,7 @@ function graphView_age_genre(age_genre_id) {
         data:{//グラフのデータ
             labels:["00代", "10代", "20代", "30代", "40代", "50代", "60代", "70代"],//データの名前
             //labels:ranking_data[0],
-            // datasets: [
-            //     {
-            //         label:"動画配信のサービス",//グラフのタイトル
-            //         //backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
-            //         backgroundColor: "red",
-            //         data:[100, 10, 100]//データ
-            //         //data:ranking_data[1]
-            //     },
-            //     {
-            //         label:"音楽配信のサービス",//グラフのタイトル
-            //         //backgroundColor:["#3C00FF","#58A27C", "#FAFF67","BB5179"],//グラフの背景色
-            //         backgroundColor: "blue",
-            //         data:[200, 200, 20]//データ
-            //     }
-            // ]
+
             datasets: datasets_data
         },
 
@@ -263,12 +306,7 @@ function graphView_age_genre(age_genre_id) {
     });
     return chart
 
-}
-
-//確認用
-function hello(){
-    console.log("hello");
-}
+};
 
 
 $(function() {
@@ -445,6 +483,8 @@ $(function() {
         
     });
 
+    //Chart.plugins.register(chartJsPluginCenterLabel);
+
 
     //ランキングにメダルをつける作業
     let juni_id = ["#overall_service", "#male_overall_service", "#female_overall_service", "#overall_genre", "#male_overall_genre", "#female_overall_genre"]
@@ -453,63 +493,4 @@ $(function() {
     add_ranking_number(juni_id[i], juni_list);
     }
     
-
-});
-
-function get_ranking_number(ranking_id) {
-    let document_rank = document.querySelector(ranking_id);
-    let ol_rank = document_rank.querySelector(".ol_ranking");
-    let rank_li_list = ol_rank.querySelectorAll("li");
-    //juni_numは件数
-    let juni_num = [];
-    //juni_noはランキング　順位タイあり
-    let juni_no = [];
-
-    //ランキングの要素が10以下の場合はループする回数を要素数にする
-    let for_num = 10;
-    if(rank_li_list.length < for_num) {
-        for_num = rank_li_list.length;
-    }
-    //juni_numに件数を入れる
-    for(let i = 0; i < for_num; i++) {
-        juni_num.push(parseInt(rank_li_list[i].querySelector(".subsc_reginum").textContent));
-    }
-    //juni_noをfor_numの分初期化する　iの初期値は1　例：[1,2,3,4,5,6,7,8]
-    for(let i = 1; i < for_num + 1; i++) {
-        juni_no.push(i);
-    }
-    // console.log(juni_num);
-    // console.log(juni_no);
-
-    for(let i = 1; i < for_num; i++) {
-        if(juni_num[i] == juni_num[i-1]) {
-            juni_no[i] = juni_no[i-1];
-        }
-    }
-    
-    return juni_no
-}
-
-function add_ranking_number(ranking_id, juni_list) {
-    let document_rank = document.querySelector(ranking_id);
-    let ol_rank = document_rank.querySelector(".ol_ranking");
-    let rank_li_list = ol_rank.querySelectorAll("li");
-
-    loop_num  = 10;
-    if(loop_num > rank_li_list.length) {
-        loop_num = rank_li_list.length;
-    }
-    
-    if(loop_num > 0) {
-        for (let i = 0; i < loop_num; i ++) {
-            let medal_class = ranking_id + " .ol_ranking li:nth-child(" + (i + 1) + ") .medal";
-            let add_class_no = "no" + String(juni_list[i]);
-            $(medal_class).addClass(add_class_no);
-        }
-    }
-}
-
-$(window).on('load', function(){
-	//console.log(chart_graph_overall_service);
-    console.log("window");
 });

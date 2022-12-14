@@ -3,7 +3,6 @@
     height: 100%;
 }
 
-
 .login-page {
     /* width: 100%;
     height: 80vh;
@@ -20,14 +19,38 @@
     /* position: relative; */
     z-index: 1;
     background: #ffffff;
-    min-width: 300px;
-    max-width: 500px;
+    width: 95%;
+    /* min-width: 300px; */
+    max-width: 400px;
     margin: 4% auto 4%;
-    padding: 45px;
+    /* padding: 45px; */
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     overflow: scroll;
 }
+
+.form_top {
+    height: 20%;
+    display: flex;
+}
+.page_title {
+    font-weight: bold;
+    font-size: 35px;
+    margin: auto;
+}
+.form_middle {
+    height: 70%;
+}
+.form_middle form {
+    max-width: 500px;
+    margin: 0 10px;
+    font-size: 17px;
+}
+.form_bottom {
+    height: 10%;
+}
+
+
 
 
 .form input {
@@ -39,7 +62,9 @@
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
-    font-size: 14px;
+}
+#account_remember_me {
+    scale: 1.5;
 }
 
 .form button {
@@ -51,7 +76,6 @@
     border: 0;
     padding: 15px;
     color: #FFFFFF;
-    font-size: 14px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
@@ -62,7 +86,6 @@
 }
 
 .form .message {
-    margin: 15px 0 0;
     color: #b3b3b3;
     font-size: 15px;
 }

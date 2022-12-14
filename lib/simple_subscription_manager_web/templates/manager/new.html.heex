@@ -3,23 +3,25 @@
 
 
 <div class="content">
-    <div class="h1_div">
-        <h1>サブスクリプション登録</h1>
+    <div class="page_title">
+        <div class="page_title_content">サブスクリプション登録</div>
     </div>
     <div class="genre_select_area">
-        <div class="genre_text_div"><p>ジャンル</p></div>
-        <div class="genre_select_div">
-            <select name="genre" id="genre_select" class="genre_select">
-                <option value="all" selected>すべて</option>
-                <option value="video">動画配信</option>
-                <option value="music">音楽</option>
-                <option value="car">カーレンタル</option>
-                <option value="food">食品</option>
-                <option value="software">ソフトウェア</option>
-                <option value="furniture">家具</option>
-                <option value="lesson">習い事</option>
-                <option value="lesson">本</option>
-            </select>
+        <div class="genre_select_area_content">
+            <div class="genre_text_div"><p>ジャンル</p></div>
+            <div class="genre_select_div">
+                <select name="genre" id="genre_select" class="genre_select">
+                    <option value="all" selected>すべて</option>
+                    <option value="video">動画配信</option>
+                    <option value="music">音楽</option>
+                    <option value="car">カーレンタル</option>
+                    <option value="food">食品</option>
+                    <option value="software">ソフトウェア</option>
+                    <option value="furniture">家具</option>
+                    <option value="lesson">習い事</option>
+                    <option value="lesson">本</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -34,29 +36,30 @@
                     <%= select f, :subscription_id, Enum.map(@subscription_list, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -69,9 +72,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list do %>
                 <li id={~w/#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>
@@ -87,29 +94,30 @@
                     <%= select f, :subscription_id, Enum.map(@subscription_list_by_video, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_video", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -122,9 +130,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list_by_video do %>
                 <li id={~w/video-#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>
@@ -140,29 +152,30 @@
                     <%= select f, :subscription_id, Enum.map(@subscription_list_by_music, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_music", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -175,9 +188,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list_by_music do %>
                 <li id={~w/music-#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>
@@ -193,29 +210,30 @@
                     <%= select f, :subscription_id, Enum.map(@subscription_list_by_car, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_car", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -228,9 +246,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list_by_car do %>
                 <li id={~w/car-#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>
@@ -246,29 +268,30 @@
                     <%= select f, :subscription_id, Enum.map(@subscription_list_by_food, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_food", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -281,9 +304,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list_by_food do %>
                 <li id={~w/food-#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>
@@ -299,29 +326,30 @@
                     <%= select f, :subscription_id, Enum.map(@subscription_list_by_software, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_software", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -334,9 +362,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list_by_software do %>
                 <li id={~w/software-#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>
@@ -352,29 +384,30 @@
                     <%= select f, :subscription_id, Enum.map(@subscription_list_by_furniture, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_furniture", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -387,9 +420,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list_by_furniture do %>
                 <li id={~w/furniture-#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>
@@ -405,29 +442,30 @@
                     <%= select f, :subscription_id_by_lesson, Enum.map(@subscription_list_by_lesson, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_lesson", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -440,9 +478,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list_by_lesson do %>
                 <li id={~w/lesson-#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>
@@ -458,29 +500,30 @@
                     <%= select f, :subscription_id_by_book, Enum.map(@subscription_list_by_book, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_book", class: "select_subscription"%>
                 </div>
 
-                <div>
-                    <%= label f, "契約日" %>
-                    <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
-                            {gettext("1"), "1"},
-                            {gettext("2"), "2"},
-                            {gettext("3"), "3"},
-                            {gettext("4"), "4"},
-                            {gettext("5"), "5"},
-                            {gettext("6"), "6"},
-                            {gettext("7"), "7"},
-                            {gettext("8"), "8"},
-                            {gettext("9"), "9"},
-                            {gettext("10"), "10"},
-                            {gettext("11"), "11"},
-                            {gettext("12"), "12"},
-                        ]
-                    ] %>
-                    <%= error_tag f, :date_of_contract %>
-                </div>
-
-                <div>
-                    <%= label f, "継続する"%>
-                    <%= checkbox f, :continue %>
+                <div class="select_day">
+                    <div class="select_day_box">
+                        <%= label f, "契約日" %>
+                        <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
+                                {gettext("1"), "1"},
+                                {gettext("2"), "2"},
+                                {gettext("3"), "3"},
+                                {gettext("4"), "4"},
+                                {gettext("5"), "5"},
+                                {gettext("6"), "6"},
+                                {gettext("7"), "7"},
+                                {gettext("8"), "8"},
+                                {gettext("9"), "9"},
+                                {gettext("10"), "10"},
+                                {gettext("11"), "11"},
+                                {gettext("12"), "12"},
+                            ]
+                        ] %>
+                        <%= error_tag f, :date_of_contract %>
+                    </div>
+                    <div class="check_box">
+                        <%= label f, "継続する"%>
+                        <%= checkbox f, :continue %>
+                    </div>
                 </div>
 
                 <div class="select_submit">
@@ -493,9 +536,13 @@
             <ul id="subscription_list">
             <%= for subscription <- @subscription_list_by_book do %>
                 <li id={~w/book-#{subscription.id}/}>
-                    <h3><%= subscription.name %></h3>
-                    <p><%= subscription.description %></p>
-                    <div>月額: <%= subscription.price %></div>
+                    <div class="subsc_info_top">
+                        <div class="subsc_info_title"><%= subscription.name %></div>
+                        <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
+                    </div>
+                    <div class="subsc_info_bottom">
+                        <p><%= subscription.description %></p>
+                    </div>
                 </li>
             <% end %>
             </ul>

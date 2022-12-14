@@ -29,14 +29,29 @@ body{
 .container {
     position: relative;
 }
-.container > .alert-info {
-    position: absolute;
-    top: 0;
-}
+.container > .alert-info,
 .container > .alert-danger {
     position: absolute;
     top: 0;
+
+    animation-name: alert-opacity;
+    animation-duration: 5s;
+    animation-delay: 5s;
+    animation-fill-mode: forwards;
+
 }
+
+
+@keyframes alert-opacity{
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
 
 /* スクロールバーの太さなど*/
 ::-webkit-scrollbar {
