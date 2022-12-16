@@ -91,6 +91,10 @@
 .ranking_and_graph {
     display: flex;
     min-height: 300px;
+    padding-bottom: clamp(10px, 2vw, 30px);
+}
+.age_circle_graph {
+    padding-bottom: clamp(10px, 2vw, 30px);
 }
 .div_rag_ranking {
     display: flex;
@@ -121,7 +125,7 @@
 /* ランキングサービス全体のsubsc_name設定*/
 .ranking_service li .subsc_name,
 .ranking_genre li .subsc_genre {
-    font-size: clamp(20px, 2vw, 25px);
+    font-size: clamp(18px, 2vw, 20px);
     white-space: nowrap;
     width: 100%;
     overflow-x: scroll;
@@ -139,19 +143,16 @@
 }
 /* ランキング全体のsubsc_genre設定*/
 .ranking_service li .subsc_genre {
-    font-size: clamp(15px, 1vw, 20px);
+    font-size: clamp(15px, 1vw, 18px);
     display: block;
 }
 /* １〜３位のsubsc_genreの設定 */
-.ranking_service li:nth-child(1) .subsc_genre {
+.ranking_service li .no1 + .li_right .subsc_genre,
+.ranking_service li .no2 + .li_right .subsc_genre,
+.ranking_service li .no3 + .li_right .subsc_genre {
     font-size: clamp(15px, 2vw, 20px);
 }
-.ranking_service li:nth-child(2) .subsc_genre {
-    font-size: clamp(15px, 2vw, 20px);
-}
-.ranking_service li:nth-child(3) .subsc_genre {
-    font-size: clamp(15px, 2vw, 20px);
-}
+
 /* ランキングの11以下を非表示 */
 .ranking_service li:nth-child(n + 11) {
     display: none;
@@ -160,7 +161,7 @@
 }
 .ranking_service li:nth-child(-n + 3) {
 }
-/* 三位以内に表示するメダルの設定 */
+/* 四位以下に表示するメダルの設定 */
 .medal {
     margin-top: 2.5%;
     display: block;
@@ -168,11 +169,18 @@
     max-width: 50px;
     min-width: 40px;
     height: 3vw;
-    min-height: 40px;
-    max-height: 50px;
+    min-height: 25px;
+    max-height: 30px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+}
+.medal.no1,
+.medal.no2,
+.medal.no3 {
+    height: 3vw;
+    min-height: 40px;
+    max-height: 50px;
 }
 .medal.no1 {
     background-image: url(../images/medal_no1.png);
@@ -275,7 +283,7 @@
     display: none;
 }
 .mini_graph {
-
+    min-height: 200px;
 }
 .rag_bar_graph {
     width: 100%;

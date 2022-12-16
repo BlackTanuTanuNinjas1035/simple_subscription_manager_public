@@ -40,6 +40,10 @@ header a {
 
 .header-ul{
 }
+.header-ul li {
+    white-space: nowrap;
+    overflow-x: scroll;
+}
 .header-ul .mail_address {
     display: none;
 }
@@ -167,10 +171,14 @@ header li {
     width: 30%;
 }
 .header_left {
-    margin-left: 5%;
+    margin-left: 50px;
 }
 .header_left > a {
     display: flex;
+}
+.account-info {
+    width: calc(100vw - 660px);
+    text-align: right;
 }
 
 .sumaho_rogo {
@@ -183,13 +191,25 @@ header li {
     width: 100px;
 }
 
+
 @media screen and (max-width: 767px){
-    .header > a {
+    header,
+    .sumaho_rogo,
+    .nav-header {
+        height: 70px;
+    }
+    .header_left {
+        margin-left: 0;
+    }
+    
+    /* .header > a {
         display: none;
-    }
-    .sumaho_rogo {        
-    }
+    } */
+    
     .pc_rogo {
         display: none;
+    }
+    .account-info {
+        width: calc(100vw - 190px);
     }
 }

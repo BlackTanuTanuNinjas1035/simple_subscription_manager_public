@@ -36,12 +36,11 @@ body{
 
     animation-name: alert-opacity;
     animation-duration: 5s;
-    animation-delay: 5s;
+    animation-delay: 3s;
     animation-fill-mode: forwards;
 
 }
-
-
+/* アラートが数秒出て消えるアニメーション */
 @keyframes alert-opacity{
     0% {
         opacity: 1;
@@ -51,6 +50,13 @@ body{
     }
 }
 
+@media screen and (max-width: 767px){
+    .main_contents{
+        width: 100%;
+        /*高さ↓　ヘッダーのpxとフッターのpxを引いてる */
+        height: calc(100% - 70px);
+    }
+}
 
 
 /* スクロールバーの太さなど*/
@@ -69,3 +75,4 @@ body{
     border-radius: 10px;
     box-shadow:0 0 0 1px rgba(255, 255, 255, .3);
 }
+

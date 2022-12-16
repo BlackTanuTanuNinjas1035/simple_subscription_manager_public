@@ -33,8 +33,8 @@ $(window).on('load resize', function(){
     }
 });
 
-//ol_rankingのtagdataを受け取るとspanの要素を取得し、リストにして返す
-function get_ranking(ranking_and_graph_id) {
+//ol_rankingのtagdataを受け取るとspanの要素を取得し、リストにして返す　あと取得するランキングの数を取得する
+function get_ranking(ranking_and_graph_id, rank_num) {
     //受取ったtag_dataはquerySelectorで取得したrankingのolのやつ
     //olから値取る
     let subsc_name_list = [];
@@ -52,14 +52,14 @@ function get_ranking(ranking_and_graph_id) {
         let tmp_name = li_list[i].querySelector(".subsc_name").textContent;
         let tmp_reginum = parseFloat(li_list[i].querySelector(".subsc_reginum").textContent);
 
-        if (i < 10) {
+        if (i < rank_num) {
             //10未満の処理
             subsc_name_list[i] = tmp_name;
             subsc_reginum_list[i] = tmp_reginum;
             sum += tmp_reginum;
-        } else if (i == 10) {
+        } else if (i == rank_num) {
             //10のときの処理
-            subsc_name_list[10] = "その他";
+            subsc_name_list[rank_num] = "その他";
             sum += tmp_reginum;
             sum_less_than += tmp_reginum;
         } else {

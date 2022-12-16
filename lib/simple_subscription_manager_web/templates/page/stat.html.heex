@@ -16,7 +16,7 @@
         <div class="ranking ranking_service active">
             <div class="ranking_title">人気のサービスランキング</div>
             <div class="ranking_and_graph" id="overall_service">
-                    <div class="div_rag_ranking hello">
+                    <div class="div_rag_ranking">
                         <div class="rag_ranking">
                         
                         <ol class="ol_ranking">
@@ -32,7 +32,7 @@
                         </ol>
                         </div>
                     </div>
-                    <div class="rag_graph hello">
+                    <div class="rag_graph">
                         <canvas id="graph_overall_service" class="graph"></canvas>
                     </div>
             </div>
@@ -223,7 +223,7 @@
                         </div>
                 </div>
 
-                <div class="ranking_title">年代別　男性に人気のサービスランキング</div>
+                <div class="ranking_title">年代別　男性人気 サービス</div>
                 <div class="male_age_service age_circle_graph">
                     <div class="mini_ranking_and_graph" id="male_age_00_service">
                         
@@ -404,7 +404,7 @@
                     </div>
                 </div>
 
-                <div class="ranking_title">年代別　女性に人気のサービスランキング</div>
+                <div class="ranking_title">年代別　女性人気 サービス</div>
                 <div class="female_age_service age_circle_graph">
                     <div class="mini_ranking_and_graph" id="female_age_00_service">
                         <div class="mini_ranking">
@@ -1018,9 +1018,11 @@
 
 </div>
 
-<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/chartjs-plugin-labels.js")}></script>
+<!-- <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/chartjs-plugin-labels.js")}></script> --->
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
 
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/page_stat.js")}></script>

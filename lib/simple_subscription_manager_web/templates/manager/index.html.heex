@@ -5,15 +5,25 @@
         <!-- <link phx-track-static rel="stylesheet" media="screen and (max-width:768px)" href={Routes.static_path(@conn, "/assets/manager_index_sumaho.css")}/> --->
 
         <div class="top_content">
-            <div>あなたの利用しているサブスクリプションを登録しましょう!</div>
+            <!--<div>あなたの利用しているサブスクリプションを登録しましょう!</div>--->
             <!--
             <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
             --->
-            <%= link to: Routes.manager_path(@conn, :new) do%>
-                登録
-            <% end %> 
-
-            <%= link "履歴", to: Routes.history_path(@conn, :index) %>
+            <div class="button_div">
+                <div class="button_spece"><div>あなたの利用しているサブスクを登録しよう!</div></div>
+                <div class="regi_button_div">
+                    <div class="regi_button">
+                        <%= link to: Routes.manager_path(@conn, :new) do%>
+                            登録
+                        <% end %> 
+                    </div>
+                </div>
+                <div class="history_button_div">
+                    <div class="history_button">
+                        <%= link "履歴", to: Routes.history_path(@conn, :index) %>
+                    </div>
+                </div>
+            </div>
             <h2>登録しているサービス</h2>
         </div>
 
@@ -33,17 +43,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
+                    <div class="subsc_middle">
+                        <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
+                        <div class="subsc_continue">
+                            <%= if subscribe.continue == true do %>
+                                    <div>継続○</div>
+                            <% else %>
+                                    <div>継続×</div>
+                            <% end %>
+                        </div>
+                    </div>
                     <div class="card_flex">
                         <!-- <div class="subsc_payment">契約日: <%= subscribe.date_of_contract %></div> --->
                         <div class="subsc_payment">次回支払日: <%= subscribe.date_of_payment %></div>
-                        <%= if subscribe.continue == true do %>
-                            <div>継続する</div>
-                        <% else %>
-                            <div>継続しない</div>
-                        <% end %>
+                        
                         <!-- subsc_price　はcssの疑似要素::afterで円を挿入 --->
-                        <div class="subsc_price"><%= subscribe.subscription_alias.price %></div>
+                        <div class="subsc_price_div"><div class="subsc_price"><%= subscribe.subscription_alias.price %></div>円</div>
                     </div>
                     <div class="subsc_change_payment">
                     <%# 登録内容の更新 %>
@@ -116,13 +131,16 @@
     <!-- <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/jquery.inview.min.js")}></script> --->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_index.js")}></script>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/manager_graph.js")}></script>
 
 </div>
 
+<!--
 <div class="sumaho_content">
     <div class="register_button">登録</div>
 </div>
+--->
 

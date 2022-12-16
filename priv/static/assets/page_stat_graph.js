@@ -1,5 +1,14 @@
-var global_value = 0;
+//棒グラフのツールチップを中心に表示するため
+Chart.Tooltip.positioners.middle = elements => {
+    let model = elements[0]._model;
+    return {
+    x: model.x,
+    y: (model.base + model.y) / 2
+    };
+};
 
+//ホバーした要素をグラフの中心に表示するためのやつ
+var global_value = 0;
 var chartJsPluginCenterLabel = {
     afterDatasetsDraw: function (chart) {
     console.log("プラグイン");
@@ -26,11 +35,11 @@ var chartJsPluginCenterLabel = {
     ctx.fillStyle = '#636363';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-
     return ctx;
     }
 };
 var options = {//グラフのオプション
+    cutoutPercentage: 50, //ドーナツグラフの何％をえぐるか
     maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
     legend:{
         display:false//グラフの説明を表示
@@ -41,7 +50,8 @@ var options = {//グラフのオプション
             //return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
             return data.labels[tooltipItem.index]
             }
-        },    
+        },
+        //bodyFontSize: 15, //ツールチップのフォントサイズ
     },
     title:{//上部タイトル表示の設定
         display: false,
@@ -51,13 +61,105 @@ var options = {//グラフのオプション
 
      //このpluginsはパーセンテージ表示の外部のやつ
     plugins: {
-        labels: {
-        render: 'percentage',
-        fontColor: 'black',
-        fontSize: 20
+        datalabels: {
+            formatter: (value, ctx) => {
+                let sum = 0;
+                let data_length = ctx.chart.data.datasets[0].data.length;
+                let data_set_index = ctx.datasetIndex;
+                let data_index = ctx.dataIndex;
+                for(let i = 0; i < data_length; i++){
+                    sum += ctx.chart.data.datasets[0].data[i]
+                }
+                // console.log(ctx.dataset.label);
+
+                // let return_num = (value*100 / sum).toFixed(2)+"%";
+                //パーセントが小さすぎたら数字を表示させない
+                let percentage = (value*100 / sum);
+                let return_num;
+                if ( percentage > 1) {
+                    return_num = percentage.toFixed(1)+"%";
+                }else {
+                    return_num = null;
+                }
+                return return_num
+            },
+            color: '#040404',
+            anchor: 'center',
+            font: {
+                size: 20
+            },
+            labels: {
+                title: {
+                    font: {
+                        weight: 'bold'
+                    }
+                }
+            }
         }
     }
 };
+//ミニグラフ用　フォントサイズを変えたかったから
+var options_mini = {//グラフのオプション
+    cutoutPercentage: 50, //ドーナツグラフの何％をえぐるか
+    maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
+    legend:{
+        display:false//グラフの説明を表示
+    },
+    tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
+        callbacks:{
+            label: function (tooltipItem, data) {
+            //return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
+            return data.labels[tooltipItem.index]
+            }
+        },
+        //bodyFontSize: 15, //ツールチップのフォントサイズ
+    },
+    title:{//上部タイトル表示の設定
+        display: false,
+        fontSize:10,
+        text: '単位：%'
+    },
+
+     //このpluginsはパーセンテージ表示の外部のやつ
+    plugins: {
+        datalabels: {
+            formatter: (value, ctx) => {
+                let sum = 0;
+                let data_length = ctx.chart.data.datasets[0].data.length;
+                let data_set_index = ctx.datasetIndex;
+                let data_index = ctx.dataIndex;
+                for(let i = 0; i < data_length; i++){
+                    sum += ctx.chart.data.datasets[0].data[i]
+                }
+                // console.log(ctx.dataset.label);
+
+                // let return_num = (value*100 / sum).toFixed(2)+"%";
+                //パーセントが小さすぎたら数字を表示させない
+                let percentage = (value*100 / sum);
+                let return_num;
+                if ( percentage > 1) {
+                    return_num = percentage.toFixed(1)+"%";
+                }else {
+                    return_num = null;
+                }
+                return return_num
+            },
+            color: '#040404',
+            anchor: 'center',
+            font: {
+                size: 15
+            },
+            labels: {
+                title: {
+                    font: {
+                        weight: 'bold'
+                    }
+                }
+            }
+        }
+    }
+};
+
 var prevHoveredIndexes = [];
 options.events = ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove', 'hover'];
 options.onHover = (event, hoveredItems) => {
@@ -82,97 +184,17 @@ options.onHover = (event, hoveredItems) => {
     // }
 }
 
-//値をグラフに表示させる
-// Chart.plugins.register({
-//     afterDatasetsDraw: function (chart, easing) {
-//         var ctx = chart.ctx;
-
-//         chart.data.datasets.forEach(function (dataset, i) {
-//             var meta = chart.getDatasetMeta(i);
-//             if (!meta.hidden) {
-//                 meta.data.forEach(function (element, index) {
-//                     // 値の表示
-//                     ctx.fillStyle = 'rgb(0, 0, 0,0.8)';//文字の色
-//                     var fontSize = 12;//フォントサイズ
-//                     var fontStyle = 'normal';//フォントスタイル
-//                     var fontFamily = 'Arial';//フォントファミリー
-//                     ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
-
-//                     //var dataString = dataset.data[index].toString();
-//                     //var dataString = chart.data.labels[index];
-        
-//                     // 値の位置
-//                     ctx.textAlign = 'center';//テキストを中央寄せ
-//                     ctx.textBaseline = 'middle';//テキストベースラインの位置を中央揃え
-
-//                     var padding = 5;//余白
-//                     var position = element.tooltipPosition();
-//                     ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
-    
-//                 });
-//             }
-//         });
-        
-//     }
-// });
-
-// function graphView(graph_id) {
-//         var ctx=document.getElementById(graph_id);//グラフを描画したい場所のid
-
-//         // var tmp = getSubsc();
-//         // var ls_name = tmp[0];
-//         // var ls_price = tmp[1];
-//         //console.log(ls_name);
-//         var chart=new Chart(ctx,{
-//             type:'pie',//グラフのタイプ
-//             //type:'doughnut',
-//             data:{//グラフのデータ
-//                 labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
-//                 //labels:ls_name,
-//                 datasets:[{
-//                     label:"職種別比率",//グラフのタイトル
-//                     backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
-//                     data:["960", "1000"]//データ
-//                     //data:ls_price
-//                 }]
-//             },
-
-//             options:{//グラフのオプション
-//                 maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
-//                 legend:{
-//                     display:true//グラフの説明を表示
-//                 },
-//                 tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
-//                     callbacks:{
-//                         label: function (tooltipItem, data) {
-//                         return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
-//                         }
-//                     },    
-//                 },
-//                 title:{//上部タイトル表示の設定
-//                     display: true,
-//                     fontSize:10,
-//                     text: '単位：%'
-//                 },
-//             }
-            
-            
-//         });
-//         return chart
-// }
-
-//ranking_and_graphのところのidを引数で渡す
+//ranking_and_graphのところのidを引数で渡す　それと取得するランキングの数を引数で渡す　10を入れると　1~10位　11位以下はその他になる
 function graphView(ranking_and_graph_id) {
     let a = document.querySelector("#" + ranking_and_graph_id);
-    //let b = a.querySelector(".ol_ranking");
-    //let ranking_data = get_ranking(b);
-    let ranking_data = get_ranking(ranking_and_graph_id)
+    // 取得するランキングの数を引数で渡す　10を入れると　1~10位　11位以下はその他になる
+    let rank_num = 10;
+    let ranking_data = get_ranking(ranking_and_graph_id, rank_num)
     //console.log(ranking_data);
     var ctx = a.querySelector(".graph"); //グラフを描画したい場所のid
 
     var chart=new Chart(ctx,{
         type:'doughnut',//グラフのタイプ
-        //type:'doughnut',
         data:{//グラフのデータ
             //labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
             labels:ranking_data[0],
@@ -184,42 +206,39 @@ function graphView(ranking_and_graph_id) {
             }]
         },
 
-        options: options//グラフのオプション
-            // maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
-            // legend:{
-            //     display:false//グラフの説明を表示
-            // },
-            // tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
-            //     callbacks:{
-            //         label: function (tooltipItem, data) {
-            //         //return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
-            //         return data.labels[tooltipItem.index]
-            //         }
-            //     },    
-            // },
-            // title:{//上部タイトル表示の設定
-            //     display: false,
-            //     fontSize:10,
-            //     text: '単位：%'
-            // },
+        options: options,
+    });
+    return chart
+}
+//ミニグラフ用　オプションのフォントサイズを変える方法が新しく作るしか思いつかなかった
+function graphView_mini(ranking_and_graph_id) {
+    let a = document.querySelector("#" + ranking_and_graph_id);
+    // 取得するランキングの数を引数で渡す　10を入れると　1~10位　11位以下はその他になる
+    let rank_num = 3;
+    let ranking_data = get_ranking(ranking_and_graph_id, rank_num)
+    //console.log(ranking_data);
+    var ctx = a.querySelector(".graph"); //グラフを描画したい場所のid
 
-            //  //このpluginsはパーセンテージ表示の外部のやつ
-            // plugins: {
-            //     labels: {
-            //     render: 'percentage',
-            //     fontColor: 'black',
-            //     fontSize: 20
-            //     }
-            // }
-        
+    var chart=new Chart(ctx,{
+        type:'doughnut',//グラフのタイプ
+        data:{//グラフのデータ
+            //labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
+            labels:ranking_data[0],
+            datasets:[{
+                label:"職種別比率",//グラフのタイトル
+                backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
+                //data:["960", "1000"]//データ
+                data:ranking_data[1]
+            }]
+        },
+
+        options: options_mini,
     });
     return chart
 }
 //ジャンル用のグラフ描画関数　liのspanのclassが違うから取ってくる関数が違うだけなはず
 function graphView_genre(ranking_and_graph_id) {
     let a = document.querySelector("#" + ranking_and_graph_id);
-    //let b = a.querySelector(".ol_ranking");
-    //let ranking_data = get_ranking_genre(b);
     let ranking_data = get_ranking_genre(ranking_and_graph_id);
     //console.log(ranking_data);
     var ctx = a.querySelector(".graph"); //グラフを描画したい場所のid
@@ -237,9 +256,7 @@ function graphView_genre(ranking_and_graph_id) {
                 data:ranking_data[1]
             }]
         },
-
         options: options
-        
     });
     return chart
 }
@@ -248,20 +265,15 @@ function graphView_genre(ranking_and_graph_id) {
 function graphView_age_genre(age_genre_id) {
     let a = document.querySelector("#" + age_genre_id);
     let datasets_data = get_age_ranking_genre("#" + age_genre_id);
-    //console.log(datasets_data);
     var ctx = a.querySelector(".bar_graph"); //グラフを描画したい場所のid
 
     var chart=new Chart(ctx,{
         type:'bar',//グラフのタイプ
-        //type:'doughnut',
         data:{//グラフのデータ
             labels:["00代", "10代", "20代", "30代", "40代", "50代", "60代", "70代"],//データの名前
-            //labels:ranking_data[0],
-
             datasets: datasets_data
         },
-
-        options:{//グラフのオプション
+        options:{
             maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
             legend:{
                 display:false//グラフの説明を表示
@@ -272,7 +284,10 @@ function graphView_age_genre(age_genre_id) {
                     //return data.labels[tooltipItem.index]+ ": "+ data.datasets[0].data[tooltipItem.index] + "%";//%を最後につける
                     return data.datasets[tooltipItem.datasetIndex].label
                     }
-                },    
+                },
+                position: 'middle',  // must match the positioner function name defined above
+                yAlign: null,        // to get rid of the pointer
+                xAlign: 'center'
             },
             scales: {
                 xAxes: [
@@ -291,14 +306,43 @@ function graphView_age_genre(age_genre_id) {
                 fontSize:10,
                 text: '単位：%'
             },
-
             //このpluginsはパーセンテージ表示の外部のやつ
             plugins: {
-                labels: {
-                render: 'percentage',
-                fontColor: 'black',
-                fontSize: 20,
-                position: "default"
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        let sum = 0;
+                        let datasets_length = ctx.chart.data.datasets.length;
+                        let data_set_index = ctx.datasetIndex;
+                        let data_index = ctx.dataIndex;
+                        for(let i = 0; i < datasets_length; i++){
+                            sum += ctx.chart.data.datasets[i].data[data_index]
+                        }
+                        console.log(sum);
+                        // console.log(ctx.dataset.label);
+
+                        // let return_num = (value*100 / sum).toFixed(2)+"%";
+                        //パーセントが小さすぎたら数字を表示させない
+                        let percentage = (value*100 / sum);
+                        let return_num;
+                        if ( percentage > 1) {
+                            return_num = percentage.toFixed(1)+"%";
+                        }else {
+                            return_num = null;
+                        }
+                        return return_num
+                    },
+                    color: '#040404',
+                    anchor: 'center',
+                    font: {
+                        size: 20
+                    },
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -336,7 +380,6 @@ $(function() {
     }
 
     let chart_graph_overall_service;
-    console.log("document 1");
     //すべてのサービスランキングのグラフ描画処理
     $("#graph_overall_service").on("inview", function() {
         if (flag_graph_overall_service) {
@@ -344,10 +387,8 @@ $(function() {
             let tmp = "overall_service";
             chart_graph_overall_service = graphView(tmp); //オブジェクトが返ってくる　個別にoptionなど変更したいとき
             //console.log(chart_graph_overall_service);
-            console.log("document 2");
         };
     });
-    console.log("document 3")
     
 
     //年代別　人気のサービスランキング
@@ -362,7 +403,7 @@ $(function() {
             $(chart_id_sub).on("inview", function() {
                 if(flaglist_graph_overall_age_service[i]) {
                     flaglist_graph_overall_age_service[i] = false;
-                    chartlist_graph_overall_age_service[i] = graphView(chart_id);
+                    chartlist_graph_overall_age_service[i] = graphView_mini(chart_id);
                 }
             })
         })(i, chart_id, chart_id_sub, flaglist_graph_overall_age_service, chartlist_graph_overall_age_service);
@@ -387,7 +428,7 @@ $(function() {
             $(chart_id_sub).on("inview", function() {
                 if(flaglist_graph_male_age_service[i]) {
                     flaglist_graph_male_age_service[i] = false;
-                    chartlist_graph_male_age_service[i] = graphView(chart_id);
+                    chartlist_graph_male_age_service[i] = graphView_mini(chart_id);
                 }
             })
         })(i, chart_id, chart_id_sub, flaglist_graph_male_age_service, chartlist_graph_male_age_service);
@@ -409,7 +450,7 @@ $(function() {
             $(chart_id_sub).on("inview", function() {
                 if(flaglist_graph_female_age_service[i]) {
                     flaglist_graph_female_age_service[i] = false;
-                    chartlist_graph_female_age_service[i] = graphView(chart_id);
+                    chartlist_graph_female_age_service[i] = graphView_mini(chart_id);
                 }
             })
         })(i, chart_id, chart_id_sub, flaglist_graph_female_age_service, chartlist_graph_female_age_service);

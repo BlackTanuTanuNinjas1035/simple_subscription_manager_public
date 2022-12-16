@@ -1,13 +1,13 @@
 <!-- ログイン時のユーザーの名前とか表示するところ --->
 <ul class="header-ul">
 <%= if @current_account do %>
-  <li>いらっしゃい、<%= @current_account.name %> さん!</li>
+  <li><%= @current_account.name %> さん、いらっしゃい！</li>
   <li class="mail_address">メアド: <%= @current_account.email %> さん!</li>
-  <li><%= link "アカウントの設定をする", to: Routes.account_settings_path(@conn, :edit) %></li>
-  <li><%= link "ログアウトする", to: Routes.account_session_path(@conn, :delete), method: :delete %></li>
+  <li><%= link "アカウント設定", to: Routes.account_settings_path(@conn, :edit) %></li>
+  <li><%= link "ログアウト", to: Routes.account_session_path(@conn, :delete), method: :delete %></li>
   <!-- <li><%= link "退会する", to: Routes.account_quit_path(@conn, :index) %></li> -->
 <% else %>
-  <li><%= link "アカウントの登録をする", to: Routes.account_registration_path(@conn, :new) %></li>
-  <li><%= link "ログインする", to: Routes.account_session_path(@conn, :new) %></li>
+  <li><%= link "アカウント登録", to: Routes.account_registration_path(@conn, :new) %></li>
+  <li><%= link "ログイン", to: Routes.account_session_path(@conn, :new) %></li>
 <% end %>
 </ul>

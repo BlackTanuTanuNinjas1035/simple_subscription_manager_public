@@ -1,72 +1,78 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/login.css")}/>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/create_account.css")}/>
 
 <div class="login-page">
   <div class="form reg">
-    <h1>アカウントの登録</h1>
+    <div class="form_top">
+      <div class="page_title">アカウントの登録</div>
+    </div>
+    <div class="form_middle">
+      <.form let={f} for={@changeset} action={Routes.account_registration_path(@conn, :create)}>
+        <%= if @changeset.action do %>
+          <div class="alert alert-danger">
+            <p>どこかに入力の誤りがありました! 入力内容を確認してください。</p>
+          </div>
+        <% end %>
 
-    <.form let={f} for={@changeset} action={Routes.account_registration_path(@conn, :create)}>
-      <%= if @changeset.action do %>
-        <div class="alert alert-danger">
-          <p>どこかに入力の誤りがありました! 入力内容を確認してください。</p>
+        <div>
+          <%= label f, "ニックネーム" %>
+          <%= text_input f, :name, required: true%>
+          <%= error_tag f, :name%>
         </div>
-      <% end %>
 
-      <div>
-        <%= label f, "ニックネーム" %>
-        <%= text_input f, :name, required: true%>
-        <%= error_tag f, :name%>
-      </div>
+        <div>
+          <%= label f, "メールアドレス" %>
+          <%= email_input f, :email, required: true %>
+          <%= error_tag f, :email %>
+        </div>
+        <div>
+          <%= label f, "パスワード" %>
+          <%= password_input f, :password, required: true %>
+          <%= error_tag f, :password %>
+        </div>
+        <div>
+          <%= label f, "年齢" %>
+          <%= date_select f, :age, year: [options: 1950..@today.year], default: @today, month: [options: [
+              {gettext("1"), "1"},
+              {gettext("2"), "2"},
+              {gettext("3"), "3"},
+              {gettext("4"), "4"},
+              {gettext("5"), "5"},
+              {gettext("6"), "6"},
+              {gettext("7"), "7"},
+              {gettext("8"), "8"},
+              {gettext("9"), "9"},
+              {gettext("10"), "10"},
+              {gettext("11"), "11"},
+              {gettext("12"), "12"},
+            ]
+          ] %>
+          <%= error_tag f, :age %>
+        </div>
+        <div class="seibetu">
+          <%= label f, "性別" %>
+          <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力" %>
+          <%= error_tag f, :gender %>
+        </div>
 
-      <div>
-        <%= label f, "メールアドレス" %>
-        <%= email_input f, :email, required: true %>
-        <%= error_tag f, :email %>
-      </div>
-      <div>
-        <%= label f, "パスワード" %>
-        <%= password_input f, :password, required: true %>
-        <%= error_tag f, :password %>
-      </div>
-      <div>
-        <%= label f, "年齢" %>
-        <%= date_select f, :age, year: [options: 1950..@today.year], default: @today, month: [options: [
-            {gettext("1"), "1"},
-            {gettext("2"), "2"},
-            {gettext("3"), "3"},
-            {gettext("4"), "4"},
-            {gettext("5"), "5"},
-            {gettext("6"), "6"},
-            {gettext("7"), "7"},
-            {gettext("8"), "8"},
-            {gettext("9"), "9"},
-            {gettext("10"), "10"},
-            {gettext("11"), "11"},
-            {gettext("12"), "12"},
-          ]
-        ] %>
-        <%= error_tag f, :age %>
-      </div>
-      <div class="seibetu">
-        <%= label f, "性別" %>
-        <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力" %>
-        <%= error_tag f, :gender %>
-      </div>
+        <div>入力していただいた情報(性別、年齢、登録したサービス)などを収集して、グラフすることで利用者全体のサービスの利用情報の表示を考えております
+        </div>
+        <div>
+          <%= label f, "ユーザ情報の利用を許可する"%>
+          <%= checkbox f, :use_user_info %>
+        </div>
 
-      <div>入力していただいた情報(性別、年齢、登録したサービス)などを収集して、グラフすることで利用者全体のサービスの利用情報の表示を考えております
-      </div>
-      <div>
-        <%= label f, "ユーザ情報の利用を許可する"%>
-        <%= checkbox f, :use_user_info %>
-      </div>
+        <div class="submit_button">
+          <%= submit "登録" %>
+        </div>
+      </.form>
+    </div>
 
-      <div>
-        <%= submit "登録" %>
-      </div>
-    </.form>
-
-    <p class="message">
-      <%= link "ログイン", to: Routes.account_session_path(@conn, :new) %> |
-      <%= link "パスワードを忘れたら？", to: Routes.account_reset_password_path(@conn, :new) %>
-    </p>
+    <div class="form_bottom">
+      <p class="message">
+        <%= link "ログイン", to: Routes.account_session_path(@conn, :new) %> |
+        <%= link "パスワードを忘れたら？", to: Routes.account_reset_password_path(@conn, :new) %>
+      </p>
+    </div>
   </div>
 </div>

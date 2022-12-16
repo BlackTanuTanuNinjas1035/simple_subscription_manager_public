@@ -70,7 +70,8 @@ button {
     font-weight: bold;
 }
 
-.start_button:hover{
+.start_button:hover,
+.start_button:active{
     background-color: #e78036;
     box-shadow: 0px 4px rgb(197, 118, 0); 
     position:relative;

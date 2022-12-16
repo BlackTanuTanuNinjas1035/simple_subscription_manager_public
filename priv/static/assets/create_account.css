@@ -1,0 +1,48 @@
+#front {
+    height: 100%;
+}
+.main_contents {
+    height: auto;
+}
+.login-page {
+    height: 100%;
+}
+.form {
+    margin: 2% auto;
+    font-size: 10vw;
+    height: fit-content;
+    max-width: 610px;
+    text-align: center;
+}
+.form_top {
+    height: auto;
+    margin: 2%;
+}
+.form_middle {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+}
+.form_middle form {
+    font-size: clamp(17px, 2vw, 20px);
+    
+}
+.submit_button {
+    margin: 2%;
+}
+.form_bottom {
+    height: auto;
+    margin: 2%;
+}
+.form .message {
+    font-size: clamp(15px, 2vw, 17px);
+}
+.form input {
+    text-align: center;
+}
+
+#account_use_user_info {
+    width: 50%;
+    scale: 1.5;
+}

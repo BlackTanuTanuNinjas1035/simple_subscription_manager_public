@@ -52,7 +52,6 @@
     grid-area: right;
 }
 
-/*  gridレイアウトつかってみたい */
 .subsc_card {
 
     background-color: rgb(191, 255, 108);
@@ -62,7 +61,60 @@
     border-radius: 10px;
     box-shadow: 5px 5px 5px 0 rgb(0, 0, 0, .5);
     border: none;
+    padding-left: 5%;
 }
+.button_div{
+    display: flex;
+    justify-content: right;
+    margin-top: 5px;
+}
+.button_spece {
+    /* width: 60%; */
+}
+.regi_button_div {
+    width: 20%;
+}
+.regi_button,
+.history_button{
+    width: 90%;
+    min-width: 50px;
+    height: 50px;
+    margin: auto;
+    border-radius: 10px;
+    display: table;
+    background-color: #ff8f3e;
+    box-shadow: 0px 4px rgb(197, 118, 0);
+    font-size: 20px;
+    font-weight: bold;
+}
+.regi_button:hover,
+.regi_button:active,
+.history_button:hover,
+.history_button:active{
+    background-color: #e78036;
+    box-shadow: 0px 2px rgb(197, 118, 0); 
+    position:relative;
+    top: 4px;
+}
+.regi_button > a,
+.history_button > a {
+    text-decoration: none;
+    display: table-cell;
+    vertical-align: middle;
+}
+.history_button_div {
+    width: 20%;
+}
+.history_button{
+}
+.history_button:hover,
+.history_button:active{
+}
+.history_button > a {
+}
+
+
+
 .card_flex {
     display: flex;
     justify-content: space-between;
@@ -70,7 +122,6 @@
 
 .subsc_name {
     text-align: left;
-    margin-left: 5%;
     font-size: 20px;
     /* はみ出した部分をスクロールにする */ 
     white-space: nowrap;
@@ -93,25 +144,36 @@
     border-radius: 10px;
     box-shadow:0 0 0 1px rgba(255, 255, 255, .3);
 }
+.subsc_middle {
+    display: flex;
+}
 .subsc_genre {
     text-align: left;
-    margin-left: 5%;
+    width: 70%;
+    white-space: nowrap;
+    overflow-x: scroll;
 }
-.subsc_price {
+.subsc_continue {
+    width: 30%;
+    text-align: right;
+}
+.subsc_price_div {
+    display: flex;
     font-size: 20px;
     align-self: end;
 }
-/*なんかクロームだけで文字化けしたから直接書くことにした いけど別の問題が */
+.subsc_price {
+    
+}
+/*なんかクロームだけで文字化けしたから直接書くことにした いけどこのdivに文字が入ってるとグラフに数値を取得できなくなる */
 .subsc_price::after {
-    content: "円";
+    /* content: "円"; */
 }
 .subsc_payment {
     text-align: left;
-    margin-left: 5%;
 }
 .subsc_change_payment {
     text-align: left;
-    margin-left: 5%;
     display: none;
 }
 .subsc_option {
@@ -209,7 +271,7 @@
     display: none;
 }
 
-.sumaho_content {
+/* .sumaho_content {
     position: absolute;
     right: 30px;
     bottom: 20px;
@@ -221,7 +283,7 @@
     background-color: rgba(255, 152, 83, 0.692);
     text-align: center;
     border-radius: 30px;
-}
+} */
 
 @media screen and (max-width: 767px){
     .container > .big_content {
@@ -243,7 +305,7 @@
         margin-bottom: 10px;
         height: calc( 100vh - 120px);
     }
-    .sumaho_content {
+    /* .sumaho_content {
         display: block;
-    }
+    } */
 }
