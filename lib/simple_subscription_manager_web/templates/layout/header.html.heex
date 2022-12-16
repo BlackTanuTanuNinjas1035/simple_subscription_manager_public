@@ -1,14 +1,14 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/header.css")}/>
 <section class="container header">
-    
+
     <div class="header_left">
         <%= unless @current_account do %>
             <%= link to: Routes.page_path(@conn, :index) do%>
                 <div class="sumaho_rogo"></div>
                 <div class="pc_rogo">
-                    <img src={Routes.static_path(@conn, "/images/mozi1.png")} class="header_logo" alt="Simple Subscription Manager Logo"/>    
+                    <img src={Routes.static_path(@conn, "/images/mozi1.png")} class="header_logo" alt="Simple Subscription Manager Logo"/>
                 </div>
-            <% end %> 
+            <% end %>
         <% else %>
             <%= link to: Routes.manager_path(@conn, :index) do%>
             <div class="sumaho_rogo"></div>
@@ -18,7 +18,7 @@
             <% end %>
         <% end %>
     </div>
-    
+
 
     <nav class="nav-header">
 
@@ -39,23 +39,23 @@
                     <nav class="hamburger_nav" id="hamburger_nav">
                         <ul class="nav__items nav-items">
                             <li class="hbg_nav_li">
-                                <p class="hbg_nav_p">当サイトについて</p>
-                                <div class="hbg_nav_link"><%= link "使い方について", to: Routes.page_path(@conn, :help) %></div>
+                                <p class="hbg_nav_p">サブスクーラーについて</p>
+                                <div class="hbg_nav_link"><%= link "サブスクーラーの使い方", to: Routes.page_path(@conn, :help) %></div>
                                 <%= if @current_account do %>
-                                    <%= link "退会する", to: Routes.account_quit_path(@conn, :index) %>
+                                    <%= link "アカウントの退会", to: Routes.account_quit_path(@conn, :index) %>
                                 <% end %>
-                                <div><%= link "お知らせ", to: Routes.topic_path(@conn, :index) %></div>
-                                <div><%= link "お問い合わせ", to: Routes.form_path(@conn, :form) %></div>
+                                <div><%= link "お知らせ一覧", to: Routes.topic_path(@conn, :index) %></div>
+                                <div><%= link "お問い合わせページ", to: Routes.form_path(@conn, :form) %></div>
                             </li>
                             <li class="hbg_nav_li">
-                                <p class="hbg_nav_p">各画面へのリンク</p>
-                                    <div class="hbg_nav_link"><%= link "登録サービス一覧を表示", to: Routes.manager_path(@conn, :index) %></div>
-                                    <div class="hbg_nav_link"><%= link "サービスを登録する", to: Routes.manager_path(@conn, :new) %></div>
+                                <p class="hbg_nav_p">サブスク利用者向けページ</p>
+                                    <div class="hbg_nav_link"><%= link "利用料金表示ページ", to: Routes.manager_path(@conn, :index) %></div>
+                                    <div class="hbg_nav_link"><%= link "新しくサービスを登録する", to: Routes.manager_path(@conn, :new) %></div>
                                     <div class="hbg_nav_link"><%= link "アカウント情報を変更する", to: Routes.account_settings_path(@conn, :edit) %></div>
                             </li>
                             <li class="hbg_nab_li">
-                                <p class="hbg_nav_p">企業向け</p>
-                                <div class="hbg_nav_link"><%= link "利用サービスの統計", to: Routes.page_path(@conn, :stat) %></div>
+                                <p class="hbg_nav_p">企業向けページ</p>
+                                <div class="hbg_nav_link"><%= link "サブスクの利用傾向一覧ページ", to: Routes.page_path(@conn, :stat) %></div>
                                 <!--- 下のやつがAPIのリンク　パスは通ってない --->
                                 <div class="hbg_nav_link"><%= link "APIドキュメント", to: Routes.document_path(@conn, :index) %></div>
 

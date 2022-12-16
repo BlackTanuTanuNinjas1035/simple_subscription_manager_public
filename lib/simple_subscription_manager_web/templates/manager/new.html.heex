@@ -3,8 +3,12 @@
 
 
 <div class="content">
+    <div class="title_left"><%= link "", to: Routes.manager_path(@conn, :index) %></div>
     <div class="page_title">
         <div class="page_title_content">サブスクリプション登録</div>
+    </div>
+    <div class="left_text">
+        <p>　ご利用のサブスクリプションサービスを登録してください。契約日を選択していただきますと、その月の支払い履歴に登録されます。継続にチェックを入れていただきますと、支払日になったときに次回の支払日を自動で更新します。またチェックを入れない場合は、月をまたぎますと自動的に削除されます</p>
     </div>
     <div class="genre_select_area">
         <div class="genre_select_area_content">
@@ -76,7 +80,7 @@
                         <div class="subsc_info_title"><%= subscription.name %></div>
                         <div class="subsc_info_price">月額: <%= subscription.price %> 円</div>
                     </div>
-                    <div class="subsc_info_bottom">
+                    <div class="subsc_info_bottom left_text">
                         <p><%= subscription.description %></p>
                     </div>
                 </li>
