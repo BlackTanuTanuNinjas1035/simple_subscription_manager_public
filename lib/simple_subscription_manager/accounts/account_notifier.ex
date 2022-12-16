@@ -10,7 +10,7 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"サブスクーラー システム Mail", @subscler_email})
+      |> from({"サブスクーラー", @subscler_email})
       |> subject(subject)
       |> text_body(body)
 
@@ -23,19 +23,19 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
   Deliver instructions to confirm account.
   """
   def deliver_confirmation_instructions(account, url) do
-    deliver(account.email, "Confirmation instructions", """
+    deliver(account.email, "アカウント作成の確認", """
+
+    　こんにちは、 #{account.email}　様
+    サブスクリプションサービス管理Webアプリケーション「サブスクーラー」をご利用いただきありがとうございます。
+    作成したアカウントは以下のURLで確認することができます。
 
     ==============================
-
-    Hi #{account.email},
-
-    You can confirm your account by visiting the URL below:
-
     #{url}
-
-    If you didn't create an account with us, please ignore this.
-
     ==============================
+
+    今後とも、サブスクーラーをよろしくお願いいたします。
+
+    もしこのメール見覚えがない場合は無視してください。
     """)
   end
 
@@ -46,17 +46,18 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
   def deliver_reset_password_instructions(account, url) do
     deliver(account.email, "Reset password instructions", """
 
+
+    　こんにちは、 #{account.email}　様
+
+    登録したパスワードを変更されたい場合は以下のURLにお進みください。
+
     ==============================
-
-    Hi #{account.email},
-
-    You can reset your password by visiting the URL below:
-
     #{url}
-
-    If you didn't request this change, please ignore this.
-
     ==============================
+
+    今後とも、サブスクーラーをよろしくお願いいたします。
+
+    もしこのメール見覚えがない場合は無視してください。
     """)
   end
 
@@ -67,17 +68,19 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
   def deliver_update_email_instructions(account, url) do
     deliver(account.email, "メールアドレスの変更", """
 
-    ==============================
+
 
     お世話になっております #{account.email}さま
 
-    メールアドレスの変更を確定するため以下のリンクに行ってください:
-
-    #{url}
-
-    もしこのメールに見覚えがない場合は無視してください。
+    現在のメールアドレスの変更を確定するため以下のリンクにお進みください。
 
     ==============================
+    #{url}
+    ==============================
+
+    今後とも、サブスクーラーをよろしくお願いいたします。
+
+    もしこのメールに見覚えがない場合は無視してください。
     """)
   end
 end

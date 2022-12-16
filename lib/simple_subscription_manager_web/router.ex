@@ -110,6 +110,11 @@ defmodule SimpleSubscriptionManagerWeb.Router do
 
     get "/", PageController, :index
     get "/help", PageController, :help
+  end
+
+  scope "/", SimpleSubscriptionManagerWeb do
+    pipe_through [:browser, :require_authenticated_account]
+
     get "/stat", PageController, :stat
   end
 

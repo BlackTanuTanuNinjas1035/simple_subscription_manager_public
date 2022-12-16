@@ -135,6 +135,8 @@ defmodule SimpleSubscriptionManager.Subscribes do
 
     Map.to_list(genre_ranking) |>
     Enum.map(fn genre -> {elem(genre,0), elem(genre, 1), Float.ceil(elem(genre, 1)/genre_count, 3)} end)
+    |> Enum.sort_by(fn x -> elem(x, 1) end, :desc)
+
   end
 
   @doc """

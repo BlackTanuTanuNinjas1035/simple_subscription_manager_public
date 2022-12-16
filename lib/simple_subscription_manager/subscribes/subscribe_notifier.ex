@@ -11,7 +11,7 @@ defmodule SimpleSubscriptionManager.Subscribes.SubscribeNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"サブスクーラー システム Mail", @subscler_email})
+      |> from({"サブスクーラー", @subscler_email})
       |> subject(subject)
       |> text_body(body)
 
@@ -30,12 +30,12 @@ defmodule SimpleSubscriptionManager.Subscribes.SubscribeNotifier do
 
     Hi #{email},
 
-    YouのSubscribeした#{service}の利用料金をPayする日まで、残り10日になったぜ！
+    YouのSubscribeした#{service}の利用料金を支払日まで、残り10日になりました。
 
+    サブスクーラーにて利用しているサービスをご確認ください。
 
-    残り10日までしっかりとお財布の中身を確認しておいてくれよな！
-
-    支払い日: #{date}
+    サービス名: #{service}
+    支払日    : #{date}
     ==============================
     """)
   end

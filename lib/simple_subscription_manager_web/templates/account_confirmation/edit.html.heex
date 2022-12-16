@@ -1,12 +1,12 @@
-<h1>Confirm account</h1>
+<h1>アカウントの確認ページ</h1>
 
 <.form let={_f} for={:account} action={Routes.account_confirmation_path(@conn, :update, @token)}>
   <div>
-    <%= submit "Confirm my account" %>
+    <%= submit "アカウントの確認" %>
   </div>
 </.form>
 
 <p>
-  <%= link "Register", to: Routes.account_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.account_session_path(@conn, :new) %>
+  <%= link "アカウントの登録", to: Routes.account_registration_path(@conn, :new) %> |
+  <%= link "ログイン", to: Routes.account_session_path(@conn, :new) %>
 </p>
