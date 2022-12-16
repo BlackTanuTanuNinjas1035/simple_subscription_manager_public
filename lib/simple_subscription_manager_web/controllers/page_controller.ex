@@ -9,8 +9,10 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
   end
 
   def help(conn, _params) do
-    index_1 = {"はじめに", Talks.get_talk_list(0)}
-    render(conn, "help.html", index_list: [index_1])
+    content_list = [
+        {"導入部分", Talks.get_talk_list(0)}
+      ]
+    render(conn, "help.html", content_list: content_list)
   end
 
   def stat(conn, _params) do

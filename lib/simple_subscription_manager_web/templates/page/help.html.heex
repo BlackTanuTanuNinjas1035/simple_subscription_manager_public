@@ -11,34 +11,36 @@
 
 <div class="content">
     <div>
-
-            <!-- inde_list =  [{"はじまり", talk_list}, ...] -->
-            <%= for index <- @index_list do %>
-                <!-- はじめにとか -->
-                <h3><%= elem index, 0 %></h3>
-
-                    <!-- 本文 -->
-                    <%= for talk <- elem index, 1 do %>
-                        <div class="flex">
-                            <%= if talk.is_left do%>
+        <%= for content <- @content_list do %>
+            <h3><%= elem content, 0 %></h3>
+                <%= for talk <- elem content, 1 do %>
+                    <%= case talk.direction do %>
+                        <%= "left" -> %>
+                            <div class={~w"#{talk.name}_left set"}>
                                 <div class="left">
-                                    <figure class="image"><img src={"/assets/images/#{talk.image}.png"} alt=""></figure>
+                                    <img src={~w"{talk.image}"} alt={~w"#{talk.name}の画像"}>
+                                </div>
+                                <div class="mid">
+                                    <div><%= talk.name %><p><%= talk.text %></p></div>
+                                </div>
+                                <div class="right"></div>
+                            </div>
+                        <%= "right" -> %>
+                            <div class={~w"#{talk.name}_left set"}>
+                                <div class="left"></div>
+                                <div class="mid">
+                                    <div><%= talk.name %><p><%= talk.text %></p></div>
                                 </div>
                                 <div class="right">
-                                    <p class="text"><%= talk.text %></p>
+                                    <img src={~w"{talk.image}"} alt={~w"#{talk.name}の画像"}>
                                 </div>
-                            <% else %>
-                                <div class="left">
-                                    <p class="text"><%= talk.text %></p>
-                                </div>
-                                <div class="right">
-                                    <figure class="image"><img src={"/assets/images/#{talk.image}.png"} alt=""></figure>
-                                </div>
-                            <% end%>
-                        </div>
-                    <% end %>
-
-            <% end %>
-        </div>
-
+                            </div>
+                        <%= _ -> %>
+                            <div class="image_only set">
+                                <img src={~w"{talk.image}"} alt={~w"#{talk.name}の画像"}>
+                            </div>
+                        <% end %>
+                <% end %>
+        <% end %>
+    </div>
 </div>
