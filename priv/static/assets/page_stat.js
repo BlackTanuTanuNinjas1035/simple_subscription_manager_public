@@ -123,10 +123,11 @@ function get_age_ranking_genre(age_genre_id){
     let age_genre_list = age_genre.querySelectorAll(".mini_ranking_and_graph"); 
 
     //初期化
-     //年代の数　8個　ループするときに使う
-    let age_num = 8
+    
     //ジャンルのリスト
     let genre_list = [ "動画配信のサービス", "音楽配信のサービス", "カーレンタルのサービス", "食品のサービス", "ソフトウェア提供のサービス","家具・家電のサービス","習い事や趣味のサービス","本のサービス"]
+    //年代の数　8個　ループするときに使う
+    let age_num = genre_list.length;
     //age_data_listに8つの年代の辞書を格納する
     let age_data_list = [];
     for(let i = 0; i < age_num; i++) {

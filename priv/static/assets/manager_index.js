@@ -25,8 +25,4 @@ $(function(){
         $(this).find(".subsc_option_menu").toggleClass("active");
         $(this).parents(".subsc_card").children(".subsc_change_payment").slideToggle(300);
     });
-    // $(".change_button").on("click", function(){
-    //     $(this).parents(".subsc_card").children(".subsc_change_payment").slideToggle(300);
-    //     // $(this).parents(".subsc_card").children(".subsc_change_payment").toggleClass("active");
-    // })
 })

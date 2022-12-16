@@ -1,1 +1,2 @@
 ジャンルの種類を増やしたら　page_stat.jsで使うgenre_listとhistory.html.heexのページのアイコンのクラスを作るとこ変えないといけない
+あとpage_stat.jsのカラーもジャンルの数にしなきゃ

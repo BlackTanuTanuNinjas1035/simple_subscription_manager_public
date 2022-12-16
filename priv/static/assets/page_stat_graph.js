@@ -95,6 +95,9 @@ var options = {//グラフのオプション
                     }
                 }
             }
+        },
+        colorschemes: {
+            scheme: 'brewer.Paired12'
         }
     }
 };
@@ -156,6 +159,9 @@ var options_mini = {//グラフのオプション
                     }
                 }
             }
+        },
+        colorschemes: {
+            scheme: 'brewer.Paired12'
         }
     }
 };
@@ -199,8 +205,8 @@ function graphView(ranking_and_graph_id) {
             //labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
             labels:ranking_data[0],
             datasets:[{
-                label:"職種別比率",//グラフのタイトル
-                backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
+                label:"サービス割合",//グラフのタイトル
+                //backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
                 //data:["960", "1000"]//データ
                 data:ranking_data[1]
             }]
@@ -225,8 +231,8 @@ function graphView_mini(ranking_and_graph_id) {
             //labels:["Abemaプレミアム", "Youtubeプレミアム"],//データの名前
             labels:ranking_data[0],
             datasets:[{
-                label:"職種別比率",//グラフのタイトル
-                backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
+                label:"ミニサービス割合",//グラフのタイトル
+                //backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
                 //data:["960", "1000"]//データ
                 data:ranking_data[1]
             }]
@@ -251,7 +257,7 @@ function graphView_genre(ranking_and_graph_id) {
             labels:ranking_data[0],
             datasets:[{
                 label:"職種別比率",//グラフのタイトル
-                backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
+                //backgroundColor:["#BB5179","#FAFF67", "#58A27C","#3C00FF"],//グラフの背景色
                 //data:["960", "1000"]//データ
                 data:ranking_data[1]
             }]
@@ -271,7 +277,7 @@ function graphView_age_genre(age_genre_id) {
         type:'bar',//グラフのタイプ
         data:{//グラフのデータ
             labels:["00代", "10代", "20代", "30代", "40代", "50代", "60代", "70代"],//データの名前
-            datasets: datasets_data
+            datasets: datasets_data,
         },
         options:{
             maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
@@ -343,6 +349,9 @@ function graphView_age_genre(age_genre_id) {
                             }
                         }
                     }
+                },
+                colorschemes: {
+                    scheme: 'brewer.Paired12'
                 }
             }
         }
