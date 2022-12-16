@@ -7,7 +7,7 @@ defmodule SimpleSubscriptionManager.Repo.Migrations.CreateTalks do
       add :image, :string
       add :name, :string
       add :text, :string
-      add :is_left, :boolean, null: false
+      add :direction, :string
 
       timestamps()
     end

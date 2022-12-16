@@ -7,7 +7,7 @@ defmodule SimpleSubscriptionManager.Talks.Talk do
     field :image, :string
     field :name, :string
     field :text, :string
-    field :is_left, :boolean
+    field :direction, :string
 
     timestamps()
   end
@@ -15,7 +15,6 @@ defmodule SimpleSubscriptionManager.Talks.Talk do
   @doc false
   def changeset(talk, attrs) do
     talk
-    |> cast(attrs, [:index, :image, :name, :text, :is_left])
-    |> validate_required([:is_left])
+    |> cast(attrs, [:index, :image, :name, :text, :direction])
   end
 end
