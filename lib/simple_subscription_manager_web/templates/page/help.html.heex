@@ -1,43 +1,41 @@
-ここに説明を書く
-1.アカウントを登録します。(アカウントごとに登録したサービスを管理いたします。)
-ここにたぬきがアカウントの登録する画面をクリックしている絵を貼る
-2.ログインしましたら始めるボタンを押してください
-3.まずは、利用しているサービスを登録するところから始めましょう登録ボタンを押してください
-4.サービスの一覧がセレクトボックスとかなんとかで表示されるので、選択したあと登録ボタンを押してください。
-5.登録しましたら先程の画面にご利用のサービスの一覧と月にかかるサブスクリプションサービスの合計金額が表示されます
-6.気軽にご利用ください
+
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/tmp_content.css")}/>
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/help.css")}/>
 
+<div class="katuai">割愛</div>
 <div class="content">
-    <div>
+    <div class="osyaberi">
         <%= for content <- @content_list do %>
-            <h3><%= elem content, 0 %></h3>
+            <h1><%= elem content, 0 %></h1>
                 <%= for talk <- elem content, 1 do %>
                     <%= case talk.direction do %>
                         <%= "left" -> %>
-                            <div class={~w"#{talk.name}_left set"}>
+                            <div class={~w"face_left set"}>
+                            <%# <div class={~w"#{talk.name}_left set"}> %>
                                 <div class="left">
-                                    <img src={~w"{talk.image}"} alt={~w"#{talk.name}の画像"}>
+                                    <figure class="chara"><img src={Routes.static_path(@conn, "/images/#{talk.image}")} alt={~w"#{talk.name}の画像"} /></figure>
                                 </div>
                                 <div class="mid">
-                                    <div><%= talk.name %><p><%= talk.text %></p></div>
+                                    <div><%= talk.name %></div>
+                                    <p><%= talk.text %></p>
                                 </div>
                                 <div class="right"></div>
                             </div>
                         <%= "right" -> %>
-                            <div class={~w"#{talk.name}_left set"}>
+                            <div class={~w"face_right set"}>
+                            <%# <div class={~w"#{talk.name}_right set"}> %>
                                 <div class="left"></div>
                                 <div class="mid">
-                                    <div><%= talk.name %><p><%= talk.text %></p></div>
+                                    <div><%= talk.name %></div>
+                                    <p><%= talk.text %></p>
                                 </div>
                                 <div class="right">
-                                    <img src={~w"{talk.image}"} alt={~w"#{talk.name}の画像"}>
+                                    <figure class="chara"><img src={Routes.static_path(@conn, "/images/#{talk.image}")} alt={~w"#{talk.name}の画像"} /></figure>
                                 </div>
                             </div>
                         <%= _ -> %>
                             <div class="image_only set">
-                                <img src={~w"{talk.image}"} alt={~w"#{talk.name}の画像"}>
+                                <figure class="screenshot"><img src={Routes.static_path(@conn, "/images/#{talk.image}")} alt="説明画像"} /></figure>
                             </div>
                         <% end %>
                 <% end %>
