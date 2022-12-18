@@ -2,15 +2,10 @@
     <div class="scroll_snap_margin"></div><!-- スクロールスナップ用のdiv --->
     <div class="content">
         <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/manager_index.css")}/>
-        <!-- <link phx-track-static rel="stylesheet" media="screen and (max-width:768px)" href={Routes.static_path(@conn, "/assets/manager_index_sumaho.css")}/> --->
 
         <div class="top_content">
-            <!--<div>あなたの利用しているサブスクリプションを登録しましょう!</div>--->
-            <!--
-            <button><%= link "登録", to: Routes.manager_path(@conn, :new) %></button>
-            --->
             <div class="button_div">
-                <div class="button_spece"><div>あなたの利用しているサブスクを登録しよう!</div></div>
+                <div class="button_spece"><div><span class="span_br">あなたの利用している</span><span class="span_br">サブスクを登録しよう!</span></div></div>
                 <div class="regi_button_div">
                     <div class="regi_button">
                         <%= link to: Routes.manager_path(@conn, :new) do%>
@@ -24,82 +19,84 @@
                     </div>
                 </div>
             </div>
-            <h2>登録しているサービス</h2>
         </div>
 
         <div class="middle_content">
-            <!--登録しているサブスクをカードとして表示 --->
-            <%= for subscribe <- @subscribes_list do %>
-                <div class="subsc_card">
-                    <div class="card_flex">
-                        <div class="subsc_name"><%= subscribe.subscription_alias.name %></div>
-                        <div class="subsc_option">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <div class="subsc_option_menu">
-                                <div><a href={~w"/manager/delete/#{subscribe.id}"}><div class="trash"></div></a></div>
-                                <!-- <button class="change_button">更新</button> --->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subsc_middle">
-                        <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
-                        <div class="subsc_continue">
-                            <%= if subscribe.continue == true do %>
-                                    <div>継続○</div>
-                            <% else %>
-                                    <div>継続×</div>
-                            <% end %>
-                        </div>
-                    </div>
-                    <div class="card_flex">
-                        <!-- <div class="subsc_payment">契約日: <%= subscribe.date_of_contract %></div> --->
-                        <div class="subsc_payment">次回支払日: <%= subscribe.date_of_payment %></div>
-                        
-                        <!-- subsc_price　はcssの疑似要素::afterで円を挿入 --->
-                        <div class="subsc_price_div"><div class="subsc_price"><%= subscribe.subscription_alias.price %></div>円</div>
-                    </div>
-                    <div class="subsc_change_payment">
-                    <%# 登録内容の更新 %>
-                        <%= form_for @changeset, Routes.manager_path(@conn, :update), fn f -> %>
-                            <%= if @changeset.action do %>
-                                <div class="alert alert-danger">
-                                    <p>登録内容の変更に失敗しました。入力内容を確認してください。</p>
+            <div class="middle_content_title"><div class="middle_content_title_mozi">登録しているサービス</div></div>
+            <div class="subsc_flame">
+                <!--登録しているサブスクをカードとして表示 --->
+                <%= for subscribe <- @subscribes_list do %>
+                    <div class="subsc_card">
+                        <div class="card_flex">
+                            <div class="subsc_name"><%= subscribe.subscription_alias.name %></div>
+                            <div class="subsc_option">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <div class="subsc_option_menu">
+                                    <div><a href={~w"/manager/delete/#{subscribe.id}"}><div class="trash"></div></a></div>
+                                    <!-- <button class="change_button">更新</button> --->
                                 </div>
-                            <% end %>
-
-                            <%= hidden_input f, :action, name: "subscribe_id", value: subscribe.id %>
-
-                            <label>
-                                <%= date_select f, :date_of_contract, year: [options: @to_year..@to_year+3], default: subscribe.date_of_contract, month: [options: [
-                                        {gettext("1"), "1"},
-                                        {gettext("2"), "2"},
-                                        {gettext("3"), "3"},
-                                        {gettext("4"), "4"},
-                                        {gettext("5"), "5"},
-                                        {gettext("6"), "6"},
-                                        {gettext("7"), "7"},
-                                        {gettext("8"), "8"},
-                                        {gettext("9"), "9"},
-                                        {gettext("10"), "10"},
-                                        {gettext("11"), "11"},
-                                        {gettext("12"), "12"},
-                                    ]
-                                ] %>
-                            </label>
-
-                            <div>
-                                <%= label f, "継続"%>
-                                <%= checkbox f, :continue %>
                             </div>
+                        </div>
+                        <div class="subsc_middle">
+                            <div class="subsc_genre"><%= subscribe.subscription_alias.genre_alias.name %></div>
+                            <div class="subsc_continue">
+                                <%= if subscribe.continue == true do %>
+                                        <div>継続○</div>
+                                <% else %>
+                                        <div>継続×</div>
+                                <% end %>
+                            </div>
+                        </div>
+                        <div class="card_flex">
+                            <!-- <div class="subsc_payment">契約日: <%= subscribe.date_of_contract %></div> --->
+                            <div class="subsc_payment">次回支払日: <%= subscribe.date_of_payment %></div>
+                            
+                            <!-- subsc_price　はcssの疑似要素::afterで円を挿入 --->
+                            <div class="subsc_price_div"><div class="subsc_price"><%= subscribe.subscription_alias.price %></div>円</div>
+                        </div>
+                        <div class="subsc_change_payment">
+                        <%# 登録内容の更新 %>
+                            <%= form_for @changeset, Routes.manager_path(@conn, :update), fn f -> %>
+                                <%= if @changeset.action do %>
+                                    <div class="alert alert-danger">
+                                        <p>登録内容の変更に失敗しました。入力内容を確認してください。</p>
+                                    </div>
+                                <% end %>
 
-                            <%= submit "登録内容の更新" %>
-                        <% end %>
+                                <%= hidden_input f, :action, name: "subscribe_id", value: subscribe.id %>
+
+                                <label>
+                                    <%= date_select f, :date_of_contract, year: [options: @to_year..@to_year+3], default: subscribe.date_of_contract, month: [options: [
+                                            {gettext("1"), "1"},
+                                            {gettext("2"), "2"},
+                                            {gettext("3"), "3"},
+                                            {gettext("4"), "4"},
+                                            {gettext("5"), "5"},
+                                            {gettext("6"), "6"},
+                                            {gettext("7"), "7"},
+                                            {gettext("8"), "8"},
+                                            {gettext("9"), "9"},
+                                            {gettext("10"), "10"},
+                                            {gettext("11"), "11"},
+                                            {gettext("12"), "12"},
+                                        ]
+                                    ] %>
+                                </label>
+
+                                <div>
+                                    <%= label f, "継続"%>
+                                    <%= checkbox f, :continue %>
+                                </div>
+
+                                <%= submit "登録内容の更新" %>
+                            <% end %>
+                        </div>
+
                     </div>
-
-                </div>
-            <% end %>
+                <% end %>
+            </div>
         </div>
 
         <div class="bottom_content">
