@@ -62,9 +62,10 @@
     justify-content: center;
 }
 .history_flame {
-    background-color: gray;
+    background-color: rgba(163, 163, 163, 0.5);
     width: 95%;
     height: 95%;
+    border-radius: 5px;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;
@@ -75,21 +76,23 @@
     scroll-snap-align: start;
     min-width: 100%;
     height: 99%;
+    padding: 0 2%;
     display: flex;
     flex-direction: column;
 }
 .data_month {
     text-align: center;
     height: 10%;
-    font-size: 20px;
+    font-size: clamp(20px, 3vw, 25px);
+    font-weight: bold;
     vertical-align:auto;
     display: flex;
     justify-content: space-between;
+    border-bottom: solid;
 }
 .data_month span {
     width: 20%;
     display: inline-block;
-    padding: 5px;
 }
 .left_data_month {
     white-space: nowrap;
@@ -110,6 +113,7 @@
 .ul_card {
     list-style: none;
     height: 100%;
+    margin-top: 3%;
     overflow: scroll;
     /* display: flex;
     flex-direction: column;

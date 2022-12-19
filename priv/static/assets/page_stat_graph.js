@@ -11,7 +11,6 @@ Chart.Tooltip.positioners.middle = elements => {
 var global_value = 0;
 var chartJsPluginCenterLabel = {
     afterDatasetsDraw: function (chart) {
-    console.log("プラグイン");
 
     // // ラベルの X 座標と Y 座標
     var canvas = chart.ctx.canvas;
@@ -38,6 +37,7 @@ var chartJsPluginCenterLabel = {
     return ctx;
     }
 };
+
 var options = {//グラフのオプション
     cutoutPercentage: 50, //ドーナツグラフの何％をえぐるか
     maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
@@ -180,7 +180,7 @@ options.onHover = (event, hoveredItems) => {
         console.log(global_value);
 
     } catch (error) {
-        console.log("えらった")
+        console.log("グラフ外ホバー")
     }
     
     // if(data.labels[piyo[0]] == null) {
@@ -323,7 +323,7 @@ function graphView_age_genre(age_genre_id) {
                         for(let i = 0; i < datasets_length; i++){
                             sum += ctx.chart.data.datasets[i].data[data_index]
                         }
-                        console.log(sum);
+                        //console.log(sum);
                         // console.log(ctx.dataset.label);
 
                         // let return_num = (value*100 / sum).toFixed(2)+"%";
@@ -543,4 +543,6 @@ $(function() {
     add_ranking_number(juni_id[i], juni_list);
     }
     
+    let final_time = performance.now();
+    // console.log("ファイナル" + (final_time - start_time) / 1000 + "秒");
 });

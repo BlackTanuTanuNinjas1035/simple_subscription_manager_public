@@ -12,14 +12,8 @@ $(function(){
         //console.log(selected_tab);
         $(".ranking").removeClass("active");
         $(selected_tab).addClass("active");
-    })
+    });
 });
-
-// $(window).on('load', function(){
-// 	//console.log(chart_graph_overall_service);
-//     console.log("window");
-// });
-
 $(window).on('load resize', function(){
     var winW = $(window).width();
     var devW = 767;
@@ -200,7 +194,8 @@ function get_age_ranking_genre(age_genre_id){
     //動画[00代, 10代, 20代]
     //console.log(re_age_data);
 
-    let color_palette = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "gray", "white"]
+    //let color_palette = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "gray", "white"]
+    let color_palette = ["#fb8072", "#ffffb3", "#fdb462", "#b3de69", "#bc80bd", "#fccde5", "#80b1d3", "#8dd3c7", "white"]
     let re = [];
     for(let i = 0; i < genre_list.length; i++) {
         re.push({});

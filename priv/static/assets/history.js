@@ -49,6 +49,7 @@ function get_history_data() {
     let return_list = [];
     return_list.push(month_list.reverse())
     return_list.push(sum_list.reverse())
+    console.log(return_list)
     
     return return_list;
 }

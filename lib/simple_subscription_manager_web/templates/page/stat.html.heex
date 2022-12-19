@@ -1,8 +1,21 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/page_stat.css")}/>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/loader.css")}/>
+<script defer phx-track-static type="text/javascript" media="screen and (max-width: 767px)" src={Routes.static_path(@conn, "/assets/loader.js")}></script>
+
+<div id="load">
+    <div class="load_div">
+        <div class="loader">Loading...</div>
+        <div class="load_mozi">   Loading...</div>
+    </div>
+</div>
 
 <div class="content">
     <div class="content_top">
-        <div class="page_title">サブスクリプションサービスの統計</div>
+        <div class="page_title">
+            <div class="page_back"><%= link "", to: Routes.manager_path(@conn, :index) %></div>
+            <div class="page_title_content">サブスクリプションサービスの統計</div>
+            <div class="page_title_content_mobile">サブスクの統計</div>
+        </div>
             <div class="left_text">
                 <p>こちらから人気のサブスクリプションサービスを見ることができます</p>
             </div>
@@ -1019,7 +1032,6 @@
 
 </div>
 
-<!-- <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/cdn/chartjs-plugin-labels.js")}></script> --->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>

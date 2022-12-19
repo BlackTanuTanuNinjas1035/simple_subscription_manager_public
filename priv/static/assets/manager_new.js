@@ -179,5 +179,8 @@ $(function() {
         $(selected_subsc).addClass("active");
     })
     
+    $(".discription_button").on("click", function() {
+        $(".discription").slideToggle();
+    })
 
 });
