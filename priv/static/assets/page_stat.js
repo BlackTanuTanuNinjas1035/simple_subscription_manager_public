@@ -14,18 +14,6 @@ $(function(){
         $(selected_tab).addClass("active");
     });
 });
-$(window).on('load resize', function(){
-    var winW = $(window).width();
-    var devW = 767;
-    if (winW <= devW) {
-    //767px以下の時の処理
-        console.log("767以下だよー");
-
-    } else {
-    //768pxより大きい時の処理
-        console.log("768以上だよー");
-    }
-});
 
 //ol_rankingのtagdataを受け取るとspanの要素を取得し、リストにして返す　あと取得するランキングの数を取得する
 function get_ranking(ranking_and_graph_id, rank_num) {

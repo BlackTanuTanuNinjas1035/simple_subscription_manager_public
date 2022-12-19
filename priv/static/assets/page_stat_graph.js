@@ -9,6 +9,7 @@ Chart.Tooltip.positioners.middle = elements => {
 
 //ホバーした要素をグラフの中心に表示するためのやつ
 var global_value = 0;
+
 var chartJsPluginCenterLabel = {
     afterDatasetsDraw: function (chart) {
 
@@ -51,7 +52,7 @@ var options = {//グラフのオプション
             return data.labels[tooltipItem.index]
             }
         },
-        //bodyFontSize: 15, //ツールチップのフォントサイズ
+        bodyFontSize: 15, //ツールチップのフォントサイズ
     },
     title:{//上部タイトル表示の設定
         display: false,
@@ -358,7 +359,6 @@ function graphView_age_genre(age_genre_id) {
         
     });
     return chart
-
 };
 
 
@@ -398,7 +398,6 @@ $(function() {
             //console.log(chart_graph_overall_service);
         };
     });
-    
 
     //年代別　人気のサービスランキング
     let chartlist_graph_overall_age_service = [];
@@ -417,7 +416,6 @@ $(function() {
             })
         })(i, chart_id, chart_id_sub, flaglist_graph_overall_age_service, chartlist_graph_overall_age_service);
     }
-
 
     //すべての男性のサービスグラフランキングの描画処理
     $("#graph_male_overall_service").on("inview", function() {
@@ -533,16 +531,19 @@ $(function() {
         
     });
 
-    //Chart.plugins.register(chartJsPluginCenterLabel);
-
-
     //ランキングにメダルをつける作業
     let juni_id = ["#overall_service", "#male_overall_service", "#female_overall_service", "#overall_genre", "#male_overall_genre", "#female_overall_genre"]
     for(let i = 0; i < juni_id.length; i++) {
         let juni_list = get_ranking_number(juni_id[i]);
     add_ranking_number(juni_id[i], juni_list);
     }
-    
+
+    //ロード後　ロード画面消す　最後に記述する
     let final_time = performance.now();
-    // console.log("ファイナル" + (final_time - start_time) / 1000 + "秒");
+    console.log("ファイナル" + (final_time - start_time) / 1000 + "秒");
+    let load = document.querySelector("#load");
+    load.classList.add("loaded");
+    sleep(3, function() {
+        load.classList.add("none");
+    });
 });

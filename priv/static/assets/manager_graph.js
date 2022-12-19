@@ -3,7 +3,12 @@ var options = {//グラフのオプション
   //cutoutPercentage: 50, //ドーナツグラフの何％をえぐるか
     maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
     legend:{
-        display:true//グラフの説明を表示
+        display:true,//グラフの説明を表示
+        labels: {
+            fontColor: '#040404',
+            fontSize:20,
+            
+        }
     },
     tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
         callbacks:{
@@ -64,8 +69,6 @@ var options = {//グラフのオプション
         }
     }
 };
-
-
 
 $(function() {
     let flag_chart01 = true;

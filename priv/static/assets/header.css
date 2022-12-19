@@ -3,12 +3,17 @@
 header {
     height: 100px;
     width: 100%;
-    background-color: rgb(199, 199, 199);
+    
 }
 
 .container.header{
+    background-color: rgb(201, 201, 201);
     display: flex;
     justify-content: space-between;
+
+    /* background-image: url(../images/Tree-5.png);
+    background-size: contain;
+    background-repeat: repeat-x; */
 }
 .header > a {
     margin-left: max(20px, 3%);
@@ -30,14 +35,10 @@ header {
 .nav-header div {
 } 
 
-
 /* ハンバーガーメニューcss */
-
-
 header a {
     text-decoration: none;
 }
-
 .header-ul{
 }
 .header-ul li {
@@ -94,7 +95,6 @@ header li {
     visibility: visible;
     opacity: 1;
 }
-
 .hbg_nav_p{
     font-size: 20px;
 }
@@ -180,7 +180,6 @@ header li {
     width: calc(100vw - 660px);
     text-align: right;
 }
-
 .sumaho_rogo {
     content: "";
     background-image: url(../images/rogotanu_touka.png);
@@ -190,7 +189,6 @@ header li {
     height: 100px;
     width: 100px;
 }
-
 
 @media screen and (max-width: 767px){
     header,

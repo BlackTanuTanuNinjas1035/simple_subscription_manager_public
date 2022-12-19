@@ -1,77 +1,101 @@
-<div>サービスの追加</div>
-<div>
-    <%= unless [] == @service_add_topic_list do%>
-        <ul>
-            <%= for service_topic <- @service_add_topic_list do %>
-                <li><%= Date.to_iso8601(service_topic.inserted_at) %><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></li>
-            <% end %>
-        </ul>
-    <% else %>
-        <div>記事がありません</div>
-    <% end %>
-</div>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/topic_index.css")}/>
 
-<div>サービスの変更</div>
-<div>
-    <%= unless [] == @service_update_topic_list do%>
-        <ul>
-            <%= for service_topic <- @service_update_topic_list do %>
-                <li><%= Date.to_iso8601(service_topic.inserted_at) %><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></li>
-            <% end %>
-        </ul>
-    <% else %>
-        <div>記事がありません</div>
-    <% end %>
-</div>
+<div class="content">
+    <div class="page_title">お知らせ一覧</div>
+    <div class="topic_flame">
 
-<div>機能の追加</div>
-<div>
-    <%= unless [] == @function_add_topic_list do%>
-        <ul>
-            <%= for service_topic <- @function_add_topic_list do %>
-                <li><%= Date.to_iso8601(service_topic.inserted_at) %><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></li>
-            <% end %>
-        </ul>
-    <% else %>
-        <div>記事がありません</div>
-    <% end %>
-</div>
+        <div class="topic_nowrap">
+            <div class="topic_content">
+                <div class="topic_title">サービスの追加</div>
+                <div>
+                    <%= unless [] == @service_add_topic_list do%>
+                        <ul class="topic_ul">
+                            <%= for service_topic <- @service_add_topic_list do %>
+                                <li class="topic_li"><span class="li_a"><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></span><span class="li_date"><%= Date.to_iso8601(service_topic.inserted_at) %></span></li>
+                            <% end %>
+                        </ul>
+                    <% else %>
+                        <div>記事がありません</div>
+                    <% end %>
+                </div>
+            </div>
 
-<div>機能の追加</div>
-<div>
-    <%= unless [] == @function_update_topic_list do%>
-        <ul>
-            <%= for service_topic <- @function_update_topic_list do %>
-                <li><%= Date.to_iso8601(service_topic.inserted_at) %><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></li>
-            <% end %>
-        </ul>
-    <% else %>
-        <div>記事がありません</div>
-    <% end %>
-</div>
+            <div class="topic_content">
+                <div class="topic_title">サービスの変更</div>
+                <div>
+                    <%= unless [] == @service_update_topic_list do%>
+                        <ul class="topic_ul">
+                            <%= for service_topic <- @service_update_topic_list do %>
+                                <li class="topic_li"><span class="li_a"><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></span><span class="li_date"><%= Date.to_iso8601(service_topic.inserted_at) %></span></li>
+                            <% end %>
+                        </ul>
+                    <% else %>
+                        <div>記事がありません</div>
+                    <% end %>
+                </div>
+            </div>
 
-<div>不具合の修正</div>
-<div>
-    <%= unless [] == @bug_fixes_list do%>
-        <ul>
-            <%= for service_topic <- @bug_fixes_list do %>
-                <li><%= Date.to_iso8601(service_topic.inserted_at) %><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></li>
-            <% end %>
-        </ul>
-    <% else %>
-        <div>記事がありません</div>
-    <% end %>
-</div>
+            <div class="topic_content">
+                <div class="topic_title">機能の追加</div>
+                <div>
+                    <%= unless [] == @function_add_topic_list do%>
+                        <ul class="topic_ul">
+                            <%= for service_topic <- @function_add_topic_list do %>
+                                <li class="topic_li"><span class="li_a"><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></span><span class="li_date"><%= Date.to_iso8601(service_topic.inserted_at) %></span></li>
+                            <% end %>
+                        </ul>
+                    <% else %>
+                        <div>記事がありません</div>
+                    <% end %>
+                </div>
+            </div>
 
-<div>運営からのお知らせ</div>
-<div>
-    <%= unless [] == @etc_list do%>
-        <ul>
-            <%= for service_topic <- @etc_list do %>
-                <li><%= Date.to_iso8601(service_topic.inserted_at) %><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></li>
-            <% end %>
-        </ul>
-    <% else %>
-        <div>記事がありません</div>
-    <% end %>
+            <div class="topic_content">
+                <div class="topic_title">機能の追加</div>
+                <div>
+                    <%= unless [] == @function_update_topic_list do%>
+                        <ul class="topic_ul">
+                            <%= for service_topic <- @function_update_topic_list do %>
+                                <li class="topic_li"><span class="li_a"><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></span><span class="li_date"><%= Date.to_iso8601(service_topic.inserted_at) %></span></li>
+                            <% end %>
+                        </ul>
+                    <% else %>
+                        <div>記事がありません</div>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="topic_content">
+                <div class="topic_title">不具合の修正</div>
+                <div>
+                    <%= unless [] == @bug_fixes_list do%>
+                        <ul class="topic_ul">
+                            <%= for service_topic <- @bug_fixes_list do %>
+                                <li class="topic_li"><span class="li_a"><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></span><span class="li_date"><%= Date.to_iso8601(service_topic.inserted_at) %></span></li>
+                            <% end %>
+                        </ul>
+                    <% else %>
+                        <div>記事がありません</div>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="topic_content">
+                <div class="topic_title">運営からのお知らせ</div>
+                <div>
+                    <%= unless [] == @etc_list do%>
+                        <ul class="topic_ul">
+                            <%= for service_topic <- @etc_list do %>
+                                <li class="topic_li"><span class="li_a"><a href={~w"/topic/#{service_topic.id}"} ><%= service_topic.title %></a></span><span class="li_date"><%= Date.to_iso8601(service_topic.inserted_at) %></span></li>
+                            <% end %>
+                        </ul>
+                    <% else %>
+                        <div>記事がありません</div>
+                    <% end %>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div>

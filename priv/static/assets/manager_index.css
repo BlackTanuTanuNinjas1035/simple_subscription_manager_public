@@ -12,7 +12,6 @@
     justify-content: center;
 }
 
-
 .big_content > .content{
     background: #ffffff;
     width: 500px;
@@ -31,7 +30,6 @@
         / 10px  1fr     10px;
     /* scroll-snap-align: start; */
 }
-
 .top_content{
     grid-area: top;
 }

@@ -1,0 +1,85 @@
+/* bace.cssの値を修正 */
+#front {
+    height: auto;
+}
+.main_contents {
+    min-height: calc(100% - 70px);
+}
+
+.main_contents > .container > .content{
+    
+    
+}
+
+
+.main_contents > .container{
+    width: 100%;
+    /* height: 100%; */
+    min-height: calc(100vh - 100px);
+    display :flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.main_contents > .container > .content{
+    background: #ffffff;
+    width: 98%;
+    max-width: 1500px;
+    height: auto;
+    
+    margin: 10px auto 10px auto;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+}
+.page_title {
+    font-size: clamp(30px, 3vw, 35px);
+    font-weight: bold;
+    
+}
+.topic_flame {
+    margin: 10px 0 10px 0;
+    width: 100%;
+    height: 90%;
+}
+.topic_nowrap {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+.topic_content {
+    width: 49%;
+    min-height: 20vh;
+    margin: auto;
+}
+.topic_title {
+    font-size: clamp(25px, 3vw, 30px);
+    font-weight: bold;
+}
+.topic_ul {
+    list-style-position: inside;
+}
+.topic_li {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
+.topic_li:nth-child(n + 11) {
+    display: none;
+}
+.li_a {
+    width: calc(100% - 85px);
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+.li_date {
+    white-space: nowrap;
+    width: 85px;
+}
+
+
+@media screen and (max-width: 767px){
+    .topic_content {
+        width: 98%;
+    }
+    
+}

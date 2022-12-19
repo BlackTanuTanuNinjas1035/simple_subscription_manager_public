@@ -53,7 +53,7 @@
                                     <div class="hbg_nav_link"><%= link "新しくサービスを登録する", to: Routes.manager_path(@conn, :new) %></div>
                                     <div class="hbg_nav_link"><%= link "アカウント情報を変更する", to: Routes.account_settings_path(@conn, :edit) %></div>
                             </li>
-                            <li class="hbg_nab_li">
+                            <li class="hbg_nav_li">
                                 <p class="hbg_nav_p">企業向けページ</p>
                                 <div class="hbg_nav_link"><%= link "サブスクの利用傾向一覧ページ", to: Routes.page_path(@conn, :stat) %></div>
                                 <!--- 下のやつがAPIのリンク　パスは通ってない --->
@@ -70,5 +70,6 @@
 
     </nav>
 </section>
+<div class="copyright"></div>
 
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/header.js")}></script>
