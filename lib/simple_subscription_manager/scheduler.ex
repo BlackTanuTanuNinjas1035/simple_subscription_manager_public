@@ -3,6 +3,7 @@ defmodule SimpleSubscriptionManager.Scheduler do
 
   alias SimpleSubscriptionManager.Historys
   alias SimpleSubscriptionManager.Subscribes
+  alias SimpleSubscriptionManager.Util
   alias SimpleSubscriptionManager.Subscribes.SubscribeNotifier
   alias SimpleSubscriptionManager.Repo
 
@@ -42,7 +43,7 @@ defmodule SimpleSubscriptionManager.Scheduler do
             date_of_payment = subscribe.date_of_payment
 
             if date_of_payment.month + 1 < 12 do
-              Date.new!(date_of_payment.year, date_of_payment.month+1, date_of_payment.day)
+              Date.new!(date_of_payment.year, Util.add_month(date_of_payment.month,1), date_of_payment.day)
             else
               Date.new!(date_of_payment.year + 1, 1, date_of_payment.day)
             end

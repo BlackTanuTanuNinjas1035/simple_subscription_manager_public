@@ -27,7 +27,7 @@ defmodule SimpleSubscriptionManager.Historys do
     |> Repo.all
     |> Repo.preload([:account_alias, :subscription_alias, subscription_alias: [:genre_alias]])
     |> Enum.filter(fn record -> Date.diff(today, NaiveDateTime.to_date(record.inserted_at)) <= 365 end)
-    |> Enum.filter(fn record -> Util.calc_month(tomonth, record.date_of_contract.month) == month end)
+    |> Enum.filter(fn record -> Util.adjust_month(tomonth + record.date_of_contract.month) == month end)
   end
 
   @doc """
