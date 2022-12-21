@@ -10,7 +10,8 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
 
   def help(conn, _params) do
     content_list = [
-        {"導入部分", Talks.get_talk_list(0)}
+        {"導入部分", Talks.get_talk_list(0)},
+        {"機能説明 その1: サブスク利用状況を可視化", Talks.get_talk_list(1)},
       ]
     render(conn, "help.html", content_list: content_list)
   end

@@ -103,68 +103,108 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
     IO.inspect(subscribe_params)
 
-    # サービスを登録する
-    case Subscribes.register_subscribe(subscribe_params)do
-      {:ok, _} ->
+    today = Date.utc_today()
 
-        if Date.diff(subscribe_params["date_of_contract"], Date.utc_today) <= 0 do
-          # 履歴に登録する
-          case Historys.register_history(subscribe_params) do
-            {:ok, _msg} ->
-              conn
-              |> put_flash(:info, "サブスクリプションの追加に成功しました。")
-              |> redirect(to: Routes.manager_path(conn, :index))
+    next_month_of_contract = Converter.convert! %{
+      "year" => subscribe_params["date_of_contract"].year,
+      "month" => subscribe_params["date_of_contract"].month+1,
+      "day" => subscribe_params["date_of_contract"].day
+    }
 
-            # すでに登録履歴がある場合は、履歴の日付の更新をする
-            {:error, _changeset} ->
-              case Historys.update_history(
-                current_id,
-                subscribe_params
-              ) do
-                {:ok, msg} ->
-                  conn
-                  |> put_flash(:info, msg)
-                  |> redirect(to: Routes.manager_path(conn, :index))
-                {:error, msg} ->
-                  conn
-                  |> put_flash(:error, msg)
-                  |> redirect(to: Routes.manager_path(conn, :index))
-              end
-          end
-        else
-          conn
-          |> put_flash(:info, "サブスクリプションの追加に成功しました。")
-          |> redirect(to: Routes.manager_path(conn, :index))
+    # 今月より契約月が前、かつ継続しない、かつ今日 > 翌月の契約日のものは履歴だけ登録する
+    if today.month > subscribe_params["date_of_contract"].month && subscribe_params["continue"] == "false" && today > next_month_of_contract do
+
+      if Date.diff(subscribe_params["date_of_contract"], Date.utc_today) <= 0 do
+
+        # 履歴に登録する
+        case Historys.register_history(subscribe_params) do
+          {:ok, _msg} ->
+            conn
+            |> put_flash(:info, "サブスクリプションの追加に成功しました。")
+            |> redirect(to: Routes.manager_path(conn, :index))
+
+          # すでに登録履歴がある場合は、履歴の日付の更新をする
+          {:error, _changeset} ->
+            case Historys.update_history(
+              current_id,
+              subscribe_params
+            ) do
+              {:ok, msg} ->
+                conn
+                |> put_flash(:info, msg)
+                |> redirect(to: Routes.manager_path(conn, :index))
+              {:error, msg} ->
+                conn
+                |> put_flash(:error, msg)
+                |> redirect(to: Routes.manager_path(conn, :index))
+            end
         end
+      end
+    else
+
+      # サービスを登録する
+      case Subscribes.register_subscribe(subscribe_params)do
+        {:ok, _} ->
+
+          if Date.diff(subscribe_params["date_of_contract"], Date.utc_today) <= 0 do
+            # 履歴に登録する
+            case Historys.register_history(subscribe_params) do
+              {:ok, _msg} ->
+                conn
+                |> put_flash(:info, "サブスクリプションの追加に成功しました。")
+                |> redirect(to: Routes.manager_path(conn, :index))
+
+              # すでに登録履歴がある場合は、履歴の日付の更新をする
+              {:error, _changeset} ->
+                case Historys.update_history(
+                  current_id,
+                  subscribe_params
+                ) do
+                  {:ok, msg} ->
+                    conn
+                    |> put_flash(:info, msg)
+                    |> redirect(to: Routes.manager_path(conn, :index))
+                  {:error, msg} ->
+                    conn
+                    |> put_flash(:error, msg)
+                    |> redirect(to: Routes.manager_path(conn, :index))
+                end
+            end
+          else
+            conn
+            |> put_flash(:info, "サブスクリプションの追加に成功しました。")
+            |> redirect(to: Routes.manager_path(conn, :index))
+          end
 
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        # 各ジャンルのサービスのクエリのリストを受け取る
-        subscription_list = Subscriptions.list_subscriptions()
-        subscription_list_by_video = Subscriptions.list_subscriptions_by_genre 1
-        subscription_list_by_music = Subscriptions.list_subscriptions_by_genre 2
-        subscription_list_by_car = Subscriptions.list_subscriptions_by_genre 3
-        subscription_list_by_food = Subscriptions.list_subscriptions_by_genre 4
-        subscription_list_by_software = Subscriptions.list_subscriptions_by_genre 5
-        subscription_list_by_furniture = Subscriptions.list_subscriptions_by_genre 6
-        subscription_list_by_lesson = Subscriptions.list_subscriptions_by_genre 7
-        subscription_list_by_book = Subscriptions.list_subscriptions_by_genre 8
+        {:error, %Ecto.Changeset{} = changeset} ->
+          # 各ジャンルのサービスのクエリのリストを受け取る
+          subscription_list = Subscriptions.list_subscriptions()
+          subscription_list_by_video = Subscriptions.list_subscriptions_by_genre 1
+          subscription_list_by_music = Subscriptions.list_subscriptions_by_genre 2
+          subscription_list_by_car = Subscriptions.list_subscriptions_by_genre 3
+          subscription_list_by_food = Subscriptions.list_subscriptions_by_genre 4
+          subscription_list_by_software = Subscriptions.list_subscriptions_by_genre 5
+          subscription_list_by_furniture = Subscriptions.list_subscriptions_by_genre 6
+          subscription_list_by_lesson = Subscriptions.list_subscriptions_by_genre 7
+          subscription_list_by_book = Subscriptions.list_subscriptions_by_genre 8
 
-        to_year = Date.utc_today().year
+          to_year = Date.utc_today().year
 
-        conn
-        |> put_flash(:info, "サブスクリプションの登録に失敗しました。サービスの重複を確認してください。")
-        |> render("new.html", changeset: changeset, to_year: to_year,
-          subscription_list: subscription_list,
-          subscription_list_by_video: subscription_list_by_video,
-          subscription_list_by_music: subscription_list_by_music,
-          subscription_list_by_car: subscription_list_by_car,
-          subscription_list_by_food: subscription_list_by_food,
-          subscription_list_by_software: subscription_list_by_software,
-          subscription_list_by_furniture: subscription_list_by_furniture,
-          subscription_list_by_lesson: subscription_list_by_lesson,
-          subscription_list_by_book: subscription_list_by_book
-        )
+          conn
+          |> put_flash(:info, "サブスクリプションの登録に失敗しました。サービスの重複を確認してください。")
+          |> render("new.html", changeset: changeset, to_year: to_year,
+            subscription_list: subscription_list,
+            subscription_list_by_video: subscription_list_by_video,
+            subscription_list_by_music: subscription_list_by_music,
+            subscription_list_by_car: subscription_list_by_car,
+            subscription_list_by_food: subscription_list_by_food,
+            subscription_list_by_software: subscription_list_by_software,
+            subscription_list_by_furniture: subscription_list_by_furniture,
+            subscription_list_by_lesson: subscription_list_by_lesson,
+            subscription_list_by_book: subscription_list_by_book
+          )
+      end
     end
   end
 

@@ -46,12 +46,13 @@ defmodule SimpleSubscriptionManager.Scheduler do
             else
               Date.new!(date_of_payment.year + 1, 1, date_of_payment.day)
             end
-            Ecto.Changeset.change subscribe, date_of_payment: Date.new!(date_of_payment.year, date_of_payment.month+1, date_of_payment.day)
 
-            IO.puts "支払日の更新 成功: #{subscribe.account_alias.name} #{subscribe.account_alias.name}"
+            subscribe = Ecto.Changeset.change subscribe, date_of_payment: Date.new!(date_of_payment.year, date_of_payment.month+1, date_of_payment.day)
 
             case Repo.update subscribe do
-              {:ok, _struct} ->
+              {:ok, subscribe} ->
+
+                IO.puts "支払日の更新 成功: #{subscribe.account_alias.name} #{subscribe.account_alias.name}"
 
                 case Historys.insert_history(
                   %{
@@ -67,7 +68,7 @@ defmodule SimpleSubscriptionManager.Scheduler do
                 end
 
               {:error, _changeset} ->
-                IO.puts "支払日の更新 失敗: #{subscribe.account_alias.name} #{subscribe.account_alias.name}"
+                IO.puts "支払日の更新 失敗"
             end
           else
             case Subscribes.delete_subscribe(subscribe.account_id, subscribe.subscription_id) do
