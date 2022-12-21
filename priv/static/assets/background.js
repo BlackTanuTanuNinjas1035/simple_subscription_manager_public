@@ -6,7 +6,7 @@ $(function() {
     let big_interval_id = setInterval(function(){
         random_num = parseInt(Math.random() * 10);
         console.log(random_num);
-        //あたりを引いてかつ前のあたりから20秒たっていたら発射する　アニメーションが一回20秒のため
+        //あたりを引いてかつ前のあたりから30秒たっていたら発射する　アニメーションが一回20秒のため
         if(random_num == 0 && shot_bool) {
             shot_bool = false;
             console.log("発射");
@@ -18,7 +18,7 @@ $(function() {
                 shot_bool = true;
                 document.querySelector(".tanutanu").remove();
                 // document.querySelector("#tanutanu").classList.remove("shot");
-            }, 20000)
+            }, 30000)
         }
     }, 1000);
 });

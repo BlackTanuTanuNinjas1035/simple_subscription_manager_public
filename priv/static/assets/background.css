@@ -110,7 +110,7 @@
 }
 
 .circles > li.tanutanu{
-    animation: kyara_animate 20s linear infinite;
+    animation: kyara_animate 20s linear forwards;
     background: rgba(253, 253, 253, 0);
     background-image: url(../images/tanuki_nin_awai.png);
     background-size: contain;

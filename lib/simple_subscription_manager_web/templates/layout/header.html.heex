@@ -42,10 +42,12 @@
                                 <p class="hbg_nav_p">サブスクーラーについて</p>
                                 <div class="hbg_nav_link"><%= link "サブスクーラーの使い方", to: Routes.page_path(@conn, :help) %></div>
                                 <%= if @current_account do %>
-                                    <%= link "アカウントの退会", to: Routes.account_quit_path(@conn, :index) %>
+                                    <div class="hbg_nav_link">
+                                        <%= link "アカウントの退会", to: Routes.account_quit_path(@conn, :index) %>
+                                    </div>
                                 <% end %>
-                                <div><%= link "お知らせ一覧", to: Routes.topic_path(@conn, :index) %></div>
-                                <div><%= link "お問い合わせページ", to: Routes.form_path(@conn, :form) %></div>
+                                <div class="hbg_nav_link"><%= link "お知らせ一覧", to: Routes.topic_path(@conn, :index) %></div>
+                                <div class="hbg_nav_link"><%= link "お問い合わせページ", to: Routes.form_path(@conn, :form) %></div>
                             </li>
                             <li class="hbg_nav_li">
                                 <p class="hbg_nav_p">サブスク利用者向けページ</p>

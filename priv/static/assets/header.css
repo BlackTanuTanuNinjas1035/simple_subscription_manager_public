@@ -7,12 +7,12 @@ header {
 }
 
 .container.header{
-    background-color: rgb(201, 201, 201);
+    background-color: rgb(221, 219, 219);
+    box-shadow: 0px 5px 10px gray;
     display: flex;
     justify-content: space-between;
 
-    /* background-image: url(../images/mori6.png); */
-    background-image: url(../images/mori4.png), url(../images/cloud5.png);
+    /* background-image: url(../images/mori8.png), url(../images/cloud5.png); */
     background-size: contain;
     background-repeat: repeat-x;
 }
@@ -38,9 +38,11 @@ header {
 
 /* ハンバーガーメニューcss */
 header a {
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 .header-ul{
+    font-weight: bold;
+    margin-top: 13px;
 }
 .header-ul li {
     white-space: nowrap;
@@ -48,6 +50,9 @@ header a {
 }
 .header-ul .mail_address {
     display: none;
+}
+.header-ul a {
+    color:inherit;
 }
 
 header ul,
@@ -83,7 +88,9 @@ header li {
     position: absolute;
     top: 0px;
     right: 0;
-    padding: 30px;
+    padding: 20px;
+    line-height: 30px;
+    border: solid;
     border-radius: 10px;
     z-index: 10;
     visibility: hidden;
@@ -92,13 +99,19 @@ header li {
 }
 
 .hamburger_nav.active{
-    background-color: rgb(211, 211, 211);
+    /* background-color: rgb(211, 211, 211); */
+    background-color: rgb(240, 240, 240);
     visibility: visible;
     opacity: 1;
 }
 .hbg_nav_p{
     font-size: 20px;
+    font-weight: bold;
 }
+.hbg_nav_link {
+    text-indent: 1em;
+}
+
 
 /*ハンバーガーの線のcss*/
 .hamburger_button{
@@ -183,7 +196,7 @@ header li {
 }
 .sumaho_rogo {
     content: "";
-    background-image: url(../images/rogotanu_color.png);
+    background-image: url(../images/rogotanu_touka.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -204,11 +217,16 @@ header li {
     /* .header > a {
         display: none;
     } */
-    
+    .header-ul{
+        margin-top: 0;
+    }
     .pc_rogo {
         display: none;
     }
     .account-info {
         width: calc(100vw - 190px);
+    }
+    .irassyai {
+        display: none;
     }
 }

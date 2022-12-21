@@ -1,7 +1,7 @@
 <!-- ログイン時のユーザーの名前とか表示するところ --->
 <ul class="header-ul">
 <%= if @current_account do %>
-  <li><%= @current_account.name %> さん、いらっしゃい！</li>
+  <li><%= @current_account.name %> さん<span class="irassyai">、いらっしゃい</span>！</li>
   <li class="mail_address">メアド: <%= @current_account.email %> さん!</li>
   <li><%= link "アカウント設定", to: Routes.account_settings_path(@conn, :edit) %></li>
   <li><%= link "ログアウト", to: Routes.account_session_path(@conn, :delete), method: :delete %></li>
