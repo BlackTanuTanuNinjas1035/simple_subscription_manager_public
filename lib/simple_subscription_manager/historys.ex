@@ -2,6 +2,7 @@ defmodule SimpleSubscriptionManager.Historys do
   alias SimpleSubscriptionManager.Historys.History
   alias SimpleSubscriptionManager.Repo
   alias SimpleSubscriptionManager.Converter
+  alias SimpleSubscriptionManager.Util
 
   import Ecto.Query
 
@@ -18,13 +19,15 @@ defmodule SimpleSubscriptionManager.Historys do
   指定したユーザの指定した月の履歴を表示する
   """
   def get_history(account_id, month) do
-    today_month = Date.utc_today().month
+    today= Date.utc_today()
+    tomonth = today.month
 
     History
     |> where(account_id: ^account_id)
     |> Repo.all
     |> Repo.preload([:account_alias, :subscription_alias, subscription_alias: [:genre_alias]])
-    |> Enum.filter(fn record -> today_month - record.date_of_contract.month == month end)
+    |> Enum.filter(fn record -> Date.diff(today, NaiveDateTime.to_date(record.inserted_at)) <= 365 end)
+    |> Enum.filter(fn record -> Util.calc_month(tomonth, record.date_of_contract.month) == month end)
   end
 
   @doc """
