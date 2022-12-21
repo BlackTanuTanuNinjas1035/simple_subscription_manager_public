@@ -11,9 +11,10 @@ header {
     display: flex;
     justify-content: space-between;
 
-    /* background-image: url(../images/Tree-5.png);
+    /* background-image: url(../images/mori6.png); */
+    background-image: url(../images/mori4.png), url(../images/cloud5.png);
     background-size: contain;
-    background-repeat: repeat-x; */
+    background-repeat: repeat-x;
 }
 .header > a {
     margin-left: max(20px, 3%);
@@ -182,7 +183,7 @@ header li {
 }
 .sumaho_rogo {
     content: "";
-    background-image: url(../images/rogotanu_touka.png);
+    background-image: url(../images/rogotanu_color.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
