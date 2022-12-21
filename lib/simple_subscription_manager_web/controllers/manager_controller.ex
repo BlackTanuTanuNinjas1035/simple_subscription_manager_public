@@ -6,6 +6,7 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   alias SimpleSubscriptionManager.Converter
   alias SimpleSubscriptionManager.Historys
   alias SimpleSubscriptionManager.Subscriptions
+  alias SimpleSubscriptionManager.Util
   # alias SimpleSubscriptionManager.Subscriptions.SubscriptionNotifier
 
 
@@ -105,11 +106,17 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
     today = Date.utc_today()
 
-    next_month_of_contract = Converter.convert! %{
-      "year" => subscribe_params["date_of_contract"].year,
-      "month" => subscribe_params["date_of_contract"].month+1,
-      "day" => subscribe_params["date_of_contract"].day
-    }
+    # next_month_of_contract = Converter.convert! %{
+    #   "year" => subscribe_params["date_of_contract"].year,
+    #   "month" => Integer.to_string(String.to_integer(subscribe_params["date_of_contract"].month) + 1),
+    #   "day" => subscribe_params["date_of_contract"].day
+    # }
+
+    next_month_of_contract = Util.next_month_of_contract(
+      subscribe_params["date_of_contract"].year,
+      subscribe_params["date_of_contract"].month + 1,
+      subscribe_params["date_of_contract"].day
+    )
 
     # 今月より契約月が前、かつ継続しない、かつ今日 > 翌月の契約日のものは履歴だけ登録する
     if today.month > subscribe_params["date_of_contract"].month && subscribe_params["continue"] == "false" && today > next_month_of_contract do
