@@ -29,8 +29,10 @@
         </div>
         <div class="ranking ranking_service active">
             <div class="ranking_title">人気のサービスランキング</div>
+            
             <div class="ranking_and_graph" id="overall_service">
                     <div class="div_rag_ranking">
+                        <div id="arrow_right_s1" class="arrow_right_flame"><div class="arrow_right"></div></div>
                         <div class="rag_ranking">
 
                         <ol class="ol_ranking">
@@ -47,6 +49,7 @@
                         </div>
                     </div>
                     <div class="rag_graph">
+                        <div id="arrow_left_s1" class="arrow_left_flame"><div class="arrow_left"></div></div>
                         <canvas id="graph_overall_service" class="graph"></canvas>
                     </div>
             </div>
@@ -54,7 +57,10 @@
 
             <!-- サービスの年齢別のランキング --->
             <div class="ranking_title">年代別のサービスランキング</div>
-            <div class="overall_age_service age_circle_graph">
+            <div class="scroll_flame_age">
+            <div class="arrow_left_flame_age"><div class="arrow_left_age"></div></div>
+            <div class="arrow_right_flame_age"><div class="arrow_right_age"></div></div>
+            <div id="overall_age_service" class="age_circle_graph">
                 <div class="mini_ranking_and_graph" id="overall_age_00_service">
                     <div class="mini_ranking">
                         <h3>10代未満</h3>
@@ -210,13 +216,16 @@
                 </div>
 
             </div>
+            </div>
 
 
 
             <div class="male_service">
                 <div class="ranking_title">男性に人気のサービスランキング</div>
+                
                 <div class="ranking_and_graph" id="male_overall_service">
                     <div class="div_rag_ranking">
+                        <div id="arrow_right_s2" class="arrow_right_flame"><div class="arrow_right"></div></div>
                         <div class="rag_ranking"><!--classのragはranking_and_graph--->
 
                             <ol class="ol_ranking">
@@ -233,12 +242,16 @@
                         </div>
                     </div>
                         <div class="rag_graph">
+                            <div id="arrow_left_s2" class="arrow_left_flame"><div class="arrow_left"></div></div>
                             <canvas id="graph_male_overall_service" class="graph"></canvas>
                         </div>
                 </div>
 
                 <div class="ranking_title">年代別　男性人気 サービス</div>
-                <div class="male_age_service age_circle_graph">
+                <div class="scroll_flame_age">
+                <div class="arrow_left_flame_age"><div class="arrow_left_age"></div></div>
+                <div class="arrow_right_flame_age"><div class="arrow_right_age"></div></div>
+                <div id="male_age_service" class="age_circle_graph">
                     <div class="mini_ranking_and_graph" id="male_age_00_service">
 
                         <div class="mini_ranking">
@@ -394,11 +407,14 @@
                     </div>
                 </div>
             </div>
+            </div>
 
             <div class="female_service">
                 <div class="ranking_title">女性に人気のサービスランキング</div>
+                
                 <div class="ranking_and_graph" id="female_overall_service">
                     <div class="div_rag_ranking">
+                        <div id="arrow_right_s3" class="arrow_right_flame"><div class="arrow_right"></div></div>
                         <div class="rag_ranking">
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@subscription_counter_in_female) == 0 do %>
@@ -414,12 +430,16 @@
                         </div>
                     </div>
                     <div class="rag_graph">
+                        <div id="arrow_left_s3" class="arrow_left_flame"><div class="arrow_left"></div></div>
                         <canvas id="graph_female_service" class="graph"></canvas>
                     </div>
                 </div>
 
                 <div class="ranking_title">年代別　女性人気 サービス</div>
-                <div class="female_age_service age_circle_graph">
+                <div class="scroll_flame_age">
+                <div class="arrow_left_flame_age"><div class="arrow_left_age"></div></div>
+                <div class="arrow_right_flame_age"><div class="arrow_right_age"></div></div>
+                <div id="female_age_service" class="age_circle_graph">
                     <div class="mini_ranking_and_graph" id="female_age_00_service">
                         <div class="mini_ranking">
                             <h3>10代未満</h3>
@@ -575,12 +595,15 @@
                 </div>
             </div>
         </div>
+        </div>
 
         <div class="ranking ranking_genre">
 
             <div class="ranking_title">人気のジャンルのランキング</div>
+            
             <div class="ranking_and_graph" id="overall_genre">
                 <div class="div_rag_ranking">
+                    <div id="arrow_right_g1" class="arrow_right_flame"><div class="arrow_right"></div></div>
                     <div class="rag_ranking">
                         <ol class="ol_ranking">
                             <%= unless Enum.count(@genre_counter) == 0 do %>
@@ -596,6 +619,7 @@
                     </div>
                 </div>
                 <div class="rag_graph">
+                    <div id="arrow_left_g1" class="arrow_left_flame"><div class="arrow_left"></div></div>
                     <canvas id="graph_overall_genre" class="graph"></canvas>
                 </div>
             </div>
@@ -732,8 +756,10 @@
 
             <div class="male_genre">
                 <div class="ranking_title">男性に人気のジャンルのランキング</div>
+                
                 <div class="ranking_and_graph" id="male_overall_genre">
                     <div class="div_rag_ranking">
+                        <div id="arrow_right_g2" class="arrow_right_flame"><div class="arrow_right"></div></div>
                         <div class="rag_ranking">
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_male) == 0 do %>
@@ -749,6 +775,7 @@
                         </div>
                     </div>
                     <div class="rag_graph">
+                        <div id="arrow_left_g2" class="arrow_left_flame"><div class="arrow_left"></div></div>
                         <canvas id="graph_male_overall_genre" class="graph"></canvas>
                     </div>
                 </div>
@@ -881,8 +908,10 @@
 
             <div class="female_genre">
                 <div class="ranking_title">女性に人気のジャンルのランキング</div>
+                
                 <div class="ranking_and_graph" id="female_overall_genre">
                     <div class="div_rag_ranking">
+                        <div id="arrow_right_g3" class="arrow_right_flame"><div class="arrow_right"></div></div>
                         <div class="rag_ranking">
                             <ol class="ol_ranking">
                                 <%= unless Enum.count(@genre_counter_in_female) == 0 do %>
@@ -898,6 +927,7 @@
                         </div>
                     </div>
                     <div class="rag_graph">
+                        <div id="arrow_left_g3" class="arrow_left_flame"><div class="arrow_left"></div></div>
                         <canvas id="graph_female_overall_genre" class="graph"></canvas>
                     </div>
                 </div>

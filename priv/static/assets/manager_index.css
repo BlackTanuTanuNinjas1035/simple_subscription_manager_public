@@ -115,6 +115,8 @@
 .regi_button > a,
 .history_button > a {
     text-decoration: none;
+    color: rgb(0, 78, 0);
+    font-size: 25px;
     display: table-cell;
     vertical-align: middle;
 }

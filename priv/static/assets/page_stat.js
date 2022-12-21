@@ -13,6 +13,39 @@ $(function(){
         $(".ranking").removeClass("active");
         $(selected_tab).addClass("active");
     });
+
+    //スクロール矢印の処理
+    $(".arrow_right_flame").on("click", function() {
+        let parent = $(this).parent();
+        let scroll_width = parent[0].clientWidth;
+        let parent_id = "#" + parent.parent()[0].id;
+        let scroll_parent = document.querySelector(parent_id);
+        scroll_parent.scrollBy( scroll_width, 0);
+    });
+    $(".arrow_left_flame").on("click", function() {
+        let parent = $(this).parent();
+        let scroll_width = 0 - parent[0].clientWidth;
+        let parent_id = "#" + parent.parent()[0].id;
+        let scroll_parent = document.querySelector(parent_id);
+        scroll_parent.scrollBy( scroll_width, 0);
+    });
+
+    $(".arrow_left_flame_age").on("click", function() {
+        let parent_parent = $(this).parent();
+        let parent = parent_parent[0].querySelector(".age_circle_graph");
+        let parent_id = "#" + parent.id;
+        let scroll_parent = parent_parent[0].querySelector(parent_id);
+        let scroll_width = 0 - parent.querySelector(".mini_ranking_and_graph").clientWidth;
+        scroll_parent.scrollBy( scroll_width, 0);
+    });
+    $(".arrow_right_flame_age").on("click", function() {
+        let parent_parent = $(this).parent();
+        let parent = parent_parent[0].querySelector(".age_circle_graph");
+        let parent_id = "#" + parent.id;
+        let scroll_parent = parent_parent[0].querySelector(parent_id);
+        let scroll_width = parent.querySelector(".mini_ranking_and_graph").clientWidth;
+        scroll_parent.scrollBy( scroll_width, 0);
+    });
 });
 
 //ol_rankingのtagdataを受け取るとspanの要素を取得し、リストにして返す　あと取得するランキングの数を取得する

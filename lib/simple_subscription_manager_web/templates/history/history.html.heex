@@ -14,7 +14,11 @@
         </div>
 
         <div class="history_content">
-            <div class="history_flame">
+            <div class="history_flame_out">
+            <div id="arrow_left" class="arrow_left_flame"><div class="arrow_left"></div></div>
+            <div id="arrow_right" class="arrow_right_flame"><div class="arrow_right"></div></div>
+                
+            <div id="history_flame_in" class="history_flame_in">
                 <div class="data" id="before_1">
                     <div class="data_month"><span class="left_data_month">1ヶ月前</span><span class="right_data_month"><span class="span_month"><%= 1 |> previous_month()  %></span></span><span></span></div>
                     <div class="card_flame">
@@ -675,6 +679,7 @@
                     <% end %>
                 </div>
 
+            </div>
             </div>
         </div>
 

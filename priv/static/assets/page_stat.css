@@ -92,9 +92,8 @@
 }
 
 .ranking_title {
-    height: 30px;
     font-weight: bold;
-    font-size: clamp(20px, 3vw, 25px);
+    font-size: clamp(25px, 3vw, 30px);
 }
 
 .ranking_service {
@@ -111,11 +110,11 @@
 .ranking_genre.active {
     display: block;
 }
-
 .ranking_and_graph {
     display: flex;
     min-height: 300px;
     padding-bottom: clamp(10px, 2vw, 30px);
+    scroll-behavior: smooth;
 }
 .age_circle_graph {
     padding-bottom: clamp(10px, 2vw, 30px);
@@ -131,6 +130,54 @@
     /* max-width: 70%;
     margin-left: 10%; */
     max-width: 85%;
+}
+.arrow_left_flame,
+.arrow_right_flame,
+.arrow_left_flame_age,
+.arrow_right_flame_age  {
+    width: 20px;
+    height: 100px;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: none;
+    position: absolute;
+}
+.arrow_right_flame,
+.arrow_right_flame_age {
+    right: 0;
+    border-radius: 10px 0 0 10px;
+}
+.arrow_right,
+.arrow_right_age {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin: auto;
+    border-top: 4px solid #000;
+    border-right: 4px solid #000;
+    transform: rotate(45deg);
+}
+.arrow_left_flame,
+.arrow_left_flame_age {
+    left: 0;
+    border-radius: 0 10px 10px 0;
+}
+.arrow_left,
+.arrow_left_age {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin: auto;
+    border-left: 4px solid #000;
+    border-bottom: 4px solid #000;
+    transform: rotate(45deg);
+}
+.scroll_flame_age {
+    width: 100%;
+    position: relative;
 }
 
 /* ランキングのliの処理 */
@@ -250,19 +297,11 @@
 .age_circle_graph {
     display: flex;
     flex-wrap: wrap;
-}
-.overall_age_service {
-
+    scroll-behavior: smooth;
 }
 .male_service {
 }
-.male_age_service {
-
-}
 .female_service {
-}
-.female_age_service {
-
 }
 .overall_genre {
 }
@@ -363,10 +402,18 @@
     .div_rag_ranking {
         min-width: 100%;
         scroll-snap-align: start;
+        position: relative;
     } 
     .rag_graph {
         min-width: 100%;
         scroll-snap-align: start;
+        position: relative;
+    }
+    .arrow_left_flame,
+    .arrow_right_flame,
+    .arrow_left_flame_age,
+    .arrow_right_flame_age {
+        display: inline-flex;
     }
     .age_circle_graph {
         flex-wrap: nowrap;

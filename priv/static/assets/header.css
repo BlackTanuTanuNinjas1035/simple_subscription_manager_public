@@ -91,6 +91,7 @@ header li {
     padding: 20px;
     line-height: 30px;
     border: solid;
+    border-color: gray;
     border-radius: 10px;
     z-index: 10;
     visibility: hidden;
@@ -196,7 +197,7 @@ header li {
 }
 .sumaho_rogo {
     content: "";
-    background-image: url(../images/rogotanu_touka.png);
+    background-image: url(../images/rogotanu_v2_touka.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -211,13 +212,14 @@ header li {
         height: 70px;
     }
     .header_left {
-        margin-left: 0;
+        margin-left: 1%;
     }
     
     /* .header > a {
         display: none;
     } */
     .header-ul{
+        line-height: 23px;
         margin-top: 0;
     }
     .pc_rogo {
