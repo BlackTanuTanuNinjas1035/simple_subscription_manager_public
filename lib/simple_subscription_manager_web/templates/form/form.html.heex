@@ -1,15 +1,19 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/tmp_content.css")}/>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/form_form.css")}/>
 
 <div class="content">
 
-    <h1>お問い合わせページ</h1>
+    <div class="page_title">お問い合わせページ</div>
+    
+    <div class="inner_content">
+        <div class="description">
+            <p>当ページはサブスクーラーに追加してほしいサービスや、機能などの要望を気軽にお知らせください。<br>お問い合わせの種類を選択してご入力ください。</p>
+        </div>
+        <%= form_for @conn, Routes.form_path(@conn, :inquiry_form), fn f -> %>
 
-    <p>当ページはサブスクーラーに追加してほしいサービスや、機能などの要望を気軽にお知らせください。<br>お問い合わせの種類を選択してご入力ください。</p>
-
-    <%= form_for @conn, Routes.form_path(@conn, :inquiry_form), fn f -> %>
-
-        <div><%= label f, "問い合わせの種類" %><%= select f, :genre, ["サービスの追加": "add_service", "機能の追加": "extend_function"]%></div>
-        <%= textarea f, :text %>
-        <%= submit "送信" %>
-    <% end %>
+            <div class="select_div"><%= label f, "問い合わせの種類：" %><%= select f, :genre, ["サービスの追加": "add_service", "機能の追加": "extend_function"]%></div>
+            <div class="text_div"><%= textarea f, :text %></div>
+            <div class="button_div"><%= submit "送信" %></div>
+        <% end %>
+    </div>
 </div>

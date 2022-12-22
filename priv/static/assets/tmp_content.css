@@ -7,15 +7,26 @@
     flex-direction: column;
     justify-content: center;
 }
-.main_contents > .container > .content{
+.container > .content{
     background: #ffffff;
-    min-width: 50%;
-    min-height: 60%;
+    width: 98vw;
+    max-width: 1000px;
+    min-height: 500px;
     margin: auto;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
 }
+
+.page_title {
+    font-weight: bold;
+    font-size: clamp(30px, 3vw, 35px);
+    height: 10%;
+}
+.inner_content {
+    height: 90%;
+}
+
 
 .left_text {
     text-align: left;
@@ -23,4 +34,11 @@
     margin-right: 10%;
     margin-top: 1%;
     margin-bottom: 3%;
+}
+
+@media screen and (max-width: 767px){
+    .container > .content{
+        margin: 4% auto;
+        min-height: 90%;
+    }
 }

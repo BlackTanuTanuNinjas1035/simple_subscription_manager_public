@@ -1,15 +1,28 @@
-<h1>Forgot your password?</h1>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/account_reset_password_new.css")}/>
 
-<.form let={f} for={:account} action={Routes.account_reset_password_path(@conn, :create)}>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
+<div class="content">
+  <div class="page_title"><div class="title_mozi">パスワードを忘れたら？</div></div>
 
-  <div>
-    <%= submit "Send instructions to reset password" %>
+  <div class="middle_content">
+    <div class="discription">
+        <div class="discription_mozi">登録されたメールアドレスを入力し、受信したメールからパスワードの再設定を行ってください。</div>
+    </div>
+    <div class="form_div">
+      <.form let={f} for={:account} action={Routes.account_reset_password_path(@conn, :create)}>
+        <div class="label"><%= label f, :メールアドレス %></div>
+        <div class="input"><%= email_input f, :email, required: true %></div>
+
+        <div class="submit_button">
+          <%= submit "再設定用メールを送信" %>
+        </div>
+      </.form>
+    </div>
   </div>
-</.form>
+  <div class="bottom_content">
+    <p>
+      <%= link "アカウントの登録", to: Routes.account_registration_path(@conn, :new) %> |
+      <%= link "ログイン", to: Routes.account_session_path(@conn, :new) %>
+    </p>
+  </div>
 
-<p>
-  <%= link "Register", to: Routes.account_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.account_session_path(@conn, :new) %>
-</p>
+</div>
