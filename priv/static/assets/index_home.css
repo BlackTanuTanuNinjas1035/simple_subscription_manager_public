@@ -41,9 +41,11 @@ button {
 
 .youkoso {
     font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 2%;
 }
 .catchphrase {
-    margin: 3% 0;
+    margin: 2% 0;
     font-size: 30px;
     font-weight: bold;
 }
@@ -83,6 +85,16 @@ button {
     vertical-align: middle;
 }
 
+.divdiv {
+    display: none;
+}
+.spanspan {
+    display: inline-block;
+}
+.appname {
+    color: green;
+    font-weight: bold;
+}
 @media screen and (max-width: 767px){
     .main_contents > .container > .content{
         height: 80%;
