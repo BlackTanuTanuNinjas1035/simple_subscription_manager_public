@@ -1,9 +1,40 @@
 <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/tmp_content.css")}/>
+<link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/account_quit_index.css")}/>
 
 <div class="content">
-    <h1>アカウント退会について</h1>
-    <div class="left_text">
-        <p>　サブスクーラーをご利用ありがとうございました。<br>退会しますと、これまでサブスクーラーに登録されていた内容はすべて削除され、<br>また支払期限を知らせるメールなども送信されなくなります。<br>　退会しますか?</p>
+    <div class="page_title">アカウント退会について</div>
+    <div class="discription">
+        <p>　サブスクーラーをご利用ありがとうございました。<br>退会しますと、これまでサブスクーラーに登録されていた内容はすべて削除され、<br>また支払期限を知らせるメールなども送信されなくなります。</p>
     </div>
-    <%=link "退会する", to: Routes.account_quit_path(@conn, :quit) %>
+
+    <div class="button_flame">
+        <div class="tiratanu button_left">
+
+        </div>
+        <div class="button_middle">
+            <div class="button active">
+                <div class="kakunin"><div id="kakunin">退会しますか？</div></div>
+                <div class="button_div">
+                    <div id="tyomate" class="quit_button">
+                        <p>退会する</p>
+                    </div>
+                </div>
+                <div class="cansel"></div>
+            </div>
+            <div class="button">
+                <div class="kakunin"><div id="kakunin">ほんとうに？</div></div>
+                <div class="button_div">
+                    <div class="quit_button">
+                        <%=link "本当に退会する", to: Routes.account_quit_path(@conn, :quit) %>
+                    </div>
+                </div>
+                <div class="cansel"><div id="yameru">やっぱやめる</div></div>
+            </div>
+        </div>
+        <div class="tiratanu button_right">
+
+        </div>
+    </div>
 </div>
+
+<script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/account_quit_index.js")}></script>

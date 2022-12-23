@@ -283,7 +283,10 @@ function graphView_age_genre(age_genre_id) {
         options:{
             maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
             legend:{
-                display:false//グラフの説明を表示
+                display:true,//グラフの説明を表示
+                labels: {
+                    fontColor: 'black'
+                }
             },
             tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
                 callbacks:{
@@ -299,7 +302,14 @@ function graphView_age_genre(age_genre_id) {
             scales: {
                 xAxes: [
                     {
-                        stacked: true  // 積み上げの指定
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: '横軸ラベル',
+                            fontColor: 	'#666'
+                        },
+                        stacked: true,  // 積み上げの指定
+                        
                     }
                 ],
                 yAxes: [

@@ -1,0 +1,95 @@
+.discription {
+    height: 40%;
+    display: flex;
+}
+.discription p {
+    font-size: clamp(18px, 2vw, 20px);
+    margin: auto;
+}
+.button_flame {
+    height: 50%;
+    display: flex;
+}
+.button_left {
+    width: 20%;
+}
+.button_middle {
+    width: 60%;
+}
+.button_right {
+    width: 20%;
+}
+.button {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+.button.active {
+    display: block;
+}
+.kakunin {
+    height: 15%;
+    font-size: clamp(18px, 2vw, 20px);
+    font-weight: bold;
+}
+.button_div {
+    height: 70%;
+    display: flex;
+}
+.cansel {
+    height: 15%;
+    font-size: clamp(18px, 2vw, 20px);
+    text-align: right;
+    text-decoration:underline;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.button_left,
+.button_right {
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.button_left {
+    background-image: none;
+}
+.button_left.really {
+    background-image: url(../images/left_tanu.png);
+    background-position: left;
+}
+.button_right {
+    background-image: url(../images/right_tanu1.png);
+    background-position: right;
+}
+.button_right.really {
+    background-image: url(../images/right_tanu2.png);
+}
+
+.quit_button{
+    width: 90%;
+    max-width: 300px;
+    height: 100px;
+    margin: auto;
+    border-radius: 10px;
+    display: table;
+    background-color: #ff8f3e;
+    box-shadow: 0px 10px rgb(197, 118, 0);
+
+    font-size: clamp(25px, 3vw, 30px);
+    font-weight: bold;
+}
+.quit_button:hover,
+.quit_button:active{
+    background-color: #e78036;
+    box-shadow: 0px 4px rgb(197, 118, 0); 
+    position:relative;
+    top: 6px;
+}
+.quit_button > a,
+.quit_button > p {
+    text-decoration: none;
+    display: table-cell;
+    vertical-align: middle;
+}

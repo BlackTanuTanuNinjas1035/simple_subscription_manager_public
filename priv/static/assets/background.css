@@ -116,15 +116,23 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    left: 3%;
     width: 150px;
     height: 150px;
     /* animation-delay: 10s; */
     animation-duration: 20s;
 }
-
-
-
+.circles > li.tanutanu.p1{
+    left:0%;
+}
+.circles > li.tanutanu.p2{
+    left:25%
+}
+.circles > li.tanutanu.p3{
+    left: 60%;
+}
+.circles > li.tanutanu.p4{
+    right: 0%;
+}
 @keyframes animate {
 
     0%{

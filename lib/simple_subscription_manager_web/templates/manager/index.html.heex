@@ -22,8 +22,13 @@
         </div>
 
         <div class="middle_content">
-            <div class="middle_content_title"><div class="middle_content_title_mozi">登録しているサービス</div></div>
+            <div class="middle_content_title"><div class="middle_content_title_mozi">利用可能サービス</div><div id="user_guid" class="user_guid"></div></div>
             <div class="subsc_flame">
+                <div id="user_guid_content" class="user_guid_content">
+                    <div class="user_guid_title">使い方</div>
+                    <p>緑色：</p>
+                    <p>赤色：</p>
+                </div>
                 <!--登録しているサブスクをカードとして表示 --->
                 <%= for subscribe <- @subscribes_list do %>
                     <div class="subsc_card">
@@ -64,7 +69,7 @@
                                         <p>登録内容の変更に失敗しました。入力内容を確認してください。</p>
                                     </div>
                                 <% end %>
-
+                                <div>登録内容の編集</div>
                                 <%= hidden_input f, :action, name: "subscribe_id", value: subscribe.id %>
 
                                 <label>
@@ -85,12 +90,12 @@
                                     ] %>
                                 </label>
 
-                                <div>
+                                <div class="keizoku">
                                     <%= label f, "継続"%>
                                     <%= checkbox f, :continue %>
                                 </div>
 
-                                <%= submit "登録内容の更新" %>
+                                <div class="change_button"><%= submit "更新" %></div>
                             <% end %>
                         </div>
 
