@@ -43,7 +43,11 @@ var options = {//グラフのオプション
     cutoutPercentage: 50, //ドーナツグラフの何％をえぐるか
     maintainAspectRatio: false,//CSSで大きさを調整するため、自動縮小をさせない
     legend:{
-        display:false//グラフの説明を表示
+        display:true,//グラフの説明を表示
+        labels: {
+            fontColor: 'black',
+            
+        }
     },
     tooltips:{//グラフへカーソルを合わせた際の詳細表示の設定
         callbacks:{
