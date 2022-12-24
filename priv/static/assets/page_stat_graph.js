@@ -554,7 +554,7 @@ $(function() {
 
     //ロード後　ロード画面消す　最後に記述する
     let final_time = performance.now();
-    console.log("ファイナル" + (final_time - start_time) / 1000 + "秒");
+    //console.log("ファイナル" + (final_time - start_time) / 1000 + "秒");
     let load = document.querySelector("#load");
     load.classList.add("loaded");
     sleep(3, function() {

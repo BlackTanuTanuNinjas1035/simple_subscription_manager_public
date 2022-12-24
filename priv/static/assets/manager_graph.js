@@ -80,7 +80,7 @@ $(function() {
         var tmp = getSubsc();
         var ls_name = tmp[0];
         var ls_price = tmp[1];
-        console.log(ls_name);
+        //console.log(ls_name);
         
         var chart=new Chart(ctx,{
         type:'pie',//グラフのタイプ

@@ -101,7 +101,7 @@
 
       <div class="one-element">
       <%= label f, :age, "新しい年齢" %><div class="divdiv"></div>
-      ここ
+      <p class="tyuui">※月の日付を超えた入力は、その月の末日になります。</p>
       <%= date_select f, :age, year: [options: 1950..@today.year], month: [options: [
           {gettext("1"), "1"},
           {gettext("2"), "2"},
