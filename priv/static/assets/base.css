@@ -29,32 +29,61 @@ body{
 .container {
     position: relative;
 }
-.container > .alert-info,
-.container > .alert-danger {
+.alert_flame {
     position: absolute;
-    top: 0;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 
-    animation-name: alert-opacity;
+    animation-name: alert-anime;
     animation-duration: 5s;
-    animation-delay: 3s;
+    /* animation-delay: 3s; */
     animation-fill-mode: forwards;
+}
+.alert_content {
+    background-color: white;
+    border-radius: 5px;
+}
+.alert-info,
+.alert-danger {
 
 }
 /* アラートが数秒出て消えるアニメーション */
-@keyframes alert-opacity{
+@keyframes alert-anime{
     0% {
-        opacity: 1;
+        top: -200px;
+    }
+    10%, 90% {
+        top: -100px;
     }
     100% {
-        opacity: 0;
+        top: -200px;
     }
 }
+@keyframes alert-anime-sumaho{
+    0% {
+        bottom: -100px;
+    }
+    10%, 90% {
+        bottom: 0;
+    }
+    100% {
+        bottom: -100px;
+    }
+}
+
 
 @media screen and (max-width: 767px){
     .main_contents{
         width: 100%;
         /*高さ↓　ヘッダーのpxとフッターのpxを引いてる */
         height: calc(100% - 70px);
+    }
+    .alert_flame {
+        animation-name: alert-anime-sumaho;
     }
 }
 
@@ -76,3 +105,6 @@ body{
     box-shadow:0 0 0 1px rgba(255, 255, 255, .3);
 }
 
+::-webkit-scrollbar{
+    display:none;
+}

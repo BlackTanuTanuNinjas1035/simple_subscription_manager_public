@@ -1,6 +1,4 @@
-
 $(function(){
-
     /*ハンバーガーボタンをクリックしたらactiveクラスを付与する*/
     $('#hamburger_button2').on('click', function(e){
         
@@ -27,7 +25,6 @@ $(function(){
             $('#hamburger_button2').removeClass('active');
             $('#hamburger_nav').removeClass('active');
         } 
-        
     });
 
 });

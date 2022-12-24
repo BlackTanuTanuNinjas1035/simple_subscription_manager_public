@@ -1,3 +1,4 @@
+<!-- これなんて書いてあるんだ！ --->
 <h1>Resend confirmation instructions</h1>
 
 <.form let={f} for={:account} action={Routes.account_confirmation_path(@conn, :create)}>
@@ -10,6 +11,6 @@
 </.form>
 
 <p>
-  <%= link "Register", to: Routes.account_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.account_session_path(@conn, :new) %>
+  <%= link "アカウント登録", to: Routes.account_registration_path(@conn, :new) %> |
+  <%= link "ログイン", to: Routes.account_session_path(@conn, :new) %>
 </p>

@@ -1,0 +1,48 @@
+.inner_content {
+    display: flex;
+    flex-direction: column;
+}
+.description {
+    font-size: clamp(20px, 2vw, 22px);
+    height: 30%;
+}
+form {
+    margin: auto 2%;
+    height: 65%;
+}
+.select_div,
+.text_div,
+.button_div {
+    display: flex;
+}
+.select_div {
+    justify-content: center;
+    height: 20%;
+}
+.text_div {
+    height: 60%;
+}
+.button_div {
+    height: 20%;
+}
+
+label {
+    margin: auto 0;
+}
+select {
+    margin: auto 0;
+    height: 30px;
+    font-weight: bold;
+}
+#text {
+    margin: auto;
+    width: 80%;
+    height: 90%;
+}
+button {
+    margin: auto;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 20px;
+}

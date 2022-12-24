@@ -1,17 +1,19 @@
 #front {
-    height: 100%;
-}
-.main_contents {
     height: auto;
 }
 .login-page {
     height: 100%;
+    margin: 0;
+    display: flex;
+}
+.page_title { 
+    font-size: 30px;
 }
 .form {
     margin: 2% auto;
-    font-size: 10vw;
+    font-size: 18px;
     height: fit-content;
-    max-width: 610px;
+    max-width: 400px;
     text-align: center;
 }
 .form_top {
@@ -25,8 +27,12 @@
     font-size: 50px;
 }
 .form_middle form {
-    font-size: clamp(17px, 2vw, 20px);
+    /* font-size: clamp(17px, 2vw, 20px); */
+    font-size: 18px;
     
+}
+.kiyaku {
+    font-size: 15px;
 }
 .submit_button {
     margin: 2%;
@@ -36,13 +42,24 @@
     margin: 2%;
 }
 .form .message {
-    font-size: clamp(15px, 2vw, 17px);
+    /* font-size: clamp(15px, 2vw, 17px); */
+    font-size: 16px;
 }
 .form input {
     text-align: center;
+}
+.form input {
+    margin-bottom: 20px;
+    padding: 10px;
 }
 
 #account_use_user_info {
     width: 50%;
     scale: 1.5;
+}
+
+select {
+    height: 25px;
+    width: 80px;
+    font-size: 16px;
 }

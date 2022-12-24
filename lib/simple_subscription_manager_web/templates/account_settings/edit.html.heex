@@ -37,12 +37,12 @@
       <%= hidden_input f, :action, name: "action", value: "update_email" %>
 
       <div class="one-element">
-        <%= label f, :email, "新しいメールアドレス" %>
+        <%= label f, :email, "新しいメールアドレス" %><div class="divdiv"></div>
         <%= email_input f, :email, required: true %>
         <%= error_tag f, :email %>
       </div>
       <div class="one-element">
-        <%= label f, :current_password, "パスワード", for: "current_password_for_email" %>
+        <%= label f, :current_password, "パスワード", for: "current_password_for_email" %><div class="divdiv"></div>
         <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email" %>
         <%= error_tag f, :current_password %>
       </div>
@@ -67,13 +67,13 @@
       <%= hidden_input f, :action, name: "action", value: "update_name" %>
 
       <div class="one-element">
-      <%= label f, :name, "新しい名前" %>
+      <%= label f, :name, "新しい名前" %><div class="divdiv"></div>
       <%= text_input f, :name, required: true %>
       <%= error_tag f, :name %>
       </div>
 
       <div class="one-element">
-      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_name" %>
+      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_name" %><div class="divdiv"></div>
       <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_name" %>
       <%= error_tag f, :current_password %>
       </div>
@@ -100,7 +100,7 @@
       <%= hidden_input f, :action, name: "action", value: "update_age" %>
 
       <div class="one-element">
-      <%= label f, :age, "新しい年齢" %>
+      <%= label f, :age, "新しい年齢" %><div class="divdiv"></div>
       <%= date_select f, :age, year: [options: 1950..@today.year], month: [options: [
           {gettext("1"), "1"},
           {gettext("2"), "2"},
@@ -120,7 +120,7 @@
       </div>
 
       <div class="one-element">
-      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_age" %>
+      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_age" %><div class="divdiv"></div>
       <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_age" %>
       <%= error_tag f, :current_password %>
       </div>
@@ -146,19 +146,19 @@
       <%= hidden_input f, :action, name: "action", value: "update_password" %>
 
       <div class="one-element">
-      <%= label f, :password, "新しいパスワード" %>
+      <%= label f, :password, "新しいパスワード" %><div class="divdiv"></div>
       <%= password_input f, :password, required: true %>
       <%= error_tag f, :password %>
       </div>
 
       <div class="one-element">
-      <%= label f, :password_confirmation, "新しいパスワード(再入力)" %>
+      <%= label f, :password_confirmation, "新しいパスワード(再入力)" %><div class="divdiv"></div>
       <%= password_input f, :password_confirmation, required: true %>
       <%= error_tag f, :password_confirmation %>
       </div>
 
       <div class="one-element">
-      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_password" %>
+      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_password" %><div class="divdiv"></div>
       <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password" %>
       <%= error_tag f, :current_password %>
       </div>
@@ -184,13 +184,13 @@
       <%= hidden_input f, :action, name: "action", value: "update_gender" %>
 
       <div class="one-element">
-      <%= label f, "性別" %>
+      <%= label f, "性別" %><div class="divdiv"></div>
       <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力" %>
       <%= error_tag f, :gender %>
       </div>
 
       <div class="one-element">
-      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_gender" %>
+      <%= label f, :current_password, "現在のパスワード", for: "current_password_for_gender" %><div class="divdiv"></div>
       <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_gender" %>
       <%= error_tag f, :current_password %>
       </div>
@@ -216,13 +216,13 @@
       <%= hidden_input f, :action, name: "action", value: "update_use_user_info" %>
 
       <div class="one-element">
-      <%= label f, :use_user_info, "ユーザ情報の利用を許可する"%>
-      <%= checkbox f, :use_user_info %>
+      <div class="check_input"><%= label f, :use_user_info, "ユーザ情報の利用を許可する"%>
+      <%= checkbox f, :use_user_info %></div>
       <%= error_tag f, :use_user_info %>
       </div>
 
       <div class="one-element">
-      <%= label f, :current_password, "パスワード", for: "current_password_for_use_user_info" %>
+      <%= label f, :current_password, "パスワード", for: "current_password_for_use_user_info" %><div class="divdiv"></div>
       <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_use_user_info" %>
       <%= error_tag f, :current_password %>
       </div>

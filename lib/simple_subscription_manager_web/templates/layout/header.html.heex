@@ -42,10 +42,12 @@
                                 <p class="hbg_nav_p">サブスクーラーについて</p>
                                 <div class="hbg_nav_link"><%= link "サブスクーラーの使い方", to: Routes.page_path(@conn, :help) %></div>
                                 <%= if @current_account do %>
-                                    <%= link "アカウントの退会", to: Routes.account_quit_path(@conn, :index) %>
+                                    <div class="hbg_nav_link">
+                                        <%= link "アカウントの退会", to: Routes.account_quit_path(@conn, :index) %>
+                                    </div>
                                 <% end %>
-                                <div><%= link "お知らせ一覧", to: Routes.topic_path(@conn, :index) %></div>
-                                <div><%= link "お問い合わせページ", to: Routes.form_path(@conn, :form) %></div>
+                                <div class="hbg_nav_link"><%= link "お知らせ一覧", to: Routes.topic_path(@conn, :index) %></div>
+                                <div class="hbg_nav_link"><%= link "お問い合わせページ", to: Routes.form_path(@conn, :form) %></div>
                             </li>
                             <li class="hbg_nav_li">
                                 <p class="hbg_nav_p">サブスク利用者向けページ</p>
@@ -53,7 +55,7 @@
                                     <div class="hbg_nav_link"><%= link "新しくサービスを登録する", to: Routes.manager_path(@conn, :new) %></div>
                                     <div class="hbg_nav_link"><%= link "アカウント情報を変更する", to: Routes.account_settings_path(@conn, :edit) %></div>
                             </li>
-                            <li class="hbg_nab_li">
+                            <li class="hbg_nav_li">
                                 <p class="hbg_nav_p">企業向けページ</p>
                                 <div class="hbg_nav_link"><%= link "サブスクの利用傾向一覧ページ", to: Routes.page_path(@conn, :stat) %></div>
                                 <!--- 下のやつがAPIのリンク　パスは通ってない --->
@@ -70,5 +72,6 @@
 
     </nav>
 </section>
+<div class="copyright"></div>
 
 <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/header.js")}></script>

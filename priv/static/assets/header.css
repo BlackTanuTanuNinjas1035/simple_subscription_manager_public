@@ -3,12 +3,18 @@
 header {
     height: 100px;
     width: 100%;
-    background-color: rgb(199, 199, 199);
+    
 }
 
 .container.header{
+    background-color: rgb(221, 219, 219);
+    box-shadow: 0px 5px 10px gray;
     display: flex;
     justify-content: space-between;
+
+    /* background-image: url(../images/mori8.png), url(../images/cloud5.png); */
+    background-size: contain;
+    background-repeat: repeat-x;
 }
 .header > a {
     margin-left: max(20px, 3%);
@@ -30,15 +36,13 @@ header {
 .nav-header div {
 } 
 
-
 /* ハンバーガーメニューcss */
-
-
 header a {
-    text-decoration: none;
+    /* text-decoration: none; */
 }
-
 .header-ul{
+    font-weight: bold;
+    margin-top: 13px;
 }
 .header-ul li {
     white-space: nowrap;
@@ -46,6 +50,9 @@ header a {
 }
 .header-ul .mail_address {
     display: none;
+}
+.header-ul a {
+    color:inherit;
 }
 
 header ul,
@@ -81,7 +88,10 @@ header li {
     position: absolute;
     top: 0px;
     right: 0;
-    padding: 30px;
+    padding: 20px;
+    line-height: 30px;
+    border: solid;
+    border-color: gray;
     border-radius: 10px;
     z-index: 10;
     visibility: hidden;
@@ -90,14 +100,19 @@ header li {
 }
 
 .hamburger_nav.active{
-    background-color: rgb(211, 211, 211);
+    /* background-color: rgb(211, 211, 211); */
+    background-color: rgb(240, 240, 240);
     visibility: visible;
     opacity: 1;
 }
-
 .hbg_nav_p{
     font-size: 20px;
+    font-weight: bold;
 }
+.hbg_nav_link {
+    text-indent: 1em;
+}
+
 
 /*ハンバーガーの線のcss*/
 .hamburger_button{
@@ -180,17 +195,15 @@ header li {
     width: calc(100vw - 660px);
     text-align: right;
 }
-
 .sumaho_rogo {
     content: "";
-    background-image: url(../images/rogotanu_touka.png);
+    background-image: url(../images/rogotanu_v2_touka.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     height: 100px;
     width: 100px;
 }
-
 
 @media screen and (max-width: 767px){
     header,
@@ -205,11 +218,17 @@ header li {
     /* .header > a {
         display: none;
     } */
-    
+    .header-ul{
+        line-height: 23px;
+        margin-top: 0;
+    }
     .pc_rogo {
         display: none;
     }
     .account-info {
         width: calc(100vw - 190px);
+    }
+    .irassyai {
+        display: none;
     }
 }
