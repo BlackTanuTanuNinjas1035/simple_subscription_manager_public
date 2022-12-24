@@ -20,7 +20,7 @@ defmodule SimpleSubscriptionManager.MixProject do
   def application do
     [
       mod: {SimpleSubscriptionManager.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :logger_file_backend]
     ]
   end
 
@@ -52,6 +52,7 @@ defmodule SimpleSubscriptionManager.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:hackney, "~> 1.9"},
       {:quantum, "~> 3.0"},
+      {:logger_file_backend, "~> 0.0.4"},
     ]
   end
 

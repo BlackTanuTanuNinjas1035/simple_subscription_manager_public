@@ -4,9 +4,13 @@ defmodule SimpleSubscriptionManager.Application do
   @moduledoc false
 
   use Application
+  require Logger
 
   @impl true
   def start(_type, _args) do
+
+    Logger.info "server started named subscler"
+
     children = [
       # Start the Ecto repository
       SimpleSubscriptionManager.Repo,
@@ -28,6 +32,17 @@ defmodule SimpleSubscriptionManager.Application do
     opts = [strategy: :one_for_one, name: SimpleSubscriptionManager.Supervisor]
     Supervisor.start_link(children, opts)
   end
+
+  # applicationにはデフォルトでstopが実装されているが:okだけを返すようになっている
+  @impl true
+  def stop(_state) do
+    Logger.info "server finished named subscler"
+  end
+
+  # @impl true
+  # def prep_stop(_state) do
+  #   Logger.info "server finished named subscler"
+  # end
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.

@@ -3,7 +3,12 @@ defmodule SimpleSubscriptionManagerWeb.PageController do
 
   alias SimpleSubscriptionManager.Talks
 
+  require Logger
+
   def index(conn, _params) do
+
+    Logger.info "get"
+
     IO.inspect(conn)
     render(conn, "index.html")
   end

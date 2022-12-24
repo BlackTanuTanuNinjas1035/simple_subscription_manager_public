@@ -40,9 +40,36 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
-# Configures Elixir's Logger
-config :logger, :console,
+# 古いのでコメントアウト
+# # Configures Elixir's Logger
+# config :logger, :console,
+#   format: "$time $metadata[$level] $message\n",
+#   metadata: [:request_id]
+
+config :logger,
+  # :error_log というキーに対して、LoggerFileBackend を紐付けます
+  backends: [{LoggerFileBackend, :error_log}]
+
+# :error_log の設定
+config :logger, :error_log,
+  # ログの保存先, ファイル名
+  path: "../log/error.log",
+  # 対象とするレベル
+  level: :error,
+  # ログフォーマット
   format: "$time $metadata[$level] $message\n",
+  # メタデータの要素
+  metadata: [:request_id]
+
+config :logger,
+  # :error_log というキーに対して、LoggerFileBackend を紐付けます
+  backends: [{LoggerFileBackend, :info_log}]
+
+# :info_log の設定
+config :logger, :info_log,
+  format: "$date $time $metadata[$level] $message\n",
+  path: "../log/info.log",
+  level: :info,
   metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
@@ -55,6 +82,9 @@ import_config "#{config_env()}.exs"
 config :simple_subscription_manager, SimpleSubscriptionManager.Scheduler,
   jobs: [
     {"0 0 * * *", {SimpleSubscriptionManager.Scheduler, :check_date_of_payment, []}},
-    # {"0 0 * * *", {SimpleSubscriptionManager.Scheduler, 支払日になったら支払日を翌月に設定して継続するか、subscribesから削除する}}
     {"0 0 * * *", {SimpleSubscriptionManager.Scheduler, :check_continue_subscription, []}},
+    {"0 0 * * *", {SimpleSubscriptionManager.Logging, :mv_log, []}},
+    {"0 0 1 * *", {SimpleSubscriptionManager.Logging, :to_archive, []}},
+    {"0 0 * * *", {SimpleSubscriptionManager.Scheduler, :postgres_backup, []}},
+    {"0 0 1 * *", {SimpleSubscriptionManager.Scheduler, :postgres_backup_tar, []}},
   ]

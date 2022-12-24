@@ -28,15 +28,13 @@ config :simple_subscription_manager, SimpleSubscriptionManagerWeb.Endpoint,
     keyfile: "priv/cert/selfsigned_key.pem",
     certfile: "priv/cert/selfsigned.pem"
   ],
-  # url: [host: "subscler-blacktanutanu.com", port: 443],
-  # url: [host: "localhost", port: 4001],
+  # url: [host: "subscler-blacktanutanu.com", port: 4001],
   # https: [
-  #   ip: {127, 0, 0, 1},
   #   port: 4001,
   #   cipher_suite: :strong,
   #   otp_app: :simple_subscription_manager,
-  #   keyfile: System.get_env("../priv/ssl/private.key", __DIR__),
-  #   certfile: System.get_env("../priv/ssl/server.crt", __DIR__)
+  #   keyfile: "/etc/letsencrypt/live/subscler-blacktanutanu.com/privkey.pem",
+  #   certfile: "/etc/letsencrypt/live/subscler-blacktanutanu.com/fullchain.pem"
   # ],
   check_origin: false,
   code_reloader: true,
@@ -46,7 +44,7 @@ config :simple_subscription_manager, SimpleSubscriptionManagerWeb.Endpoint,
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
-  # force_ssl: [hsts: false, rewrite_on: [:x_forwarded_proto], exclude: [], host: "localhost"]
+  # force_ssl: [hsts: true]
 
 
 # ## SSL Support
