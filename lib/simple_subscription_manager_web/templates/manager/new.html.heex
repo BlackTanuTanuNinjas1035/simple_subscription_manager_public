@@ -41,12 +41,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id, Enum.map(@subscription_list, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription", class: "select_subscription"%>
+                    <%= select f, :subscription_id, Enum.map(@subscription_list, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -61,7 +62,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">
@@ -99,12 +100,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_video, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_video", class: "select_subscription"%>
+                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_video, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_video", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -119,7 +121,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">
@@ -157,12 +159,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_music, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_music", class: "select_subscription"%>
+                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_music, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_music", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -177,7 +180,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">
@@ -215,12 +218,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_car, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_car", class: "select_subscription"%>
+                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_car, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_car", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -235,7 +239,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">
@@ -273,12 +277,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_food, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_food", class: "select_subscription"%>
+                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_food, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_food", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -293,7 +298,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">
@@ -331,12 +336,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_software, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_software", class: "select_subscription"%>
+                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_software, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_software", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -351,7 +357,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">
@@ -389,12 +395,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_furniture, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_furniture", class: "select_subscription"%>
+                    <%= select f, :subscription_id, Enum.map(@subscription_list_by_furniture, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_furniture", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -409,7 +416,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">
@@ -447,12 +454,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id_by_lesson, Enum.map(@subscription_list_by_lesson, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_lesson", class: "select_subscription"%>
+                    <%= select f, :subscription_id_by_lesson, Enum.map(@subscription_list_by_lesson, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_lesson", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -467,7 +475,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">
@@ -505,12 +513,13 @@
             <.form let={f} for={@changeset} action={Routes.manager_path(@conn, :create)}>
 
                 <div class="select_box">
-                    <%= select f, :subscription_id_by_book, Enum.map(@subscription_list_by_book, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_book", class: "select_subscription"%>
+                    <%= select f, :subscription_id_by_book, Enum.map(@subscription_list_by_book, fn(s) -> {s.name, s.id} end), selected: [1], id: "select_subscription_by_book", class: "select_subscription", required: true %>
                 </div>
 
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
+                        ここ
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
@@ -525,7 +534,7 @@
                                 {gettext("11"), "11"},
                                 {gettext("12"), "12"},
                             ]
-                        ] %>
+                        ], required: true %>
                         <%= error_tag f, :date_of_contract %>
                     </div>
                     <div class="check_box">

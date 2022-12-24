@@ -28,4 +28,48 @@ defmodule SimpleSubscriptionManager.Util do
         Converter.convert!({year, month, day})
     end
   end
+
+  def max_day(year, month) do
+    case month do
+      1 -> 	31
+      2 ->
+        if Date.leap_year?(Date.new(year, 1, 1)) do
+          28
+        else
+          29
+        end
+      3 ->	31
+      4 ->	30
+      5 ->	31
+      6 ->	30
+      7 ->	31
+      8 ->	31
+      9 ->	30
+      10 ->	31
+      11 ->	30
+      12 ->	31
+    end
+  end
+
+  def max_day_by_string(year, month) do
+    case month do
+      "1" -> 	"31"
+      "2" ->
+        if Date.leap_year?(Date.new(String.to_integer(year), 1, 1)) do
+          "28"
+        else
+          "29"
+        end
+      "3" ->	"31"
+      "4" ->	"30"
+      "5" ->	"31"
+      "6" ->	"30"
+      "7" ->	"31"
+      "8" ->	"31"
+      "9" ->	"30"
+      "10" ->	"31"
+      "11" ->	"30"
+      "12" ->	"31"
+    end
+  end
 end

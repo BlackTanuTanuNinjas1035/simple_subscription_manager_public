@@ -2,6 +2,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationController do
   use SimpleSubscriptionManagerWeb, :controller
 
   alias SimpleSubscriptionManager.Accounts
+  alias SimpleSubscriptionManager.Util
   alias SimpleSubscriptionManager.Accounts.Account
   alias SimpleSubscriptionManagerWeb.AccountAuth
 
@@ -15,6 +16,21 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationController do
   end
 
   def create(conn, %{"account" => account_params}) do
+
+    IO.puts "account_params[\"age\"][\"year\"]: #{is_binary account_params["age"]["year"]}"
+
+    account_params = update_in(account_params, ["age", "day"], fn day ->
+      if String.to_integer(Util.max_day_by_string(account_params["age"]["year"], account_params["age"]["month"])) < String.to_integer(day) do
+        Util.max_day_by_string(account_params["age"]["year"], account_params["age"]["month"])
+      else
+        account_params["age"]["day"]
+      end
+    end)
+
+
+    IO.puts "aaccounts_params"
+    IO.inspect account_params
+
     case Accounts.register_account(account_params) do
       {:ok, account} ->
         {:ok, _} =
