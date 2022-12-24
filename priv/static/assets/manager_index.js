@@ -29,17 +29,17 @@ $(function(){
         $("#user_guid_content").slideToggle(200);
     })
     
-    // let cards = document.querySelectorAll(".subsc_card");
-    // console.log(cards);
-    // for (let i = 0; i < cards.length; i++) {
-    //     let card = cards[i];
-    //     //console.log(card);
-    //     let card_continue = card.querySelector(".subsc_continue");
-    //     card_continue = card_continue.querySelector("div").textContent;
-    //     console.log(card_continue);
-    //     if(card_continue == "継続×") {
-    //         console.log(card);
-    //         //card.classList.add("no_keizoku");
-    //     }
-    // }
+    let cards = document.querySelectorAll(".subsc_card");
+    console.log(cards);
+    for (let i = 0; i < cards.length; i++) {
+        let card = cards[i];
+        //console.log(card);
+        let card_continue = card.querySelector(".subsc_continue");
+        card_continue = card_continue.querySelector("div").textContent;
+        console.log(card_continue);
+        if(card_continue == "継続×") {
+            console.log(card);
+            card.classList.add("no_keizoku");
+        }
+    }
 })
