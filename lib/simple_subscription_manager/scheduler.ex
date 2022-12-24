@@ -43,9 +43,21 @@ defmodule SimpleSubscriptionManager.Scheduler do
             date_of_payment = subscribe.date_of_payment
 
             if date_of_payment.month + 1 < 12 do
-              Date.new!(date_of_payment.year, Util.add_month(date_of_payment.month,1), date_of_payment.day)
+              Date.new!(date_of_payment.year, Util.add_month(date_of_payment.month,1),
+                if Util.max_day(date_of_payment.year, Util.add_month(date_of_payment.month,1)) >= date_of_payment.day do
+                  date_of_payment.day
+                else
+                  Util.max_day(date_of_payment.year, Util.add_month(date_of_payment.month,1))
+                end
+              )
             else
-              Date.new!(date_of_payment.year + 1, 1, date_of_payment.day)
+              Date.new!(date_of_payment.year + 1, 1,
+                if Util.max_day(date_of_payment.year + 1, 1) >= date_of_payment.day do
+                  date_of_payment.day
+                else
+                  Util.max_day(date_of_payment.year + 1, 1)
+                end
+              )
             end
 
             subscribe = Ecto.Changeset.change subscribe, date_of_payment: Date.new!(date_of_payment.year, date_of_payment.month+1, date_of_payment.day)
@@ -79,6 +91,28 @@ defmodule SimpleSubscriptionManager.Scheduler do
           end
         end
       end
+    end
+  end
+
+  @doc """
+  毎日DBのバックアップをとる
+  """
+  def postgres_backup() do
+    if File.exists? "../db" do
+      System.cmd("mkdir", ["../db"])
+    end
+    System.cmd("pg_dump", ["simple_subscription_manager_dev", ">", "../db/`date +%Y年%m月%d日`_db.backup"])
+  end
+
+  @doc """
+  毎月DBのアーカイブを作成をする
+  """
+  def postgres_backup_tar() do
+    if File.exists? "../db/db_archive" do
+      System.cmd("mkdir", ["../db/db_archive"])
+    end
+    if File.exists? "../db/*_db.backup" do
+      System.cmd("tar", ["czf", "../db/db_archive/`date +%Y年%m月`_db.tar.gz", "../db/*_db.backup", "--remove-files"])
     end
   end
 end

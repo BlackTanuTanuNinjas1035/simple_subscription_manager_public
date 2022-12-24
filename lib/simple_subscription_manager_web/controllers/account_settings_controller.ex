@@ -2,6 +2,7 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
   use SimpleSubscriptionManagerWeb, :controller
 
   alias SimpleSubscriptionManager.Accounts
+  alias SimpleSubscriptionManager.Util
   alias SimpleSubscriptionManagerWeb.AccountAuth
 
   plug :assign_email_and_password_and_name_changesets
@@ -100,6 +101,11 @@ defmodule SimpleSubscriptionManagerWeb.AccountSettingsController do
   def update(conn, %{"action" => "update_age"} = params) do
     %{"current_password" => password, "account" => account_params} = params
     account = conn.assigns.current_account
+
+    IO.puts "aaccounts_params"
+    IO.inspect account_params
+    # 11/31を11/30を直す処理
+    account_params = Map.update(account_params["age"], "day", 0, fn day -> if Util.max_day(String.to_integer(account_params["age"]["year"]), String.to_integer(account_params["age"]["month"])) < String.to_integer(day), do: Integer.to_string(Util.max_day(String.to_integer(account_params["age"]["year"]), String.to_integer(account_params["age"]["month"]))) end)
 
     case Accounts.update_account_age(account, password, account_params) do
       {:ok, account} ->

@@ -115,7 +115,7 @@
           {gettext("11"), "11"},
           {gettext("12"), "12"},
         ]
-      ] %>
+      ], required: true %>
       <%= error_tag f, :age %>
       </div>
 
@@ -126,7 +126,7 @@
       </div>
 
       <div class="submit_button">
-        <%= submit "名前を変更する" %>
+        <%= submit "年齢を変更する" %>
       </div>
 
     </.form>
@@ -185,7 +185,7 @@
 
       <div class="one-element">
       <%= label f, "性別" %><div class="divdiv"></div>
-      <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力" %>
+      <%= select f, :gender, ["男性": 1, "女性": 2], prompt: "未入力", required: true %>
       <%= error_tag f, :gender %>
       </div>
 
@@ -217,7 +217,7 @@
 
       <div class="one-element">
       <div class="check_input"><%= label f, :use_user_info, "ユーザ情報の利用を許可する"%>
-      <%= checkbox f, :use_user_info %></div>
+      <%= checkbox f, :use_user_info, required: true %></div>
       <%= error_tag f, :use_user_info %>
       </div>
 

@@ -15,7 +15,6 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   """
   def index(conn, _params) do
 
-    IO.puts "AAA"
     IO.inspect conn.assigns
 
     changeset = Subscribe.changeset(%Subscribe{}, %{})
@@ -80,6 +79,14 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
   """
   def create(conn, %{"subscribe" => subscribe_params}) do
 
+    subscribe_params = update_in(subscribe_params, ["date_of_contract", "day"], fn day ->
+      if String.to_integer(Util.max_day_by_string(subscribe_params["date_of_contract"]["year"], subscribe_params["date_of_contract"]["month"])) < String.to_integer(day) do
+        Util.max_day_by_string(subscribe_params["date_of_contract"]["year"], subscribe_params["date_of_contract"]["month"])
+      else
+        day
+      end
+    end)
+
     # account_idを追加
     current_id = conn.assigns[:current_account].id
     subscribe_params = Map.put(subscribe_params, "account_id", current_id)
@@ -106,16 +113,16 @@ defmodule SimpleSubscriptionManagerWeb.ManagerController do
 
     today = Date.utc_today()
 
-    # next_month_of_contract = Converter.convert! %{
-    #   "year" => subscribe_params["date_of_contract"].year,
-    #   "month" => Integer.to_string(String.to_integer(subscribe_params["date_of_contract"].month) + 1),
-    #   "day" => subscribe_params["date_of_contract"].day
-    # }
 
+    next_month = subscribe_params["date_of_contract"].month + 1
     next_month_of_contract = Util.next_month_of_contract(
       subscribe_params["date_of_contract"].year,
-      subscribe_params["date_of_contract"].month + 1,
-      subscribe_params["date_of_contract"].day
+      next_month,
+      if Util.max_day(subscribe_params["date_of_contract"].year, next_month) >= subscribe_params["date_of_contract"].day do
+        subscribe_params["date_of_contract"].day
+      else
+        Util.max_day(subscribe_params["date_of_contract"].year, next_month)
+      end
     )
 
     # 今月より契約月が前、かつ継続しない、かつ今日 > 翌月の契約日のものは履歴だけ登録する
