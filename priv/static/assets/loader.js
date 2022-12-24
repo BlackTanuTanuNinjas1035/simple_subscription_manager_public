@@ -1,6 +1,6 @@
 let start_time = performance.now();
 let end_time = performance.now();
-console.log("最初", (end_time - start_time) / 1000 + "秒");
+//console.log("最初", (end_time - start_time) / 1000 + "秒");
 
 function sleep(waitSec, callbackFunc) {
     // 経過時間（秒）

@@ -9,7 +9,7 @@ function getSubsc() {
 
     let tmp;
     for ( let t = 0; t < ls_n.length; t++) {
-        console.log("hello");
+        //console.log("hello");
         tmp = ls_n[t].textContent;
         ls_name.push(tmp.replace(/\s+/g, ''));  //空白と改行を取り除いてからpush
         tmp = ls_p[t].textContent;
@@ -28,4 +28,18 @@ $(function(){
     $("#user_guid").on("click", function() {
         $("#user_guid_content").slideToggle(200);
     })
+    
+    // let cards = document.querySelectorAll(".subsc_card");
+    // console.log(cards);
+    // for (let i = 0; i < cards.length; i++) {
+    //     let card = cards[i];
+    //     //console.log(card);
+    //     let card_continue = card.querySelector(".subsc_continue");
+    //     card_continue = card_continue.querySelector("div").textContent;
+    //     console.log(card_continue);
+    //     if(card_continue == "継続×") {
+    //         console.log(card);
+    //         //card.classList.add("no_keizoku");
+    //     }
+    // }
 })
