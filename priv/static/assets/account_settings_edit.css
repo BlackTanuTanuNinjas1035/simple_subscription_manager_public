@@ -96,6 +96,9 @@ button {
 .divdiv {
     display: none;
 }
+.tyuui {
+    font-size: 14px;
+}
 @media screen and (max-width: 767px){
     .divdiv {
         display: block;

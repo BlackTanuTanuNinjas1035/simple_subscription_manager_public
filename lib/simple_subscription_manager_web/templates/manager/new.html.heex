@@ -12,7 +12,9 @@
     </div>
     <div class="discription">
         <div class="discription_title">使い方</div>
-        <p>　ご利用のサブスクリプションサービスを登録してください。契約日を選択していただきますと、その月の支払い履歴に登録されます。継続にチェックを入れていただきますと、支払日になったときに次回の支払日を自動で更新します。またチェックを入れない場合は、月をまたぎますと自動的に削除されます。</p>
+        <p>　ご利用のサブスクリプションサービスを登録してください。契約日を選択していただきますと、その月の支払い履歴に登録されます。継続にチェックを入れていただきますと、支払日になったときに次回の支払日を自動で更新します。またチェックを入れない場合は、月をまたぎますと自動的に削除されます。
+            また月の日付を超えた入力は、その月の末日になります。
+        </p>
     </div>
     <div class="genre_select_area">
         <div class="genre_select_area_content">
@@ -47,7 +49,7 @@
                 <div class="select_day">
                     <div class="select_day_box">
                         <%= label f, "契約日" %>
-                        ここ
+                        
                         <%= date_select f, :date_of_contract, year: [options: @to_year-3..@to_year], month: [options: [
                                 {gettext("1"), "1"},
                                 {gettext("2"), "2"},
