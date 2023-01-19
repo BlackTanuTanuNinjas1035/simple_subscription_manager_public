@@ -1,8 +1,8 @@
-/* とりあえずのcss 退会画面　api　とかについてる */
+/* api画面についてる */
 
-/* #front {
+#front {
     height: auto;
-} */
+}
 .main_contents {
     min-height: calc(100vh - 100px);
 }
@@ -10,6 +10,7 @@
 .main_contents > .container{
     width: 100%;
     height: 100%;
+    min-height: calc(100vh - 100px);
     display :flex;
     flex-direction: column;
     justify-content: center;
@@ -43,13 +44,12 @@
     margin-bottom: 3%;
 }
 
+.container > .content{
+    margin: 4% auto;
+    min-height: 90%;
+}
 
 @media screen and (max-width: 767px){
-    .container > .content{
-        margin: 4% auto;
-        min-height: 90%;
-    }
-
     .main_contents {
         min-height: calc(100vh - 70px);
     }
