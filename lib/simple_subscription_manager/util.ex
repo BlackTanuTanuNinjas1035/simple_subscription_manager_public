@@ -33,7 +33,7 @@ defmodule SimpleSubscriptionManager.Util do
     case month do
       1 -> 	31
       2 ->
-        if Date.leap_year?(Date.new(year, 1, 1)) do
+        if Date.leap_year?(Date.new!(year, 1, 1)) do
           28
         else
           29
@@ -55,7 +55,7 @@ defmodule SimpleSubscriptionManager.Util do
     case month do
       "1" -> 	"31"
       "2" ->
-        if Date.leap_year?(Date.new(String.to_integer(year), 1, 1)) do
+        if Date.leap_year?(Date.new!(String.to_integer(year), 1, 1)) do
           "28"
         else
           "29"
