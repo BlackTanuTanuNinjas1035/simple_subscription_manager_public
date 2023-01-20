@@ -53,7 +53,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
     |> validate_required([:email])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "「＠」がありません。もしくは、スペースが含まれています。")
     |> validate_length(:email, max: 160, message: "160までの文字数で入力してください。")
-    |> unsafe_validate_unique(:email, SimpleSubscriptionManager.Repo)
+    |> unsafe_validate_unique(:email, SimpleSubscriptionManager.Repo, message: "すでにアカウントは作成されています。")
     |> unique_constraint(:email)
   end
 
@@ -93,7 +93,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
     |> validate_email()
     |> case do
       %{changes: %{email: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :email, "did not change")
+      %{} = changeset -> add_error(changeset, :email, "変更されていません。")
     end
   end
 
@@ -158,7 +158,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
     |> validate_required([:name])
     |> case do
       %{changes: %{name: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :name, "did not change")
+      %{} = changeset -> add_error(changeset, :name, "変更されていません。")
     end
   end
 
@@ -169,7 +169,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
     |> validate_required([:age])
     |> case do
       %{changes: %{age: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :age, "did not change")
+      %{} = changeset -> add_error(changeset, :age, "変更されていません。")
     end
   end
 
@@ -180,7 +180,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
     |> validate_required([:gender])
     |> case do
       %{changes: %{gender: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :gender, "did not change")
+      %{} = changeset -> add_error(changeset, :gender, "変更されていません。")
     end
   end
 
@@ -191,7 +191,7 @@ defmodule SimpleSubscriptionManager.Accounts.Account do
     |> validate_required([:use_user_info])
     |> case do
       %{changes: %{use_user_info: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :use_user_info, "did not change")
+      %{} = changeset -> add_error(changeset, :use_user_info, "変更されていません。")
     end
   end
 

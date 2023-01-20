@@ -45,7 +45,9 @@ defmodule SimpleSubscriptionManagerWeb.AccountRegistrationController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         today = Date.utc_today()
-        render(conn, "new.html", changeset: changeset, today: today)
+        conn
+        |> put_flash(:info, "アカウントの作成に失敗しました。")
+        |> render("new.html", changeset: changeset, today: today)
     end
   end
 end

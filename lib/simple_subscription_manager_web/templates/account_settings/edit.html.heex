@@ -27,7 +27,7 @@
       <h3>メールアドレスを変更する</h3>
     </div>
 
-    <.form let={f} for={@email_changeset} action={Routes.account_settings_path(@conn, :update)} id="update_email">
+    <%= form_for @email_changeset, Routes.account_settings_path(@conn, :update),[id: "update_email"], fn f -> %>
       <%= if @email_changeset.action do %>
         <div class="alert alert-danger">
           <p>メールアドレスの変更に失敗しました。入力内容を確認してください。</p>
@@ -49,7 +49,7 @@
       <div class="submit_button">
         <%= submit "メールアドレスを変更" %>
       </div>
-    </.form>
+    <% end %>
   </div>
 
   <div class="one-block">
