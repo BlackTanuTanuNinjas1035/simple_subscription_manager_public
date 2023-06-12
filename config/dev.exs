@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :simple_subscription_manager, SimpleSubscriptionManager.Repo,
-  username: "simple_subscription_manager",
-  password: "simple_subscription_manager",
+  username: "postgres",
+  password: "postgres",
   hostname: "localhost",
   database: "simple_subscription_manager_dev",
   stacktrace: true,
