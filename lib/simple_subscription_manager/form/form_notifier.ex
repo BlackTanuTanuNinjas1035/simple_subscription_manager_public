@@ -4,7 +4,7 @@ defmodule SimpleSubscriptionManager.Form.FormNotifier do
 
   alias SimpleSubscriptionManager.Mailer
 
-  @subscler_email "subscler14106@gmail.com"
+  @subscler_email "tanutanu@gmail.com"
 
   # サブスクーラー管理用メールへ送信する機能
   defp deliver_to_subscler(from, subject, body) do
