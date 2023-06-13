@@ -22,20 +22,6 @@ config :simple_subscription_manager, SimpleSubscriptionManagerWeb.Endpoint,
 
   # httpからhttpsへ変更するために置き換え
   http: [ip: {127, 0, 0, 1}, port: 4000],
-  https: [
-    port: 4001,
-    cipher_suite: :strong,
-    keyfile: "priv/cert/selfsigned_key.pem",
-    certfile: "priv/cert/selfsigned.pem"
-  ],
-  # url: [host: "subscler-blacktanutanu.com", port: 4001],
-  # https: [
-  #   port: 4001,
-  #   cipher_suite: :strong,
-  #   otp_app: :simple_subscription_manager,
-  #   keyfile: "/etc/letsencrypt/live/subscler-blacktanutanu.com/privkey.pem",
-  #   certfile: "/etc/letsencrypt/live/subscler-blacktanutanu.com/fullchain.pem"
-  # ],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,

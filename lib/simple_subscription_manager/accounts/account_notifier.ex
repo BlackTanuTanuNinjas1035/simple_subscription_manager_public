@@ -4,7 +4,7 @@ defmodule SimpleSubscriptionManager.Accounts.AccountNotifier do
 
   alias SimpleSubscriptionManager.Mailer
 
-  @subscler_email "subscler14106@gmail.com"
+  @subscler_email "tanutanu@gmail.com"
   # メール送信機能
   defp deliver(recipient, subject, body) do
     email =

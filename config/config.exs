@@ -19,16 +19,6 @@ config :simple_subscription_manager, SimpleSubscriptionManagerWeb.Endpoint,
 
 # ローカル環境用
 config :simple_subscription_manager, SimpleSubscriptionManager.Mailer, adapter: Swoosh.Adapters.Local
-# # 本番環境用
-# config :swoosh, :api_client, Swoosh.ApiClient.Local
-
-# 本番環境用
-# config :simple_subscription_manager, SimpleSubscriptionManager.Mailer,
-#   adapter: Swoosh.Adapters.Sendgrid,
-#   api_key: "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"
-
-# 本番環境用
-# config :swoosh, :api_client, Swoosh.ApiClient.Hackney
 
 # Configure esbuild (the version is required)
 config :esbuild,
