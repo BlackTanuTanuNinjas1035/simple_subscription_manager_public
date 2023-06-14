@@ -18,14 +18,9 @@
     JavaScript
     CSS 等
 
-
-次の目標:
-  退会フォームを作成する
-
-  * 展望…と見せかけた願望
-    LiveViewでレンダリングする際に、conn内のassingsの中身をsocketに渡すすべを学習する。
-       もう少し具体的にいうと、Controllerによる静的ページレンダリングからLiveViewによる動的ページレンダリングに切り替わる際に、
-       connのassignsをLiveViewのsocketに移すこと。
-      参考文献が見つかりませんでした。(なお、当方が読解力皆無な可能性はあり)そのため、JSなしで動的ページレンダリングをすることができませんでした。
-       aタグのURLに埋め込もうとしたが、アカウントのIDが丸見えになるためよろしくないと判断
-
+# setup
+  実行する前に以下を行ってください。
+  * `iex -S mix`を実行してください。
+  * `SimpleSubscriptionManager.Init.init()`を実行してください
+  * Ctr+Cを2回押してください。
+  * `mix phx.new`を実行してブラウザで`localhost:4000`にアクセスしてください。
